@@ -1,22 +1,35 @@
 package pe.edu.upc.backend.entities;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
+@Entity
+@Table(name = "Usuario")
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
+    @Column(name = "nombreUsuario", nullable = false, length = 220)
     private String nombreUsuario;
+    @Column(name = "emailUsuario", nullable = false, length = 220)
     private String emailUsuario;
+    @Column(name = "telefonoUsuario", nullable = false, length = 220)
     private String telefonoUsuario;
+    @Column(name = "direccionUsuario", nullable = false, length = 220)
     private String direccionUsuario;
+    @Column(name = "fechaRegistroUsuario", nullable = false)
     private LocalDateTime fechaRegistroUsuario;
+    @Column(name = "passwordUsuario", nullable = false, length = 220)
     private String passwordUsuario;
-    private List<Rol>roles;
+
+    @ManyToOne
+    @JoinColumn(name = "idRol")
+    private Rol rol;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, String telefonoUsuario, String direccionUsuario, LocalDateTime fechaRegistroUsuario, String passwordUsuario, List<Rol> roles) {
+    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, String telefonoUsuario, String direccionUsuario, LocalDateTime fechaRegistroUsuario, String passwordUsuario, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.emailUsuario = emailUsuario;
@@ -24,7 +37,7 @@ public class Usuario {
         this.direccionUsuario = direccionUsuario;
         this.fechaRegistroUsuario = fechaRegistroUsuario;
         this.passwordUsuario = passwordUsuario;
-        this.roles = roles;
+        this.rol = rol;
     }
 
     public int getIdUsuario() {
@@ -83,11 +96,11 @@ public class Usuario {
         this.passwordUsuario = passwordUsuario;
     }
 
-    public List<Rol> getRoles() {
-        return roles;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

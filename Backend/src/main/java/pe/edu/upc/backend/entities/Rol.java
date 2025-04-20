@@ -1,17 +1,24 @@
 package pe.edu.upc.backend.entities;
 
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "Rol")
 public class Rol {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRol;
+    @Column(name = "nombreRol", nullable = false, length = 70)
     private String nombreRol;
-    private Usuario user;
 
     public Rol() {
     }
 
-    public Rol(int idRol, String nombreRol, Usuario user) {
+    public Rol(int idRol, String nombreRol) {
         this.idRol = idRol;
         this.nombreRol = nombreRol;
-        this.user = user;
     }
 
     public int getIdRol() {
@@ -28,13 +35,5 @@ public class Rol {
 
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
-    }
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
     }
 }
