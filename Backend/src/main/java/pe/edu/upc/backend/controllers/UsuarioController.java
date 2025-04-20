@@ -32,7 +32,7 @@ public class UsuarioController {
         uS.insert(us);
     }
 
-    @PostMapping
+    @PutMapping
     public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
