@@ -21,19 +21,19 @@ public class EvaluacionIncidente {
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    @ManyToOne
+    /* @ManyToOne
     @JoinColumn(name = "idIncidente")
     private Incidente incidente;
-
+    */
     public EvaluacionIncidente() {
     }
 
-    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracion, LocalDateTime fechaCreacion, Usuario usuario, Incidente incidente) {
+    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracion, LocalDateTime fechaCreacion, Usuario usuario) {
         this.idEvaluacionIncidente = idEvaluacionIncidente;
         this.valoracion = valoracion;
         this.fechaCreacion = fechaCreacion;
         this.usuario = usuario;
-        this.incidente = incidente;
+        //this.incidente = incidente;
     }
 
     public int getIdEvaluacionIncidente() {
@@ -67,7 +67,7 @@ public class EvaluacionIncidente {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+/*
     public Incidente getIncidente() {
         return incidente;
     }
@@ -75,4 +75,6 @@ public class EvaluacionIncidente {
     public void setIncidente(Incidente incidente) {
         this.incidente = incidente;
     }
+
+ */
 }
