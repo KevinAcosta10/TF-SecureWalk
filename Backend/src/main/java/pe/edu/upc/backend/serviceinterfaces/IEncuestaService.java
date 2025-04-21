@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IEncuestaService {
     public List<Encuesta> list();
+    public void insert(Encuesta e);
+    public Encuesta listId(int id);
 }
