@@ -17,4 +17,15 @@ public class EncuestaImplement implements IEncuestaService {
     public List<Encuesta> list() {
         return eS.findAll();
     }
+
+    @Override
+    public void insert(Encuesta e) {
+        eS.save(e);
+    }
+
+    @Override
+    public Encuesta listId(int id) {
+        return eS.findById(id).orElse(new Encuesta());
+    }
+
 }
