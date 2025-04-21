@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class IncidenteImplement implements IIncidenteService {
-@Autowired
+    @Autowired
     private IIncidenteRepository iR;
 
     @Override
