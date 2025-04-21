@@ -3,11 +3,8 @@ package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.backend.dtos.EncuestaDTO;
 import pe.edu.upc.backend.dtos.EvaluacionIncidenteDTO;
-import pe.edu.upc.backend.entities.Encuesta;
 import pe.edu.upc.backend.entities.EvaluacionIncidente;
-import pe.edu.upc.backend.serviceinterfaces.IEncuestaService;
 import pe.edu.upc.backend.serviceinterfaces.IEvaluacionIncidenteService;
 
 import java.util.List;
