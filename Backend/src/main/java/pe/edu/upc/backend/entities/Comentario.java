@@ -2,8 +2,6 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "Comentario")
 

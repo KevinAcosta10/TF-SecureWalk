@@ -1,51 +1,51 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUsuario;
+    private Long idUsuario;
+    @Column(name = "username", nullable = false, length = 50, unique = true)
+    private String username;
     @Column(name = "nombreUsuario", nullable = false, length = 220)
     private String nombreUsuario;
     @Column(name = "emailUsuario", nullable = false, length = 220)
     private String emailUsuario;
     @Column(name = "telefonoUsuario", nullable = false, length = 220)
-    private String telefonoUsuario;
+    private int telefonoUsuario;
     @Column(name = "direccionUsuario", nullable = false, length = 220)
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
     private LocalDateTime fechaRegistroUsuario;
     @Column(name = "passwordUsuario", nullable = false, length = 220)
     private String passwordUsuario;
+    private Boolean enabled;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Rol> roles;
 
-    @ManyToOne
-    @JoinColumn(name = "idRol")
-    private Rol rol;
-
-    public Usuario() {
-    }
-
-    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, String telefonoUsuario, String direccionUsuario, LocalDateTime fechaRegistroUsuario, String passwordUsuario, Rol rol) {
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.emailUsuario = emailUsuario;
-        this.telefonoUsuario = telefonoUsuario;
-        this.direccionUsuario = direccionUsuario;
-        this.fechaRegistroUsuario = fechaRegistroUsuario;
-        this.passwordUsuario = passwordUsuario;
-        this.rol = rol;
-    }
-
-    public int getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNombreUsuario() {
@@ -64,11 +64,11 @@ public class Usuario {
         this.emailUsuario = emailUsuario;
     }
 
-    public String getTelefonoUsuario() {
+    public int getTelefonoUsuario() {
         return telefonoUsuario;
     }
 
-    public void setTelefonoUsuario(String telefonoUsuario) {
+    public void setTelefonoUsuario(int telefonoUsuario) {
         this.telefonoUsuario = telefonoUsuario;
     }
 
@@ -96,11 +96,19 @@ public class Usuario {
         this.passwordUsuario = passwordUsuario;
     }
 
-    public Rol getRol() {
-        return rol;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }
