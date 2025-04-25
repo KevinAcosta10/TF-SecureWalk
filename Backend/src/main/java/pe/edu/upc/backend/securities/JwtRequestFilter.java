@@ -1,6 +1,5 @@
 package pe.edu.upc.backend.securities;
 
-
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import pe.edu.upc.backend.serviceimplements.JwtUserDetailsService;
+import pe.edu.upc.backend.servicesimplements.JwtUserDetailsService;
 
 import java.io.IOException;
 
