@@ -9,12 +9,11 @@ public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRol;
-    @Column(name = "nombreRol", nullable = false, length = 30)
+    @Column(name = "rol", nullable = false, length = 30)
     private String nombreRol;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Usuario user;
-
     public Long getIdRol() {
         return idRol;
     }
