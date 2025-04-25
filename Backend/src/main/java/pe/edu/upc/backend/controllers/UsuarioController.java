@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.UsuarioDTO;
-import pe.edu.upc.backend.entities.Users;
+import pe.edu.upc.backend.entities.Usuario;
 import pe.edu.upc.backend.serviceinterfaces.IUsuarioService;
 
 import java.util.List;
@@ -28,14 +28,14 @@ public class UsuarioController {
     @PostMapping
     public void insertar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
-        Users us = m.map(dto, Users.class);
+        Usuario us = m.map(dto, Usuario.class);
         uS.insert(us);
     }
 
     @PutMapping
     public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
-        Users us = m.map(dto, Users.class);
+        Usuario us = m.map(dto, Usuario.class);
         uS.update(us);
 
     }

@@ -1,4 +1,4 @@
-package pe.edu.upc.backend.controllers.util;
+package pe.edu.upc.backend.util;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

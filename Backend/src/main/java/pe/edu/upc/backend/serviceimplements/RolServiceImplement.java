@@ -2,7 +2,7 @@ package pe.edu.upc.backend.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.entities.Role;
+import pe.edu.upc.backend.entities.Rol;
 import pe.edu.upc.backend.repositories.IRolRepository;
 import pe.edu.upc.backend.serviceinterfaces.IRolService;
 
@@ -13,7 +13,7 @@ public class RolServiceImplement implements IRolService {
     private IRolRepository rR;
 
     @Override
-    public List<Role> list() {
+    public List<Rol> list() {
         return rR.findAll();
     }
 }

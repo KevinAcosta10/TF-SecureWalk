@@ -15,7 +15,7 @@ public class Comentario {
 
     @ManyToOne
     @JoinColumn(name = "usuarioID")
-    private Users usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "postID")
@@ -24,7 +24,7 @@ public class Comentario {
     public Comentario() {
     }
 
-    public Comentario(int idComentario, String descripciónComentario, Users usuario, Post post) {
+    public Comentario(int idComentario, String descripciónComentario, Usuario usuario, Post post) {
         this.idComentario = idComentario;
         this.descripciónComentario = descripciónComentario;
         this.usuario = usuario;
@@ -47,11 +47,11 @@ public class Comentario {
         this.descripciónComentario = descripciónComentario;
     }
 
-    public Users getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Users usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

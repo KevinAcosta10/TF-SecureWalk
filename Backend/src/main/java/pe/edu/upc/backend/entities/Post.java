@@ -13,12 +13,12 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
-    private Users usuario;
+    private Usuario usuario;
 
     public Post() {
     }
 
-    public Post(int idPost, String descripcionPost, Users usuario) {
+    public Post(int idPost, String descripcionPost, Usuario usuario) {
         this.idPost = idPost;
         this.descripcionPost = descripcionPost;
         this.usuario = usuario;
@@ -40,11 +40,11 @@ public class Post {
         this.descripcionPost = descripcionPost;
     }
 
-    public Users getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Users usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 }

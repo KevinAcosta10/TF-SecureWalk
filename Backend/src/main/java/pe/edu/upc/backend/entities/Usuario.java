@@ -1,5 +1,6 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -8,16 +9,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Users implements Serializable {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
+    @Column(name = "username", nullable = false, length = 50, unique = true)
+    private String username;
     @Column(name = "nombreUsuario", nullable = false, length = 220)
     private String nombreUsuario;
     @Column(name = "emailUsuario", nullable = false, length = 220)
     private String emailUsuario;
     @Column(name = "telefonoUsuario", nullable = false, length = 220)
-    private String telefonoUsuario;
+    private int telefonoUsuario;
     @Column(name = "direccionUsuario", nullable = false, length = 220)
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
@@ -27,7 +30,7 @@ public class Users implements Serializable {
     private Boolean enabled;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private List<Role> roles;
+    private List<Rol> roles;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -35,6 +38,14 @@ public class Users implements Serializable {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNombreUsuario() {
@@ -53,11 +64,11 @@ public class Users implements Serializable {
         this.emailUsuario = emailUsuario;
     }
 
-    public String getTelefonoUsuario() {
+    public int getTelefonoUsuario() {
         return telefonoUsuario;
     }
 
-    public void setTelefonoUsuario(String telefonoUsuario) {
+    public void setTelefonoUsuario(int telefonoUsuario) {
         this.telefonoUsuario = telefonoUsuario;
     }
 
@@ -93,11 +104,11 @@ public class Users implements Serializable {
         this.enabled = enabled;
     }
 
-    public List<Role> getRoles() {
+    public List<Rol> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<Rol> roles) {
         this.roles = roles;
     }
 }
