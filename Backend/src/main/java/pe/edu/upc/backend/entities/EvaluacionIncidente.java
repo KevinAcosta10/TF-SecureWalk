@@ -11,29 +11,29 @@ public class EvaluacionIncidente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEvaluacionIncidente;
 
-    @Column(name = "valoracion", nullable = false)
-    private boolean valoracion;
+    @Column(name = "valoracionIncidente", nullable = false)
+    private boolean valoracionIncidente;
 
-    @Column(name = "fechaCreacion", nullable = false)
-    private LocalDateTime fechaCreacion;
+    @Column(name = "fechaCreacionIncidente", nullable = false)
+    private LocalDateTime fechaCreacionIncidente;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    /* @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "idIncidente")
     private Incidente incidente;
-    */
+
     public EvaluacionIncidente() {
     }
 
-    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracion, LocalDateTime fechaCreacion, Usuario usuario) {
+    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracionIncidente, LocalDateTime fechaCreacionIncidente, Usuario usuario, Incidente incidente) {
         this.idEvaluacionIncidente = idEvaluacionIncidente;
-        this.valoracion = valoracion;
-        this.fechaCreacion = fechaCreacion;
+        this.valoracionIncidente = valoracionIncidente;
+        this.fechaCreacionIncidente = fechaCreacionIncidente;
         this.usuario = usuario;
-        //this.incidente = incidente;
+        this.incidente = incidente;
     }
 
     public int getIdEvaluacionIncidente() {
@@ -44,20 +44,20 @@ public class EvaluacionIncidente {
         this.idEvaluacionIncidente = idEvaluacionIncidente;
     }
 
-    public boolean isValoracion() {
-        return valoracion;
+    public boolean isValoracionIncidente() {
+        return valoracionIncidente;
     }
 
-    public void setValoracion(boolean valoracion) {
-        this.valoracion = valoracion;
+    public void setValoracionIncidente(boolean valoracionIncidente) {
+        this.valoracionIncidente = valoracionIncidente;
     }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
+    public LocalDateTime getFechaCreacionIncidente() {
+        return fechaCreacionIncidente;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setFechaCreacionIncidente(LocalDateTime fechaCreacionIncidente) {
+        this.fechaCreacionIncidente = fechaCreacionIncidente;
     }
 
     public Usuario getUsuario() {
@@ -67,7 +67,7 @@ public class EvaluacionIncidente {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-/*
+
     public Incidente getIncidente() {
         return incidente;
     }
@@ -75,6 +75,4 @@ public class EvaluacionIncidente {
     public void setIncidente(Incidente incidente) {
         this.incidente = incidente;
     }
-
- */
 }

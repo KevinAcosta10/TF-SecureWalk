@@ -2,7 +2,7 @@ package pe.edu.upc.backend.dtos;
 
 public class ComentarioDTO {
     private int idComentario;
-    private String descripcion;
+    private String descripciónComentario;
 
     public int getIdComentario() {
         return idComentario;
@@ -12,11 +12,11 @@ public class ComentarioDTO {
         this.idComentario = idComentario;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripciónComentario() {
+        return descripciónComentario;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripciónComentario(String descripciónComentario) {
+        this.descripciónComentario = descripciónComentario;
     }
 }

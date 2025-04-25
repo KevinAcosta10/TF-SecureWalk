@@ -14,16 +14,16 @@ public class Encuesta {
     @Column(name="fechaEncuesta", nullable = false)
     private LocalDateTime fechaEncuesta;
 
-    @Column(name="calificacionGeneral", nullable = false)
-    private int calificacionGeneral;
+    @Column(name="calificacionEncuesta", nullable = false)
+    private int calificacionEncuesta;
 
     public Encuesta() {
     }
 
-    public Encuesta(int idEncuesta, LocalDateTime fechaEncuesta, int calificacionGeneral) {
+    public Encuesta(int idEncuesta, LocalDateTime fechaEncuesta, int calificacionEncuesta) {
         this.idEncuesta = idEncuesta;
         this.fechaEncuesta = fechaEncuesta;
-        this.calificacionGeneral = calificacionGeneral;
+        this.calificacionEncuesta = calificacionEncuesta;
     }
 
     public int getIdEncuesta() {
@@ -42,11 +42,11 @@ public class Encuesta {
         this.fechaEncuesta = fechaEncuesta;
     }
 
-    public int getCalifacionGeneral() {
-        return calificacionGeneral;
+    public int getCalificacionEncuesta() {
+        return calificacionEncuesta;
     }
 
-    public void setCalifacionGeneral(int calificacionGeneral) {
-        this.calificacionGeneral = calificacionGeneral;
+    public void setCalificacionEncuesta(int calificacionEncuesta) {
+        this.calificacionEncuesta = calificacionEncuesta;
     }
 }

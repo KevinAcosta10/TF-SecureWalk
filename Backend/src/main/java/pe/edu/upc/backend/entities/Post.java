@@ -8,13 +8,8 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPost;
 
-    @Column(name = "descripcion", nullable = false, length = 200)
-    private String descripcion;
-
-    public Post(int idPost,String descripcion) {
-        this.idPost = idPost;
-        this.descripcion = descripcion;
-    }
+    @Column(name = "descripcionPost", nullable = false, length = 200)
+    private String descripcionPost;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
@@ -22,25 +17,34 @@ public class Post {
 
     public Post() {
     }
+
+    public Post(int idPost, String descripcionPost, Usuario usuario) {
+        this.idPost = idPost;
+        this.descripcionPost = descripcionPost;
+        this.usuario = usuario;
+    }
+
     public int getIdPost() {
         return idPost;
     }
+
     public void setIdPost(int idPost) {
         this.idPost = idPost;
     }
-    public String getDescripcion() {
-        return descripcion;
+
+    public String getDescripcionPost() {
+        return descripcionPost;
     }
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+
+    public void setDescripcionPost(String descripcionPost) {
+        this.descripcionPost = descripcionPost;
     }
 
     public Usuario getUsuario() {
         return usuario;
     }
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-
 }
