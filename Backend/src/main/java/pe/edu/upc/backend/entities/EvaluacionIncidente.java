@@ -19,7 +19,7 @@ public class EvaluacionIncidente {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    private Users usuario;
 
     @ManyToOne
     @JoinColumn(name = "idIncidente")
@@ -28,7 +28,7 @@ public class EvaluacionIncidente {
     public EvaluacionIncidente() {
     }
 
-    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracionIncidente, LocalDateTime fechaCreacionIncidente, Usuario usuario, Incidente incidente) {
+    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracionIncidente, LocalDateTime fechaCreacionIncidente, Users usuario, Incidente incidente) {
         this.idEvaluacionIncidente = idEvaluacionIncidente;
         this.valoracionIncidente = valoracionIncidente;
         this.fechaCreacionIncidente = fechaCreacionIncidente;
@@ -60,11 +60,11 @@ public class EvaluacionIncidente {
         this.fechaCreacionIncidente = fechaCreacionIncidente;
     }
 
-    public Usuario getUsuario() {
+    public Users getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Users usuario) {
         this.usuario = usuario;
     }
 

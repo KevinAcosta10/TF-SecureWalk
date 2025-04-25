@@ -19,12 +19,12 @@ public class Incidente {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
-    private Usuario idUsuario;
+    private Users idUsuario;
 
     public Incidente() {
     }
 
-    public Incidente(int idIncidente, String descripcionIncidente, String tipoIncidente, LocalDate fechaIncidente, Usuario idUsuario) {
+    public Incidente(int idIncidente, String descripcionIncidente, String tipoIncidente, LocalDate fechaIncidente, Users idUsuario) {
         this.idIncidente = idIncidente;
         this.descripcionIncidente = descripcionIncidente;
         this.tipoIncidente = tipoIncidente;
@@ -64,11 +64,11 @@ public class Incidente {
         this.fechaIncidente = fechaIncidente;
     }
 
-    public Usuario getIdUsuario() {
+    public Users getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
+    public void setIdUsuario(Users idUsuario) {
         this.idUsuario = idUsuario;
     }
 }

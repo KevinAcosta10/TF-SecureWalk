@@ -2,8 +2,8 @@ package pe.edu.upc.backend.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.entities.Usuario;
-import pe.edu.upc.backend.repositories.IUsuarioRepository;
+import pe.edu.upc.backend.entities.Users;
+import pe.edu.upc.backend.repositories.IUserRepository;
 import pe.edu.upc.backend.serviceinterfaces.IUsuarioService;
 
 import java.util.List;
@@ -11,20 +11,20 @@ import java.util.List;
 @Service
 public class UsuarioImplement implements IUsuarioService {
     @Autowired
-    private IUsuarioRepository uR;
+    private IUserRepository uR;
 
     @Override
-    public List<Usuario> list() {
+    public List<Users> list() {
         return uR.findAll();
     }
 
     @Override
-    public void insert(Usuario usua) {
+    public void insert(Users usua) {
         uR.save(usua);
     }
 
     @Override
-    public void update(Usuario usua) {
+    public void update(Users usua) {
         uR.save(usua);
     }
 

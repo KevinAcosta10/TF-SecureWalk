@@ -2,8 +2,6 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "Comentario")
 
@@ -17,7 +15,7 @@ public class Comentario {
 
     @ManyToOne
     @JoinColumn(name = "usuarioID")
-    private Usuario usuario;
+    private Users usuario;
 
     @ManyToOne
     @JoinColumn(name = "postID")
@@ -26,7 +24,7 @@ public class Comentario {
     public Comentario() {
     }
 
-    public Comentario(int idComentario, String descripciónComentario, Usuario usuario, Post post) {
+    public Comentario(int idComentario, String descripciónComentario, Users usuario, Post post) {
         this.idComentario = idComentario;
         this.descripciónComentario = descripciónComentario;
         this.usuario = usuario;
@@ -49,11 +47,11 @@ public class Comentario {
         this.descripciónComentario = descripciónComentario;
     }
 
-    public Usuario getUsuario() {
+    public Users getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Users usuario) {
         this.usuario = usuario;
     }
 
