@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class EncuestaDTO {
     private int idEncuesta;
     private LocalDateTime fechaEncuesta;
-    private int calificacionGeneral;
+    private int calificacionEncuesta;
 
     public int getIdEncuesta() {
         return idEncuesta;
@@ -23,11 +23,11 @@ public class EncuestaDTO {
         this.fechaEncuesta = fechaEncuesta;
     }
 
-    public int getCalificacionGeneral() {
-        return calificacionGeneral;
+    public int getCalificacionEncuesta() {
+        return calificacionEncuesta;
     }
 
-    public void setCalificacionGeneral(int calificacionGeneral) {
-        this.calificacionGeneral = calificacionGeneral;
+    public void setCalificacionEncuesta(int calificacionEncuesta) {
+        this.calificacionEncuesta = calificacionEncuesta;
     }
 }

@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class EvaluacionIncidenteDTO {
     private int idIncidente;
-    private boolean valoracion;
-    private LocalDateTime fechaIncidente;
+    private boolean valoracionIncidente;
+    private LocalDateTime fechaCreacionIncidente;
 
     public int getIdIncidente() {
         return idIncidente;
@@ -15,19 +15,19 @@ public class EvaluacionIncidenteDTO {
         this.idIncidente = idIncidente;
     }
 
-    public boolean isValoracion() {
-        return valoracion;
+    public boolean isValoracionIncidente() {
+        return valoracionIncidente;
     }
 
-    public void setValoracion(boolean valoracion) {
-        this.valoracion = valoracion;
+    public void setValoracionIncidente(boolean valoracionIncidente) {
+        this.valoracionIncidente = valoracionIncidente;
     }
 
-    public LocalDateTime getFechaIncidente() {
-        return fechaIncidente;
+    public LocalDateTime getFechaCreacionIncidente() {
+        return fechaCreacionIncidente;
     }
 
-    public void setFechaIncidente(LocalDateTime fechaIncidente) {
-        this.fechaIncidente = fechaIncidente;
+    public void setFechaCreacionIncidente(LocalDateTime fechaCreacionIncidente) {
+        this.fechaCreacionIncidente = fechaCreacionIncidente;
     }
 }

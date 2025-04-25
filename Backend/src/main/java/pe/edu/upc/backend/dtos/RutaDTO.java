@@ -1,24 +1,12 @@
 package pe.edu.upc.backend.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class RutaDTO {
     private int idRuta;
-    private int idZona;
-    private int idUsuario;
-    private LocalDateTime fechaHoraInicio;
-    private LocalDateTime fechaHoraFin;
-
-    public RutaDTO() {
-    }
-
-    public RutaDTO(int idRuta, int idZona, int idUsuario, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin) {
-        this.idRuta = idRuta;
-        this.idZona = idZona;
-        this.idUsuario = idUsuario;
-        this.fechaHoraInicio = fechaHoraInicio;
-        this.fechaHoraFin = fechaHoraFin;
-    }
+    private LocalTime horaInicioRuta;
+    private LocalTime horaFinRuta;
+    private String nivelSeguridadRuta;
 
     public int getIdRuta() {
         return idRuta;
@@ -28,37 +16,27 @@ public class RutaDTO {
         this.idRuta = idRuta;
     }
 
-    public int getIdZona() {
-        return idZona;
+    public LocalTime getHoraInicioRuta() {
+        return horaInicioRuta;
     }
 
-    public void setIdZona(int idZona) {
-        this.idZona = idZona;
+    public void setHoraInicioRuta(LocalTime horaInicioRuta) {
+        this.horaInicioRuta = horaInicioRuta;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public LocalTime getHoraFinRuta() {
+        return horaFinRuta;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setHoraFinRuta(LocalTime horaFinRuta) {
+        this.horaFinRuta = horaFinRuta;
     }
 
-    public LocalDateTime getFechaHoraInicio() {
-        return fechaHoraInicio;
+    public String getNivelSeguridadRuta() {
+        return nivelSeguridadRuta;
     }
 
-    public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-        this.fechaHoraInicio = fechaHoraInicio;
+    public void setNivelSeguridadRuta(String nivelSeguridadRuta) {
+        this.nivelSeguridadRuta = nivelSeguridadRuta;
     }
-
-    public LocalDateTime getFechaHoraFin() {
-        return fechaHoraFin;
-    }
-
-    public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
-        this.fechaHoraFin = fechaHoraFin;
-    }
-
-
 }

@@ -1,6 +1,7 @@
 package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -11,8 +12,8 @@ public class Comentario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idComentario;
 
-    @Column(name = "descripción", nullable = false, unique = true)
-    private String descripcion;
+    @Column(name = "descripciónComentario", nullable = false, unique = true)
+    private String descripciónComentario;
 
     @ManyToOne
     @JoinColumn(name = "usuarioID")
@@ -25,9 +26,9 @@ public class Comentario {
     public Comentario() {
     }
 
-    public Comentario(int idComentario, String descripcion, Usuario usuario, Post post) {
+    public Comentario(int idComentario, String descripciónComentario, Usuario usuario, Post post) {
         this.idComentario = idComentario;
-        this.descripcion = descripcion;
+        this.descripciónComentario = descripciónComentario;
         this.usuario = usuario;
         this.post = post;
     }
@@ -40,12 +41,12 @@ public class Comentario {
         this.idComentario = idComentario;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripciónComentario() {
+        return descripciónComentario;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripciónComentario(String descripciónComentario) {
+        this.descripciónComentario = descripciónComentario;
     }
 
     public Usuario getUsuario() {
