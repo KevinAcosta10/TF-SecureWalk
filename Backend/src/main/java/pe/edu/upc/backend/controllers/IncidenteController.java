@@ -33,7 +33,7 @@ public class IncidenteController {
         }).collect(Collectors.toList());
     }
 
-    @GetMapping
+    @GetMapping("/zonas")
     public List<CantidadIncidentesPorZona> getIncidentesPorZona() {
         return iS.getIncidentesPorZona().stream().map(x -> {
             ModelMapper m = new ModelMapper();
