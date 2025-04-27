@@ -14,5 +14,6 @@ public interface IZonaRepository extends JpaRepository<Zona, Integer> {
             " FROM incidente i\n" +
             " JOIN zona z ON i.id_zona = z.id_zona\n" +
             " GROUP BY z.nombre_zona;", nativeQuery = true)
+
     public List<String[]> cantidadIncidentes();
 }
