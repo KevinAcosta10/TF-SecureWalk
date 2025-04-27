@@ -1,8 +1,8 @@
 package pe.edu.upc.backend.dtos;
 
-public class CantidadIncidentesPorZona {
+public class CantidadIncidentesPorZonaDTO {
     private String nombreZona;
-    private Long totalIncidentes;
+    private int totalIncidentes;
 
     public String getNombreZona() {
         return nombreZona;
@@ -12,11 +12,11 @@ public class CantidadIncidentesPorZona {
         this.nombreZona = nombreZona;
     }
 
-    public Long getTotalIncidentes() {
+    public int getTotalIncidentes() {
         return totalIncidentes;
     }
 
-    public void setTotalIncidentes(Long totalIncidentes) {
+    public void setTotalIncidentes(int totalIncidentes) {
         this.totalIncidentes = totalIncidentes;
     }
 }

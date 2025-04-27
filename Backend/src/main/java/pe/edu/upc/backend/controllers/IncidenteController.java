@@ -3,7 +3,6 @@ package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.backend.dtos.CantidadIncidentesPorZona;
 import pe.edu.upc.backend.dtos.IncidenteDTO;
 import pe.edu.upc.backend.entities.Incidente;
 import pe.edu.upc.backend.serviceinterfaces.IIncidenteService;
@@ -33,11 +32,4 @@ public class IncidenteController {
         }).collect(Collectors.toList());
     }
 
-    @GetMapping("/zonas")
-    public List<CantidadIncidentesPorZona> getIncidentesPorZona() {
-        return iS.getIncidentesPorZona().stream().map(x -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(x, CantidadIncidentesPorZona.class);
-        }).collect(Collectors.toList());
-    }
 }
