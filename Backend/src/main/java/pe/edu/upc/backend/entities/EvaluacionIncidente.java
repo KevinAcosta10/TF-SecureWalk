@@ -2,6 +2,7 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,7 +16,7 @@ public class EvaluacionIncidente {
     private boolean valoracionIncidente;
 
     @Column(name = "fechaCreacionIncidente", nullable = false)
-    private LocalDateTime fechaCreacionIncidente;
+    private LocalDate fechaCreacionIncidente;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
@@ -28,7 +29,7 @@ public class EvaluacionIncidente {
     public EvaluacionIncidente() {
     }
 
-    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracionIncidente, LocalDateTime fechaCreacionIncidente, Usuario usuario, Incidente incidente) {
+    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracionIncidente, LocalDate fechaCreacionIncidente, Usuario usuario, Incidente incidente) {
         this.idEvaluacionIncidente = idEvaluacionIncidente;
         this.valoracionIncidente = valoracionIncidente;
         this.fechaCreacionIncidente = fechaCreacionIncidente;
@@ -52,11 +53,11 @@ public class EvaluacionIncidente {
         this.valoracionIncidente = valoracionIncidente;
     }
 
-    public LocalDateTime getFechaCreacionIncidente() {
+    public LocalDate getFechaCreacionIncidente() {
         return fechaCreacionIncidente;
     }
 
-    public void setFechaCreacionIncidente(LocalDateTime fechaCreacionIncidente) {
+    public void setFechaCreacionIncidente(LocalDate fechaCreacionIncidente) {
         this.fechaCreacionIncidente = fechaCreacionIncidente;
     }
 

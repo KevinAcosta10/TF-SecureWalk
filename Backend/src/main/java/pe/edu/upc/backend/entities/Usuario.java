@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Usuario implements Serializable {
     @Column(name = "direccionUsuario", nullable = false, length = 220)
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
-    private LocalDateTime fechaRegistroUsuario;
+    private LocalDate fechaRegistroUsuario;
     @Column(name = "passwordUsuario", nullable = false, length = 220)
     private String passwordUsuario;
     private Boolean enabled;
@@ -80,11 +81,11 @@ public class Usuario implements Serializable {
         this.direccionUsuario = direccionUsuario;
     }
 
-    public LocalDateTime getFechaRegistroUsuario() {
+    public LocalDate getFechaRegistroUsuario() {
         return fechaRegistroUsuario;
     }
 
-    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
         this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
