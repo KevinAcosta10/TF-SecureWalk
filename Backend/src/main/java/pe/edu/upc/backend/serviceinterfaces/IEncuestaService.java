@@ -1,6 +1,7 @@
 package pe.edu.upc.backend.serviceinterfaces;
 
 import pe.edu.upc.backend.entities.Encuesta;
+import pe.edu.upc.backend.entities.Zona;
 
 import java.util.List;
 
