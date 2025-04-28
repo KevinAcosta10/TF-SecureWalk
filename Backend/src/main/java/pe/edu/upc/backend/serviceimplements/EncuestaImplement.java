@@ -28,4 +28,9 @@ public class EncuestaImplement implements IEncuestaService {
         return eS.findById(id).orElse(new Encuesta());
     }
 
+    @Override
+    public List<String[]> cantidadEncuestasCompletadas() {
+        return eS.cantidadEncuestasCompletadas();
+    }
+
 }

@@ -1,7 +1,6 @@
 package pe.edu.upc.backend.serviceinterfaces;
 
 import pe.edu.upc.backend.entities.Encuesta;
-import pe.edu.upc.backend.entities.Zona;
 
 import java.util.List;
 
@@ -9,4 +8,5 @@ public interface IEncuestaService {
     public List<Encuesta> list();
     public void insert(Encuesta e);
     public Encuesta listId(int id);
+    public List<String[]> cantidadEncuestasCompletadas();
 }
