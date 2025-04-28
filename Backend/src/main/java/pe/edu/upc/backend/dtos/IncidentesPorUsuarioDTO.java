@@ -11,15 +11,6 @@ public class IncidentesPorUsuarioDTO {
     private Long idUsuario;
     private String nombreUsuario;
 
-    public IncidentesPorUsuarioDTO(Long idIncidente, String descripcionIncidente, LocalDate fechaIncidente, String tipoIncidente, Long idUsuario, String nombreUsuario) {
-        this.idIncidente = idIncidente;
-        this.descripcionIncidente = descripcionIncidente;
-        this.fechaIncidente = fechaIncidente;
-        this.tipoIncidente = tipoIncidente;
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-    }
-
     public Long getIdIncidente() {
         return idIncidente;
     }

@@ -17,5 +17,5 @@ public interface IIncidenteRepository extends JpaRepository<Incidente, Integer> 
             " FROM incidente i\n" +
             " JOIN usuario u ON i.id_usuario = u.id_usuario\n" +
             " ORDER BY i.fecha_incidente DESC", nativeQuery = true)
-    public List<IncidentesPorUsuarioDTO> findAllIncidentesPorUsuario();
+    public List<String[]> IncidentesPorUsuario();
 }

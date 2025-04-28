@@ -9,6 +9,6 @@ import java.util.List;
 public interface IIncidenteService {
     public void insert(Incidente incidente);
     public List<Incidente> list();
-    public List<IncidentesPorUsuarioDTO> findAllIncidentesPorUsuario();
+    public List<String[]> IncidentesPorUsuario();
 
 }

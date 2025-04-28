@@ -25,7 +25,8 @@ public class IncidenteImplement implements IIncidenteService {
     }
 
     @Override
-    public List<IncidentesPorUsuarioDTO> findAllIncidentesPorUsuario() {
-        return iR.findAllIncidentesPorUsuario();
+    public List<String[]> IncidentesPorUsuario() {
+        return iR.IncidentesPorUsuario();
     }
+
 }
