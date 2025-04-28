@@ -53,5 +53,4 @@ public class EncuestaController {
         }
         return listaDTO;
     }
-
 }
