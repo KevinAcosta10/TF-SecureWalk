@@ -18,17 +18,21 @@ public class Incidente {
     private LocalDate fechaIncidente;
 
     @ManyToOne
+    @JoinColumn(name = "idZona")
+    private Zona idZona;
+    @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario idUsuario;
 
     public Incidente() {
     }
 
-    public Incidente(int idIncidente, String descripcionIncidente, String tipoIncidente, LocalDate fechaIncidente, Usuario idUsuario) {
+    public Incidente(int idIncidente, String descripcionIncidente, String tipoIncidente, LocalDate fechaIncidente, Zona idZona, Usuario idUsuario) {
         this.idIncidente = idIncidente;
         this.descripcionIncidente = descripcionIncidente;
         this.tipoIncidente = tipoIncidente;
         this.fechaIncidente = fechaIncidente;
+        this.idZona = idZona;
         this.idUsuario = idUsuario;
     }
 
@@ -62,6 +66,14 @@ public class Incidente {
 
     public void setFechaIncidente(LocalDate fechaIncidente) {
         this.fechaIncidente = fechaIncidente;
+    }
+
+    public Zona getIdZona() {
+        return idZona;
+    }
+
+    public void setIdZona(Zona idZona) {
+        this.idZona = idZona;
     }
 
     public Usuario getIdUsuario() {

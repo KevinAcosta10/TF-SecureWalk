@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IZonaService {
     public List<Zona> list();
+    public List<String[]> cantidadIncidentes();
 }

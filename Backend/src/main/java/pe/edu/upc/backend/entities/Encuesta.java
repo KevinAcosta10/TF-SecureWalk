@@ -2,6 +2,7 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,7 +13,7 @@ public class Encuesta {
     private int idEncuesta;
 
     @Column(name="fechaEncuesta", nullable = false)
-    private LocalDateTime fechaEncuesta;
+    private LocalDate fechaEncuesta;
 
     @Column(name="calificacionEncuesta", nullable = false)
     private int calificacionEncuesta;
@@ -20,7 +21,7 @@ public class Encuesta {
     public Encuesta() {
     }
 
-    public Encuesta(int idEncuesta, LocalDateTime fechaEncuesta, int calificacionEncuesta) {
+    public Encuesta(int idEncuesta, LocalDate fechaEncuesta, int calificacionEncuesta) {
         this.idEncuesta = idEncuesta;
         this.fechaEncuesta = fechaEncuesta;
         this.calificacionEncuesta = calificacionEncuesta;
@@ -34,11 +35,11 @@ public class Encuesta {
         this.idEncuesta = idEncuesta;
     }
 
-    public LocalDateTime getFechaEncuesta() {
+    public LocalDate getFechaEncuesta() {
         return fechaEncuesta;
     }
 
-    public void setFechaEncuesta(LocalDateTime fechaEncuesta) {
+    public void setFechaEncuesta(LocalDate fechaEncuesta) {
         this.fechaEncuesta = fechaEncuesta;
     }
 
