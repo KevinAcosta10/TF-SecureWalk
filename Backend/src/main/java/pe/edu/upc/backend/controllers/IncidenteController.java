@@ -35,6 +35,7 @@ public class IncidenteController {
         }).collect(Collectors.toList());
     }
 
+
     @GetMapping("/incidentesPor")
     public List<IncidentesPorUsuarioDTO> IncidentesUsuarios(){
         List<String[]> lista = iS.IncidentesPorUsuario();
