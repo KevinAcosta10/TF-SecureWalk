@@ -30,4 +30,9 @@ public class PostImplement implements IPostService {
     public void delete(int id) {
         pT.deleteById(id);
     }
+
+    @Override
+    public List<String[]> postPorIncidente() {
+        return pT.postPorIncidente();
+    }
 }
