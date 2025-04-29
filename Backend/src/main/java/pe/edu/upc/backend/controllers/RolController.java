@@ -34,7 +34,7 @@ public class RolController {
         for (String[] columna : lista) {
             UsuarioRolDTO dto = new UsuarioRolDTO();
             dto.setNombreUsuario(columna[0]);
-            dto.setNombreRol(columna[1]);
+            dto.setDireccionUsuario(columna[1]);
             listaDTO.add(dto);
         }
         return listaDTO;
