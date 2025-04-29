@@ -1,8 +1,22 @@
 package pe.edu.upc.backend.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.backend.entities.Zona;
+
+import java.util.List;
+
 @Repository
 public interface IZonaRepository extends JpaRepository<Zona, Integer> {
+
+    @Query(
+            value = "SELECT z.NombreZona, COUNT(r.RutaID) \n" +
+                    "  FROM Zona z \n" +
+                    "  LEFT JOIN Ruta r \n" +
+                    "    ON z.ZonaID = r.ZonaID \n" +
+                    " GROUP BY z.NombreZona",
+            nativeQuery = true
+    )
+    List<String[]> countRutasByZona();
 }

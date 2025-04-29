@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface IRutaService {
     public List<Ruta> list();
 
+    List<String[]> countRutasByUsuario();
+
 }

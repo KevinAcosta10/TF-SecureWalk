@@ -17,4 +17,9 @@ public class ZonaServiceImplement implements IZonaService {
     public List<Zona> list() {
         return zR.findAll();
     }
+
+    @Override
+    public List<String[]> countRutasByZona() {
+        return zR.countRutasByZona();
+    }
 }

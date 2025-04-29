@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IZonaService {
     public List<Zona> list();
+
+    List<String[]> countRutasByZona();
 }
