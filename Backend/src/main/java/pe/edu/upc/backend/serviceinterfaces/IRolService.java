@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IRolService {
     public List<Rol> list();
+    public List<String[]> UsuariosRol();
 }

@@ -1,5 +1,6 @@
 package pe.edu.upc.backend.dtos;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 
 public class UsuarioRolDTO {
@@ -16,6 +17,11 @@ public class UsuarioRolDTO {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+=======
+public class UsuarioRolDTO {
+    private String nombreUsuario;
+    private String nombreRol;
+>>>>>>> origin/JheanPieer
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -25,6 +31,7 @@ public class UsuarioRolDTO {
         this.nombreUsuario = nombreUsuario;
     }
 
+<<<<<<< HEAD
     public String getEmailUsuario() {
         return emailUsuario;
     }
@@ -47,5 +54,13 @@ public class UsuarioRolDTO {
 
     public void setDireccionUsuario(String direccionUsuario) {
         this.direccionUsuario = direccionUsuario;
+=======
+    public String getNombreRol() {
+        return nombreRol;
+    }
+
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
+>>>>>>> origin/JheanPieer
     }
 }

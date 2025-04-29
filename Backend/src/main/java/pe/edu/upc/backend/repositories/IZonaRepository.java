@@ -27,5 +27,4 @@ public interface IZonaRepository extends JpaRepository<Zona, Integer> {
             nativeQuery = true
     )
     List<String[]> countRutasByZona();
-
 }

@@ -32,4 +32,9 @@ public class ComentarioImplement implements IComentarioService {
     public void delete(int id) {
         cR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> ComentarioPorUsuario() {
+        return cR.IncidentesPorUsuario();
+    }
 }
