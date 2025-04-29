@@ -6,6 +6,7 @@ public class EncuestaDTO {
     private int idEncuesta;
     private LocalDateTime fechaEncuesta;
     private int calificacionEncuesta;
+    private boolean completadaEncuesta;
 
     public int getIdEncuesta() {
         return idEncuesta;
@@ -30,4 +31,8 @@ public class EncuestaDTO {
     public void setCalificacionEncuesta(int calificacionEncuesta) {
         this.calificacionEncuesta = calificacionEncuesta;
     }
+
+    public boolean getCompletadaEncuesta() {return completadaEncuesta;}
+
+    public void setCompletadaEncuesta(boolean completadaEncuesta) {this.completadaEncuesta = completadaEncuesta;}
 }
