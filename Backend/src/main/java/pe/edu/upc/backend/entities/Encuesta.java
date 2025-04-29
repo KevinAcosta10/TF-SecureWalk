@@ -3,28 +3,31 @@ package pe.edu.upc.backend.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="Encuesta")
 public class Encuesta {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEncuesta;
 
-    @Column(name="fechaEncuesta", nullable = false)
+    @Column(name = "fechaEncuesta", nullable = false)
     private LocalDate fechaEncuesta;
 
-    @Column(name="calificacionEncuesta", nullable = false)
+    @Column(name = "calificacionEncuesta", nullable = false)
     private int calificacionEncuesta;
+
+    @Column(name = "completada", nullable = false)
+    private boolean completadaEncuesta;
 
     public Encuesta() {
     }
 
-    public Encuesta(int idEncuesta, LocalDate fechaEncuesta, int calificacionEncuesta) {
+    public Encuesta(int idEncuesta, LocalDate fechaEncuesta, int calificacionEncuesta, boolean completadaEncuesta) {
         this.idEncuesta = idEncuesta;
         this.fechaEncuesta = fechaEncuesta;
         this.calificacionEncuesta = calificacionEncuesta;
+        this.completadaEncuesta = completadaEncuesta;
     }
 
     public int getIdEncuesta() {
@@ -50,4 +53,8 @@ public class Encuesta {
     public void setCalificacionEncuesta(int calificacionEncuesta) {
         this.calificacionEncuesta = calificacionEncuesta;
     }
+
+    public boolean getCompletadaEncuesta() {return completadaEncuesta;}
+
+    public void setCompletadaEncuesta(boolean completadaEncuesta) {this.completadaEncuesta = completadaEncuesta;}
 }

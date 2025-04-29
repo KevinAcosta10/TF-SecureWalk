@@ -7,4 +7,5 @@ public interface IPostService {
     public void insert(Post pos);
     public void update(Post pos);
     public void delete(int id);
+    public List<String[]> postPorIncidente();
 }
