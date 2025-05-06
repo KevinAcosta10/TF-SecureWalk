@@ -20,4 +20,10 @@ public class RutaServiceImplement implements IRutaService {
     public List<Ruta> list() {
         return rR.findAll();
     }
+
+    @Override
+    public List<String[]> countRutasByUsuario() {
+        return rR.countRutasByUsuario();
+    }
+
 }

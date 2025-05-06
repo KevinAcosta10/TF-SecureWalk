@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upc.backend.dtos.RolDTO;
+import pe.edu.upc.backend.dtos.UsuarioRolDTO;
 import pe.edu.upc.backend.serviceinterfaces.IRolService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,4 +27,17 @@ public class RolController {
             return m.map(x, RolDTO.class);
         }).collect(Collectors.toList());
     }
+    @GetMapping("/UsuarioRol")
+    public List<UsuarioRolDTO> UsuarioRol() {
+        List<String[]> lista = rS.UsuariosRol();
+        List<UsuarioRolDTO> listaDTO = new ArrayList<>();
+        for (String[] columna : lista) {
+            UsuarioRolDTO dto = new UsuarioRolDTO();
+            dto.setNombreUsuario(columna[0]);
+            dto.setDireccionUsuario(columna[1]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
+
 }

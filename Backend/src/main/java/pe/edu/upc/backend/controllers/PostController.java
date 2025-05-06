@@ -2,12 +2,15 @@ package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.backend.dtos.CantidadIncidentesPorZonaDTO;
 import pe.edu.upc.backend.dtos.PostDTO;
+import pe.edu.upc.backend.dtos.PostPorIncidenteDTO;
 import pe.edu.upc.backend.entities.Post;
 
 import pe.edu.upc.backend.serviceinterfaces.IPostService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +45,21 @@ public class PostController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){
         pT.delete(id);
+    }
+
+    @GetMapping("/cantidades")
+    public List<PostPorIncidenteDTO> ObtenerPostPorIncidente() {
+        List<String[]> lista =pT.postPorIncidente();
+        List<PostPorIncidenteDTO> listaDTO = new ArrayList<>();
+        for(String[] columna : lista) {
+            PostPorIncidenteDTO dto = new PostPorIncidenteDTO();
+            dto.setIdPOst(Integer.parseInt(columna[0]));
+            dto.setDescripcion((columna[1]));
+            dto.setTipoIncidente(columna[2]);
+            dto.setNombreZona(columna[3]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 }
 
