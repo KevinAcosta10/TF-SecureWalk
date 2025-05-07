@@ -1,6 +1,6 @@
 package pe.edu.upc.backend.dtos;
 
-public class CantidadEncuestasCompletadasPorUsuarioDTO {
+public class EncuestasCompletadasPorUsuarioDTO {
     private String nombreUsuario;
     private int totalEncuestasCompletadas;
 
@@ -16,7 +16,5 @@ public class CantidadEncuestasCompletadasPorUsuarioDTO {
         return totalEncuestasCompletadas;
     }
 
-    public void setTotalEncuestasCompletadas(int totalEncuestasCompletadas) {
-        this.totalEncuestasCompletadas = totalEncuestasCompletadas;
-    }
+
 }
