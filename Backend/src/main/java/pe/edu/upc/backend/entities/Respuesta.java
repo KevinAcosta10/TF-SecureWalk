@@ -2,7 +2,7 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Entity
@@ -24,12 +24,12 @@ public class Respuesta {
     private String respuesta;
 
     @Column(name = "fechaRespuesta", nullable = false, length = 100)
-    private LocalDateTime fechaRespuesta;
+    private LocalDate fechaRespuesta;
 
     public Respuesta() {
     }
 
-    public Respuesta(long idRespuesta, Usuario usuario, EncuestaPregunta encuestaPregunta, String respuesta, LocalDateTime fechaRespuesta) {
+    public Respuesta(long idRespuesta, Usuario usuario, EncuestaPregunta encuestaPregunta, String respuesta, LocalDate fechaRespuesta) {
         this.idRespuesta = idRespuesta;
         this.usuario = usuario;
         this.encuestaPregunta = encuestaPregunta;
@@ -69,11 +69,11 @@ public class Respuesta {
         this.respuesta = respuesta;
     }
 
-    public LocalDateTime getFechaRespuesta() {
+    public LocalDate getFechaRespuesta() {
         return fechaRespuesta;
     }
 
-    public void setFechaRespuesta(LocalDateTime fechaRespuesta) {
+    public void setFechaRespuesta(LocalDate fechaRespuesta) {
         this.fechaRespuesta = fechaRespuesta;
     }
 }

@@ -37,6 +37,26 @@ public class Usuario{
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Respuesta> respuestas;
 
+    @OneToMany(mappedBy = "usuarioruta", cascade = CascadeType.ALL)
+    private List<UsuarioRuta> usuarioRutas;
+
+    public Usuario() {
+    }
+
+    public Usuario(Long idUsuario, String username, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String passwordUsuario, Boolean enabled, List<Rol> roles, List<Respuesta> respuestas, List<UsuarioRuta> usuarioRutas) {
+        this.idUsuario = idUsuario;
+        this.username = username;
+        this.nombreUsuario = nombreUsuario;
+        this.emailUsuario = emailUsuario;
+        this.telefonoUsuario = telefonoUsuario;
+        this.direccionUsuario = direccionUsuario;
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
+        this.passwordUsuario = passwordUsuario;
+        this.enabled = enabled;
+        this.roles = roles;
+        this.respuestas = respuestas;
+        this.usuarioRutas = usuarioRutas;
+    }
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -90,11 +110,9 @@ public class Usuario{
         return fechaRegistroUsuario;
     }
 
-    public List<Respuesta> getRespuestas() {return respuestas;}
-
-    public void setRespuestas(List<Respuesta> respuestas) {this.respuestas = respuestas;}
-
-    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {this.fechaRegistroUsuario = fechaRegistroUsuario;}
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
+    }
 
     public String getPasswordUsuario() {
         return passwordUsuario;
@@ -118,5 +136,21 @@ public class Usuario{
 
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
+    }
+
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
+    }
+
+    public List<UsuarioRuta> getUsuarioRutas() {
+        return usuarioRutas;
+    }
+
+    public void setUsuarioRutas(List<UsuarioRuta> usuarioRutas) {
+        this.usuarioRutas = usuarioRutas;
     }
 }
