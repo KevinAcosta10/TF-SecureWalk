@@ -11,26 +11,22 @@ import java.util.List;
 @Service
 public class EncuestaImplement implements IEncuestaService {
     @Autowired
-    private IEncuestaRepository eS;
+    private IEncuestaRepository eR;
 
     @Override
     public List<Encuesta> list() {
-        return eS.findAll();
+        return eR.findAll();
     }
 
     @Override
     public void insert(Encuesta e) {
-        eS.save(e);
+        eR.save(e);
     }
 
     @Override
-    public Encuesta listId(int id) {
-        return eS.findById(id).orElse(new Encuesta());
-    }
+    public void update(Encuesta e) { eR.save(e);}
 
     @Override
-    public List<String[]> cantidadEncuestasCompletadas() {
-        return eS.cantidadEncuestasCompletadas();
-    }
+    public void eliminar(long id) { eR.deleteById(id);}
 
 }

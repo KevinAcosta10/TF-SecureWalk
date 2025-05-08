@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable {
+public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
@@ -28,9 +29,14 @@ public class Usuario implements Serializable {
     @Column(name = "passwordUsuario", nullable = false, length = 220)
     private String passwordUsuario;
     private Boolean enabled;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<Rol> roles;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Respuesta> respuestas;
+
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -84,9 +90,11 @@ public class Usuario implements Serializable {
         return fechaRegistroUsuario;
     }
 
-    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
-        this.fechaRegistroUsuario = fechaRegistroUsuario;
-    }
+    public List<Respuesta> getRespuestas() {return respuestas;}
+
+    public void setRespuestas(List<Respuesta> respuestas) {this.respuestas = respuestas;}
+
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {this.fechaRegistroUsuario = fechaRegistroUsuario;}
 
     public String getPasswordUsuario() {
         return passwordUsuario;

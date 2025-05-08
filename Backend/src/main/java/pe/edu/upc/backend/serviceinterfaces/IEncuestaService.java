@@ -7,6 +7,6 @@ import java.util.List;
 public interface IEncuestaService {
     public List<Encuesta> list();
     public void insert(Encuesta e);
-    public Encuesta listId(int id);
-    public List<String[]> cantidadEncuestasCompletadas();
+    public void update(Encuesta e);
+    public void eliminar(long id);
 }
