@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/respuestas")
 public class RespuestaController {
     @Autowired
-    private IRespuestaService rR;
+    private IRespuestaService rS;
 
     @GetMapping("/listar")
     public List<RespuestaDTO> listar(){
-        return rR.list().stream().map(z->{
+        return rS.list().stream().map(z->{
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(z, RespuestaDTO.class);
         }).collect(Collectors.toList());
@@ -28,18 +28,18 @@ public class RespuestaController {
     public void insertar(@RequestBody RespuestaDTO dto){
         ModelMapper m = new ModelMapper();
         Respuesta rs = m.map(dto, Respuesta.class);
-        rR.insert(rs);
+        rS.insert(rs);
     }
 
     @PutMapping("/modificar")
     public void modificar(@RequestBody RespuestaDTO dto){
         ModelMapper m = new ModelMapper();
         Respuesta c = m.map(dto, Respuesta.class);
-        rR.update(c);
+        rS.update(c);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
-        rR.eliminar(id);
+        rS.eliminar(id);
     }
 }
