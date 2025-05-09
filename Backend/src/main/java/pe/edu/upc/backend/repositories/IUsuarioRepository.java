@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
-public Usuario findOneByUsername(String username);
+    public Usuario findOneByUsername(String username);
+
 }
