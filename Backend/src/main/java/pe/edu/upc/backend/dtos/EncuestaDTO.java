@@ -1,12 +1,18 @@
 package pe.edu.upc.backend.dtos;
 
+import pe.edu.upc.backend.entities.EncuestaPregunta;
+
 import java.time.LocalDateTime;
+import java.util.List;
+
 
 public class EncuestaDTO {
+
     private int idEncuesta;
-    private LocalDateTime fechaEncuesta;
-    private int calificacionEncuesta;
-    private boolean completadaEncuesta;
+    private String nombreEncuesta;
+    private LocalDateTime fechaCreacionEncuesta;
+    private String descripcionEncuesta;
+    List<EncuestaPregunta> encuestas;
 
     public int getIdEncuesta() {
         return idEncuesta;
@@ -16,23 +22,35 @@ public class EncuestaDTO {
         this.idEncuesta = idEncuesta;
     }
 
-    public LocalDateTime getFechaEncuesta() {
-        return fechaEncuesta;
+    public String getNombreEncuesta() {
+        return nombreEncuesta;
     }
 
-    public void setFechaEncuesta(LocalDateTime fechaEncuesta) {
-        this.fechaEncuesta = fechaEncuesta;
+    public void setNombreEncuesta(String nombreEncuesta) {
+        this.nombreEncuesta = nombreEncuesta;
     }
 
-    public int getCalificacionEncuesta() {
-        return calificacionEncuesta;
+    public LocalDateTime getFechaCreacionEncuesta() {
+        return fechaCreacionEncuesta;
     }
 
-    public void setCalificacionEncuesta(int calificacionEncuesta) {
-        this.calificacionEncuesta = calificacionEncuesta;
+    public void setFechaCreacionEncuesta(LocalDateTime fechaCreacionEncuesta) {
+        this.fechaCreacionEncuesta = fechaCreacionEncuesta;
     }
 
-    public boolean getCompletadaEncuesta() {return completadaEncuesta;}
+    public String getDescripcionEncuesta() {
+        return descripcionEncuesta;
+    }
 
-    public void setCompletadaEncuesta(boolean completadaEncuesta) {this.completadaEncuesta = completadaEncuesta;}
+    public void setDescripcionEncuesta(String descripcionEncuesta) {
+        this.descripcionEncuesta = descripcionEncuesta;
+    }
+
+    public List<EncuestaPregunta> getEncuestas() {
+        return encuestas;
+    }
+
+    public void setEncuestas(List<EncuestaPregunta> encuestas) {
+        this.encuestas = encuestas;
+    }
 }

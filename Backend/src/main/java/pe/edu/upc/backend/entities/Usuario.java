@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable {
+public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
@@ -28,9 +29,34 @@ public class Usuario implements Serializable {
     @Column(name = "passwordUsuario", nullable = false, length = 220)
     private String passwordUsuario;
     private Boolean enabled;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<Rol> roles;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Respuesta> respuestas;
+
+    @OneToMany(mappedBy = "usuarioruta", cascade = CascadeType.ALL)
+    private List<UsuarioRuta> usuarioRutas;
+
+    public Usuario() {
+    }
+
+    public Usuario(Long idUsuario, String username, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String passwordUsuario, Boolean enabled, List<Rol> roles, List<Respuesta> respuestas, List<UsuarioRuta> usuarioRutas) {
+        this.idUsuario = idUsuario;
+        this.username = username;
+        this.nombreUsuario = nombreUsuario;
+        this.emailUsuario = emailUsuario;
+        this.telefonoUsuario = telefonoUsuario;
+        this.direccionUsuario = direccionUsuario;
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
+        this.passwordUsuario = passwordUsuario;
+        this.enabled = enabled;
+        this.roles = roles;
+        this.respuestas = respuestas;
+        this.usuarioRutas = usuarioRutas;
+    }
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -110,5 +136,21 @@ public class Usuario implements Serializable {
 
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
+    }
+
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
+    }
+
+    public List<UsuarioRuta> getUsuarioRutas() {
+        return usuarioRutas;
+    }
+
+    public void setUsuarioRutas(List<UsuarioRuta> usuarioRutas) {
+        this.usuarioRutas = usuarioRutas;
     }
 }
