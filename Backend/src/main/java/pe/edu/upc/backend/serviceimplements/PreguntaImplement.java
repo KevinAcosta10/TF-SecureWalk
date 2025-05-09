@@ -32,4 +32,8 @@ public class PreguntaImplement implements IPreguntaService {
         pS.deleteById(id);
     }
 
+    @Override
+    public List<String[]> obtenerPreguntasConEncuesta() {
+        return pS.obtenerPreguntasConEncuesta();
+    }
 }

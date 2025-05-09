@@ -6,4 +6,5 @@ public interface IPreguntaService {
     public void insert(Pregunta preg);
     public void update(Pregunta preg);
     public void delete(int id);
+    List<String[]> obtenerPreguntasConEncuesta();
 }

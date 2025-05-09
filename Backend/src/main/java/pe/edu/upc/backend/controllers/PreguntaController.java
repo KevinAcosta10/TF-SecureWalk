@@ -3,8 +3,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.PreguntaDTO;
+import pe.edu.upc.backend.dtos.PreguntaPorEncuestaDTO;
 import pe.edu.upc.backend.entities.Pregunta;
 import pe.edu.upc.backend.serviceinterfaces.IPreguntaService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +41,21 @@ public class PreguntaController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){
         pS.delete(id);
+    }
+
+    @GetMapping("/conEncuesta")
+    public List<PreguntaPorEncuestaDTO> obtenerPreguntasConEncuesta() {
+        List<String[]> lista = pS.obtenerPreguntasConEncuesta();
+        List<PreguntaPorEncuestaDTO> listaDTO = new ArrayList<>();
+
+        for (String[] fila : lista) {
+            PreguntaPorEncuestaDTO dto = new PreguntaPorEncuestaDTO();
+            dto.setTextoPregunta(fila[0]);
+            dto.setTipoPregunta(fila[1]);
+            dto.setNombreEncuesta(fila[2]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 
 }
