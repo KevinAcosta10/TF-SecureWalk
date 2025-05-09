@@ -37,7 +37,7 @@ public class Usuario{
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Respuesta> respuestas;
 
-    @OneToMany(mappedBy = "usuarioruta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<UsuarioRuta> usuarioRutas;
 
     public Usuario() {

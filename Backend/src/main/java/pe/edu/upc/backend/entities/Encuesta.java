@@ -21,18 +21,18 @@ public class Encuesta {
     @Column(name = "descripcionEncuesta", nullable = false)
     private String descripcionEncuesta;
 
-    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL)
-    List<EncuestaPregunta> encuestas;
+    @OneToMany(mappedBy = "idEncuesta", cascade = CascadeType.ALL)
+    private List<EncuestaPregunta> encuestaPreguntas;
 
     public Encuesta() {
     }
 
-    public Encuesta(long idEncuesta, String nombreEncuesta, LocalDateTime fechaCreacionEncuesta, String descripcionEncuesta, List<EncuestaPregunta> encuestas) {
+    public Encuesta(long idEncuesta, String nombreEncuesta, LocalDateTime fechaCreacionEncuesta, String descripcionEncuesta, List<EncuestaPregunta> encuestaPreguntas) {
         this.idEncuesta = idEncuesta;
         this.nombreEncuesta = nombreEncuesta;
         this.fechaCreacionEncuesta = fechaCreacionEncuesta;
         this.descripcionEncuesta = descripcionEncuesta;
-        this.encuestas = encuestas;
+        this.encuestaPreguntas = encuestaPreguntas;
     }
 
     public long getIdEncuesta() {
@@ -67,11 +67,11 @@ public class Encuesta {
         this.descripcionEncuesta = descripcionEncuesta;
     }
 
-    public List<EncuestaPregunta> getEncuestas() {
-        return encuestas;
+    public List<EncuestaPregunta> getEncuestaPreguntas() {
+        return encuestaPreguntas;
     }
 
-    public void setEncuestas(List<EncuestaPregunta> encuestas) {
-        this.encuestas = encuestas;
+    public void setEncuestaPreguntas(List<EncuestaPregunta> encuestaPreguntas) {
+        this.encuestaPreguntas = encuestaPreguntas;
     }
 }

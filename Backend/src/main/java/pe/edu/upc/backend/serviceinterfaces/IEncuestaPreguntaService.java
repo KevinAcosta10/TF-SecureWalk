@@ -1,8 +1,6 @@
 package pe.edu.upc.backend.serviceinterfaces;
 
-import pe.edu.upc.backend.entities.Encuesta;
 import pe.edu.upc.backend.entities.EncuestaPregunta;
-
 import java.util.List;
 
 public interface IEncuestaPreguntaService {

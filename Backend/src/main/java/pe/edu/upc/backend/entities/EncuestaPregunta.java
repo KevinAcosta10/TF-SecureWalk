@@ -13,23 +13,22 @@ public class EncuestaPregunta {
 
     @ManyToOne
     @JoinColumn(name="idEncuesta")
-    private Encuesta encuesta;
+    private Encuesta idEncuesta;
 
     @ManyToOne
     @JoinColumn(name="idPregunta")
-    private Pregunta pregunta;
+    private Pregunta idPregunta;
 
-    @OneToMany(mappedBy = "respuesta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "encuestaPregunta", cascade = CascadeType.ALL)
     private List<Respuesta> respuestas;
 
     public EncuestaPregunta() {
     }
 
-    public EncuestaPregunta(long idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta, List<Respuesta> respuestas) {
+    public EncuestaPregunta(long idEncuestaPregunta, Encuesta idEncuesta, Pregunta idPregunta) {
         this.idEncuestaPregunta = idEncuestaPregunta;
-        this.encuesta = encuesta;
-        this.pregunta = pregunta;
-        this.respuestas = respuestas;
+        this.idEncuesta = idEncuesta;
+        this.idPregunta = idPregunta;
     }
 
     public long getIdEncuestaPregunta() {
@@ -40,27 +39,19 @@ public class EncuestaPregunta {
         this.idEncuestaPregunta = idEncuestaPregunta;
     }
 
-    public Encuesta getEncuesta() {
-        return encuesta;
+    public Encuesta getIdEncuesta() {
+        return idEncuesta;
     }
 
-    public void setEncuesta(Encuesta encuesta) {
-        this.encuesta = encuesta;
+    public void setIdEncuesta(Encuesta idEncuesta) {
+        this.idEncuesta = idEncuesta;
     }
 
-    public Pregunta getPregunta() {
-        return pregunta;
+    public Pregunta getIdPregunta() {
+        return idPregunta;
     }
 
-    public void setPregunta(Pregunta pregunta) {
-        this.pregunta = pregunta;
-    }
-
-    public List<Respuesta> getRespuestas() {
-        return respuestas;
-    }
-
-    public void setRespuestas(List<Respuesta> respuestas) {
-        this.respuestas = respuestas;
+    public void setIdPregunta(Pregunta idPregunta) {
+        this.idPregunta = idPregunta;
     }
 }
