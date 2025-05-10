@@ -14,37 +14,35 @@ import java.util.stream.Collectors;
 @RequestMapping("/evaluaciones")
 public class EvaluacionIncidenteController {
     @Autowired
-    private IEvaluacionIncidenteService eIR;
+    private IEvaluacionIncidenteService eiR;
 
     @GetMapping("/listas")
     public List<EvaluacionIncidenteDTO> listar(){
-        return eIR.list().stream().map(z->{
+        return eiR.list().stream().map(z->{
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(z, EvaluacionIncidenteDTO.class);
         }).collect(Collectors.toList());
     }
 
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody EvaluacionIncidenteDTO dto){
         ModelMapper m = new ModelMapper();
         EvaluacionIncidente eI = m.map(dto, EvaluacionIncidente.class);
-        eIR.insert(eI);
+        eiR.insert(eI);
     }
     @GetMapping("/{id}")
     public EvaluacionIncidenteDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
-        EvaluacionIncidenteDTO dto =m.map(eIR.listId(id), EvaluacionIncidenteDTO.class);
+        EvaluacionIncidenteDTO dto =m.map(eiR.listId(id), EvaluacionIncidenteDTO.class);
         return dto;
     }
 
-    @PutMapping
+    @PutMapping("/modificar")
     public void modificar(@RequestBody EvaluacionIncidenteDTO dto){
         ModelMapper m = new ModelMapper();
         EvaluacionIncidente eI = m.map(dto, EvaluacionIncidente.class);
-        eIR.update(eI);
+        eiR.update(eI);
     }
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable("id") int id){
-        eIR.delete(id);
-    }
+    public void eliminar(@PathVariable("id") int id){eiR.delete(id);}
 }

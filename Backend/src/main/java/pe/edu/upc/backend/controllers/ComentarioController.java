@@ -17,20 +17,20 @@ import java.util.stream.Collectors;
 public class ComentarioController {
     @Autowired
     private IComentarioService cS;
-    @GetMapping
+    @GetMapping("/listar")
     public List<ComentarioDTO> listar() {
         return cS.list().stream().map(x ->{
             ModelMapper m = new ModelMapper();
             return m.map(x,ComentarioDTO.class);
         }).collect(Collectors.toList());
     }
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody ComentarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Comentario c = m.map(dto, Comentario.class);
         cS.insert(c);
     }
-    @PutMapping
+    @PutMapping("/modificar")
     public void modificar(@RequestBody ComentarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Comentario c = m.map(dto, Comentario.class);

@@ -17,26 +17,27 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService uS;
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<UsuarioDTO> listar() {
         return uS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, UsuarioDTO.class);
         }).collect(Collectors.toList());
     }
-    /// REGISTRO DE UN USUARIO CONSIDERANDO EL JSON
-    @PostMapping
+
+    @PostMapping("/insertar")
     public void insertar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
         uS.insert(us);
     }
 
-    @PutMapping
+    @PutMapping("/modificar")
     public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
         uS.update(us);
+
     }
 
     @DeleteMapping("/{id}")

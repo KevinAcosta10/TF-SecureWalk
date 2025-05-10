@@ -1,25 +1,35 @@
 package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "rol"})})
-public class Rol implements Serializable {
+@Table(name = "Rol")
+public class Rol{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRol;
-    @Column(name = "rol", nullable = false, length = 30)
-    private String nombreRol;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Usuario user;
+    private int idRol;
 
-    public Long getIdRol() {
+    @Column(name = "nombreRol")
+    private String nombreRol;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+    public Rol() {
+    }
+
+    public Rol(int idRol, String nombreRol, Usuario usuario) {
+        this.idRol = idRol;
+        this.nombreRol = nombreRol;
+        this.usuario = usuario;
+    }
+
+    public int getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(Long idRol) {
+    public void setIdRol(int idRol) {
         this.idRol = idRol;
     }
 
@@ -31,11 +41,11 @@ public class Rol implements Serializable {
         this.nombreRol = nombreRol;
     }
 
-    public Usuario getUser() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

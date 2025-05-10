@@ -4,31 +4,29 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Comentario")
-
 public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idComentario;
 
-    @Column(name = "descripciónComentario", nullable = false, unique = true)
-    private String descripciónComentario;
+    @Column(name = "descripcionComentario")
+    private String descripcionComentario;
 
     @ManyToOne
-    @JoinColumn(name = "usuarioID")
-    private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "postID")
+    @JoinColumn(name = "idPost")
     private Post post;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
     public Comentario() {
     }
 
-    public Comentario(int idComentario, String descripciónComentario, Usuario usuario, Post post) {
+    public Comentario(int idComentario, String descripcionComentario, Post post, Usuario usuario) {
         this.idComentario = idComentario;
-        this.descripciónComentario = descripciónComentario;
-        this.usuario = usuario;
+        this.descripcionComentario = descripcionComentario;
         this.post = post;
+        this.usuario = usuario;
     }
 
     public int getIdComentario() {
@@ -39,20 +37,12 @@ public class Comentario {
         this.idComentario = idComentario;
     }
 
-    public String getDescripciónComentario() {
-        return descripciónComentario;
+    public String getDescripcionComentario() {
+        return descripcionComentario;
     }
 
-    public void setDescripciónComentario(String descripciónComentario) {
-        this.descripciónComentario = descripciónComentario;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setDescripcionComentario(String descripcionComentario) {
+        this.descripcionComentario = descripcionComentario;
     }
 
     public Post getPost() {
@@ -61,5 +51,13 @@ public class Comentario {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

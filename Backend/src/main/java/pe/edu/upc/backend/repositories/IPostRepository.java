@@ -5,14 +5,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.backend.entities.Post;
 
+import java.util.List;
+
 @Repository
 public interface IPostRepository extends JpaRepository<Post, Integer>{
-    //@Query(value = "SELECT u.id_Usuario, u.nombre_usuario AS NombreUsuario, r.rol, p.descripcion_post AS UltimoPost, c.descripcion_comentario AS UltimoComentario\n" +
-    //        " FROM Usuario u\n" +
-    //        " INNER JOIN Rol r ON u.id_usuario = r.user_id\n" +
-    //        " LEFT JOIN Post p ON u.id_usuario = p.id_usuario\n" +
-     //       " LEFT JOIN Comentario c ON u.id_usuario = c.usuarioid\n" +
-       //     " WHERE u.id_usuario = :id\n" +
-         //   " ORDER BY p.id_post DESC, c.id_comentario DESC\n" +
-           // " LIMIT 1;" )
+    @Query(value = "SELECT p.idPost, p.descripcion, i.tipoIncidente, z.nombreZona \n" +
+            " FROM incidente i\n" +
+            " JOIN zona z ON i.id_zona = z.id_zona\n" +
+            " GROUP BY z.nombre_zona;", nativeQuery = true)
+
+    public List<String[]> postPorIncidente();
 }

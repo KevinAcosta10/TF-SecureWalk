@@ -17,17 +17,22 @@ public class PostImplement implements IPostService {
     }
 
     @Override
-    public void insert(Post pos) {
-        pT.save(pos);
+    public void insert(Post p) {
+        pT.save(p);
     }
 
     @Override
-    public void update(Post pos) {
-        pT.save(pos);
+    public void update(Post p) {
+        pT.save(p);
     }
 
     @Override
     public void delete(int id) {
         pT.deleteById(id);
+    }
+
+    @Override
+    public List<String[]> postPorIncidente() {
+        return pT.postPorIncidente();
     }
 }

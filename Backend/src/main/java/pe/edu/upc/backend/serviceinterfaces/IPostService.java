@@ -4,7 +4,8 @@ import java.util.List;
 
 public interface IPostService {
     public List<Post> list();
-    public void insert(Post pos);
-    public void update(Post pos);
+    public void insert(Post p);
+    public void update(Post p);
     public void delete(int id);
+    public List<String[]> postPorIncidente();
 }

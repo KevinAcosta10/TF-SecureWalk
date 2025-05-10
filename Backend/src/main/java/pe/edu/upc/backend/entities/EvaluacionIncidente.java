@@ -2,38 +2,36 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name="EvaluacionIncidente")
+@Table(name = "EvaluacionIncidente")
 public class EvaluacionIncidente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEvaluacionIncidente;
 
-    @Column(name = "valoracionIncidente", nullable = false)
-    private boolean valoracionIncidente;
-
-    @Column(name = "fechaCreacionIncidente", nullable = false)
-    private LocalDateTime fechaCreacionIncidente;
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @Column(name = "aprobacionIncidente")
+    private Boolean aprobacionIncidente;
+    @Column(name = "fechaCreacionIncidente")
+    private LocalDate fechaCreacionIncidente;
 
     @ManyToOne
-    @JoinColumn(name = "idIncidente")
+    @JoinColumn(name = "idIncidente", nullable = false)
     private Incidente incidente;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario", nullable = false)
+    private Usuario usuario;
 
     public EvaluacionIncidente() {
     }
 
-    public EvaluacionIncidente(int idEvaluacionIncidente, boolean valoracionIncidente, LocalDateTime fechaCreacionIncidente, Usuario usuario, Incidente incidente) {
+    public EvaluacionIncidente(int idEvaluacionIncidente, Boolean aprobacionIncidente, LocalDate fechaCreacionIncidente, Incidente incidente, Usuario usuario) {
         this.idEvaluacionIncidente = idEvaluacionIncidente;
-        this.valoracionIncidente = valoracionIncidente;
+        this.aprobacionIncidente = aprobacionIncidente;
         this.fechaCreacionIncidente = fechaCreacionIncidente;
-        this.usuario = usuario;
         this.incidente = incidente;
+        this.usuario = usuario;
     }
 
     public int getIdEvaluacionIncidente() {
@@ -44,28 +42,20 @@ public class EvaluacionIncidente {
         this.idEvaluacionIncidente = idEvaluacionIncidente;
     }
 
-    public boolean isValoracionIncidente() {
-        return valoracionIncidente;
+    public Boolean getAprobacionIncidente() {
+        return aprobacionIncidente;
     }
 
-    public void setValoracionIncidente(boolean valoracionIncidente) {
-        this.valoracionIncidente = valoracionIncidente;
+    public void setAprobacionIncidente(Boolean aprobacionIncidente) {
+        this.aprobacionIncidente = aprobacionIncidente;
     }
 
-    public LocalDateTime getFechaCreacionIncidente() {
+    public LocalDate getFechaCreacionIncidente() {
         return fechaCreacionIncidente;
     }
 
-    public void setFechaCreacionIncidente(LocalDateTime fechaCreacionIncidente) {
+    public void setFechaCreacionIncidente(LocalDate fechaCreacionIncidente) {
         this.fechaCreacionIncidente = fechaCreacionIncidente;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Incidente getIncidente() {
@@ -74,5 +64,13 @@ public class EvaluacionIncidente {
 
     public void setIncidente(Incidente incidente) {
         this.incidente = incidente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

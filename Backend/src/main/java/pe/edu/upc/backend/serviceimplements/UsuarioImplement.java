@@ -19,13 +19,13 @@ public class    UsuarioImplement implements IUsuarioService {
     }
 
     @Override
-    public void insert(Usuario usua) {
-        uR.save(usua);
+    public void insert(Usuario u) {
+        uR.save(u);
     }
 
     @Override
-    public void update(Usuario usua) {
-        uR.save(usua);
+    public void update(Usuario u) {
+        uR.save(u);
     }
 
     @Override

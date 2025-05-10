@@ -15,27 +15,32 @@ import java.util.stream.Collectors;
 public class EncuestaController {
 
     @Autowired
-    private IEncuestaService eS;
+    private IEncuestaService eR;
 
-    @GetMapping("/listas")
+    @GetMapping("/listar")
     public List<EncuestaDTO> listar(){
-        return eS.list().stream().map(z->{
+        return eR.list().stream().map(z->{
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(z, EncuestaDTO.class);
         }).collect(Collectors.toList());
     }
 
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody EncuestaDTO dto){
         ModelMapper m = new ModelMapper();
         Encuesta es = m.map(dto, Encuesta.class);
-        eS.insert(es);
-    }
-    @GetMapping("/{id}")
-    public EncuestaDTO buscarId(@PathVariable("id") int id){
-        ModelMapper m = new ModelMapper();
-        EncuestaDTO dto =m.map(eS.listId(id), EncuestaDTO.class);
-        return dto;
+        eR.insert(es);
     }
 
+    @PutMapping("/modificar")
+    public void modificar(@RequestBody EncuestaDTO dto){
+        ModelMapper m = new ModelMapper();
+        Encuesta c = m.map(dto, Encuesta.class);
+        eR.update(c);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") int id) {
+        eR.eliminar(id);
+    }
 }
