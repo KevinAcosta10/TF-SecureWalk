@@ -9,7 +9,7 @@ import pe.edu.upc.backend.serviceinterfaces.IUsuarioService;
 import java.util.List;
 
 @Service
-public class UsuarioImplement implements IUsuarioService {
+public class    UsuarioImplement implements IUsuarioService {
     @Autowired
     private IUsuarioRepository uR;
 

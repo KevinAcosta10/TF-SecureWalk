@@ -24,7 +24,7 @@ public class UsuarioController {
             return m.map(x, UsuarioDTO.class);
         }).collect(Collectors.toList());
     }
-
+    /// REGISTRO DE UN USUARIO CONSIDERANDO EL JSON
     @PostMapping
     public void insertar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -37,7 +37,6 @@ public class UsuarioController {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
         uS.update(us);
-
     }
 
     @DeleteMapping("/{id}")

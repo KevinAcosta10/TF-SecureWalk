@@ -1,6 +1,4 @@
 package pe.edu.upc.backend.entities;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -29,7 +27,6 @@ public class Usuario implements Serializable {
     private String passwordUsuario;
     private Boolean enabled;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private List<Rol> roles;
 
     public Long getIdUsuario() {

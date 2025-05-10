@@ -14,6 +14,7 @@ public class Rol implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Usuario user;
+
     public Long getIdRol() {
         return idRol;
     }
