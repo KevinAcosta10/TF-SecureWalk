@@ -18,17 +18,17 @@ public class RespuestaImplement implements IRespuestaService {
     }
 
     @Override
-    public void insert(Respuesta respuesta) {
-        rR.save(respuesta);
+    public void insert(Respuesta r) {
+        rR.save(r);
     }
 
     @Override
-    public void update(Respuesta respuesta) {
-        rR.save(respuesta);
+    public void update(Respuesta r) {
+        rR.save(r);
     }
 
     @Override
-    public void eliminar(long id) {
+    public void eliminar(int id) {
         rR.deleteById(id);
     }
 }

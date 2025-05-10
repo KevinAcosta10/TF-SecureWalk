@@ -2,56 +2,53 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="EncuestaPregunta")
+@Table(name = "EncuestaPregunta")
 public class EncuestaPregunta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEncuestaPregunta;
+    private int idEncuestaPregunta;
 
     @ManyToOne
-    @JoinColumn(name="idEncuesta")
-    private Encuesta idEncuesta;
-
+    @JoinColumn(name = "idEncuesta")
+    private Encuesta encuesta;
     @ManyToOne
-    @JoinColumn(name="idPregunta")
-    private Pregunta idPregunta;
-
-    @OneToMany(mappedBy = "encuestaPregunta", cascade = CascadeType.ALL)
-    private List<Respuesta> respuestas;
+    @JoinColumn(name = "idPregunta")
+    private Pregunta pregunta;
 
     public EncuestaPregunta() {
     }
 
-    public EncuestaPregunta(long idEncuestaPregunta, Encuesta idEncuesta, Pregunta idPregunta) {
+    public EncuestaPregunta(int idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta) {
         this.idEncuestaPregunta = idEncuestaPregunta;
-        this.idEncuesta = idEncuesta;
-        this.idPregunta = idPregunta;
+        this.encuesta = encuesta;
+        this.pregunta = pregunta;
     }
 
-    public long getIdEncuestaPregunta() {
+    public int getIdEncuestaPregunta() {
         return idEncuestaPregunta;
     }
 
-    public void setIdEncuestaPregunta(long idEncuestaPregunta) {
+    public void setIdEncuestaPregunta(int idEncuestaPregunta) {
         this.idEncuestaPregunta = idEncuestaPregunta;
     }
 
-    public Encuesta getIdEncuesta() {
-        return idEncuesta;
+    public Encuesta getEncuesta() {
+        return encuesta;
     }
 
-    public void setIdEncuesta(Encuesta idEncuesta) {
-        this.idEncuesta = idEncuesta;
+    public void setEncuesta(Encuesta encuesta) {
+        this.encuesta = encuesta;
     }
 
-    public Pregunta getIdPregunta() {
-        return idPregunta;
+    public Pregunta getPregunta() {
+        return pregunta;
     }
 
-    public void setIdPregunta(Pregunta idPregunta) {
-        this.idPregunta = idPregunta;
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
     }
 }

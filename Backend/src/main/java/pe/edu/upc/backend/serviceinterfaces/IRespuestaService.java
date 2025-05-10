@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IRespuestaService {
     public List<Respuesta> list();
-    public void insert(Respuesta respuesta);
-    public void update(Respuesta respuesta);
-    public void eliminar(long id);
+    public void insert(Respuesta r);
+    public void update(Respuesta r);
+    public void eliminar(int id);
 }

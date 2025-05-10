@@ -4,53 +4,58 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-
 @Entity
 @Table(name = "Respuesta")
 public class Respuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idRespuesta;
+    private int idRespuesta;
 
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @Column(name = "textoRespuesta")
+    private String textoRespuesta;
+    @Column(name = "fechaRespuesta")
+    private LocalDate fechaRespuesta;
 
     @ManyToOne
     @JoinColumn(name = "idEncuestaPregunta")
     private EncuestaPregunta encuestaPregunta;
-
-    @Column(name = "respuesta", nullable = false, length = 100)
-    private String respuesta;
-
-    @Column(name = "fechaRespuesta", nullable = false, length = 100)
-    private LocalDate fechaRespuesta;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
     public Respuesta() {
     }
 
-    public Respuesta(long idRespuesta, Usuario usuario, EncuestaPregunta encuestaPregunta, String respuesta, LocalDate fechaRespuesta) {
+    public Respuesta(int idRespuesta, String textoRespuesta, LocalDate fechaRespuesta, EncuestaPregunta encuestaPregunta, Usuario usuario) {
         this.idRespuesta = idRespuesta;
-        this.usuario = usuario;
-        this.encuestaPregunta = encuestaPregunta;
-        this.respuesta = respuesta;
+        this.textoRespuesta = textoRespuesta;
         this.fechaRespuesta = fechaRespuesta;
+        this.encuestaPregunta = encuestaPregunta;
+        this.usuario = usuario;
     }
 
-    public long getIdRespuesta() {
+    public int getIdRespuesta() {
         return idRespuesta;
     }
 
-    public void setIdRespuesta(long idRespuesta) {
+    public void setIdRespuesta(int idRespuesta) {
         this.idRespuesta = idRespuesta;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getTextoRespuesta() {
+        return textoRespuesta;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setTextoRespuesta(String textoRespuesta) {
+        this.textoRespuesta = textoRespuesta;
+    }
+
+    public LocalDate getFechaRespuesta() {
+        return fechaRespuesta;
+    }
+
+    public void setFechaRespuesta(LocalDate fechaRespuesta) {
+        this.fechaRespuesta = fechaRespuesta;
     }
 
     public EncuestaPregunta getEncuestaPregunta() {
@@ -61,19 +66,11 @@ public class Respuesta {
         this.encuestaPregunta = encuestaPregunta;
     }
 
-    public String getRespuesta() {
-        return respuesta;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
-    }
-
-    public LocalDate getFechaRespuesta() {
-        return fechaRespuesta;
-    }
-
-    public void setFechaRespuesta(LocalDate fechaRespuesta) {
-        this.fechaRespuesta = fechaRespuesta;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

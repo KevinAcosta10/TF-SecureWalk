@@ -18,13 +18,13 @@ public class PreguntaImplement implements IPreguntaService {
     }
 
     @Override
-    public void insert(Pregunta preg) {
-        pS.save(preg);
+    public void insert(Pregunta p) {
+        pS.save(p);
     }
 
     @Override
-    public void update(Pregunta preg) {
-        pS.save(preg);
+    public void update(Pregunta p) {
+        pS.save(p);
     }
 
     @Override

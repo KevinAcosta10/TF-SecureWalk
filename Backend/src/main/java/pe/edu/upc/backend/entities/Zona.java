@@ -5,9 +5,12 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Zona")
 public class Zona {
+
+//Primary Key + Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idZona;
+
     @Column(name = "latitudZona", nullable = false)
     private Float latitudZona;
     @Column(name = "longitudZona", nullable = false)

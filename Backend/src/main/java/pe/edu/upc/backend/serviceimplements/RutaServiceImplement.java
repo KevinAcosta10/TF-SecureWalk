@@ -22,6 +22,21 @@ public class RutaServiceImplement implements IRutaService {
     }
 
     @Override
+    public void insert(Ruta r) {
+        rR.save(r);
+    }
+
+    @Override
+    public void update(Ruta r) {
+        rR.save(r);
+    }
+
+    @Override
+    public void delete(int id) {
+        rR.deleteById(id);
+    }
+
+    @Override
     public List<String[]> countRutasByUsuario() {
         return rR.countRutasByUsuario();
     }

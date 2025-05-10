@@ -16,7 +16,7 @@ public class UsuarioRutaController {
         @Autowired
         private IUsuarioRutaService urS;
 
-        @GetMapping
+        @GetMapping("/listar")
         public List<UsuarioRutaDTO> listar() {
             return urS.list().stream().map(x -> {
                 ModelMapper m = new ModelMapper();
@@ -24,14 +24,14 @@ public class UsuarioRutaController {
             }).collect(Collectors.toList());
         }
 
-        @PostMapping
+        @PostMapping("/insertar")
         public void insertar(@RequestBody UsuarioRutaDTO dto) {
             ModelMapper m = new ModelMapper();
             UsuarioRuta us = m.map(dto, UsuarioRuta.class);
             urS.insert(us);
         }
 
-        @PutMapping
+        @PutMapping("/modificar")
         public void modificar(@RequestBody UsuarioRutaDTO dto) {
             ModelMapper m = new ModelMapper();
             UsuarioRuta us = m.map(dto, UsuarioRuta.class);

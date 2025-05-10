@@ -1,33 +1,54 @@
 package pe.edu.upc.backend.dtos;
 
-import java.time.LocalDateTime;
+import pe.edu.upc.backend.entities.Incidente;
+import pe.edu.upc.backend.entities.Usuario;
+
+import java.time.LocalDate;
 
 public class EvaluacionIncidenteDTO {
-    private int idIncidente;
-    private boolean valoracionIncidente;
-    private LocalDateTime fechaCreacionIncidente;
+    private int idEvaluacionIncidente;
+    private boolean aprobacionIncidente;
+    private LocalDate fechaCreacionIncidente;
+    private Incidente incidente;
+    private Usuario usuario;
 
-    public int getIdIncidente() {
-        return idIncidente;
+    public int getIdEvaluacionIncidente() {
+        return idEvaluacionIncidente;
     }
 
-    public void setIdIncidente(int idIncidente) {
-        this.idIncidente = idIncidente;
+    public void setIdEvaluacionIncidente(int idEvaluacionIncidente) {
+        this.idEvaluacionIncidente = idEvaluacionIncidente;
     }
 
-    public boolean isValoracionIncidente() {
-        return valoracionIncidente;
+    public boolean isAprobacionIncidente() {
+        return aprobacionIncidente;
     }
 
-    public void setValoracionIncidente(boolean valoracionIncidente) {
-        this.valoracionIncidente = valoracionIncidente;
+    public void setAprobacionIncidente(boolean aprobacionIncidente) {
+        this.aprobacionIncidente = aprobacionIncidente;
     }
 
-    public LocalDateTime getFechaCreacionIncidente() {
+    public LocalDate getFechaCreacionIncidente() {
         return fechaCreacionIncidente;
     }
 
-    public void setFechaCreacionIncidente(LocalDateTime fechaCreacionIncidente) {
+    public void setFechaCreacionIncidente(LocalDate fechaCreacionIncidente) {
         this.fechaCreacionIncidente = fechaCreacionIncidente;
+    }
+
+    public Incidente getIncidente() {
+        return incidente;
+    }
+
+    public void setIncidente(Incidente incidente) {
+        this.incidente = incidente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

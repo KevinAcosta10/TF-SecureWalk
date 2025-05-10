@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IPreguntaService {
     public List<Pregunta> list();
-    public void insert(Pregunta preg);
-    public void update(Pregunta preg);
+    public void insert(Pregunta p);
+    public void update(Pregunta p);
     public void delete(int id);
 }

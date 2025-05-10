@@ -2,10 +2,11 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.backend.dtos.EncuestaPreguntaDTO;
 import pe.edu.upc.backend.dtos.IncidenteDTO;
 import pe.edu.upc.backend.dtos.IncidentesPorUsuarioDTO;
+import pe.edu.upc.backend.entities.EncuestaPregunta;
 import pe.edu.upc.backend.entities.Incidente;
 import pe.edu.upc.backend.serviceinterfaces.IIncidenteService;
 
@@ -16,19 +17,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/incidentes")
-@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class IncidenteController {
     @Autowired
     private IIncidenteService iS;
 
-    @PutMapping
-    public void agregar(@RequestBody IncidenteDTO incidenteDTO) {
-        ModelMapper m = new ModelMapper();
-        Incidente incidente = m.map(incidenteDTO, Incidente.class);
-        iS.insert(incidente);
-    }
-
-    @GetMapping
+    @GetMapping("/listar")
     public List<IncidenteDTO> listar() {
         return iS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -37,8 +30,26 @@ public class IncidenteController {
         }).collect(Collectors.toList());
     }
 
+    @PostMapping("/insertar")
+    public void insertar(@RequestBody IncidenteDTO incidenteDTO) {
+        ModelMapper m = new ModelMapper();
+        Incidente incidente = m.map(incidenteDTO, Incidente.class);
+        iS.insert(incidente);
+    }
+
+    @PutMapping("/modificar")
+    public void modificar(@RequestBody IncidenteDTO dto){
+        ModelMapper m = new ModelMapper();
+        Incidente c = m.map(dto, Incidente.class);
+        iS.update(c);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") int id) {
+        iS.delete(id);
+    }
+
     @GetMapping("/incidentesPorUsuario")
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR','POLICIA')")
     public List<IncidentesPorUsuarioDTO> IncidentesUsuarios(){
         List<String[]> lista = iS.IncidentesPorUsuario();
         List<IncidentesPorUsuarioDTO> listaDTO= new ArrayList<>();

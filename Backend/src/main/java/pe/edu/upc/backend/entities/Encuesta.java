@@ -2,44 +2,39 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="Encuesta")
+@Table(name = "Encuesta")
 public class Encuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEncuesta;
+    private int idEncuesta;
 
-    @Column(name = "nombreEncuesta", nullable = false)
+    @Column(name = "nombreEncuesta")
     private String nombreEncuesta;
-
-    @Column(name = "fechaCreacionEncuesta", nullable = false)
-    private LocalDateTime fechaCreacionEncuesta;
-
-    @Column(name = "descripcionEncuesta", nullable = false)
+    @Column(name = "descripcionEncuesta")
     private String descripcionEncuesta;
-
-    @OneToMany(mappedBy = "idEncuesta", cascade = CascadeType.ALL)
-    private List<EncuestaPregunta> encuestaPreguntas;
+    @Column(name = "fechaCreacionEncuesta")
+    private LocalDate fechaCreacionEncuesta;
 
     public Encuesta() {
     }
 
-    public Encuesta(long idEncuesta, String nombreEncuesta, LocalDateTime fechaCreacionEncuesta, String descripcionEncuesta, List<EncuestaPregunta> encuestaPreguntas) {
+    public Encuesta(int idEncuesta, String nombreEncuesta, String descripcionEncuesta, LocalDate fechaCreacionEncuesta) {
         this.idEncuesta = idEncuesta;
         this.nombreEncuesta = nombreEncuesta;
-        this.fechaCreacionEncuesta = fechaCreacionEncuesta;
         this.descripcionEncuesta = descripcionEncuesta;
-        this.encuestaPreguntas = encuestaPreguntas;
+        this.fechaCreacionEncuesta = fechaCreacionEncuesta;
     }
 
-    public long getIdEncuesta() {
+    public int getIdEncuesta() {
         return idEncuesta;
     }
 
-    public void setIdEncuesta(long idEncuesta) {
+    public void setIdEncuesta(int idEncuesta) {
         this.idEncuesta = idEncuesta;
     }
 
@@ -51,14 +46,6 @@ public class Encuesta {
         this.nombreEncuesta = nombreEncuesta;
     }
 
-    public LocalDateTime getFechaCreacionEncuesta() {
-        return fechaCreacionEncuesta;
-    }
-
-    public void setFechaCreacionEncuesta(LocalDateTime fechaCreacionEncuesta) {
-        this.fechaCreacionEncuesta = fechaCreacionEncuesta;
-    }
-
     public String getDescripcionEncuesta() {
         return descripcionEncuesta;
     }
@@ -67,11 +54,11 @@ public class Encuesta {
         this.descripcionEncuesta = descripcionEncuesta;
     }
 
-    public List<EncuestaPregunta> getEncuestaPreguntas() {
-        return encuestaPreguntas;
+    public LocalDate getFechaCreacionEncuesta() {
+        return fechaCreacionEncuesta;
     }
 
-    public void setEncuestaPreguntas(List<EncuestaPregunta> encuestaPreguntas) {
-        this.encuestaPreguntas = encuestaPreguntas;
+    public void setFechaCreacionEncuesta(LocalDate fechaCreacionEncuesta) {
+        this.fechaCreacionEncuesta = fechaCreacionEncuesta;
     }
 }

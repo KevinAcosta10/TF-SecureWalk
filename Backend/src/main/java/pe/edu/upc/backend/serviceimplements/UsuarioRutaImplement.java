@@ -20,17 +20,16 @@ public class UsuarioRutaImplement implements IUsuarioRutaService {
     }
 
     @Override
-    public void insert(UsuarioRuta usuarioRuta) {
-        urR.save(usuarioRuta);
+    public void insert(UsuarioRuta ur) {
+        urR.save(ur);
     }
 
     @Override
-    public void update(UsuarioRuta usuarioRuta) {
-        urR.save(usuarioRuta);
+    public void update(UsuarioRuta ur) {urR.save(ur);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         urR.deleteById(id);
     }
 }

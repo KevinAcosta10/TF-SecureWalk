@@ -21,7 +21,7 @@ public class PostController {
     @Autowired
     private IPostService pT;
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<PostDTO> list() {
         return pT.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -29,13 +29,13 @@ public class PostController {
         }).collect(Collectors.toList());
 
     }
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody PostDTO dto) {
         ModelMapper m = new ModelMapper();
         Post us = m.map(dto, Post.class);
         pT.insert(us);
     }
-    @PutMapping
+    @PutMapping("/modificar")
     public void modificar(@RequestBody PostDTO dto) {
         ModelMapper m = new ModelMapper();
         Post us = m.map(dto, Post.class);

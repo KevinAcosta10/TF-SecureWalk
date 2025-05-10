@@ -1,14 +1,15 @@
 package pe.edu.upc.backend.entities;
-import jakarta.persistence.*;
-@Entity
-@Table(name= "Post")
-public class Post {
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Post")
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPost;
 
-    @Column(name = "descripcionPost", nullable = false, length = 200)
+    @Column(name = "descripcionPost")
     private String descripcionPost;
 
     @ManyToOne

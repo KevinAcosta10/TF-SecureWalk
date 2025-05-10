@@ -1,7 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import jakarta.persistence.Column;
-
 public class ZonaDTO {
     private int idZona;
     private Float latitudZona;
