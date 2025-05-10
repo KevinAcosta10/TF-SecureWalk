@@ -1,9 +1,7 @@
 package pe.edu.upc.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,65 +11,43 @@ import java.util.List;
 public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
-    @Column(name = "username", nullable = false, length = 50, unique = true)
-    private String username;
-    @Column(name = "nombreUsuario", nullable = false, length = 220)
+    private int idUsuario;
+
+    @Column(name = "nombreUsuario", nullable = false)
     private String nombreUsuario;
-    @Column(name = "emailUsuario", nullable = false, length = 220)
+    @Column(name = "emailUsuario", nullable = false)
     private String emailUsuario;
-    @Column(name = "telefonoUsuario", nullable = false, length = 220)
+    @Column(name = "telefonoUsuario", nullable = false)
     private int telefonoUsuario;
-    @Column(name = "direccionUsuario", nullable = false, length = 220)
+    @Column(name = "direccionUsuario", nullable = false)
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
     private LocalDate fechaRegistroUsuario;
-    @Column(name = "passwordUsuario", nullable = false, length = 220)
-    private String passwordUsuario;
-    private Boolean enabled;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private List<Rol> roles;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Respuesta> respuestas;
-
-    @OneToMany(mappedBy = "usuarioruta", cascade = CascadeType.ALL)
-    private List<UsuarioRuta> usuarioRutas;
+    @Column(name = "username", nullable = false)
+    private String username;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String username, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String passwordUsuario, Boolean enabled, List<Rol> roles, List<Respuesta> respuestas, List<UsuarioRuta> usuarioRutas) {
+    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password) {
         this.idUsuario = idUsuario;
-        this.username = username;
         this.nombreUsuario = nombreUsuario;
         this.emailUsuario = emailUsuario;
         this.telefonoUsuario = telefonoUsuario;
         this.direccionUsuario = direccionUsuario;
         this.fechaRegistroUsuario = fechaRegistroUsuario;
-        this.passwordUsuario = passwordUsuario;
-        this.enabled = enabled;
-        this.roles = roles;
-        this.respuestas = respuestas;
-        this.usuarioRutas = usuarioRutas;
+        this.username = username;
+        this.password = password;
     }
 
-    public Long getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getNombreUsuario() {
@@ -114,43 +90,19 @@ public class Usuario{
         this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public String getPasswordUsuario() {
-        return passwordUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPasswordUsuario(String passwordUsuario) {
-        this.passwordUsuario = passwordUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public List<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
-    }
-
-    public List<Respuesta> getRespuestas() {
-        return respuestas;
-    }
-
-    public void setRespuestas(List<Respuesta> respuestas) {
-        this.respuestas = respuestas;
-    }
-
-    public List<UsuarioRuta> getUsuarioRutas() {
-        return usuarioRutas;
-    }
-
-    public void setUsuarioRutas(List<UsuarioRuta> usuarioRutas) {
-        this.usuarioRutas = usuarioRutas;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

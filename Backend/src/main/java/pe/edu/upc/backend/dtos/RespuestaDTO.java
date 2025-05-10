@@ -7,10 +7,10 @@ import java.time.LocalDate;
 
 public class RespuestaDTO {
     private long idRespuesta;
-    private Usuario usuario;
-    private String respuesta;
+    private String textoRespuesta;
     private LocalDate fechaRespuesta;
     private EncuestaPregunta encuestaPregunta;
+    private Usuario usuario;
 
     public long getIdRespuesta() {
         return idRespuesta;
@@ -20,12 +20,20 @@ public class RespuestaDTO {
         this.idRespuesta = idRespuesta;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getTextoRespuesta() {
+        return textoRespuesta;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setTextoRespuesta(String textoRespuesta) {
+        this.textoRespuesta = textoRespuesta;
+    }
+
+    public LocalDate getFechaRespuesta() {
+        return fechaRespuesta;
+    }
+
+    public void setFechaRespuesta(LocalDate fechaRespuesta) {
+        this.fechaRespuesta = fechaRespuesta;
     }
 
     public EncuestaPregunta getEncuestaPregunta() {
@@ -36,19 +44,11 @@ public class RespuestaDTO {
         this.encuestaPregunta = encuestaPregunta;
     }
 
-    public String getRespuesta() {
-        return respuesta;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
-    }
-
-    public LocalDate getFechaRespuesta() {
-        return fechaRespuesta;
-    }
-
-    public void setFechaRespuesta(LocalDate fechaRespuesta) {
-        this.fechaRespuesta = fechaRespuesta;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

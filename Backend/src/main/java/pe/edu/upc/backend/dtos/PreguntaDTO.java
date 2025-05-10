@@ -1,15 +1,10 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.EncuestaPregunta;
-
-import java.util.List;
-
 public class PreguntaDTO {
 
     private int idPregunta;
     private String textoPregunta;
     private String tipoPregunta;
-    List<EncuestaPregunta> preguntas;
 
     public int getIdPregunta() {
         return idPregunta;
@@ -35,11 +30,4 @@ public class PreguntaDTO {
         this.tipoPregunta = tipoPregunta;
     }
 
-    public List<EncuestaPregunta> getPreguntas() {
-        return preguntas;
-    }
-
-    public void setPreguntas(List<EncuestaPregunta> preguntas) {
-        this.preguntas = preguntas;
-    }
 }

@@ -10,30 +10,31 @@ public class Incidente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idIncidente;
-    @Column(name = "descripcionIncidente", nullable = false, length = 250)
-    private String descripcionIncidente;
-    @Column(name = "tipoIncidente", nullable = false, length = 250)
+
+    @Column(name = "tipoIncidente")
     private String tipoIncidente;
-    @Column(name = "fechaIncidente", nullable = false)
+    @Column(name = "fechaIncidente")
     private LocalDate fechaIncidente;
+    @Column(name = "descripcionIncidente")
+    private String descripcionIncidente;
 
     @ManyToOne
-    @JoinColumn(name = "idZona")
-    private Zona idZona;
+    @JoinColumn(name = "idZona", nullable = false)
+    private Zona zona;
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario idUsuario;
+    @JoinColumn(name = "idUsuario", nullable = false)
+    private Usuario usuario;
 
     public Incidente() {
     }
 
-    public Incidente(int idIncidente, String descripcionIncidente, String tipoIncidente, LocalDate fechaIncidente, Zona idZona, Usuario idUsuario) {
+    public Incidente(int idIncidente, String tipoIncidente, LocalDate fechaIncidente, String descripcionIncidente, Zona zona, Usuario usuario) {
         this.idIncidente = idIncidente;
-        this.descripcionIncidente = descripcionIncidente;
         this.tipoIncidente = tipoIncidente;
         this.fechaIncidente = fechaIncidente;
-        this.idZona = idZona;
-        this.idUsuario = idUsuario;
+        this.descripcionIncidente = descripcionIncidente;
+        this.zona = zona;
+        this.usuario = usuario;
     }
 
     public int getIdIncidente() {
@@ -42,14 +43,6 @@ public class Incidente {
 
     public void setIdIncidente(int idIncidente) {
         this.idIncidente = idIncidente;
-    }
-
-    public String getDescripcionIncidente() {
-        return descripcionIncidente;
-    }
-
-    public void setDescripcionIncidente(String descripcionIncidente) {
-        this.descripcionIncidente = descripcionIncidente;
     }
 
     public String getTipoIncidente() {
@@ -68,19 +61,27 @@ public class Incidente {
         this.fechaIncidente = fechaIncidente;
     }
 
-    public Zona getIdZona() {
-        return idZona;
+    public String getDescripcionIncidente() {
+        return descripcionIncidente;
     }
 
-    public void setIdZona(Zona idZona) {
-        this.idZona = idZona;
+    public void setDescripcionIncidente(String descripcionIncidente) {
+        this.descripcionIncidente = descripcionIncidente;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Zona getZona() {
+        return zona;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

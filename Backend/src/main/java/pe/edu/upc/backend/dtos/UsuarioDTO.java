@@ -1,15 +1,16 @@
 package pe.edu.upc.backend.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class UsuarioDTO {
     private int idUsuario;
     private String nombreUsuario;
     private String emailUsuario;
-    private String telefonoUsuario;
+    private int telefonoUsuario;
     private String direccionUsuario;
-    private LocalDateTime fechaRegistroUsuario;
-    private String passwordUsuario;
+    private LocalDate fechaRegistroUsuario;
+    private String username;
+    private String password;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -35,11 +36,11 @@ public class UsuarioDTO {
         this.emailUsuario = emailUsuario;
     }
 
-    public String getTelefonoUsuario() {
+    public int getTelefonoUsuario() {
         return telefonoUsuario;
     }
 
-    public void setTelefonoUsuario(String telefonoUsuario) {
+    public void setTelefonoUsuario(int telefonoUsuario) {
         this.telefonoUsuario = telefonoUsuario;
     }
 
@@ -51,19 +52,27 @@ public class UsuarioDTO {
         this.direccionUsuario = direccionUsuario;
     }
 
-    public LocalDateTime getFechaRegistroUsuario() {
+    public LocalDate getFechaRegistroUsuario() {
         return fechaRegistroUsuario;
     }
 
-    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
         this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public String getPasswordUsuario() {
-        return passwordUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPasswordUsuario(String passwordUsuario) {
-        this.passwordUsuario = passwordUsuario;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

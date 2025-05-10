@@ -1,32 +1,26 @@
 package pe.edu.upc.backend.entities;
+
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
-@Table(name= "Pregunta")
+@Table(name = "Pregunta")
 public class Pregunta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPregunta;
 
-    @Column(name = "textoPregunta", nullable = false, length = 100)
+    @Column(name = "textoPregunta")
     private String textoPregunta;
-
-    @Column(name = "tipoPregunta", nullable = false, length = 100)
+    @Column(name = "tipoPregunta")
     private String tipoPregunta;
-
-    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL)
-    List<EncuestaPregunta> preguntas;
 
     public Pregunta() {
     }
 
-    public Pregunta(int idPregunta, String textoPregunta, String tipoPregunta, List<EncuestaPregunta> preguntas) {
+    public Pregunta(int idPregunta, String textoPregunta, String tipoPregunta) {
         this.idPregunta = idPregunta;
         this.textoPregunta = textoPregunta;
         this.tipoPregunta = tipoPregunta;
-        this.preguntas = preguntas;
     }
 
     public int getIdPregunta() {
@@ -51,14 +45,6 @@ public class Pregunta {
 
     public void setTipoPregunta(String tipoPregunta) {
         this.tipoPregunta = tipoPregunta;
-    }
-
-    public List<EncuestaPregunta> getPreguntas() {
-        return preguntas;
-    }
-
-    public void setPreguntas(List<EncuestaPregunta> preguntas) {
-        this.preguntas = preguntas;
     }
 }
 

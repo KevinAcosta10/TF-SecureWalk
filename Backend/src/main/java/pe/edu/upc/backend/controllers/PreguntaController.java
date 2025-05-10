@@ -17,7 +17,7 @@ public class PreguntaController {
     @Autowired
     private IPreguntaService pS;
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<PreguntaDTO> list() {
         return pS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -25,13 +25,13 @@ public class PreguntaController {
         }).collect(Collectors.toList());
 
     }
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody PreguntaDTO dto) {
         ModelMapper m = new ModelMapper();
         Pregunta us = m.map(dto, Pregunta.class);
         pS.insert(us);
     }
-    @PutMapping
+    @PutMapping("/modificar")
     public void modificar(@RequestBody PreguntaDTO dto) {
         ModelMapper m = new ModelMapper();
         Pregunta us = m.map(dto, Pregunta.class);

@@ -24,7 +24,7 @@ public class EvaluacionIncidenteController {
         }).collect(Collectors.toList());
     }
 
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody EvaluacionIncidenteDTO dto){
         ModelMapper m = new ModelMapper();
         EvaluacionIncidente eI = m.map(dto, EvaluacionIncidente.class);
@@ -37,7 +37,7 @@ public class EvaluacionIncidenteController {
         return dto;
     }
 
-    @PutMapping
+    @PutMapping("/modificar")
     public void modificar(@RequestBody EvaluacionIncidenteDTO dto){
         ModelMapper m = new ModelMapper();
         EvaluacionIncidente eI = m.map(dto, EvaluacionIncidente.class);

@@ -19,13 +19,13 @@ public class ComentarioImplement implements IComentarioService {
     }
 
     @Override
-    public void insert(Comentario comentario) {
-        cR.save(comentario);
+    public void insert(Comentario c) {
+        cR.save(c);
     }
 
     @Override
-    public void update(Comentario comentario) {
-        cR.save(comentario);
+    public void update(Comentario c) {
+        cR.save(c);
     }
 
     @Override

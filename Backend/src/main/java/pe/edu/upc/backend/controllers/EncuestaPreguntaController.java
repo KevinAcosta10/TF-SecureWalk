@@ -25,7 +25,7 @@ public class EncuestaPreguntaController {
         }).collect(Collectors.toList());
     }
 
-    @PostMapping("/registrar")
+    @PostMapping("/insertar")
     public void insertar(@RequestBody EncuestaPreguntaDTO dto){
         ModelMapper m = new ModelMapper();
         EncuestaPregunta es = m.map(dto, EncuestaPregunta.class);

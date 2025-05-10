@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IUsuarioRutaService {
     public List<UsuarioRuta> list();
-    public void insert(UsuarioRuta usuarioRuta);
-    public void update(UsuarioRuta usuarioRuta);
-    public void delete(long id);
+    public void insert(UsuarioRuta ur);
+    public void update(UsuarioRuta ur);
+    public void delete(int id);
 }

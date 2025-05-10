@@ -2,41 +2,37 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="EncuestaPregunta")
+@Table(name = "EncuestaPregunta")
 public class EncuestaPregunta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEncuestaPregunta;
+    private int idEncuestaPregunta;
 
     @ManyToOne
-    @JoinColumn(name="idEncuesta")
+    @JoinColumn(name = "idEncuesta")
     private Encuesta encuesta;
-
     @ManyToOne
-    @JoinColumn(name="idPregunta")
+    @JoinColumn(name = "idPregunta")
     private Pregunta pregunta;
-
-    @OneToMany(mappedBy = "respuesta", cascade = CascadeType.ALL)
-    private List<Respuesta> respuestas;
 
     public EncuestaPregunta() {
     }
 
-    public EncuestaPregunta(long idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta, List<Respuesta> respuestas) {
+    public EncuestaPregunta(int idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta) {
         this.idEncuestaPregunta = idEncuestaPregunta;
         this.encuesta = encuesta;
         this.pregunta = pregunta;
-        this.respuestas = respuestas;
     }
 
-    public long getIdEncuestaPregunta() {
+    public int getIdEncuestaPregunta() {
         return idEncuestaPregunta;
     }
 
-    public void setIdEncuestaPregunta(long idEncuestaPregunta) {
+    public void setIdEncuestaPregunta(int idEncuestaPregunta) {
         this.idEncuestaPregunta = idEncuestaPregunta;
     }
 
@@ -54,13 +50,5 @@ public class EncuestaPregunta {
 
     public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
-    }
-
-    public List<Respuesta> getRespuestas() {
-        return respuestas;
-    }
-
-    public void setRespuestas(List<Respuesta> respuestas) {
-        this.respuestas = respuestas;
     }
 }

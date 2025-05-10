@@ -7,39 +7,31 @@ import jakarta.persistence.*;
 public class UsuarioRuta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuarioRuta;
+    private int idUsuarioRuta;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "idRuta")
+    @JoinColumn(name = "idRuta", nullable = false)
     private Ruta ruta;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario" , nullable = false)
+    private Usuario usuario;
 
     public UsuarioRuta() {
     }
 
-    public UsuarioRuta(Long idUsuarioRuta, Usuario usuario, Ruta ruta) {
+    public UsuarioRuta(int idUsuarioRuta, Ruta ruta, Usuario usuario) {
         this.idUsuarioRuta = idUsuarioRuta;
-        this.usuario = usuario;
         this.ruta = ruta;
+        this.usuario = usuario;
     }
 
-    public Long getIdUsuarioRuta() {
+    public int getIdUsuarioRuta() {
         return idUsuarioRuta;
     }
 
-    public void setIdUsuarioRuta(Long idUsuarioRuta) {
+    public void setIdUsuarioRuta(int idUsuarioRuta) {
         this.idUsuarioRuta = idUsuarioRuta;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Ruta getRuta() {
@@ -48,5 +40,13 @@ public class UsuarioRuta {
 
     public void setRuta(Ruta ruta) {
         this.ruta = ruta;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
