@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/usuarios")
 @PreAuthorize("hasAuthority('Administrador')")
 public class UsuarioController {
-
     @Autowired
     private IUsuarioService uS;
 
