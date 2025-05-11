@@ -10,6 +10,6 @@ public interface IRolService {
     public void insert(Rol r);
     public void update(Rol r);
     public void delete(int id);
-    public List<String[]> UsuariosRol(String rol);
+    public List<String[]> UsuariosRol(int id);
     public Rol listById(int id);
 }
