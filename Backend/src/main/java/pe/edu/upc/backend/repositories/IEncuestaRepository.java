@@ -6,6 +6,6 @@ import pe.edu.upc.backend.entities.Encuesta;
 
 
 @Repository
-public interface IEncuestaRepository extends JpaRepository<Encuesta, Long> {
+public interface IEncuestaRepository extends JpaRepository<Encuesta, Integer> {
 
 }

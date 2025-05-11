@@ -1,12 +1,15 @@
 package pe.edu.upc.backend.dtos;
 
 
+import java.time.LocalDate;
+
 public class UsuarioRolDTO {
     private int idUsuario;
     private String nombreUsuario;
     private String emailUsuario;
-    private String telefonoUsuario;
+    private int telefonoUsuario;
     private String direccionUsuario;
+    private LocalDate fechaRegistroUsuario;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -32,11 +35,11 @@ public class UsuarioRolDTO {
         this.emailUsuario = emailUsuario;
     }
 
-    public String getTelefonoUsuario() {
+    public int getTelefonoUsuario() {
         return telefonoUsuario;
     }
 
-    public void setTelefonoUsuario(String telefonoUsuario) {
+    public void setTelefonoUsuario(int telefonoUsuario) {
         this.telefonoUsuario = telefonoUsuario;
     }
 
@@ -46,5 +49,13 @@ public class UsuarioRolDTO {
 
     public void setDireccionUsuario(String direccionUsuario) {
         this.direccionUsuario = direccionUsuario;
+    }
+
+    public LocalDate getFechaRegistroUsuario() {
+        return fechaRegistroUsuario;
+    }
+
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 }

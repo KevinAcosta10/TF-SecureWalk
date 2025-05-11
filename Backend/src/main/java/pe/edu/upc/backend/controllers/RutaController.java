@@ -4,9 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RutaDTO;
+import pe.edu.upc.backend.dtos.UsuarioRutaDTO;
 import pe.edu.upc.backend.entities.Ruta;
 import pe.edu.upc.backend.serviceinterfaces.IRutaService;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,4 +46,25 @@ public class RutaController {
         rS.delete(id);
     }
 
+    @GetMapping("/RutasPorUsuario")
+    public List<UsuarioRutaDTO> RutasxUsuario(@RequestParam("id") int id) {
+        List<String[]> lista = rS.rutasAsiganasaUsuario(id);
+        List<UsuarioRutaDTO> listaDTO = new ArrayList<>();
+        for (String[] columna : lista) {
+            UsuarioRutaDTO dto = new UsuarioRutaDTO();
+            dto.setIdRuta(Integer.parseInt(columna[0]));
+            dto.setHoraInicio(LocalTime.parse(columna[1]));
+            dto.setHoraFin(LocalTime.parse(columna[2]));
+            dto.setNivelSeguridad(Integer.parseInt(columna[3]));
+            dto.setNombreZona(columna[4]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
+    @GetMapping("/{id}")
+    public RutaDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        RutaDTO dto =m.map(rS.listById(id), RutaDTO.class);
+        return dto;
+    }
 }

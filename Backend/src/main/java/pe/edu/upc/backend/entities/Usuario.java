@@ -3,7 +3,6 @@ package pe.edu.upc.backend.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,11 +26,17 @@ public class Usuario{
     private String username;
     @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "enable", nullable = false)
+    private boolean enable;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idUsuario")
+    private List<Rol> roles;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password) {
+    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password, boolean enable, List<Rol> roles) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.emailUsuario = emailUsuario;
@@ -40,6 +45,8 @@ public class Usuario{
         this.fechaRegistroUsuario = fechaRegistroUsuario;
         this.username = username;
         this.password = password;
+        this.enable = enable;
+        this.roles = roles;
     }
 
     public int getIdUsuario() {
@@ -104,5 +111,21 @@ public class Usuario{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }

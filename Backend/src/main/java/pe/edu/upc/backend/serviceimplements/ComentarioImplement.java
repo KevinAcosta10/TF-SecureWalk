@@ -34,7 +34,14 @@ public class ComentarioImplement implements IComentarioService {
     }
 
     @Override
-    public List<String[]> ComentarioPorUsuario() {
-        return cR.IncidentesPorUsuario();
+    public List<String[]> TotalComentariosPorUsuario() {
+        return cR.TotalComentariosPorUsuario();
     }
+
+    @Override
+    public Comentario listId(int id) {
+        return cR.findById(id).orElse(new Comentario());
+    }
+
+
 }

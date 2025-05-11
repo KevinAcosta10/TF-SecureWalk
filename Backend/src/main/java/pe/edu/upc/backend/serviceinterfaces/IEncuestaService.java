@@ -8,5 +8,6 @@ public interface IEncuestaService {
     public List<Encuesta> list();
     public void insert(Encuesta e);
     public void update(Encuesta e);
-    public void eliminar(long id);
+    public void eliminar(int id);
+    public Encuesta listId(int id);
 }

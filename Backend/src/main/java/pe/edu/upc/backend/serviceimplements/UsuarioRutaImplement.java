@@ -32,4 +32,9 @@ public class UsuarioRutaImplement implements IUsuarioRutaService {
     public void delete(int id) {
         urR.deleteById(id);
     }
+
+    @Override
+    public UsuarioRuta listId(int id) {
+        return urR.findById(id).orElse(new UsuarioRuta());
+    }
 }

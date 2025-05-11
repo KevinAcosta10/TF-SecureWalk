@@ -4,7 +4,6 @@ public class PostPorIncidenteDTO {
     private int idPOst;
     private String descripcion;
     private String tipoIncidente;
-    private String nombreZona;
 
     public int getIdPOst() {
         return idPOst;
@@ -30,11 +29,4 @@ public class PostPorIncidenteDTO {
         this.tipoIncidente = tipoIncidente;
     }
 
-    public String getNombreZona() {
-        return nombreZona;
-    }
-
-    public void setNombreZona(String nombreZona) {
-        this.nombreZona = nombreZona;
-    }
 }

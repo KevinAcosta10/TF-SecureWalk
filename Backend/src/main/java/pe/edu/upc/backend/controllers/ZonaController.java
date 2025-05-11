@@ -3,11 +3,11 @@ package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.backend.dtos.CantidadIncidentesPorZonaDTO;
-import pe.edu.upc.backend.dtos.ZonaDTO;
+import pe.edu.upc.backend.dtos.*;
 import pe.edu.upc.backend.entities.Zona;
 import pe.edu.upc.backend.serviceinterfaces.IZonaService;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +43,7 @@ public class ZonaController {
         zS.delete(id);
     }
 
-    @GetMapping("/cantidades")
+    @GetMapping("/IncidentesPorZona")
     public List<CantidadIncidentesPorZonaDTO> ObtenerIncidentesPorZona() {
         List<String[]> lista =zS.cantidadIncidentes();
         List<CantidadIncidentesPorZonaDTO> listaDTO = new ArrayList<>();
@@ -54,5 +54,37 @@ public class ZonaController {
             listaDTO.add(dto);
         }
         return listaDTO;
+    }
+    @GetMapping("/RutasPorZona")
+    public List<ZonaRutasCountDTO> NumerodeRutasPorZona() {
+        List<String[]> lista =zS.countRutasByZona();
+        List<ZonaRutasCountDTO> listaDTO = new ArrayList<>();
+        for(String[] columna : lista) {
+            ZonaRutasCountDTO dto = new ZonaRutasCountDTO();
+            dto.setNombreZona(columna[0]);
+            dto.setCantidadRutas(Integer.parseInt(columna[1]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
+    @GetMapping("/SeguridadPorZona")
+    public List<SeguridadPorZonaDTO> SeguridadPorZona(@RequestParam("zona") String zona) {
+        List<String[]> lista =zS.SeguridadPorZona(zona);
+        List<SeguridadPorZonaDTO> listaDTO = new ArrayList<>();
+        for(String[] columna : lista) {
+            SeguridadPorZonaDTO dto = new SeguridadPorZonaDTO();
+            dto.setNombreZona(columna[0]);
+            dto.setHoraInicio(LocalTime.parse(columna[1]));
+            dto.setHoraFin(LocalTime.parse(columna[2]));
+            dto.setNivelSeguridad(Integer.parseInt(columna[3]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
+    @GetMapping("/{id}")
+    public ZonaDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        ZonaDTO dto =m.map(zS.listId(id), ZonaDTO.class);
+        return dto;
     }
 }

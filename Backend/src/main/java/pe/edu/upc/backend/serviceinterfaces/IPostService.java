@@ -8,4 +8,5 @@ public interface IPostService {
     public void update(Post p);
     public void delete(int id);
     public List<String[]> postPorIncidente();
+    public Post listId(int id);
 }

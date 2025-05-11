@@ -43,4 +43,11 @@ public class EncuestaController {
     public void eliminar(@PathVariable("id") int id) {
         eR.eliminar(id);
     }
+
+    @GetMapping("/{id}")
+    public EncuestaDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        EncuestaDTO dto =m.map(eR.listId(id), EncuestaDTO.class);
+        return dto;
+    }
 }

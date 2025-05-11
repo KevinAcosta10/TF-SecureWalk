@@ -7,5 +7,5 @@ public interface IPreguntaService {
     public void insert(Pregunta p);
     public void update(Pregunta p);
     public void delete(int id);
-    List<String[]> obtenerPreguntasConEncuesta();
+    public Pregunta listId(int id);
 }

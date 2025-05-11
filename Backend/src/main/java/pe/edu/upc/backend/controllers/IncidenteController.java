@@ -3,10 +3,8 @@ package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.backend.dtos.EncuestaPreguntaDTO;
 import pe.edu.upc.backend.dtos.IncidenteDTO;
 import pe.edu.upc.backend.dtos.IncidentesPorUsuarioDTO;
-import pe.edu.upc.backend.entities.EncuestaPregunta;
 import pe.edu.upc.backend.entities.Incidente;
 import pe.edu.upc.backend.serviceinterfaces.IIncidenteService;
 
@@ -64,5 +62,11 @@ public class IncidenteController {
             listaDTO.add(dto);
         }
         return listaDTO;
+    }
+    @GetMapping("/{id}")
+    public IncidenteDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        IncidenteDTO dto =m.map(iS.listId(id), IncidenteDTO.class);
+        return dto;
     }
 }

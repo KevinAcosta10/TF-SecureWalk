@@ -9,5 +9,7 @@ public interface IComentarioService {
     public void insert(Comentario c);
     public void update(Comentario c);
     public void delete(int id);
-    public List<String[]> ComentarioPorUsuario();
+    public List<String[]> TotalComentariosPorUsuario();
+    public Comentario listId(int id);
+
 }

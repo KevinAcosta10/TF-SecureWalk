@@ -43,14 +43,21 @@ public class ComentarioController {
 
     @GetMapping("/ComentariosPorUsuario")
     public List<ComentarioPorUsuarioDTO> ComentarioPorUsuario() {
-        List<String[]> lista = cS.ComentarioPorUsuario();
+        List<String[]> lista = cS.TotalComentariosPorUsuario();
         List<ComentarioPorUsuarioDTO> comentariosDTO = new ArrayList<>();
         for (String[] columna : lista) {
             ComentarioPorUsuarioDTO dto = new ComentarioPorUsuarioDTO();
-            dto.setNombreUsuario(columna[0]);
-            dto.setTotalComentarios(Integer.parseInt(columna[1]));
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setNombreUsuario(columna[1]);
+            dto.setTotalComentarios(Integer.parseInt(columna[2]));
             comentariosDTO.add(dto);
         }
         return comentariosDTO;
+    }
+    @GetMapping("/{id}")
+    public ComentarioDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        ComentarioDTO dto =m.map(cS.listId(id), ComentarioDTO.class);
+        return dto;
     }
 }
