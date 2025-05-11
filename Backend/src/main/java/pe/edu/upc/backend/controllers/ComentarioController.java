@@ -2,6 +2,7 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.ComentarioDTO;
 import pe.edu.upc.backend.dtos.ComentarioPorUsuarioDTO;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comentarios")
+@PreAuthorize("hasAnyAuthority('Administrador', 'Usuario')")
 public class ComentarioController {
     @Autowired
     private IComentarioService cS;
