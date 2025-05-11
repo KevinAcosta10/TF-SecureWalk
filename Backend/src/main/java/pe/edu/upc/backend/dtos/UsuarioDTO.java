@@ -1,6 +1,10 @@
 package pe.edu.upc.backend.dtos;
 
 import java.time.LocalDate;
+<<<<<<< HEAD
+=======
+import java.time.LocalDateTime;
+>>>>>>> kevin
 
 public class UsuarioDTO {
     private int idUsuario;
@@ -9,9 +13,12 @@ public class UsuarioDTO {
     private int telefonoUsuario;
     private String direccionUsuario;
     private LocalDate fechaRegistroUsuario;
+<<<<<<< HEAD
     private String username;
     private String password;
     private boolean enable;
+=======
+>>>>>>> kevin
 
     public boolean isEnable() {
         return enable;
@@ -53,6 +60,7 @@ public class UsuarioDTO {
         this.direccionUsuario = direccionUsuario;
     }
 
+<<<<<<< HEAD
     public int getTelefonoUsuario() {
         return telefonoUsuario;
     }
@@ -84,4 +92,13 @@ public class UsuarioDTO {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+=======
+    public LocalDate getFechaRegistroUsuario() {
+        return fechaRegistroUsuario;
+    }
+
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
+    }
+>>>>>>> kevin
 }
