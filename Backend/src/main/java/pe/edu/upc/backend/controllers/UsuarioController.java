@@ -2,6 +2,7 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.UsuarioDTO;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
+@PreAuthorize("hasAuthority('Administrador')")
 public class UsuarioController {
 
     @Autowired
@@ -44,7 +46,6 @@ public class UsuarioController {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
         uS.update(us);
-
     }
 
     @DeleteMapping("/{id}")
