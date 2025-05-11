@@ -1,5 +1,6 @@
 package pe.edu.upc.backend.serviceinterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.backend.entities.Rol;
 import pe.edu.upc.backend.entities.Ruta;
 
@@ -10,6 +11,6 @@ public interface IRolService {
     public void insert(Rol r);
     public void update(Rol r);
     public void delete(int id);
-    public List<String[]> UsuariosRol(String rol);
     public Rol listById(int id);
+    public List<String[]> UsuariosRol(int id);
 }

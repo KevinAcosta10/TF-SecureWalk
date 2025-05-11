@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "rol"})})
-public class Rol implements Serializable {
+@Table(name = "Rol")
+public class Rol{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRol;

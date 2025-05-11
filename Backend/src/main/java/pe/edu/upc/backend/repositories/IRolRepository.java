@@ -12,6 +12,6 @@ public interface IRolRepository extends JpaRepository<Rol, Integer> {
     @Query(value = "SELECT u.id_usuario, u.nombre_usuario, r.nombre_rol\n" +
             "FROM public.usuario u\n" +
             "JOIN public.rol r ON u.id_usuario = r.id_usuario\n" +
-            "WHERE r.nombre_rol = :rol", nativeQuery = true)
-    public List<String[]> UsuariosRol(@Param("nombreRol") String nombreRol);
+            "WHERE r.id_rol = :id", nativeQuery = true)
+    public List<String[]> UsuariosRol(@Param("id") int id);
 }
