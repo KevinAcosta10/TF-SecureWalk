@@ -2,16 +2,16 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario{
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
-
     @Column(name = "nombreUsuario", nullable = false)
     private String nombreUsuario;
     @Column(name = "emailUsuario", nullable = false)
