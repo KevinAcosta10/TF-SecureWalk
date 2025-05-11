@@ -5,17 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RolDTO;
+import pe.edu.upc.backend.dtos.UsuarioRolDTO;
 import pe.edu.upc.backend.dtos.UsuariosXRolDTO;
 import pe.edu.upc.backend.entities.Rol;
 import pe.edu.upc.backend.serviceinterfaces.IRolService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
-@PreAuthorize("hasAuthority('Administrador')")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 
 public class RolController {
     @Autowired
@@ -47,7 +49,6 @@ public class RolController {
     public void eliminar(@PathVariable("id") int id){
         rS.delete(id);
     }
-
 
     @GetMapping("/UsuarioRol")
     public List<UsuariosXRolDTO> UsuarioRol(@RequestParam("id") int id) {

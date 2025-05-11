@@ -1,11 +1,9 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Usuario;
-
 public class PostDTO {
     private int idPost;
     private String descripcionPost;
-    private Usuario usuario;
+    private UsuarioRolDTO usuario;
 
     public int getIdPost() {
         return idPost;
@@ -23,11 +21,11 @@ public class PostDTO {
         this.descripcionPost = descripcionPost;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioRolDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioRolDTO usuario) {
         this.usuario = usuario;
     }
 }

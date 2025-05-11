@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/respuestas")
-@PreAuthorize("hasAnyAuthority('Administrador', 'Usuario')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'USUARIO')")
 
 public class RespuestaController {
     @Autowired
@@ -84,4 +84,5 @@ public class RespuestaController {
         RespuestaDTO dto =m.map(rS.listId(id), RespuestaDTO.class);
         return dto;
     }
+
 }

@@ -63,9 +63,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public UsuarioDTO buscarId(@PathVariable("id") int id){
+    public UsuarioRolDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
-        UsuarioDTO dto =m.map(uS.listId(id), UsuarioDTO.class);
+        UsuarioRolDTO dto =m.map(uS.listId(id), UsuarioRolDTO.class);
         return dto;
     }
 }

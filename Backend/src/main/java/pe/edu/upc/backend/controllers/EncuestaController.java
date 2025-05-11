@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/encuestas")
-@PreAuthorize("hasAuthority('Administrador')")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class EncuestaController {
 
     @Autowired

@@ -1,7 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Rol;
-
 public class UsuariosXRolDTO {
     private int idUsuario;
     private String nombreUsuario;
@@ -30,5 +28,4 @@ public class UsuariosXRolDTO {
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
     }
-
 }

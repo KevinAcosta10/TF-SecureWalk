@@ -1,7 +1,6 @@
 package pe.edu.upc.backend.dtos;
 
 import pe.edu.upc.backend.entities.EncuestaPregunta;
-import pe.edu.upc.backend.entities.Usuario;
 
 import java.time.LocalDate;
 
@@ -10,7 +9,7 @@ public class RespuestaDTO {
     private String textoRespuesta;
     private LocalDate fechaRespuesta;
     private EncuestaPregunta encuestaPregunta;
-    private Usuario usuario;
+    private UsuarioRolDTO usuario;
 
     public long getIdRespuesta() {
         return idRespuesta;
@@ -44,11 +43,11 @@ public class RespuestaDTO {
         this.encuestaPregunta = encuestaPregunta;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioRolDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioRolDTO usuario) {
         this.usuario = usuario;
     }
 }

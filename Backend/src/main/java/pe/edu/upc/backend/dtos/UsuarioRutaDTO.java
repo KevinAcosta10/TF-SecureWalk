@@ -1,7 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Ruta;
-import pe.edu.upc.backend.entities.Usuario;
 
 import java.time.LocalTime;
 

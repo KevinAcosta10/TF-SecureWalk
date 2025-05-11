@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/preguntas")
-@PreAuthorize("hasAuthority('Administrador')")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class PreguntaController {
     @Autowired
     private IPreguntaService pS;

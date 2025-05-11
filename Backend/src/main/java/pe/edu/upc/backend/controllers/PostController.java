@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
-@PreAuthorize("hasAnyAuthority('Administrador', 'Usuario')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'USUARIO')")
 public class PostController {
     @Autowired
     private IPostService pT;

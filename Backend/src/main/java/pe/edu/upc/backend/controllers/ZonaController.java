@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/zonas")
-@PreAuthorize("hasAuthority('Administrador')")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class ZonaController {
     @Autowired
     private IZonaService zS;
