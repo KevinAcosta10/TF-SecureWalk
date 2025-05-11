@@ -9,7 +9,7 @@ public class Rol{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRol;
 
-    @Column(name = "nombreRol")
+    @Column(name = "nombreRol", nullable = false, length = 50)
     private String nombreRol;
 
     @ManyToOne

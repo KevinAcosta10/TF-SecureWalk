@@ -2,8 +2,10 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.UsuarioDTO;
+import pe.edu.upc.backend.dtos.UsuarioRolDTO;
 import pe.edu.upc.backend.entities.Usuario;
 import pe.edu.upc.backend.serviceinterfaces.IUsuarioService;
 
@@ -17,11 +19,14 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService uS;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("/listar")
-    public List<UsuarioDTO> listar() {
+    public List<UsuarioRolDTO> listar() {
         return uS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            return m.map(x, UsuarioDTO.class);
+            return m.map(x, UsuarioRolDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -29,6 +34,8 @@ public class UsuarioController {
     public void insertar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
+        String encodedPassword = passwordEncoder.encode(us.getPassword());
+        us.setPassword(encodedPassword);
         uS.insert(us);
     }
 

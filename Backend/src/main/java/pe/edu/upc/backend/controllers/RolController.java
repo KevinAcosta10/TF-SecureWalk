@@ -8,6 +8,7 @@ import pe.edu.upc.backend.dtos.UsuarioRolDTO;
 import pe.edu.upc.backend.entities.Rol;
 import pe.edu.upc.backend.serviceinterfaces.IRolService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +55,10 @@ public class RolController {
             UsuarioRolDTO dto = new UsuarioRolDTO();
             dto.setIdUsuario(Integer.parseInt(columna[0]));
             dto.setNombreUsuario(columna[1]);
-            dto.setNombreRol(columna[2]);
+            dto.setDireccionUsuario(columna[2]);
+            dto.setEmailUsuario(columna[3]);
+            dto.setTelefonoUsuario(Integer.parseInt(columna[4]));
+            dto.setFechaRegistroUsuario(LocalDate.parse(columna[5]));
             listaDTO.add(dto);
         }
         return listaDTO;

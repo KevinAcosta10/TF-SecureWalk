@@ -2,6 +2,7 @@ package pe.edu.upc.backend.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.backend.dtos.UsuarioDTO;
 import pe.edu.upc.backend.entities.Usuario;
 import pe.edu.upc.backend.repositories.IUsuarioRepository;
 import pe.edu.upc.backend.serviceinterfaces.IUsuarioService;
