@@ -22,12 +22,8 @@ public class RolController {
     @Autowired
     private IRolService rS;
 
-    public RolController(IRolService rS) {
-        this.rS = rS;
-    }
-
     @GetMapping("/listar")
-    private List<RolDTO> listar() {
+    public List<RolDTO> listar() {
         return rS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, RolDTO.class);
