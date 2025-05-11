@@ -3,32 +3,52 @@ package pe.edu.upc.backend.dtos;
 import pe.edu.upc.backend.entities.Ruta;
 import pe.edu.upc.backend.entities.Usuario;
 
+import java.time.LocalTime;
+
 public class UsuarioRutaDTO {
-        private Long idUsuarioRuta;
-        private Usuario usuario;
-        private Ruta ruta;
+        private int idRuta;
+        private LocalTime horaInicio;
+        private LocalTime horaFin;
+        private int nivelSeguridad;
+        private String nombreZona;
 
-    public Long getIdUsuarioRuta() {
-        return idUsuarioRuta;
-    }
+        public int getIdRuta() {
+                return idRuta;
+        }
 
-    public void setIdUsuarioRuta(Long idUsuarioRuta) {
-        this.idUsuarioRuta = idUsuarioRuta;
-    }
+        public void setIdRuta(int idRuta) {
+                this.idRuta = idRuta;
+        }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+        public LocalTime getHoraInicio() {
+                return horaInicio;
+        }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+        public void setHoraInicio(LocalTime horaInicio) {
+                this.horaInicio = horaInicio;
+        }
 
-    public Ruta getRuta() {
-        return ruta;
-    }
+        public LocalTime getHoraFin() {
+                return horaFin;
+        }
 
-    public void setRuta(Ruta ruta) {
-        this.ruta = ruta;
-    }
+        public void setHoraFin(LocalTime horaFin) {
+                this.horaFin = horaFin;
+        }
+
+        public int getNivelSeguridad() {
+                return nivelSeguridad;
+        }
+
+        public void setNivelSeguridad(int nivelSeguridad) {
+                this.nivelSeguridad = nivelSeguridad;
+        }
+
+        public String getNombreZona() {
+                return nombreZona;
+        }
+
+        public void setNombreZona(String nombreZona) {
+                this.nombreZona = nombreZona;
+        }
 }

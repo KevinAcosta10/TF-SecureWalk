@@ -9,10 +9,10 @@ import java.util.List;
 
 @Repository
 public interface IPostRepository extends JpaRepository<Post, Integer>{
-    @Query(value = "SELECT p.idPost, p.descripcion, i.tipoIncidente, z.nombreZona \n" +
-            " FROM incidente i\n" +
-            " JOIN zona z ON i.id_zona = z.id_zona\n" +
-            " GROUP BY z.nombre_zona;", nativeQuery = true)
+    @Query(value = "SELECT p.id_post, p.descripcion_post, i.tipo_incidente\n" +
+            "FROM post p\n" +
+            "INNER JOIN incidente i ON i.id_usuario = p.id_usuario\n" +
+            "GROUP BY p.id_post, i.tipo_incidente", nativeQuery = true)
 
     public List<String[]> postPorIncidente();
 }

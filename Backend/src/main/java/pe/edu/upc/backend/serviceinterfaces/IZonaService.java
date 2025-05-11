@@ -11,4 +11,7 @@ public interface IZonaService {
     public void update(Zona z);
     public void delete(int id);
     public List<String[]> cantidadIncidentes();
+    public List<String[]> countRutasByZona();
+    public List<String[]> SeguridadPorZona(String zona);
+    public Zona listId(int id);
 }

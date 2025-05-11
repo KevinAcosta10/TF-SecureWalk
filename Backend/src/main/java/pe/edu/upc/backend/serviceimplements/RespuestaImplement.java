@@ -31,4 +31,19 @@ public class RespuestaImplement implements IRespuestaService {
     public void eliminar(int id) {
         rR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> RespuestasUsuarioEnEncuesta(int idUsuario, int idEncuesta) {
+        return rR.RespuestasUsuarioEnEncuesta(idUsuario,idEncuesta);
+    }
+
+    @Override
+    public List<String[]> RespuestasbyUsuario(int idUsuario) {
+        return rR.RespuestasbyUsuario(idUsuario);
+    }
+
+    @Override
+    public Respuesta listId(int id) {
+        return rR.findById(id).orElse(new Respuesta());
+    }
 }

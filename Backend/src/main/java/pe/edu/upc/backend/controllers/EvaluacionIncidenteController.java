@@ -45,4 +45,5 @@ public class EvaluacionIncidenteController {
     }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){eiR.delete(id);}
+
 }

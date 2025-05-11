@@ -27,6 +27,11 @@ public class EncuestaImplement implements IEncuestaService {
     public void update(Encuesta e) { eR.save(e);}
 
     @Override
-    public void eliminar(long id) { eR.deleteById(id);}
+    public void eliminar(int id) { eR.deleteById(id);}
+
+    @Override
+    public Encuesta listId(int id) {
+        return eR.findById(id).orElse(new Encuesta());
+    }
 
 }

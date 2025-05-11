@@ -31,5 +31,9 @@ public class PreguntaImplement implements IPreguntaService {
     public void delete(int id) {
         pS.deleteById(id);
     }
+    @Override
+    public Pregunta listId(int id) {
+        return pS.findById(id).orElse(new Pregunta());
+    }
 
 }

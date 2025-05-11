@@ -44,4 +44,11 @@ public class UsuarioController {
     public void eliminar(@PathVariable("id") int id){
         uS.delete(id);
     }
+
+    @GetMapping("/{id}")
+    public UsuarioDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        UsuarioDTO dto =m.map(uS.listId(id), UsuarioDTO.class);
+        return dto;
+    }
 }

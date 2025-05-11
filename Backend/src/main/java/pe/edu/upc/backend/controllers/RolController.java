@@ -4,10 +4,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RolDTO;
-import pe.edu.upc.backend.dtos.RutaDTO;
 import pe.edu.upc.backend.dtos.UsuarioRolDTO;
 import pe.edu.upc.backend.entities.Rol;
-import pe.edu.upc.backend.entities.Ruta;
 import pe.edu.upc.backend.serviceinterfaces.IRolService;
 
 import java.util.ArrayList;
@@ -49,16 +47,23 @@ public class RolController {
     }
 
     @GetMapping("/UsuarioRol")
-    public List<UsuarioRolDTO> UsuarioRol() {
-        List<String[]> lista = rS.UsuariosRol();
+    public List<UsuarioRolDTO> UsuarioRol(@RequestParam("nombreRol") String rol) {
+        List<String[]> lista = rS.UsuariosRol(rol);
         List<UsuarioRolDTO> listaDTO = new ArrayList<>();
         for (String[] columna : lista) {
             UsuarioRolDTO dto = new UsuarioRolDTO();
-            dto.setNombreUsuario(columna[0]);
-            dto.setDireccionUsuario(columna[1]);
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setNombreUsuario(columna[1]);
+            dto.setNombreRol(columna[2]);
             listaDTO.add(dto);
         }
         return listaDTO;
+    }
+    @GetMapping("/{id}")
+    public RolDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        RolDTO dto =m.map(rS.listById(id), RolDTO.class);
+        return dto;
     }
 
 }

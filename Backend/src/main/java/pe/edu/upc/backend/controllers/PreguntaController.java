@@ -39,5 +39,10 @@ public class PreguntaController {
     public void eliminar(@PathVariable("id") int id){
         pS.delete(id);
     }
-
+    @GetMapping("/{id}")
+    public PreguntaDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        PreguntaDTO dto =m.map(pS.listId(id), PreguntaDTO.class);
+        return dto;
+    }
 }

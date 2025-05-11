@@ -1,6 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import jakarta.persistence.*;
 import pe.edu.upc.backend.entities.Encuesta;
 import pe.edu.upc.backend.entities.Pregunta;
 

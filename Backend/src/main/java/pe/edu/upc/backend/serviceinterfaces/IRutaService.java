@@ -9,7 +9,6 @@ public interface IRutaService {
     public void insert(Ruta r);
     public void update(Ruta r);
     public void delete(int id);
-
-    List<String[]> countRutasByUsuario();
-
+    List<String[]> rutasAsiganasaUsuario(int id);
+    public Ruta listById(int id);
 }

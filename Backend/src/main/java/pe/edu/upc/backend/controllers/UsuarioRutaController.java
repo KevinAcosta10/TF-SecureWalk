@@ -13,35 +13,42 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/usuarioRutas")
 public class UsuarioRutaController {
-        @Autowired
-        private IUsuarioRutaService urS;
+    @Autowired
+    private IUsuarioRutaService urS;
 
-        @GetMapping("/listar")
-        public List<UsuarioRutaDTO> listar() {
-            return urS.list().stream().map(x -> {
-                ModelMapper m = new ModelMapper();
-                return m.map(x, UsuarioRutaDTO.class);
-            }).collect(Collectors.toList());
-        }
-
-        @PostMapping("/insertar")
-        public void insertar(@RequestBody UsuarioRutaDTO dto) {
+    @GetMapping("/listar")
+    public List<UsuarioRutaDTO> listar() {
+        return urS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            UsuarioRuta us = m.map(dto, UsuarioRuta.class);
-            urS.insert(us);
-        }
+            return m.map(x, UsuarioRutaDTO.class);
+        }).collect(Collectors.toList());
+    }
 
-        @PutMapping("/modificar")
-        public void modificar(@RequestBody UsuarioRutaDTO dto) {
-            ModelMapper m = new ModelMapper();
-            UsuarioRuta us = m.map(dto, UsuarioRuta.class);
-            urS.update(us);
+    @PostMapping("/insertar")
+    public void insertar(@RequestBody UsuarioRutaDTO dto) {
+        ModelMapper m = new ModelMapper();
+        UsuarioRuta us = m.map(dto, UsuarioRuta.class);
+        urS.insert(us);
+    }
 
-        }
+    @PutMapping("/modificar")
+    public void modificar(@RequestBody UsuarioRutaDTO dto) {
+        ModelMapper m = new ModelMapper();
+        UsuarioRuta us = m.map(dto, UsuarioRuta.class);
+        urS.update(us);
 
-        @DeleteMapping("/{id}")
-        public void eliminar(@PathVariable("id") int id){
-            urS.delete(id);
-        }
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") int id) {
+        urS.delete(id);
+    }
+
+    @GetMapping("/{id}")
+    public UsuarioRutaDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        UsuarioRutaDTO dto =m.map(urS.listId(id), UsuarioRutaDTO.class);
+        return dto;
+    }
 }
 

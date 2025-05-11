@@ -8,4 +8,5 @@ public interface IUsuarioRutaService {
     public void insert(UsuarioRuta ur);
     public void update(UsuarioRuta ur);
     public void delete(int id);
+    public UsuarioRuta listId(int id);
 }

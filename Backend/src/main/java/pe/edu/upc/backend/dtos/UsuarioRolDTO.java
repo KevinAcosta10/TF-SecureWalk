@@ -4,9 +4,7 @@ package pe.edu.upc.backend.dtos;
 public class UsuarioRolDTO {
     private int idUsuario;
     private String nombreUsuario;
-    private String emailUsuario;
-    private String telefonoUsuario;
-    private String direccionUsuario;
+    private String nombreRol;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -24,27 +22,11 @@ public class UsuarioRolDTO {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getEmailUsuario() {
-        return emailUsuario;
+    public String getNombreRol() {
+        return nombreRol;
     }
 
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
-    }
-
-    public String getTelefonoUsuario() {
-        return telefonoUsuario;
-    }
-
-    public void setTelefonoUsuario(String telefonoUsuario) {
-        this.telefonoUsuario = telefonoUsuario;
-    }
-
-    public String getDireccionUsuario() {
-        return direccionUsuario;
-    }
-
-    public void setDireccionUsuario(String direccionUsuario) {
-        this.direccionUsuario = direccionUsuario;
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
     }
 }

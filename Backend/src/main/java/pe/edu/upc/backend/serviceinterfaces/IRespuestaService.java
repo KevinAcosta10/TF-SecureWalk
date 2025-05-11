@@ -9,4 +9,7 @@ public interface IRespuestaService {
     public void insert(Respuesta r);
     public void update(Respuesta r);
     public void eliminar(int id);
+    public List<String[]> RespuestasUsuarioEnEncuesta(int idUsuario, int idEncuesta);
+    public List<String[]> RespuestasbyUsuario(int idUsuario);
+    public Respuesta listId(int id);
 }

@@ -35,4 +35,7 @@ public class PostImplement implements IPostService {
     public List<String[]> postPorIncidente() {
         return pT.postPorIncidente();
     }
+    public Post listId(int id) {
+        return pT.findById(id).orElse(new Post());
+    }
 }

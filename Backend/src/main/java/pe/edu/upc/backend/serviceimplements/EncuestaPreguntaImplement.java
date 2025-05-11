@@ -30,7 +30,12 @@ public class EncuestaPreguntaImplement implements IEncuestaPreguntaService {
     }
 
     @Override
-    public void eliminar(long id) {
+    public void eliminar(int id) {
         eIR.deleteById(id);
     }
+    @Override
+    public EncuestaPregunta listId(int id) {
+        return eIR.findById(id).orElse(new EncuestaPregunta());
+    }
+
 }

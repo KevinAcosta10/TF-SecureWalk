@@ -33,7 +33,13 @@ public class RolServiceImplement implements IRolService {
     }
 
     @Override
-    public List<String[]> UsuariosRol() {
-        return rR.UsuariosRol();
+    public List<String[]> UsuariosRol(String rol) {
+        return rR.UsuariosRol(rol);
     }
+
+    @Override
+    public Rol listById(int id) {
+        return rR.findById(id).orElse(new Rol());
+    }
+
 }

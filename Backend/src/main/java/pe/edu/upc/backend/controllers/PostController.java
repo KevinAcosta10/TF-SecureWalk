@@ -2,7 +2,6 @@ package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.backend.dtos.CantidadIncidentesPorZonaDTO;
 import pe.edu.upc.backend.dtos.PostDTO;
 import pe.edu.upc.backend.dtos.PostPorIncidenteDTO;
 import pe.edu.upc.backend.entities.Post;
@@ -47,7 +46,7 @@ public class PostController {
         pT.delete(id);
     }
 
-    @GetMapping("/cantidades")
+    @GetMapping("/PostPorIncidente")
     public List<PostPorIncidenteDTO> ObtenerPostPorIncidente() {
         List<String[]> lista =pT.postPorIncidente();
         List<PostPorIncidenteDTO> listaDTO = new ArrayList<>();
@@ -56,10 +55,15 @@ public class PostController {
             dto.setIdPOst(Integer.parseInt(columna[0]));
             dto.setDescripcion((columna[1]));
             dto.setTipoIncidente(columna[2]);
-            dto.setNombreZona(columna[3]);
             listaDTO.add(dto);
         }
         return listaDTO;
+    }
+    @GetMapping("/{id}")
+    public PostDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        PostDTO dto =m.map(pT.listId(id), PostDTO.class);
+        return dto;
     }
 }
 
