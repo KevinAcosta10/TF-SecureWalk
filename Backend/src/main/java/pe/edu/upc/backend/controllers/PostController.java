@@ -1,6 +1,7 @@
 package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.PostDTO;
 import pe.edu.upc.backend.dtos.PostPorIncidenteDTO;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
+@PreAuthorize("hasAnyAuthority('Administrador', 'Usuario')")
 public class PostController {
     @Autowired
     private IPostService pT;
