@@ -2,6 +2,7 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RolDTO;
 import pe.edu.upc.backend.dtos.UsuarioRolDTO;
@@ -15,13 +16,18 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
+@PreAuthorize("hasAuthority('Administrador')")
+
 public class RolController {
     @Autowired
     private IRolService rS;
 
+    public RolController(IRolService rS) {
+        this.rS = rS;
+    }
+
     @GetMapping("/listar")
     private List<RolDTO> listar() {
-
         return rS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, RolDTO.class);
