@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/evaluaciones")
-@PreAuthorize("hasAnyAuthority('Administrador', 'Policia')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'POLICIA')")
 public class EvaluacionIncidenteController {
     @Autowired
     private IEvaluacionIncidenteService eiR;
