@@ -34,9 +34,10 @@ public class IncidenteImplement implements IIncidenteService {
     }
 
     @Override
-    public List<String[]> IncidentesPorUsuario() {
-        return iR.IncidentesPorUsuario();
+    public List<String[]> IncidentesPorUsuario(String tipo) {
+        return iR.IncidentesPorUsuario(tipo);
     }
+
 
     public Incidente listId(int id) {
         return iR.findById(id).orElse(new Incidente());

@@ -54,4 +54,3 @@ public class UsuarioRutaController {
         return dto;
     }
 }
-

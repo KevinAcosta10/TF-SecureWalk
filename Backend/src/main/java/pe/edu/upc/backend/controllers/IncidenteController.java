@@ -51,8 +51,8 @@ public class IncidenteController {
     }
 
     @GetMapping("/incidentesPorUsuario")
-    public List<IncidentesPorUsuarioDTO> IncidentesUsuarios(){
-        List<String[]> lista = iS.IncidentesPorUsuario();
+    public List<IncidentesPorUsuarioDTO> IncidentesUsuarios(@RequestParam String tipo){
+        List<String[]> lista = iS.IncidentesPorUsuario(tipo);
         List<IncidentesPorUsuarioDTO> listaDTO= new ArrayList<>();
         for (String[] columna : lista) {
             IncidentesPorUsuarioDTO dto = new IncidentesPorUsuarioDTO();

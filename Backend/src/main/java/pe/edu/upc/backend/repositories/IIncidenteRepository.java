@@ -16,6 +16,7 @@ public interface IIncidenteRepository extends JpaRepository<Incidente, Integer> 
             "       u.id_usuario, u.nombre_usuario\n" +
             " FROM incidente i\n" +
             " JOIN usuario u ON i.id_usuario = u.id_usuario\n" +
+            " WHERE (:tipo IS NULL OR i.tipo_incidente = :tipo)" +
             " ORDER BY i.fecha_incidente DESC", nativeQuery = true)
-    public List<String[]> IncidentesPorUsuario();
+    public List<String[]> IncidentesPorUsuario(@Param("tipo")String tipo);
 }

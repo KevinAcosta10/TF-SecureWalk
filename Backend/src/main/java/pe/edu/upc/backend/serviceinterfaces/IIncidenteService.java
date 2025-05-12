@@ -1,5 +1,6 @@
 package pe.edu.upc.backend.serviceinterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.backend.entities.Incidente;
 
 
@@ -10,6 +11,6 @@ public interface IIncidenteService {
     public List<Incidente> list();
     public void update(Incidente i);
     public void delete(int id);
-    public List<String[]> IncidentesPorUsuario();
+    public List<String[]> IncidentesPorUsuario(@Param("tipo")String tipo);
     public Incidente listId(int id);
 }
