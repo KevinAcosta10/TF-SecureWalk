@@ -10,11 +10,9 @@ public class UsuarioDTO {
     private int telefonoUsuario;
     private String direccionUsuario;
     private LocalDate fechaRegistroUsuario;
-
     private String username;
     private String password;
     private boolean enable;
-
 
     public int getIdUsuario() {
         return idUsuario;

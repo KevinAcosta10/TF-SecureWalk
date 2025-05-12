@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RutasUsuarioDTO;
-import pe.edu.upc.backend.dtos.UsuarioRutaDTO;
 import pe.edu.upc.backend.entities.UsuarioRuta;
 import pe.edu.upc.backend.serviceinterfaces.IUsuarioRutaService;
 
