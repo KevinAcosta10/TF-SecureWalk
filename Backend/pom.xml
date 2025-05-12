@@ -8,6 +8,7 @@
         <version>3.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>pe.edu.upc</groupId>
     <artifactId>Backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -27,7 +28,8 @@
         <url/>
     </scm>
     <properties>
-        <java.version>24</java.version>
+        <java.version>17</java.version>
+        <spring-boot.version>3.4.4</spring-boot.version>
     </properties>
     <dependencies>
         <dependency>
@@ -96,6 +98,12 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.12.6</version>
             <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-logging -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <version>3.4.5</version>
         </dependency>
 
     </dependencies>

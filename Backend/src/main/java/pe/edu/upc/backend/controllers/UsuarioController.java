@@ -56,7 +56,6 @@ public class UsuarioController {
         }
     }
 
-
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){
         uS.delete(id);
