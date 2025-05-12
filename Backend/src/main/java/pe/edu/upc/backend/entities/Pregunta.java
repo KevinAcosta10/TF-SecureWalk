@@ -1,6 +1,9 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Pregunta")
@@ -14,6 +17,10 @@ public class Pregunta {
     @Column(name = "tipoPregunta")
     private String tipoPregunta;
 
+    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<EncuestaPregunta> encuestasPreguntas;
+
     public Pregunta() {
     }
 
@@ -25,6 +32,14 @@ public class Pregunta {
 
     public int getIdPregunta() {
         return idPregunta;
+    }
+
+    public List<EncuestaPregunta> getEncuestasPreguntas() {
+        return encuestasPreguntas;
+    }
+
+    public void setEncuestasPreguntas(List<EncuestaPregunta> encuestasPreguntas) {
+        this.encuestasPreguntas = encuestasPreguntas;
     }
 
     public void setIdPregunta(int idPregunta) {

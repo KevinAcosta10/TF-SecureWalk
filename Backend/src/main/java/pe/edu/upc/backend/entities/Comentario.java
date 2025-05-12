@@ -1,5 +1,6 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,9 +15,11 @@ public class Comentario {
 
     @ManyToOne
     @JoinColumn(name = "idPost")
+    @JsonBackReference
     private Post post;
     @ManyToOne
     @JoinColumn(name = "idUsuario")
+    @JsonBackReference
     private Usuario usuario;
 
     public Comentario() {

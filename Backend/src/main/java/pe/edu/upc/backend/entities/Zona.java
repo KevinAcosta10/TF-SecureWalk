@@ -1,6 +1,9 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Zona")
@@ -17,6 +20,10 @@ public class Zona {
     private Float longitudZona;
     @Column(name = "nombreZona", nullable = false, length = 200)
     private String nombreZona;
+
+    @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Ruta> rutas;
 
     public Zona() {
     }
@@ -58,5 +65,13 @@ public class Zona {
 
     public void setNombreZona(String nombreZona) {
         this.nombreZona = nombreZona;
+    }
+
+    public List<Ruta> getRutas() {
+        return rutas;
+    }
+
+    public void setRutas(List<Ruta> rutas) {
+        this.rutas = rutas;
     }
 }

@@ -1,5 +1,6 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -18,9 +19,11 @@ public class EvaluacionIncidente {
 
     @ManyToOne
     @JoinColumn(name = "idIncidente", nullable = false)
+    @JsonBackReference
     private Incidente incidente;
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+    @JsonBackReference
     private Usuario usuario;
 
     public EvaluacionIncidente() {

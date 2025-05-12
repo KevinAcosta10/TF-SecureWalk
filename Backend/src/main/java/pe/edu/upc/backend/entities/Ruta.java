@@ -1,8 +1,11 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Ruta")
@@ -20,9 +23,22 @@ public class Ruta {
 
     @ManyToOne
     @JoinColumn(name = "idZona")
+    @JsonBackReference
     private Zona zona;
 
+    @OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<UsuarioRuta> usuariosRutas;
+
     public Ruta() {
+    }
+
+    public List<UsuarioRuta> getUsuariosRutas() {
+        return usuariosRutas;
+    }
+
+    public void setUsuariosRutas(List<UsuarioRuta> usuariosRutas) {
+        this.usuariosRutas = usuariosRutas;
     }
 
     public Ruta(int idRuta, LocalTime horaInicio, LocalTime horaFin, int nivelSeguridad, Zona zona) {
