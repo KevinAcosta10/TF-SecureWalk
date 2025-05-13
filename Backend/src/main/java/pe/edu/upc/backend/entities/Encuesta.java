@@ -1,8 +1,10 @@
 package pe.edu.upc.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -19,6 +21,10 @@ public class Encuesta {
     @Column(name = "fechaCreacionEncuesta")
     private LocalDate fechaCreacionEncuesta;
 
+    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<EncuestaPregunta> encuestasPreguntas;
+
     public Encuesta() {
     }
 
@@ -27,6 +33,14 @@ public class Encuesta {
         this.nombreEncuesta = nombreEncuesta;
         this.descripcionEncuesta = descripcionEncuesta;
         this.fechaCreacionEncuesta = fechaCreacionEncuesta;
+    }
+
+    public List<EncuestaPregunta> getEncuestasPreguntas() {
+        return encuestasPreguntas;
+    }
+
+    public void setEncuestasPreguntas(List<EncuestaPregunta> encuestasPreguntas) {
+        this.encuestasPreguntas = encuestasPreguntas;
     }
 
     public int getIdEncuesta() {
