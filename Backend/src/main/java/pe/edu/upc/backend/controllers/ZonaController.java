@@ -76,7 +76,7 @@ public class ZonaController {
             dto.setNombreZona(columna[0]);
             dto.setHoraInicio(LocalTime.parse(columna[1]));
             dto.setHoraFin(LocalTime.parse(columna[2]));
-            dto.setNivelSeguridad(Integer.parseInt(columna[3]));
+            dto.setNivelSeguridad(columna[3]);
             listaDTO.add(dto);
         }
         return listaDTO;

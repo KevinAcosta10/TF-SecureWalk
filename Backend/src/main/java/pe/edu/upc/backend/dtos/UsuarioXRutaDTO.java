@@ -6,7 +6,7 @@ public class UsuarioXRutaDTO {
         private int idRuta;
         private LocalTime horaInicio;
         private LocalTime horaFin;
-        private int nivelSeguridad;
+        private String nivelSeguridad;
         private String nombreZona;
 
         public int getIdRuta() {
@@ -33,11 +33,11 @@ public class UsuarioXRutaDTO {
                 this.horaFin = horaFin;
         }
 
-        public int getNivelSeguridad() {
+        public String getNivelSeguridad() {
                 return nivelSeguridad;
         }
 
-        public void setNivelSeguridad(int nivelSeguridad) {
+        public void setNivelSeguridad(String nivelSeguridad) {
                 this.nivelSeguridad = nivelSeguridad;
         }
 

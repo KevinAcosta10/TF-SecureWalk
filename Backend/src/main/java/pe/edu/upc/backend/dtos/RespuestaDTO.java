@@ -1,8 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.EncuestaPregunta;
-import pe.edu.upc.backend.entities.Usuario;
-
 import java.time.LocalDate;
 
 public class RespuestaDTO {

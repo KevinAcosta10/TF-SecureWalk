@@ -1,8 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Encuesta;
-import pe.edu.upc.backend.entities.Pregunta;
-
 public class EncuestaPreguntaDTO {
     private long idEncuestaPregunta;
     private EncuestaDTO encuesta;

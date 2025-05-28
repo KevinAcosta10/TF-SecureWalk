@@ -1,6 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-
 import java.time.LocalDate;
 
 public class UsuarioRolDTO {

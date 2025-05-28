@@ -1,7 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Ruta;
-
 public class UsuarioRutaDTO {
     private int idUsuarioRuta;
     private UsuarioRolDTO usuario;

@@ -17,7 +17,7 @@ public class Ruta {
     @Column(name = "horaFin")
     private LocalTime horaFin;
     @Column(name = "nivelSeguridad")
-    private int nivelSeguridad;
+    private String nivelSeguridad;
 
     @ManyToOne
     @JoinColumn(name = "idZona")
@@ -29,7 +29,7 @@ public class Ruta {
     public Ruta() {
     }
 
-    public Ruta(int idRuta, LocalTime horaInicio, LocalTime horaFin, int nivelSeguridad, Zona zona, List<UsuarioRuta> usuariosRutas) {
+    public Ruta(int idRuta, LocalTime horaInicio, LocalTime horaFin, String nivelSeguridad, Zona zona, List<UsuarioRuta> usuariosRutas) {
         this.idRuta = idRuta;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
@@ -62,11 +62,11 @@ public class Ruta {
         this.horaFin = horaFin;
     }
 
-    public int getNivelSeguridad() {
+    public String getNivelSeguridad() {
         return nivelSeguridad;
     }
 
-    public void setNivelSeguridad(int nivelSeguridad) {
+    public void setNivelSeguridad(String nivelSeguridad) {
         this.nivelSeguridad = nivelSeguridad;
     }
 

@@ -1,8 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Usuario;
-import pe.edu.upc.backend.entities.Zona;
-
 import java.time.LocalDate;
 
 public class IncidenteDTO {
