@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/zonas")
+@RequestMapping("/api/zonas")
 public class ZonaController {
     @Autowired
     private IZonaService zS;

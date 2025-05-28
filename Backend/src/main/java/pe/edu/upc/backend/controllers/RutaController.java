@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/rutas")
+@RequestMapping("/api/rutas")
 public class RutaController {
     @Autowired
     private IRutaService rS;

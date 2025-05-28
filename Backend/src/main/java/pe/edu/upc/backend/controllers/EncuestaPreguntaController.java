@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/encuestasPreguntas")
+@RequestMapping("/api/encuestasPreguntas")
 public class EncuestaPreguntaController {
 
     @Autowired

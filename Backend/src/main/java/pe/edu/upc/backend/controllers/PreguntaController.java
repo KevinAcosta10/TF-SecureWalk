@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/preguntas")
+@RequestMapping("/api/preguntas")
 public class PreguntaController {
     @Autowired
     private IPreguntaService pS;
@@ -33,7 +33,6 @@ public class PreguntaController {
         ModelMapper m = new ModelMapper();
         Pregunta us = m.map(dto, Pregunta.class);
         pS.update(us);
-
     }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){

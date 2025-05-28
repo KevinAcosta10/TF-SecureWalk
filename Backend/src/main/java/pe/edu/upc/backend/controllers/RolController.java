@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("/api/roles")
 public class RolController {
     @Autowired
     private IRolService rS;

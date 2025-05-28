@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/respuestas")
+@RequestMapping("/api/respuestas")
 public class RespuestaController {
     @Autowired
     private IRespuestaService rS;

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/comentarios")
+@RequestMapping("/api/comentarios") //las puse /api a todas para mandarla al WebSecurityConfig y acceder sin autorizacion a todos los controllers
 public class ComentarioController {
     @Autowired
     private IComentarioService cS;
