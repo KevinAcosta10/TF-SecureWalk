@@ -2,6 +2,8 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Post")
 public class Post {
@@ -15,14 +17,17 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
+    @OneToMany (mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios;
 
     public Post() {
     }
 
-    public Post(int idPost, String descripcionPost, Usuario usuario) {
+    public Post(int idPost, String descripcionPost, Usuario usuario, List<Comentario> comentarios) {
         this.idPost = idPost;
         this.descripcionPost = descripcionPost;
         this.usuario = usuario;
+        this.comentarios = comentarios;
     }
 
     public int getIdPost() {
@@ -47,5 +52,13 @@ public class Post {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }

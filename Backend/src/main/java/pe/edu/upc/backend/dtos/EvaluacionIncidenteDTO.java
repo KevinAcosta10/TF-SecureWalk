@@ -9,8 +9,8 @@ public class EvaluacionIncidenteDTO {
     private int idEvaluacionIncidente;
     private boolean aprobacionIncidente;
     private LocalDate fechaCreacionIncidente;
-    private Incidente incidente;
-    private Usuario usuario;
+    private IncidenteDTO incidente;
+    private UsuarioRolDTO usuario;
 
     public int getIdEvaluacionIncidente() {
         return idEvaluacionIncidente;
@@ -36,19 +36,19 @@ public class EvaluacionIncidenteDTO {
         this.fechaCreacionIncidente = fechaCreacionIncidente;
     }
 
-    public Incidente getIncidente() {
+    public IncidenteDTO getIncidente() {
         return incidente;
     }
 
-    public void setIncidente(Incidente incidente) {
+    public void setIncidente(IncidenteDTO incidente) {
         this.incidente = incidente;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioRolDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioRolDTO usuario) {
         this.usuario = usuario;
     }
 }

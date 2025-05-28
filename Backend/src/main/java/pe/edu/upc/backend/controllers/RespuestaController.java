@@ -54,7 +54,7 @@ public class RespuestaController {
             dto.setIdRepuesta(Integer.parseInt(columna[0]));
             dto.setTextoPregunta(columna[1]);
             dto.setTextoRespuesta(columna[2]);
-            dto.setNombreEncuesta(columna[2]);
+            dto.setNombreEncuesta(columna[3]);
             listaDTO.add(dto);
         }
         return listaDTO;

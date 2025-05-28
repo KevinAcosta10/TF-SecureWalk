@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RutaDTO;
-import pe.edu.upc.backend.dtos.UsuarioRutaDTO;
+import pe.edu.upc.backend.dtos.UsuarioXRutaDTO;
 import pe.edu.upc.backend.entities.Ruta;
 import pe.edu.upc.backend.serviceinterfaces.IRutaService;
 
@@ -47,11 +47,11 @@ public class RutaController {
     }
 
     @GetMapping("/RutasPorUsuario")
-    public List<UsuarioRutaDTO> RutasxUsuario(@RequestParam("id") int id) {
+    public List<UsuarioXRutaDTO> RutasxUsuario(@RequestParam("id") int id) {
         List<String[]> lista = rS.rutasAsiganasaUsuario(id);
-        List<UsuarioRutaDTO> listaDTO = new ArrayList<>();
+        List<UsuarioXRutaDTO> listaDTO = new ArrayList<>();
         for (String[] columna : lista) {
-            UsuarioRutaDTO dto = new UsuarioRutaDTO();
+            UsuarioXRutaDTO dto = new UsuarioXRutaDTO();
             dto.setIdRuta(Integer.parseInt(columna[0]));
             dto.setHoraInicio(LocalTime.parse(columna[1]));
             dto.setHoraFin(LocalTime.parse(columna[2]));

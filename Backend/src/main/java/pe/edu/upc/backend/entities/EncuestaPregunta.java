@@ -2,6 +2,8 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "EncuestaPregunta")
@@ -16,6 +18,9 @@ public class EncuestaPregunta {
     @ManyToOne
     @JoinColumn(name = "idPregunta")
     private Pregunta pregunta;
+
+    @OneToMany(mappedBy = "encuestaPregunta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Respuesta> respuestas;
 
     public EncuestaPregunta() {
     }

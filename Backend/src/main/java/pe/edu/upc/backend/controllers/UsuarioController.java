@@ -22,7 +22,7 @@ public class UsuarioController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/listar")
+    @GetMapping("/listar")  //LISTA SIN MOSTRAR CONTRASEÑA
     public List<UsuarioRolDTO> listar() {
         return uS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -40,11 +40,10 @@ public class UsuarioController {
     }
 
     @PutMapping("/modificar")
-    public void modificar(@RequestBody UsuarioDTO dto) {
+    public void modificar(@RequestBody UsuarioRolDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
         uS.update(us);
-
     }
 
     @DeleteMapping("/{id}")
@@ -53,9 +52,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public UsuarioDTO buscarId(@PathVariable("id") int id){
+    public UsuarioRolDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
-        UsuarioDTO dto =m.map(uS.listId(id), UsuarioDTO.class);
+        UsuarioRolDTO dto =m.map(uS.listId(id), UsuarioRolDTO.class);
         return dto;
     }
 }

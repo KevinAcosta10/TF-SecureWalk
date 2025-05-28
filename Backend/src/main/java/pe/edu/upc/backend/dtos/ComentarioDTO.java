@@ -1,13 +1,10 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Post;
-import pe.edu.upc.backend.entities.Usuario;
-
 public class ComentarioDTO {
     private int idComentario;
     private String descripcionComentario;
-    private Post post;
-    private Usuario usuario;
+    private PostDTO post;
+    private UsuarioRolDTO usuario;
 
     public int getIdComentario() {
         return idComentario;
@@ -25,19 +22,19 @@ public class ComentarioDTO {
         this.descripcionComentario = descripcionComentario;
     }
 
-    public Post getPost() {
+    public PostDTO getPost() {
         return post;
     }
 
-    public void setPost(Post post) {
+    public void setPost(PostDTO post) {
         this.post = post;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioRolDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioRolDTO usuario) {
         this.usuario = usuario;
     }
 }

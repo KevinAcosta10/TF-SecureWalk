@@ -5,7 +5,7 @@ import pe.edu.upc.backend.entities.Usuario;
 public class RolDTO {
     private int idRol;
     private String nombreRol;
-    private Usuario usuario;
+    private UsuarioRolDTO usuario;
 
     public int getIdRol() {
         return idRol;
@@ -23,11 +23,11 @@ public class RolDTO {
         this.nombreRol = nombreRol;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioRolDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioRolDTO usuario) {
         this.usuario = usuario;
     }
 }

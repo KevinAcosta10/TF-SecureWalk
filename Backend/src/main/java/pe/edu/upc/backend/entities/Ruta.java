@@ -3,6 +3,7 @@ package pe.edu.upc.backend.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Ruta")
@@ -22,15 +23,19 @@ public class Ruta {
     @JoinColumn(name = "idZona")
     private Zona zona;
 
+    @OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioRuta> usuariosRutas;
+
     public Ruta() {
     }
 
-    public Ruta(int idRuta, LocalTime horaInicio, LocalTime horaFin, int nivelSeguridad, Zona zona) {
+    public Ruta(int idRuta, LocalTime horaInicio, LocalTime horaFin, int nivelSeguridad, Zona zona, List<UsuarioRuta> usuariosRutas) {
         this.idRuta = idRuta;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.nivelSeguridad = nivelSeguridad;
         this.zona = zona;
+        this.usuariosRutas = usuariosRutas;
     }
 
     public int getIdRuta() {
@@ -71,6 +76,14 @@ public class Ruta {
 
     public void setZona(Zona zona) {
         this.zona = zona;
+    }
+
+    public List<UsuarioRuta> getUsuariosRutas() {
+        return usuariosRutas;
+    }
+
+    public void setUsuariosRutas(List<UsuarioRuta> usuariosRutas) {
+        this.usuariosRutas = usuariosRutas;
     }
 }
 

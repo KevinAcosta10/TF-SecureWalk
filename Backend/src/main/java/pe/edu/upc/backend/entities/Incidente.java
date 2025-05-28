@@ -3,6 +3,7 @@ package pe.edu.upc.backend.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Incidente")
@@ -25,16 +26,20 @@ public class Incidente {
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
+    @OneToMany (mappedBy = "incidente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EvaluacionIncidente> evaluacionesIncidente;
+
     public Incidente() {
     }
 
-    public Incidente(int idIncidente, String tipoIncidente, LocalDate fechaIncidente, String descripcionIncidente, Zona zona, Usuario usuario) {
+    public Incidente(int idIncidente, String tipoIncidente, LocalDate fechaIncidente, String descripcionIncidente, Zona zona, Usuario usuario, List<EvaluacionIncidente> evaluacionesIncidente) {
         this.idIncidente = idIncidente;
         this.tipoIncidente = tipoIncidente;
         this.fechaIncidente = fechaIncidente;
         this.descripcionIncidente = descripcionIncidente;
         this.zona = zona;
         this.usuario = usuario;
+        this.evaluacionesIncidente = evaluacionesIncidente;
     }
 
     public int getIdIncidente() {
@@ -83,5 +88,13 @@ public class Incidente {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<EvaluacionIncidente> getEvaluacionesIncidente() {
+        return evaluacionesIncidente;
+    }
+
+    public void setEvaluacionesIncidente(List<EvaluacionIncidente> evaluacionesIncidente) {
+        this.evaluacionesIncidente = evaluacionesIncidente;
     }
 }

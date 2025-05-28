@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RolDTO;
 import pe.edu.upc.backend.dtos.UsuarioRolDTO;
+import pe.edu.upc.backend.dtos.UsuariosXRolDTO;
 import pe.edu.upc.backend.entities.Rol;
 import pe.edu.upc.backend.serviceinterfaces.IRolService;
 
@@ -48,17 +49,14 @@ public class RolController {
     }
 
     @GetMapping("/UsuarioRol")
-    public List<UsuarioRolDTO> UsuarioRol(@RequestParam("nombreRol") String rol) {
+    public List<UsuariosXRolDTO> UsuarioRol(@RequestParam("rol") String rol) {
         List<String[]> lista = rS.UsuariosRol(rol);
-        List<UsuarioRolDTO> listaDTO = new ArrayList<>();
+        List<UsuariosXRolDTO> listaDTO = new ArrayList<>();
         for (String[] columna : lista) {
-            UsuarioRolDTO dto = new UsuarioRolDTO();
+            UsuariosXRolDTO dto = new UsuariosXRolDTO();
             dto.setIdUsuario(Integer.parseInt(columna[0]));
             dto.setNombreUsuario(columna[1]);
-            dto.setDireccionUsuario(columna[2]);
-            dto.setEmailUsuario(columna[3]);
-            dto.setTelefonoUsuario(Integer.parseInt(columna[4]));
-            dto.setFechaRegistroUsuario(LocalDate.parse(columna[5]));
+            dto.setNombreRol(columna[2]);
             listaDTO.add(dto);
         }
         return listaDTO;
