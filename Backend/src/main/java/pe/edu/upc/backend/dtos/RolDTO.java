@@ -1,8 +1,11 @@
 package pe.edu.upc.backend.dtos;
 
+import pe.edu.upc.backend.entities.Usuario;
+
 public class RolDTO {
     private int idRol;
     private String nombreRol;
+    private Usuario usuario;
 
     public int getIdRol() {
         return idRol;
@@ -18,5 +21,13 @@ public class RolDTO {
 
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

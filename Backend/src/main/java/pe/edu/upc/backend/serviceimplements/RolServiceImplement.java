@@ -16,4 +16,30 @@ public class RolServiceImplement implements IRolService {
     public List<Rol> list() {
         return rR.findAll();
     }
+
+    @Override
+    public void insert(Rol r) {
+        rR.save(r);
+    }
+
+    @Override
+    public void update(Rol r) {
+        rR.save(r);
+    }
+
+    @Override
+    public void delete(int id) {
+        rR.deleteById(id);
+    }
+
+    @Override
+    public List<String[]> UsuariosRol(String rol) {
+        return rR.UsuariosRol(rol);
+    }
+
+    @Override
+    public Rol listById(int id) {
+        return rR.findById(id).orElse(new Rol());
+    }
+
 }

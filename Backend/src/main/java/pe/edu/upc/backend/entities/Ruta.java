@@ -1,6 +1,5 @@
 package pe.edu.upc.backend.entities;
 
-
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
@@ -11,26 +10,27 @@ public class Ruta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRuta;
-    @Column(name = "horaInicioRuta", nullable = false)
-    private LocalTime horaInicioRuta;
-    @Column(name = "horaFinRuta", nullable = false)
-    private LocalTime horaFinRuta;
-    @Column(name = "nivelSeguridadRuta", nullable = false, length = 40)
-    private String nivelSeguridadRuta;
+
+    @Column(name = "horaInicio")
+    private LocalTime horaInicio;
+    @Column(name = "horaFin")
+    private LocalTime horaFin;
+    @Column(name = "nivelSeguridad")
+    private int nivelSeguridad;
 
     @ManyToOne
     @JoinColumn(name = "idZona")
-    private Zona idZona;
+    private Zona zona;
 
     public Ruta() {
     }
 
-    public Ruta(int idRuta, LocalTime horaInicioRuta, LocalTime horaFinRuta, String nivelSeguridadRuta, Zona idZona) {
+    public Ruta(int idRuta, LocalTime horaInicio, LocalTime horaFin, int nivelSeguridad, Zona zona) {
         this.idRuta = idRuta;
-        this.horaInicioRuta = horaInicioRuta;
-        this.horaFinRuta = horaFinRuta;
-        this.nivelSeguridadRuta = nivelSeguridadRuta;
-        this.idZona = idZona;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.nivelSeguridad = nivelSeguridad;
+        this.zona = zona;
     }
 
     public int getIdRuta() {
@@ -41,36 +41,36 @@ public class Ruta {
         this.idRuta = idRuta;
     }
 
-    public LocalTime getHoraInicioRuta() {
-        return horaInicioRuta;
+    public LocalTime getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setHoraInicioRuta(LocalTime horaInicioRuta) {
-        this.horaInicioRuta = horaInicioRuta;
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public LocalTime getHoraFinRuta() {
-        return horaFinRuta;
+    public LocalTime getHoraFin() {
+        return horaFin;
     }
 
-    public void setHoraFinRuta(LocalTime horaFinRuta) {
-        this.horaFinRuta = horaFinRuta;
+    public void setHoraFin(LocalTime horaFin) {
+        this.horaFin = horaFin;
     }
 
-    public String getNivelSeguridadRuta() {
-        return nivelSeguridadRuta;
+    public int getNivelSeguridad() {
+        return nivelSeguridad;
     }
 
-    public void setNivelSeguridadRuta(String nivelSeguridadRuta) {
-        this.nivelSeguridadRuta = nivelSeguridadRuta;
+    public void setNivelSeguridad(int nivelSeguridad) {
+        this.nivelSeguridad = nivelSeguridad;
     }
 
-    public Zona getIdZona() {
-        return idZona;
+    public Zona getZona() {
+        return zona;
     }
 
-    public void setIdZona(Zona idZona) {
-        this.idZona = idZona;
+    public void setZona(Zona zona) {
+        this.zona = zona;
     }
 }
 

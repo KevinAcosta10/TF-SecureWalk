@@ -1,11 +1,14 @@
 package pe.edu.upc.backend.dtos;
 
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 public class EncuestaDTO {
+
     private int idEncuesta;
-    private LocalDateTime fechaEncuesta;
-    private int calificacionEncuesta;
+    private String nombreEncuesta;
+    private LocalDate fechaCreacionEncuesta;
+    private String descripcionEncuesta;
 
     public int getIdEncuesta() {
         return idEncuesta;
@@ -15,19 +18,27 @@ public class EncuestaDTO {
         this.idEncuesta = idEncuesta;
     }
 
-    public LocalDateTime getFechaEncuesta() {
-        return fechaEncuesta;
+    public String getNombreEncuesta() {
+        return nombreEncuesta;
     }
 
-    public void setFechaEncuesta(LocalDateTime fechaEncuesta) {
-        this.fechaEncuesta = fechaEncuesta;
+    public void setNombreEncuesta(String nombreEncuesta) {
+        this.nombreEncuesta = nombreEncuesta;
     }
 
-    public int getCalificacionEncuesta() {
-        return calificacionEncuesta;
+    public LocalDate getFechaCreacionEncuesta() {
+        return fechaCreacionEncuesta;
     }
 
-    public void setCalificacionEncuesta(int calificacionEncuesta) {
-        this.calificacionEncuesta = calificacionEncuesta;
+    public void setFechaCreacionEncuesta(LocalDate fechaCreacionEncuesta) {
+        this.fechaCreacionEncuesta = fechaCreacionEncuesta;
+    }
+
+    public String getDescripcionEncuesta() {
+        return descripcionEncuesta;
+    }
+
+    public void setDescripcionEncuesta(String descripcionEncuesta) {
+        this.descripcionEncuesta = descripcionEncuesta;
     }
 }

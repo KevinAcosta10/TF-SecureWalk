@@ -14,12 +14,31 @@ public class IncidenteImplement implements IIncidenteService {
     private IIncidenteRepository iR;
 
     @Override
-    public void insert(Incidente incidente) {
-        iR.save(incidente);
+    public List<Incidente> list() {
+        return iR.findAll();
     }
 
     @Override
-    public List<Incidente> list() {
-        return iR.findAll();
+    public void insert(Incidente i) {
+        iR.save(i);
+    }
+
+    @Override
+    public void update(Incidente i) {
+        iR.save(i);
+    }
+
+    @Override
+    public void delete(int id) {
+        iR.deleteById(id);
+    }
+
+    @Override
+    public List<String[]> IncidentesPorUsuario() {
+        return iR.IncidentesPorUsuario();
+    }
+
+    public Incidente listId(int id) {
+        return iR.findById(id).orElse(new Incidente());
     }
 }

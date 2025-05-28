@@ -1,46 +1,48 @@
 package pe.edu.upc.backend.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class UsuarioDTO {
     private int idUsuario;
     private String nombreUsuario;
     private String emailUsuario;
-    private String telefonoUsuario;
+    private int telefonoUsuario;
     private String direccionUsuario;
-    private LocalDateTime fechaRegistroUsuario;
-    private String passwordUsuario;
+    private LocalDate fechaRegistroUsuario;
+    private String username;
+    private String password;
+    private boolean enable;
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEmailUsuario() {
-        return emailUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getTelefonoUsuario() {
-        return telefonoUsuario;
+    public LocalDate getFechaRegistroUsuario() {
+        return fechaRegistroUsuario;
     }
 
-    public void setTelefonoUsuario(String telefonoUsuario) {
-        this.telefonoUsuario = telefonoUsuario;
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
     public String getDireccionUsuario() {
@@ -51,19 +53,35 @@ public class UsuarioDTO {
         this.direccionUsuario = direccionUsuario;
     }
 
-    public LocalDateTime getFechaRegistroUsuario() {
-        return fechaRegistroUsuario;
+    public int getTelefonoUsuario() {
+        return telefonoUsuario;
     }
 
-    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
-        this.fechaRegistroUsuario = fechaRegistroUsuario;
+    public void setTelefonoUsuario(int telefonoUsuario) {
+        this.telefonoUsuario = telefonoUsuario;
     }
 
-    public String getPasswordUsuario() {
-        return passwordUsuario;
+    public String getEmailUsuario() {
+        return emailUsuario;
     }
 
-    public void setPasswordUsuario(String passwordUsuario) {
-        this.passwordUsuario = passwordUsuario;
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

@@ -19,17 +19,29 @@ public class ComentarioImplement implements IComentarioService {
     }
 
     @Override
-    public void insert(Comentario comentario) {
-        cR.save(comentario);
+    public void insert(Comentario c) {
+        cR.save(c);
     }
 
     @Override
-    public void update(Comentario comentario) {
-        cR.save(comentario);
+    public void update(Comentario c) {
+        cR.save(c);
     }
 
     @Override
     public void delete(int id) {
         cR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> TotalComentariosPorUsuario() {
+        return cR.TotalComentariosPorUsuario();
+    }
+
+    @Override
+    public Comentario listId(int id) {
+        return cR.findById(id).orElse(new Comentario());
+    }
+
+
 }

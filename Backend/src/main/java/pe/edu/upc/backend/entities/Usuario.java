@@ -1,43 +1,52 @@
 package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario {
+public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
-    @Column(name = "nombreUsuario", nullable = false, length = 220)
+
+    @Column(name = "nombreUsuario", nullable = false)
     private String nombreUsuario;
-    @Column(name = "emailUsuario", nullable = false, length = 220)
+    @Column(name = "emailUsuario", nullable = false)
     private String emailUsuario;
-    @Column(name = "telefonoUsuario", nullable = false, length = 220)
-    private String telefonoUsuario;
-    @Column(name = "direccionUsuario", nullable = false, length = 220)
+    @Column(name = "telefonoUsuario", nullable = false)
+    private int telefonoUsuario;
+    @Column(name = "direccionUsuario", nullable = false)
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
-    private LocalDateTime fechaRegistroUsuario;
-    @Column(name = "passwordUsuario", nullable = false, length = 220)
-    private String passwordUsuario;
+    private LocalDate fechaRegistroUsuario;
+    @Column(name = "username", nullable = false)
+    private String username;
+    @Column(name = "password", nullable = false)
+    private String password;
+    @Column(name = "enable", nullable = false)
+    private boolean enable;
 
-    @ManyToOne
-    @JoinColumn(name = "idRol")
-    private Rol rol;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idUsuario")
+    private List<Rol> roles;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, String telefonoUsuario, String direccionUsuario, LocalDateTime fechaRegistroUsuario, String passwordUsuario, Rol rol) {
+    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password, boolean enable, List<Rol> roles) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.emailUsuario = emailUsuario;
         this.telefonoUsuario = telefonoUsuario;
         this.direccionUsuario = direccionUsuario;
         this.fechaRegistroUsuario = fechaRegistroUsuario;
-        this.passwordUsuario = passwordUsuario;
-        this.rol = rol;
+        this.username = username;
+        this.password = password;
+        this.enable = enable;
+        this.roles = roles;
     }
 
     public int getIdUsuario() {
@@ -64,11 +73,11 @@ public class Usuario {
         this.emailUsuario = emailUsuario;
     }
 
-    public String getTelefonoUsuario() {
+    public int getTelefonoUsuario() {
         return telefonoUsuario;
     }
 
-    public void setTelefonoUsuario(String telefonoUsuario) {
+    public void setTelefonoUsuario(int telefonoUsuario) {
         this.telefonoUsuario = telefonoUsuario;
     }
 
@@ -80,27 +89,43 @@ public class Usuario {
         this.direccionUsuario = direccionUsuario;
     }
 
-    public LocalDateTime getFechaRegistroUsuario() {
+    public LocalDate getFechaRegistroUsuario() {
         return fechaRegistroUsuario;
     }
 
-    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
         this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public String getPasswordUsuario() {
-        return passwordUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPasswordUsuario(String passwordUsuario) {
-        this.passwordUsuario = passwordUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Rol getRol() {
-        return rol;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }
