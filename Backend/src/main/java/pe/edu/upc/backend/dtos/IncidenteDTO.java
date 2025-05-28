@@ -10,7 +10,7 @@ public class IncidenteDTO {
     private String tipoIncidente;
     private LocalDate fechaIncidente;
     private String descripcionIncidente;
-    private Zona zona;
+    private ZonaDTO zona;
     private UsuarioRolDTO usuario;
 
     public int getIdIncidente() {
@@ -45,11 +45,11 @@ public class IncidenteDTO {
         this.descripcionIncidente = descripcionIncidente;
     }
 
-    public Zona getZona() {
+    public ZonaDTO getZona() {
         return zona;
     }
 
-    public void setZona(Zona zona) {
+    public void setZona(ZonaDTO zona) {
         this.zona = zona;
     }
 

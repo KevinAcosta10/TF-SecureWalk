@@ -5,7 +5,7 @@ import pe.edu.upc.backend.entities.Ruta;
 public class UsuarioRutaDTO {
     private int idUsuarioRuta;
     private UsuarioRolDTO usuario;
-    private Ruta ruta;
+    private RutaDTO ruta;
 
     public int getIdUsuarioRuta() {
         return idUsuarioRuta;
@@ -23,11 +23,11 @@ public class UsuarioRutaDTO {
         this.usuario = usuario;
     }
 
-    public Ruta getRuta() {
+    public RutaDTO getRuta() {
         return ruta;
     }
 
-    public void setRuta(Ruta ruta) {
+    public void setRuta(RutaDTO ruta) {
         this.ruta = ruta;
     }
 }

@@ -9,7 +9,7 @@ public class RutaDTO {
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private int nivelSeguridad;
-    private Zona zona;
+    private ZonaDTO zona;
 
     public int getIdRuta() {
         return idRuta;
@@ -43,11 +43,11 @@ public class RutaDTO {
         this.nivelSeguridad = nivelSeguridad;
     }
 
-    public Zona getZona() {
+    public ZonaDTO getZona() {
         return zona;
     }
 
-    public void setZona(Zona zona) {
+    public void setZona(ZonaDTO zona) {
         this.zona = zona;
     }
 }

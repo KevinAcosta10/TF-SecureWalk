@@ -40,7 +40,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/modificar")
-    public void modificar(@RequestBody UsuarioRolDTO dto) {
+    public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
         uS.update(us);
