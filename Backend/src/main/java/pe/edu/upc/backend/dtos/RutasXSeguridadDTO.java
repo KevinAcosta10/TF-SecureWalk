@@ -2,19 +2,19 @@ package pe.edu.upc.backend.dtos;
 
 import java.time.LocalTime;
 
-public class RutaDTO {
-    private int idRuta;
+public class RutasXSeguridadDTO {
+    private int IdRuta;
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private String nivelSeguridad;
-    private ZonaDTO zona;
+    private String nombreZona;
 
     public int getIdRuta() {
-        return idRuta;
+        return IdRuta;
     }
 
     public void setIdRuta(int idRuta) {
-        this.idRuta = idRuta;
+        IdRuta = idRuta;
     }
 
     public LocalTime getHoraInicio() {
@@ -41,11 +41,11 @@ public class RutaDTO {
         this.nivelSeguridad = nivelSeguridad;
     }
 
-    public ZonaDTO getZona() {
-        return zona;
+    public String getNombreZona() {
+        return nombreZona;
     }
 
-    public void setZona(ZonaDTO zona) {
-        this.zona = zona;
+    public void setNombreZona(String nombreZona) {
+        this.nombreZona = nombreZona;
     }
 }

@@ -18,5 +18,13 @@ public interface IRutaRepository extends JpaRepository<Ruta, Integer> {
                     "INNER JOIN zona z ON r.id_zona = z.id_zona\n" +
                     "WHERE ur.id_usuario = :id", nativeQuery = true)
     List<String[]> rutasAsiganasaUsuario(@Param("id") int id);
+
+    @Query(
+            value = "SELECT r.id_ruta, r.hora_inicio, r.hora_fin, r.nivel_seguridad, z.nombre_zona\n" +
+                    "FROM usuario_ruta ur\n" +
+                    "INNER JOIN ruta r ON ur.id_ruta = r.id_ruta\n" +
+                    "INNER JOIN zona z ON r.id_zona = z.id_zona\n" +
+                    "WHERE r.nivel_seguridad = :nivel", nativeQuery = true)
+    List<String[]> rutasXSeguridad(@Param("nivel") String nivel);
 }
 

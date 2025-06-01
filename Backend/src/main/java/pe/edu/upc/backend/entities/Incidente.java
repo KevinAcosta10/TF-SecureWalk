@@ -1,7 +1,5 @@
 package pe.edu.upc.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -23,35 +21,24 @@ public class Incidente {
 
     @ManyToOne
     @JoinColumn(name = "idZona", nullable = false)
-    @JsonBackReference
     private Zona zona;
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
-    @JsonBackReference
     private Usuario usuario;
 
     @OneToMany (mappedBy = "incidente", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<EvaluacionIncidente> evaluacionesIncidente;
-
 
     public Incidente() {
     }
 
-    public Incidente(int idIncidente, String tipoIncidente, LocalDate fechaIncidente, String descripcionIncidente, Zona zona, Usuario usuario) {
+    public Incidente(int idIncidente, String tipoIncidente, LocalDate fechaIncidente, String descripcionIncidente, Zona zona, Usuario usuario, List<EvaluacionIncidente> evaluacionesIncidente) {
         this.idIncidente = idIncidente;
         this.tipoIncidente = tipoIncidente;
         this.fechaIncidente = fechaIncidente;
         this.descripcionIncidente = descripcionIncidente;
         this.zona = zona;
         this.usuario = usuario;
-    }
-
-    public List<EvaluacionIncidente> getEvaluacionesIncidente() {
-        return evaluacionesIncidente;
-    }
-
-    public void setEvaluacionesIncidente(List<EvaluacionIncidente> evaluacionesIncidente) {
         this.evaluacionesIncidente = evaluacionesIncidente;
     }
 
@@ -101,5 +88,13 @@ public class Incidente {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<EvaluacionIncidente> getEvaluacionesIncidente() {
+        return evaluacionesIncidente;
+    }
+
+    public void setEvaluacionesIncidente(List<EvaluacionIncidente> evaluacionesIncidente) {
+        this.evaluacionesIncidente = evaluacionesIncidente;
     }
 }

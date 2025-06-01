@@ -1,6 +1,5 @@
 package pe.edu.upc.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -22,17 +21,21 @@ public class Zona {
     private String nombreZona;
 
     @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Ruta> rutas;
+
+    @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Incidente> incidentes;
 
     public Zona() {
     }
 
-    public Zona(int idZona, Float latitudZona, Float longitudZona, String nombreZona) {
+    public Zona(int idZona, Float latitudZona, Float longitudZona, String nombreZona, List<Ruta> rutas, List<Incidente> incidentes) {
         this.idZona = idZona;
         this.latitudZona = latitudZona;
         this.longitudZona = longitudZona;
         this.nombreZona = nombreZona;
+        this.rutas = rutas;
+        this.incidentes = incidentes;
     }
 
     public int getIdZona() {
@@ -73,5 +76,13 @@ public class Zona {
 
     public void setRutas(List<Ruta> rutas) {
         this.rutas = rutas;
+    }
+
+    public List<Incidente> getIncidentes() {
+        return incidentes;
+    }
+
+    public void setIncidentes(List<Incidente> incidentes) {
+        this.incidentes = incidentes;
     }
 }

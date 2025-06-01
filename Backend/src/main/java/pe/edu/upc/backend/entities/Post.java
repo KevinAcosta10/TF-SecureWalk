@@ -20,6 +20,8 @@ public class Post {
     @JoinColumn(name = "idUsuario")
     @JsonBackReference
     private Usuario usuario;
+    @OneToMany (mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios;
 
     @OneToMany (mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -28,10 +30,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(int idPost, String descripcionPost, Usuario usuario) {
+    public Post(int idPost, String descripcionPost, Usuario usuario, List<Comentario> comentarios) {
         this.idPost = idPost;
         this.descripcionPost = descripcionPost;
         this.usuario = usuario;
+        this.comentarios = comentarios;
     }
 
     public List<Comentario> getComentarios() {
@@ -64,5 +67,13 @@ public class Post {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }

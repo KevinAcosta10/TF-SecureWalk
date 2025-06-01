@@ -39,6 +39,11 @@ public class RutaServiceImplement implements IRutaService {
     }
 
     @Override
+    public List<String[]> rutasXSeguridad(String nivel) {
+        return rR.rutasXSeguridad(nivel);
+    }
+
+    @Override
     public Ruta listById(int id) {
         return rR.findById(id).orElse(new Ruta());
     }

@@ -16,6 +16,8 @@ public class Pregunta {
     private String textoPregunta;
     @Column(name = "tipoPregunta")
     private String tipoPregunta;
+    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EncuestaPregunta> encuestasPreguntas;
 
     @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -24,10 +26,11 @@ public class Pregunta {
     public Pregunta() {
     }
 
-    public Pregunta(int idPregunta, String textoPregunta, String tipoPregunta) {
+    public Pregunta(int idPregunta, String textoPregunta, String tipoPregunta, List<EncuestaPregunta> encuestasPreguntas) {
         this.idPregunta = idPregunta;
         this.textoPregunta = textoPregunta;
         this.tipoPregunta = tipoPregunta;
+        this.encuestasPreguntas = encuestasPreguntas;
     }
 
     public int getIdPregunta() {
@@ -60,6 +63,14 @@ public class Pregunta {
 
     public void setTipoPregunta(String tipoPregunta) {
         this.tipoPregunta = tipoPregunta;
+    }
+
+    public List<EncuestaPregunta> getEncuestasPreguntas() {
+        return encuestasPreguntas;
+    }
+
+    public void setEncuestasPreguntas(List<EncuestaPregunta> encuestasPreguntas) {
+        this.encuestasPreguntas = encuestasPreguntas;
     }
 }
 

@@ -1,6 +1,5 @@
 package pe.edu.upc.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -30,35 +29,26 @@ public class Usuario{
     @Column(name = "enable", nullable = false)
     private boolean enable;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Rol> roles;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Post> posts;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<EvaluacionIncidente> evaluacionesIncidente;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Incidente> incidentes;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<UsuarioRuta> usuariosRutas;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Comentario> comentarios;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Respuesta> respuestas;
-
-
 
     public Usuario() {
     }
@@ -160,6 +150,10 @@ public class Usuario{
 
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
+    }
+
+    public boolean isEnable() {
+        return enable;
     }
 
     public List<Post> getPosts() {

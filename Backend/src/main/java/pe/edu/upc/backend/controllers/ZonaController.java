@@ -2,7 +2,6 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.*;
 import pe.edu.upc.backend.entities.Zona;
@@ -14,8 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/zonas")
-@PreAuthorize("hasAuthority('ADMINISTRADOR')")
+@RequestMapping("/api/zonas")
 public class ZonaController {
     @Autowired
     private IZonaService zS;
@@ -78,7 +76,7 @@ public class ZonaController {
             dto.setNombreZona(columna[0]);
             dto.setHoraInicio(LocalTime.parse(columna[1]));
             dto.setHoraFin(LocalTime.parse(columna[2]));
-            dto.setNivelSeguridad(Integer.parseInt(columna[3]));
+            dto.setNivelSeguridad(columna[3]);
             listaDTO.add(dto);
         }
         return listaDTO;

@@ -6,7 +6,7 @@ public class SeguridadPorZonaDTO {
     private String nombreZona;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private int nivelSeguridad;
+    private String nivelSeguridad;
 
     public String getNombreZona() {
         return nombreZona;
@@ -16,11 +16,11 @@ public class SeguridadPorZonaDTO {
         this.nombreZona = nombreZona;
     }
 
-    public int getNivelSeguridad() {
+    public String getNivelSeguridad() {
         return nivelSeguridad;
     }
 
-    public void setNivelSeguridad(int nivelSeguridad) {
+    public void setNivelSeguridad(String nivelSeguridad) {
         this.nivelSeguridad = nivelSeguridad;
     }
 

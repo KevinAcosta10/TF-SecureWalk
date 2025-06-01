@@ -1,14 +1,12 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.EncuestaPregunta;
-
 import java.time.LocalDate;
 
 public class RespuestaDTO {
     private long idRespuesta;
     private String textoRespuesta;
     private LocalDate fechaRespuesta;
-    private EncuestaPregunta encuestaPregunta;
+    private EncuestaPreguntaDTO encuestaPregunta;
     private UsuarioRolDTO usuario;
 
     public long getIdRespuesta() {
@@ -35,11 +33,11 @@ public class RespuestaDTO {
         this.fechaRespuesta = fechaRespuesta;
     }
 
-    public EncuestaPregunta getEncuestaPregunta() {
+    public EncuestaPreguntaDTO getEncuestaPregunta() {
         return encuestaPregunta;
     }
 
-    public void setEncuestaPregunta(EncuestaPregunta encuestaPregunta) {
+    public void setEncuestaPregunta(EncuestaPreguntaDTO encuestaPregunta) {
         this.encuestaPregunta = encuestaPregunta;
     }
 

@@ -2,7 +2,6 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.*;
 import pe.edu.upc.backend.entities.Respuesta;
@@ -14,9 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/respuestas")
-@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'USUARIO')")
-
+@RequestMapping("/api/respuestas")
 public class RespuestaController {
     @Autowired
     private IRespuestaService rS;
@@ -47,22 +44,7 @@ public class RespuestaController {
     public void eliminar(@PathVariable("id") int id) {
         rS.eliminar(id);
     }
-
-    @GetMapping("/RepuestasporUsuarioyEncuesta")
-    public List<RepuestasUsuarioEncuestaDTO> RepuestasporUsuarioyEncuesta(@RequestParam("idUsuario") int idUsuario, @RequestParam("idEncuesta") int idEncuesta) {
-        List<String[]> lista = rS.RespuestasUsuarioEnEncuesta(idUsuario, idEncuesta);
-        List<RepuestasUsuarioEncuestaDTO> listaDTO = new ArrayList<>();
-        for (String[] columna : lista) {
-            RepuestasUsuarioEncuestaDTO dto = new RepuestasUsuarioEncuestaDTO();
-            dto.setIdRepuesta(Integer.parseInt(columna[0]));
-            dto.setTextoPregunta(columna[1]);
-            dto.setTextoRespuesta(columna[2]);
-            dto.setNombreEncuesta(columna[2]);
-            listaDTO.add(dto);
-        }
-        return listaDTO;
-    }
-
+    
     @GetMapping("/RespuestasXUsuario")
     public List<RespuestasXUsuarioDTO> RespuestasXUsuario(@RequestParam("idUsuario") int idUsuario) {
         List<String[]> lista = rS.RespuestasbyUsuario(idUsuario);
@@ -72,8 +54,8 @@ public class RespuestaController {
             dto.setIdRespuesta(Integer.parseInt(columna[0]));
             dto.setTextoRespuesta(columna[1]);
             dto.setFechaRespuesta(LocalDate.parse(columna[2]));
-            dto.setIdPregunta(Integer.parseInt(columna[3]));
-            dto.setIdEncuesta(Integer.parseInt(columna[4]));
+            dto.setTextoPregunta(columna[3]);
+            dto.setNombreEncuesta(columna[4]);
             listaDTO.add(dto);
         }
         return listaDTO;
@@ -84,5 +66,4 @@ public class RespuestaController {
         RespuestaDTO dto =m.map(rS.listId(id), RespuestaDTO.class);
         return dto;
     }
-
 }
