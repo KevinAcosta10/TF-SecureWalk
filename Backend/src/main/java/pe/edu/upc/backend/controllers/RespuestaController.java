@@ -2,6 +2,7 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.*;
 import pe.edu.upc.backend.entities.Respuesta;
@@ -13,12 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/respuestas")
+@RequestMapping("/respuestas")
 public class RespuestaController {
     @Autowired
     private IRespuestaService rS;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('USUARIO','POLICIA', 'ADMINISTRADOR')")
     public List<RespuestaDTO> listar(){
         return rS.list().stream().map(z->{
             ModelMapper modelMapper = new ModelMapper();
@@ -27,6 +29,7 @@ public class RespuestaController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('USUARIO','POLICIA', 'ADMINISTRADOR')")
     public void insertar(@RequestBody RespuestaDTO dto){
         ModelMapper m = new ModelMapper();
         Respuesta rs = m.map(dto, Respuesta.class);
@@ -34,6 +37,7 @@ public class RespuestaController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasAnyAuthority('USUARIO','POLICIA', 'ADMINISTRADOR')")
     public void modificar(@RequestBody RespuestaDTO dto){
         ModelMapper m = new ModelMapper();
         Respuesta c = m.map(dto, Respuesta.class);
@@ -41,6 +45,7 @@ public class RespuestaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id) {
         rS.eliminar(id);
     }
@@ -61,6 +66,7 @@ public class RespuestaController {
         return listaDTO;
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public RespuestaDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
         RespuestaDTO dto =m.map(rS.listId(id), RespuestaDTO.class);
