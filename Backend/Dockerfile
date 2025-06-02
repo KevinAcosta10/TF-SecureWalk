@@ -1,5 +1,18 @@
-FROM amazoncorretto:8-alpine-jdk
+FROM amazoncorretto:8-alpine-jdk AS builder
 
-COPY target/Backend-0.0.1-SNAPSHOT.jar app.java
+WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "/app-jar"]
+COPY . .
+
+RUN ./mvnw clean package -DskipTests
+
+FROM amazoncorretto:8-alpine-jre
+
+WORKDIR /app
+
+COPY --from=builder /app/target/*.jar app.jar
+
+EXPOSE 8085
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
