@@ -2,6 +2,7 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.EncuestaDTO;
 import pe.edu.upc.backend.entities.Encuesta;
@@ -11,7 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/encuestas")
+@RequestMapping("/encuestas")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class EncuestaController {
 
     @Autowired

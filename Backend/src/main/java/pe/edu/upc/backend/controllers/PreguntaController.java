@@ -1,6 +1,7 @@
 package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.PreguntaDTO;
 import pe.edu.upc.backend.entities.Pregunta;
@@ -9,7 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/preguntas")
+@RequestMapping("/preguntas")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class PreguntaController {
     @Autowired
     private IPreguntaService pS;
@@ -34,14 +36,16 @@ public class PreguntaController {
         Pregunta us = m.map(dto, Pregunta.class);
         pS.update(us);
     }
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable("id") int id){
-        pS.delete(id);
-    }
+
     @GetMapping("/{id}")
     public PreguntaDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
         PreguntaDTO dto =m.map(pS.listId(id), PreguntaDTO.class);
         return dto;
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") int id){
+        pS.delete(id);
     }
 }
