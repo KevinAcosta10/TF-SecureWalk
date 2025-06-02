@@ -2,12 +2,13 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario{
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
@@ -22,6 +23,7 @@ public class Usuario{
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
     private LocalDate fechaRegistroUsuario;
+
     @Column(name = "username", nullable = false)
     private String username;
     @Column(name = "password", nullable = false)

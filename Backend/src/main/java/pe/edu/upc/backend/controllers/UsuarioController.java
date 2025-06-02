@@ -2,6 +2,7 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.UsuarioDTO;
@@ -13,16 +14,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
-
     @Autowired
     private IUsuarioService uS;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/listar")  //LISTA SIN MOSTRAR CONTRASEÑA
+    @GetMapping("/listar") //LISTA SIN MOSTRAR CONTRASEÑA
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public List<UsuarioRolDTO> listar() {
         return uS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -31,6 +32,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('USUARIO', 'ADMINISTRADOR')")
     public void insertar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
@@ -40,6 +42,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
@@ -47,11 +50,13 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id){
         uS.delete(id);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public UsuarioRolDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
         UsuarioRolDTO dto =m.map(uS.listId(id), UsuarioRolDTO.class);

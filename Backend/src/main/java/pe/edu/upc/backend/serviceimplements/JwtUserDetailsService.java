@@ -1,5 +1,6 @@
 package pe.edu.upc.backend.serviceimplements;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +24,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
     @Override
+    @Transactional //This keeps the Hibernate session open until the method completes, allowing lazy collections to be initialized when accessed.
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario user = repo.findOneByUsername(username);
 
