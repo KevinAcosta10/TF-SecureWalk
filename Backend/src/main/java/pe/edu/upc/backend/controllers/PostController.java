@@ -1,6 +1,7 @@
 package pe.edu.upc.backend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.PostDTO;
 import pe.edu.upc.backend.dtos.PostPorIncidenteDTO;
@@ -15,7 +16,8 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/posts")
+@PreAuthorize("hasAnyAuthority('USUARIO','POLICIA','ADMINISTRADOR')")
 public class PostController {
     @Autowired
     private IPostService pT;
@@ -60,6 +62,7 @@ public class PostController {
         return listaDTO;
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public PostDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
         PostDTO dto =m.map(pT.listId(id), PostDTO.class);
