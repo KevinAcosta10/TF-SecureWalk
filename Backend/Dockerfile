@@ -1,4 +1,4 @@
-FROM amazoncorretto:8-alpine-jdk AS builder
+FROM amazoncorretto:17-alpine-jdk AS builder
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ COPY . .
 
 RUN ./mvnw clean package -DskipTests
 
-FROM amazoncorretto:8-alpine-jre
+FROM amazoncorretto:17-alpine-jre
 
 WORKDIR /app
 
