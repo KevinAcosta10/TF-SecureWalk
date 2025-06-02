@@ -2,6 +2,7 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.IncidenteDTO;
 import pe.edu.upc.backend.dtos.IncidentesPorUsuarioDTO;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/incidentes")
+@PreAuthorize("hasAnyAuthority('POLICIA','ADMINISTRADOR','USUARIO')")
 public class IncidenteController {
     @Autowired
     private IIncidenteService iS;
