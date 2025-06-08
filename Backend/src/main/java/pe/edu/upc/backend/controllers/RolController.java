@@ -2,27 +2,26 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RolDTO;
-import pe.edu.upc.backend.dtos.UsuarioRolDTO;
 import pe.edu.upc.backend.dtos.UsuariosXRolDTO;
 import pe.edu.upc.backend.entities.Rol;
 import pe.edu.upc.backend.serviceinterfaces.IRolService;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/roles")
 public class RolController {
     @Autowired
     private IRolService rS;
 
     @GetMapping("/listar")
-    private List<RolDTO> listar() {
-
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    public List<RolDTO> listar() {
         return rS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, RolDTO.class);
