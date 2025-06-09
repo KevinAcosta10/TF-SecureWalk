@@ -22,6 +22,7 @@ public class RespuestaController {
     private IRespuestaService rS;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('USUARIO','POLICIA', 'ADMINISTRADOR')")
     public List<RespuestaDTO> listar(){
         return rS.list().stream().map(z->{
             ModelMapper modelMapper = new ModelMapper();
@@ -30,6 +31,7 @@ public class RespuestaController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('USUARIO','POLICIA', 'ADMINISTRADOR')")
     public void insertar(@RequestBody RespuestaDTO dto){
         ModelMapper m = new ModelMapper();
         Respuesta rs = m.map(dto, Respuesta.class);
@@ -37,6 +39,7 @@ public class RespuestaController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasAnyAuthority('USUARIO','POLICIA', 'ADMINISTRADOR')")
     public void modificar(@RequestBody RespuestaDTO dto){
         ModelMapper m = new ModelMapper();
         Respuesta c = m.map(dto, Respuesta.class);
@@ -44,25 +47,11 @@ public class RespuestaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id) {
         rS.eliminar(id);
     }
-
-    @GetMapping("/RepuestasporUsuarioyEncuesta")
-    public List<RepuestasUsuarioEncuestaDTO> RepuestasporUsuarioyEncuesta(@RequestParam("idUsuario") int idUsuario, @RequestParam("idEncuesta") int idEncuesta) {
-        List<String[]> lista = rS.RespuestasUsuarioEnEncuesta(idUsuario, idEncuesta);
-        List<RepuestasUsuarioEncuestaDTO> listaDTO = new ArrayList<>();
-        for (String[] columna : lista) {
-            RepuestasUsuarioEncuestaDTO dto = new RepuestasUsuarioEncuestaDTO();
-            dto.setIdRepuesta(Integer.parseInt(columna[0]));
-            dto.setTextoPregunta(columna[1]);
-            dto.setTextoRespuesta(columna[2]);
-            dto.setNombreEncuesta(columna[2]);
-            listaDTO.add(dto);
-        }
-        return listaDTO;
-    }
-
+    
     @GetMapping("/RespuestasXUsuario")
     public List<RespuestasXUsuarioDTO> RespuestasXUsuario(@RequestParam("idUsuario") int idUsuario) {
         List<String[]> lista = rS.RespuestasbyUsuario(idUsuario);
@@ -72,13 +61,14 @@ public class RespuestaController {
             dto.setIdRespuesta(Integer.parseInt(columna[0]));
             dto.setTextoRespuesta(columna[1]);
             dto.setFechaRespuesta(LocalDate.parse(columna[2]));
-            dto.setIdPregunta(Integer.parseInt(columna[3]));
-            dto.setIdEncuesta(Integer.parseInt(columna[4]));
+            dto.setTextoPregunta(columna[3]);
+            dto.setNombreEncuesta(columna[4]);
             listaDTO.add(dto);
         }
         return listaDTO;
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public RespuestaDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
         RespuestaDTO dto =m.map(rS.listId(id), RespuestaDTO.class);

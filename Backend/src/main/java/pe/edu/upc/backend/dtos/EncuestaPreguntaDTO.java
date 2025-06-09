@@ -1,12 +1,9 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Encuesta;
-import pe.edu.upc.backend.entities.Pregunta;
-
 public class EncuestaPreguntaDTO {
     private long idEncuestaPregunta;
-    private Encuesta encuesta;
-    private Pregunta pregunta;
+    private EncuestaDTO encuesta;
+    private PreguntaDTO pregunta;
 
     public long getIdEncuestaPregunta() {
         return idEncuestaPregunta;
@@ -16,19 +13,19 @@ public class EncuestaPreguntaDTO {
         this.idEncuestaPregunta = idEncuestaPregunta;
     }
 
-    public Encuesta getEncuesta() {
+    public EncuestaDTO getEncuesta() {
         return encuesta;
     }
 
-    public void setEncuesta(Encuesta encuesta) {
+    public void setEncuesta(EncuestaDTO encuesta) {
         this.encuesta = encuesta;
     }
 
-    public Pregunta getPregunta() {
+    public PreguntaDTO getPregunta() {
         return pregunta;
     }
 
-    public void setPregunta(Pregunta pregunta) {
+    public void setPregunta(PreguntaDTO pregunta) {
         this.pregunta = pregunta;
     }
 }

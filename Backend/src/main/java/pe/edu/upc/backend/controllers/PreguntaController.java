@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/preguntas")
-@PreAuthorize("hasAuthority('Administrador')")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class PreguntaController {
     @Autowired
     private IPreguntaService pS;
@@ -35,11 +35,17 @@ public class PreguntaController {
         ModelMapper m = new ModelMapper();
         Pregunta us = m.map(dto, Pregunta.class);
         pS.update(us);
-
     }
+
+    @GetMapping("/{id}")
+    public PreguntaDTO buscarId(@PathVariable("id") int id){
+        ModelMapper m = new ModelMapper();
+        PreguntaDTO dto =m.map(pS.listId(id), PreguntaDTO.class);
+        return dto;
+    }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){
         pS.delete(id);
     }
-
 }

@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.RutaDTO;
-import pe.edu.upc.backend.dtos.UsuarioRutaDTO;
+import pe.edu.upc.backend.dtos.RutasXSeguridadDTO;
+import pe.edu.upc.backend.dtos.UsuarioXRutaDTO;
 import pe.edu.upc.backend.entities.Ruta;
 import pe.edu.upc.backend.serviceinterfaces.IRutaService;
 
@@ -16,8 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rutas")
-@PreAuthorize("hasAnyAuthority('Administrador', 'Usuario')")
-
+@PreAuthorize("hasAnyAuthority('POLICIA','ADMINISTRADOR','USUARIO')")
 public class RutaController {
     @Autowired
     private IRutaService rS;
@@ -50,15 +50,30 @@ public class RutaController {
     }
 
     @GetMapping("/RutasPorUsuario")
-    public List<UsuarioRutaDTO> RutasxUsuario(@RequestParam("id") int id) {
+    public List<UsuarioXRutaDTO> RutasxUsuario(@RequestParam("id") int id) {
         List<String[]> lista = rS.rutasAsiganasaUsuario(id);
-        List<UsuarioRutaDTO> listaDTO = new ArrayList<>();
+        List<UsuarioXRutaDTO> listaDTO = new ArrayList<>();
         for (String[] columna : lista) {
-            UsuarioRutaDTO dto = new UsuarioRutaDTO();
+            UsuarioXRutaDTO dto = new UsuarioXRutaDTO();
             dto.setIdRuta(Integer.parseInt(columna[0]));
             dto.setHoraInicio(LocalTime.parse(columna[1]));
             dto.setHoraFin(LocalTime.parse(columna[2]));
-            dto.setNivelSeguridad(Integer.parseInt(columna[3]));
+            dto.setNivelSeguridad(columna[3]);
+            dto.setNombreZona(columna[4]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
+    @GetMapping("/RutasPorNivelSeguridad")
+    public List<RutasXSeguridadDTO> rutasXSeguridad(@RequestParam("nivelSeguridad") String nivelSeguridad) {
+        List<String[]> lista = rS.rutasXSeguridad(nivelSeguridad);
+        List<RutasXSeguridadDTO> listaDTO = new ArrayList<>();
+        for (String[] columna : lista) {
+                RutasXSeguridadDTO dto = new RutasXSeguridadDTO();
+            dto.setIdRuta(Integer.parseInt(columna[0]));
+            dto.setHoraInicio(LocalTime.parse(columna[1]));
+            dto.setHoraFin(LocalTime.parse(columna[2]));
+            dto.setNivelSeguridad(columna[3]);
             dto.setNombreZona(columna[4]);
             listaDTO.add(dto);
         }

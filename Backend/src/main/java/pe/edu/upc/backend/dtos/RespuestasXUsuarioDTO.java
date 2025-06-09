@@ -6,8 +6,8 @@ public class RespuestasXUsuarioDTO {
     private int idRespuesta;
     private String textoRespuesta;
     private LocalDate fechaRespuesta;
-    private int idPregunta;
-    private int idEncuesta;
+    private String  textoPregunta;
+    private String nombreEncuesta;
 
     public int getIdRespuesta() {
         return idRespuesta;
@@ -33,19 +33,19 @@ public class RespuestasXUsuarioDTO {
         this.fechaRespuesta = fechaRespuesta;
     }
 
-    public int getIdPregunta() {
-        return idPregunta;
+    public String getTextoPregunta() {
+        return textoPregunta;
     }
 
-    public void setIdPregunta(int idPregunta) {
-        this.idPregunta = idPregunta;
+    public void setTextoPregunta(String textoPregunta) {
+        this.textoPregunta = textoPregunta;
     }
 
-    public int getIdEncuesta() {
-        return idEncuesta;
+    public String getNombreEncuesta() {
+        return nombreEncuesta;
     }
 
-    public void setIdEncuesta(int idEncuesta) {
-        this.idEncuesta = idEncuesta;
+    public void setNombreEncuesta(String nombreEncuesta) {
+        this.nombreEncuesta = nombreEncuesta;
     }
 }

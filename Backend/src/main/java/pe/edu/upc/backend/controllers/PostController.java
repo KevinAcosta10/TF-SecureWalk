@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
-@PreAuthorize("hasAnyAuthority('Administrador', 'Usuario')")
+@PreAuthorize("hasAnyAuthority('USUARIO','POLICIA','ADMINISTRADOR')")
 public class PostController {
     @Autowired
     private IPostService pT;
@@ -62,6 +62,7 @@ public class PostController {
         return listaDTO;
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public PostDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
         PostDTO dto =m.map(pT.listId(id), PostDTO.class);

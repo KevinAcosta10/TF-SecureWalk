@@ -15,16 +15,15 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
-@PreAuthorize("hasAuthority('Administrador')")
 public class UsuarioController {
-
     @Autowired
     private IUsuarioService uS;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/listar")
+    @GetMapping("/listar") //LISTA SIN MOSTRAR CONTRASEÑA
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public List<UsuarioRolDTO> listar() {
         return uS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -33,6 +32,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('USUARIO', 'POLICIA', 'ADMINISTRADOR')")
     public void insertar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario us = m.map(dto, Usuario.class);
@@ -42,30 +42,24 @@ public class UsuarioController {
     }
 
     @PutMapping("/modificar")
-    public void modificar(@RequestBody UsuarioRolDTO dto) {
-        Usuario usuario = uS.listId(dto.getIdUsuario());
-        if (usuario != null) {
-            usuario.setNombreUsuario(dto.getNombreUsuario());
-            usuario.setEmailUsuario(dto.getEmailUsuario());
-            usuario.setTelefonoUsuario(dto.getTelefonoUsuario());
-            usuario.setDireccionUsuario(dto.getDireccionUsuario());
-            usuario.setFechaRegistroUsuario(dto.getFechaRegistroUsuario());
-            uS.update(usuario);
-        } else {
-            throw new RuntimeException("Usuario no encontrado");
-        }
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    public void modificar(@RequestBody UsuarioDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Usuario us = m.map(dto, Usuario.class);
+        uS.update(us);
     }
 
-
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id){
         uS.delete(id);
     }
 
     @GetMapping("/{id}")
-    public UsuarioDTO buscarId(@PathVariable("id") int id){
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    public UsuarioRolDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();
-        UsuarioDTO dto =m.map(uS.listId(id), UsuarioDTO.class);
+        UsuarioRolDTO dto =m.map(uS.listId(id), UsuarioRolDTO.class);
         return dto;
     }
 }

@@ -3,6 +3,7 @@ package pe.edu.upc.backend.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -19,14 +20,18 @@ public class Encuesta {
     @Column(name = "fechaCreacionEncuesta")
     private LocalDate fechaCreacionEncuesta;
 
+    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EncuestaPregunta> encuestasPreguntas;
+
     public Encuesta() {
     }
 
-    public Encuesta(int idEncuesta, String nombreEncuesta, String descripcionEncuesta, LocalDate fechaCreacionEncuesta) {
+    public Encuesta(int idEncuesta, String nombreEncuesta, String descripcionEncuesta, LocalDate fechaCreacionEncuesta, List<EncuestaPregunta> encuestasPreguntas) {
         this.idEncuesta = idEncuesta;
         this.nombreEncuesta = nombreEncuesta;
         this.descripcionEncuesta = descripcionEncuesta;
         this.fechaCreacionEncuesta = fechaCreacionEncuesta;
+        this.encuestasPreguntas = encuestasPreguntas;
     }
 
     public int getIdEncuesta() {
@@ -59,5 +64,13 @@ public class Encuesta {
 
     public void setFechaCreacionEncuesta(LocalDate fechaCreacionEncuesta) {
         this.fechaCreacionEncuesta = fechaCreacionEncuesta;
+    }
+
+    public List<EncuestaPregunta> getEncuestasPreguntas() {
+        return encuestasPreguntas;
+    }
+
+    public void setEncuestasPreguntas(List<EncuestaPregunta> encuestasPreguntas) {
+        this.encuestasPreguntas = encuestasPreguntas;
     }
 }

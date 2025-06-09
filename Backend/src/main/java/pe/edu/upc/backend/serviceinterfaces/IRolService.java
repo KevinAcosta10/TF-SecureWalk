@@ -1,7 +1,6 @@
 package pe.edu.upc.backend.serviceinterfaces;
 
 import pe.edu.upc.backend.entities.Rol;
-import pe.edu.upc.backend.entities.Ruta;
 
 import java.util.List;
 

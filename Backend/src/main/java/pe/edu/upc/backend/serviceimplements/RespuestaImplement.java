@@ -33,11 +33,6 @@ public class RespuestaImplement implements IRespuestaService {
     }
 
     @Override
-    public List<String[]> RespuestasUsuarioEnEncuesta(int idUsuario, int idEncuesta) {
-        return rR.RespuestasUsuarioEnEncuesta(idUsuario,idEncuesta);
-    }
-
-    @Override
     public List<String[]> RespuestasbyUsuario(int idUsuario) {
         return rR.RespuestasbyUsuario(idUsuario);
     }

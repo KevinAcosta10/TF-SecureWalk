@@ -1,14 +1,14 @@
 package pe.edu.upc.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario{
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
@@ -23,6 +23,7 @@ public class Usuario{
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
     private LocalDate fechaRegistroUsuario;
+
     @Column(name = "username", nullable = false)
     private String username;
     @Column(name = "password", nullable = false)
@@ -30,15 +31,31 @@ public class Usuario{
     @Column(name = "enable", nullable = false)
     private boolean enable;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idUsuario")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Rol> roles;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EvaluacionIncidente> evaluacionesIncidente;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Incidente> incidentes;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioRuta> usuariosRutas;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Respuesta> respuestas;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password, boolean enable, List<Rol> roles) {
+    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password, boolean enable, List<Rol> roles, List<Post> posts, List<EvaluacionIncidente> evaluacionesIncidente, List<Incidente> incidentes, List<UsuarioRuta> usuariosRutas, List<Comentario> comentarios, List<Respuesta> respuestas) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.emailUsuario = emailUsuario;
@@ -49,6 +66,12 @@ public class Usuario{
         this.password = password;
         this.enable = enable;
         this.roles = roles;
+        this.posts = posts;
+        this.evaluacionesIncidente = evaluacionesIncidente;
+        this.incidentes = incidentes;
+        this.usuariosRutas = usuariosRutas;
+        this.comentarios = comentarios;
+        this.respuestas = respuestas;
     }
 
     public int getIdUsuario() {
@@ -129,5 +152,57 @@ public class Usuario{
 
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<EvaluacionIncidente> getEvaluacionesIncidente() {
+        return evaluacionesIncidente;
+    }
+
+    public void setEvaluacionesIncidente(List<EvaluacionIncidente> evaluacionesIncidente) {
+        this.evaluacionesIncidente = evaluacionesIncidente;
+    }
+
+    public List<Incidente> getIncidentes() {
+        return incidentes;
+    }
+
+    public void setIncidentes(List<Incidente> incidentes) {
+        this.incidentes = incidentes;
+    }
+
+    public List<UsuarioRuta> getUsuariosRutas() {
+        return usuariosRutas;
+    }
+
+    public void setUsuariosRutas(List<UsuarioRuta> usuariosRutas) {
+        this.usuariosRutas = usuariosRutas;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
     }
 }

@@ -1,8 +1,5 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Usuario;
-import pe.edu.upc.backend.entities.Zona;
-
 import java.time.LocalDate;
 
 public class IncidenteDTO {
@@ -10,8 +7,8 @@ public class IncidenteDTO {
     private String tipoIncidente;
     private LocalDate fechaIncidente;
     private String descripcionIncidente;
-    private Zona zona;
-    private Usuario usuario;
+    private ZonaDTO zona;
+    private UsuarioRolDTO usuario;
 
     public int getIdIncidente() {
         return idIncidente;
@@ -45,19 +42,19 @@ public class IncidenteDTO {
         this.descripcionIncidente = descripcionIncidente;
     }
 
-    public Zona getZona() {
+    public ZonaDTO getZona() {
         return zona;
     }
 
-    public void setZona(Zona zona) {
+    public void setZona(ZonaDTO zona) {
         this.zona = zona;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioRolDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioRolDTO usuario) {
         this.usuario = usuario;
     }
 }

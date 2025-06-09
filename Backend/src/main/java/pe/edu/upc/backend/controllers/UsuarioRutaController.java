@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarioRutas")
-@PreAuthorize("hasAuthority('Administrador')")
-
+@PreAuthorize("hasAnyAuthority('POLICIA','ADMINISTRADOR','USUARIO')")
 public class UsuarioRutaController {
     @Autowired
     private IUsuarioRutaService urS;

@@ -1,15 +1,13 @@
 package pe.edu.upc.backend.dtos;
 
-import pe.edu.upc.backend.entities.Zona;
-
 import java.time.LocalTime;
 
 public class RutaDTO {
     private int idRuta;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private int nivelSeguridad;
-    private Zona zona;
+    private String nivelSeguridad;
+    private ZonaDTO zona;
 
     public int getIdRuta() {
         return idRuta;
@@ -35,19 +33,19 @@ public class RutaDTO {
         this.horaFin = horaFin;
     }
 
-    public int getNivelSeguridad() {
+    public String getNivelSeguridad() {
         return nivelSeguridad;
     }
 
-    public void setNivelSeguridad(int nivelSeguridad) {
+    public void setNivelSeguridad(String nivelSeguridad) {
         this.nivelSeguridad = nivelSeguridad;
     }
 
-    public Zona getZona() {
+    public ZonaDTO getZona() {
         return zona;
     }
 
-    public void setZona(Zona zona) {
+    public void setZona(ZonaDTO zona) {
         this.zona = zona;
     }
 }
