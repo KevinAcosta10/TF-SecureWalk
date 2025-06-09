@@ -1,14 +1,12 @@
 package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
-
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable {
+public class Usuario  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;

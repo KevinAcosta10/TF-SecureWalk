@@ -2,7 +2,6 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.ComentarioDTO;
 import pe.edu.upc.backend.dtos.ComentarioPorUsuarioDTO;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comentarios") //las puse /api a todas para mandarla al WebSecurityConfig y acceder sin autorizacion a todos los controllers
-@PreAuthorize("hasAnyAuthority('USUARIO', 'POLICIA', 'ADMINISTRADOR')")
 public class ComentarioController {
     @Autowired
     private IComentarioService cS;

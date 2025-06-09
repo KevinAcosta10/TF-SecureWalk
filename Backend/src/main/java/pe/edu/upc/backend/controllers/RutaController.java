@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rutas")
-@PreAuthorize("hasAnyAuthority('POLICIA','ADMINISTRADOR','USUARIO')")
 public class RutaController {
     @Autowired
     private IRutaService rS;

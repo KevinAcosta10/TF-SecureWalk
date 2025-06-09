@@ -1,13 +1,10 @@
 package pe.edu.upc.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"id_usuario", "nombre_rol"})})
-public class Rol implements Serializable {
+@Table(name = "Rol")
+public class Rol{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRol;
@@ -17,7 +14,6 @@ public class Rol implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
-    @JsonBackReference
     private Usuario usuario;
 
     public Rol() {
