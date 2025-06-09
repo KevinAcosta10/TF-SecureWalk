@@ -1,0 +1,6 @@
+/* Estilo general para asegurar que el paginador esté bien alineado */
+mat-paginator {
+    margin-top: 20px;  /* Añade un poco de espacio entre la tabla y el paginador */
+    display: block;  /* Asegura que el paginador se comporta como un bloque, ocupando todo el ancho */
+  }
+    
