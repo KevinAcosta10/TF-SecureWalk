@@ -1,9 +1,17 @@
 <mat-toolbar>
   <mat-icon>menu</mat-icon>
-  <button mat-button [matMenuTriggerFor]="menuUsuario">Usuarios</button>
-  <button mat-button [matMenuTriggerFor]="menuZona">Zona</button>
-  <button mat-button [matMenuTriggerFor]="menuPregunta">Pregunta</button>
-  <button mat-button [matMenuTriggerFor]="menuEncuesta">Encuesta</button>
+  <button mat-button [matMenuTriggerFor]="menuUsuario">Usuarios
+    <mat-icon>person</mat-icon>
+  </button>
+  <button mat-button [matMenuTriggerFor]="menuZona">Zona
+    <mat-icon>location_on</mat-icon>
+  </button>
+  <button mat-button [matMenuTriggerFor]="menuPregunta">Pregunta
+    <mat-icon>help</mat-icon>
+  </button>
+  <button mat-button [matMenuTriggerFor]="menuEncuesta">Encuesta
+    <mat-icon>poll</mat-icon>
+  </button>
 
 </mat-toolbar>
 <mat-menu #menuUsuario="matMenu">
