@@ -46,7 +46,7 @@ public class RolController {
     }
 
     @GetMapping("/UsuarioRol")
-    public List<UsuariosXRolDTO> UsuarioRol(@RequestParam("rol") int rol) {
+    public List<UsuariosXRolDTO> UsuarioRol(@RequestParam("rol") String rol) {
         List<String[]> lista = rS.UsuariosRol(rol);
         List<UsuariosXRolDTO> listaDTO = new ArrayList<>();
         for (String[] columna : lista) {

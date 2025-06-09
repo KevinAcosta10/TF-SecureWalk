@@ -33,7 +33,7 @@ public class RolServiceImplement implements IRolService {
     }
 
     @Override
-    public List<String[]> UsuariosRol(int id) {
+    public List<String[]> UsuariosRol(String id) {
         return rR.UsuariosRol(id);
     }
     @Override
