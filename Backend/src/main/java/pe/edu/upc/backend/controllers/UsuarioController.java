@@ -18,10 +18,10 @@ public class UsuarioController {
     private IUsuarioService uS;
 
     @GetMapping("/listar") //LISTA SIN MOSTRAR CONTRASEÑA
-    public List<UsuarioRolDTO> listar() {
+    public List<UsuarioDTO> listar() {
         return uS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            return m.map(x, UsuarioRolDTO.class);
+            return m.map(x, UsuarioDTO.class);
         }).collect(Collectors.toList());
     }
 

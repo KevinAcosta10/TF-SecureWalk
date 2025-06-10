@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/encuestas")
 public class EncuestaController {
-
     @Autowired
     private IEncuestaService eR;
 
