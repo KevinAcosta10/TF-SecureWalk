@@ -67,7 +67,7 @@ public class CORS implements Filter {
 
         //response.setHeader("Access-Control-Allow-Methods", "DELETE, GET, OPTIONS, PATCH, POST, PUT");
 
-        response.setHeader("Access-Control-Allow-Methods", "GET");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST");
 
         response.setHeader("Access-Control-Max-Age", "3600");
 
@@ -80,13 +80,14 @@ public class CORS implements Filter {
 
             response.setStatus(HttpServletResponse.SC_OK);
 
-        } else if (!"GET".equalsIgnoreCase(method)) {
+//        } else if (!"GET".equalsIgnoreCase(method)) {
+//
+//            // Rechazar explícitamente métodos distintos de POST
+//
+//            response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Only GET is allowed");
 
-            // Rechazar explícitamente métodos distintos de POST
-
-            response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Only GET is allowed");
-
-        } else {
+        }
+        else {
 
             chain.doFilter(req, res);
 

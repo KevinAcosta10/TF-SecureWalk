@@ -6,7 +6,7 @@ public class UsuarioDTO {
     private int idUsuario;
     private String nombreUsuario;
     private String emailUsuario;
-    private int telefonoUsuario;
+    private String telefonoUsuario;
     private String direccionUsuario;
     private LocalDate fechaRegistroUsuario;
     private String username;
@@ -53,11 +53,11 @@ public class UsuarioDTO {
         this.direccionUsuario = direccionUsuario;
     }
 
-    public int getTelefonoUsuario() {
+    public String getTelefonoUsuario() {
         return telefonoUsuario;
     }
 
-    public void setTelefonoUsuario(int telefonoUsuario) {
+    public void setTelefonoUsuario(String telefonoUsuario) {
         this.telefonoUsuario = telefonoUsuario;
     }
 
