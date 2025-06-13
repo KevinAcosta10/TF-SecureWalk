@@ -33,5 +33,8 @@ export class ListarusuarioComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     })
   }
+  truncarContra(password: string): string {
+    return '*'.repeat(6);//muestra solo 6 asteriscos
+  }
 }
 
