@@ -2,7 +2,7 @@ export class Usuario{
     idUsuario: number = 0
     nombreUsuario: string = ""
     emailUsuario: string = ""
-    telefonoUsuario: number = 0
+    telefonoUsuario: string = ""
     direccionUsuario: string = ""
     fechaRegistroUsuario: Date = new Date()
     username: string = ""

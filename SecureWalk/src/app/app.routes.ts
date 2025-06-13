@@ -7,12 +7,15 @@ import { ListarpreguntaComponent } from './components/pregunta/listarpregunta/li
 import { PreguntaComponent } from './components/pregunta/pregunta.component';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
 import { ListarencuestaComponent } from './components/encuesta/listarencuesta/listarencuesta.component';
+import { InsertareditarComponent as EncuestaInsertarEditarComponent} from './components/encuesta/insertareditar/insertareditar.component';
+import { InsertareditarComponent as UsuarioInsertarEditarComponent } from './components/usuario/insertareditar/insertareditar.component';
 
 export const routes: Routes = [
     {
         path: 'usuarios', component: UsuarioComponent,
         children: [
-            { path: 'listar', component: ListarusuarioComponent }
+            { path: 'listar', component: ListarusuarioComponent },
+            { path: 'insertar', component: UsuarioInsertarEditarComponent}
         ]
 
     },
@@ -31,7 +34,8 @@ export const routes: Routes = [
     {
         path: 'encuestas', component: EncuestaComponent,
         children: [
-            { path: 'listar', component: ListarencuestaComponent }
+            { path: 'listar', component: ListarencuestaComponent },
+            { path: 'insertar', component: EncuestaInsertarEditarComponent}
         ]
     }
 ];

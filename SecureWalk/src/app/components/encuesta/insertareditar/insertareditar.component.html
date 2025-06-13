@@ -1,0 +1,42 @@
+<div>
+  <div>Registro de encuestas</div>
+  <div>
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field>
+        <mat-label>Encuesta</mat-label>
+        <input matInput formControlName="nombreEncuesta">
+
+        <mat-error *ngIf="form.get('nombreEncuesta')?.hasError('required')">
+          El nombre de la encuesta es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcionEncuesta">
+
+        <mat-error *ngIf="form.get('descripcionEncuesta')?.hasError('required')">
+          La descripción de la encuesta es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaCreacionEncuesta">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaCreacionEncuesta')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+
+  <button mat-raised-button color="primary">Aceptar</button>
+  <button mat-raised-button color="warn" routerLink="/encuestas">
+   Cancelar
+  </button>
+
+    </form>
+  </div>
+</div>
