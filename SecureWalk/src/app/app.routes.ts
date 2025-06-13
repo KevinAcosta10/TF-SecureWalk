@@ -9,7 +9,8 @@ import { EncuestaComponent } from './components/encuesta/encuesta.component';
 import { ListarencuestaComponent } from './components/encuesta/listarencuesta/listarencuesta.component';
 import { InsertareditarComponent as EncuestaInsertarEditarComponent} from './components/encuesta/insertareditar/insertareditar.component';
 import { InsertareditarComponent as UsuarioInsertarEditarComponent } from './components/usuario/insertareditar/insertareditar.component';
-
+import { InsertareditarComponent as PreguntaInsertarEditarComponent } from './components/pregunta/insertareditar/insertareditar.component';
+import { InsertareditarComponent as ZonaInsertarEditarComponent } from './components/zona/insertareditar/insertareditar.component';
 export const routes: Routes = [
     {
         path: 'usuarios', component: UsuarioComponent,
@@ -22,13 +23,15 @@ export const routes: Routes = [
     {
         path: 'zonas', component: ZonaComponent,
         children: [
-            { path: 'listar', component: ListarzonaComponent }
+            { path: 'listar', component: ListarzonaComponent },
+            { path: 'insertar', component: ZonaInsertarEditarComponent}
         ]
     },
     {
         path: 'preguntas', component: PreguntaComponent,
         children: [
-            { path: 'listar', component: ListarpreguntaComponent }
+            { path: 'listar', component: ListarpreguntaComponent },
+            { path: 'insertar', component: PreguntaInsertarEditarComponent}
         ]
     },
     {
