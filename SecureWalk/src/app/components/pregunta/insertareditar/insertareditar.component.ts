@@ -35,8 +35,8 @@ export class InsertareditarComponent implements OnInit {
   tipoPregunta: { value: String; viewValue: string }[] = [
     { value: 'SI_NO', viewValue: 'Si/No' },
     { value: 'PREGUNTA_ABIERTA', viewValue: 'Pregunta Abierta' },
-    { value: 'ESCALA_SEGURIDAD', viewValue: 'Muy seguro/Algo seguro/No seguro' },
-    { value: 'ESCALA_FRECUENCIA', viewValue: 'Frecuente/Rara vez/Nunca' }
+    { value: 'Muy seguro', viewValue: 'Muy seguro' },
+    { value: 'Frecuente', viewValue: 'Frecuente' }
   ];
 
   constructor(

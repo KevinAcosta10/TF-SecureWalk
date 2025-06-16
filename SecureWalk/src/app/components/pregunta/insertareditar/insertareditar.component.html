@@ -2,7 +2,7 @@
   <div>Registro de encuestas</div>
   <div>
     <form [formGroup]="form" (submit)="aceptar()">
-
+<br>
       <mat-form-field>
         <mat-label>Texto Pregunta</mat-label>
         <input matInput formControlName="textoPregunta">
@@ -11,7 +11,7 @@
           El texto de la pregunta es obligatorio!!
         </mat-error>
       </mat-form-field>
-
+<br>
       <mat-form-field>
         <mat-label>Tipo de pregunta</mat-label>
         <mat-select formControlName="tipoPregunta">
@@ -20,7 +20,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
+<br>
       
 
   <button mat-raised-button color="primary">Aceptar</button>
