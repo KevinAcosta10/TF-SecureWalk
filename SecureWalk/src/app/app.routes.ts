@@ -23,8 +23,12 @@ export const routes: Routes = [
     {
         path: 'zonas', component: ZonaComponent,
         children: [
-            { path: 'listar', component: ListarzonaComponent },
-            { path: 'insertar', component: ZonaInsertarEditarComponent}
+            { path: 'listar', component: ListarzonaComponent,
+                children: [
+          { path: 'ediciones/:id', component: ZonaInsertarEditarComponent }
+        ]},
+            { path: 'insertar', component: ZonaInsertarEditarComponent},
+            { path: 'formulario', component: ZonaInsertarEditarComponent},
         ]
     },
     {

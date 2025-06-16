@@ -1,44 +1,65 @@
 <div class="container">
-    <div>
-        <h1 class="titulo">Lista de zonas</h1>
-    </div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-        <!--- Note that these columns can be defined in any order.
+  <div>
+    <h1 class="titulo">Lista de zonas</h1>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="idZona">
-            <th mat-header-cell *matHeaderCellDef> ID. </th>
-            <td mat-cell *matCellDef="let element"> {{element.idZona}} </td>
-        </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="idZona">
+      <th mat-header-cell *matHeaderCellDef>ID.</th>
+      <td mat-cell *matCellDef="let element">{{ element.idZona }}</td>
+    </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="latitudZona">
-            <th mat-header-cell *matHeaderCellDef> Latitud </th>
-            <td mat-cell *matCellDef="let element"> {{element.latitudZona}} </td>
-        </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="latitudZona">
+      <th mat-header-cell *matHeaderCellDef>Latitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.latitudZona }}</td>
+    </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="longitudZona">
-            <th mat-header-cell *matHeaderCellDef> Longitud </th>
-            <td mat-cell *matCellDef="let element"> {{element.longitudZona}} </td>
-        </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="longitudZona">
+      <th mat-header-cell *matHeaderCellDef>Longitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.longitudZona }}</td>
+    </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="nombreZona">
-            <th mat-header-cell *matHeaderCellDef> Zona </th>
-            <td mat-cell *matCellDef="let element"> {{element.nombreZona}} </td>
-        </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="nombreZona">
+      <th mat-header-cell *matHeaderCellDef>Zona</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombreZona }}</td>
+    </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ediciones">
+      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+      <td mat-cell *matCellDef="let element">
+        <button matButton [routerLink]="['ediciones', element.idZona]">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-    </table>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+      <td mat-cell *matCellDef="let element">
+        <button matButton (click)="eliminar(element.idZona)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-    <!-- Paginador fuera de la tabla -->
-    <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 15,20]"
-        aria-label="Seleccionar paginación">
-    </mat-paginator>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
+  <!-- Paginador fuera de la tabla -->
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    aria-label="Seleccionar paginación"
+  >
+  </mat-paginator>
 </div>

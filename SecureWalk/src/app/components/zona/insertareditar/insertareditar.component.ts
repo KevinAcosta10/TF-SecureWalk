@@ -87,6 +87,9 @@ export class InsertareditarComponent implements OnInit{
       this.zS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idZona),
+          nombre: new FormControl(data.nombreZona),
+          latitud: new FormControl(data.latitudZona),
+          longitud: new FormControl(data.longitudZona),
         })
       })
     }

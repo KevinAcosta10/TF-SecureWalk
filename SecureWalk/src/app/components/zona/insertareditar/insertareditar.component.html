@@ -1,42 +1,48 @@
 <div>
   <div>Registro de zonas</div>
-  <div>
+  <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
-<br>
+      <mat-form-field *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El codigo de la zona es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
       <mat-form-field>
         <mat-label>Longitud</mat-label>
-        <input matInput formControlName="longitudZona">
+        <input matInput formControlName="longitudZona" />
 
         <mat-error *ngIf="form.get('longitudZona')?.hasError('required')">
           El texto de la pregunta es obligatorio!!
         </mat-error>
       </mat-form-field>
-<br>
+      <br />
       <mat-form-field>
         <mat-label>Latitud</mat-label>
-        <input matInput formControlName="latitudZona">
+        <input matInput formControlName="latitudZona" />
 
         <mat-error *ngIf="form.get('latitudZona')?.hasError('required')">
           El texto de la pregunta es obligatorio!!
         </mat-error>
       </mat-form-field>
-<br>
+      <br />
       <mat-form-field>
         <mat-label>Nombre de zona</mat-label>
-        <input matInput formControlName="nombreZona">
+        <input matInput formControlName="nombreZona" />
 
         <mat-error *ngIf="form.get('nombreZona')?.hasError('required')">
           El texto de la pregunta es obligatorio!!
         </mat-error>
       </mat-form-field>
-<br>
-      
+      <br />
 
-  <button mat-raised-button color="primary">Aceptar</button>
-  <button mat-raised-button color="warn" routerLink="/zonas">
-   Cancelar
-  </button>
-
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" routerLink="/zonas">
+        Cancelar
+      </button>
     </form>
   </div>
 </div>
