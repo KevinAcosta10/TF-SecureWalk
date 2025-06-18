@@ -84,7 +84,7 @@ export class InsertareditarComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['usuarios']);
+    this.router.navigate(['preguntas']);
   }
   init() {
     if (this.edicion) {
