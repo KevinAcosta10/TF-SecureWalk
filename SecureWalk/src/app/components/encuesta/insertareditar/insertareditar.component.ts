@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { Encuesta } from '../../../models/encuesta';
 import { EncuestaService } from '../../../services/encuesta.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -33,25 +34,38 @@ export class InsertareditarComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   encuesta: Encuesta = new Encuesta();
 
+  id: number = 0;
+  edicion: boolean = false;
+
   constructor(
     private eS: EncuestaService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      //actualizar
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
-      nombreEncuesta: ['', Validators.required],
-      descripcionEncuesta: ['', Validators.required],
-      fechaCreacionEncuesta: ['', Validators.required],
+      codigo: [''], 
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      fechaCreacion: ['', Validators.required],
     });
   }
   aceptar() {
     if (this.form.valid) {
-      this.encuesta.nombreEncuesta = this.form.value.nombreEncuesta;
-      this.encuesta.descripcionEncuesta = this.form.value.descripcionEncuesta;
+      this.encuesta.idEncuesta = this.form.value.codigo;
+      this.encuesta.nombreEncuesta = this.form.value.nombre;
+      this.encuesta.descripcionEncuesta = this.form.value.descripcion;
       this.encuesta.fechaCreacionEncuesta =
-        this.form.value.fechaCreacionEncuesta;
+        this.form.value.fechaCreacion;
 
       this.eS.insert(this.encuesta).subscribe((data) => {
         this.eS.list().subscribe((data) => {
@@ -61,4 +75,20 @@ export class InsertareditarComponent implements OnInit {
       this.router.navigate(['encuestas']);
     }
   }
+
+  cancelar() {
+      this.router.navigate(['encuestas']);
+    }
+    init() {
+      if (this.edicion) {
+        this.eS.listId(this.id).subscribe((data) => {
+          this.form = new FormGroup({
+            codigo: new FormControl(data.idEncuesta),
+            nombre: new FormControl(data.nombreEncuesta),
+            descripcion: new FormControl(data.descripcionEncuesta),  
+            fechaCreacion: new FormControl(data.fechaCreacionEncuesta),       
+          });
+        });
+      }
+    }
 }

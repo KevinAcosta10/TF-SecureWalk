@@ -26,4 +26,15 @@ private url = `${base_url}/encuestas`
   getList() {
     return this.listaCambio.asObservable()
   }
+  listId(id: number) {
+      return this.http.get<Encuesta>(`${this.url}/${id}`);
+    }
+  
+    update(e: Encuesta) {
+      return this.http.put(`${this.url}/modificar`, e);
+    }
+  
+    deleteS(id: number) {
+      return this.http.delete(`${this.url}/${id}`);
+    }
 }

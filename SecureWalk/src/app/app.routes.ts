@@ -1,11 +1,8 @@
 import { Routes } from '@angular/router';
 import { UsuarioComponent } from './components/usuario/usuario.component';
-import { ListarusuarioComponent } from './components/usuario/listarusuario/listarusuario.component';
 import { ZonaComponent } from './components/zona/zona.component';
-import { ListarpreguntaComponent } from './components/pregunta/listarpregunta/listarpregunta.component';
 import { PreguntaComponent } from './components/pregunta/pregunta.component';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
-import { ListarencuestaComponent } from './components/encuesta/listarencuesta/listarencuesta.component';
 import { InsertareditarComponent as EncuestaInsertarEditarComponent} from './components/encuesta/insertareditar/insertareditar.component';
 import { InsertareditarComponent as UsuarioInsertarEditarComponent } from './components/usuario/insertareditar/insertareditar.component';
 import { InsertareditarComponent as PreguntaInsertarEditarComponent } from './components/pregunta/insertareditar/insertareditar.component';
@@ -28,15 +25,15 @@ export const routes: Routes = [
     {
         path: 'preguntas', component: PreguntaComponent,
         children: [
-            { path: 'listar', component: ListarpreguntaComponent },
-            { path: 'insertar', component: PreguntaInsertarEditarComponent}
+            { path: 'ediciones/:id', component: PreguntaInsertarEditarComponent },
+            { path: 'formulario', component: PreguntaInsertarEditarComponent}
         ]
     },
     {
         path: 'encuestas', component: EncuestaComponent,
         children: [
-            { path: 'listar', component: ListarencuestaComponent },
-            { path: 'insertar', component: EncuestaInsertarEditarComponent}
+            { path: 'ediciones/:id', component: EncuestaInsertarEditarComponent },
+            { path: 'formulario', component: EncuestaInsertarEditarComponent}
         ]
     }
 ];
