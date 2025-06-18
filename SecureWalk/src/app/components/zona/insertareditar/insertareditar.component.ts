@@ -51,18 +51,18 @@ export class InsertareditarComponent implements OnInit{
 
 
     this.form = this.formBuilder.group({
-      idZona: [''],
-      latitudZona: ['', Validators.required],
-      longitudZona: ['', Validators.required],
-      nombreZona: ['', Validators.required]
-    });
+      codigo: [''],
+      latitud: ['', Validators.required],
+      longitud: ['', Validators.required],
+      nombre: ['', Validators.required]
+    })
   }
   aceptar() {
     if (this.form.valid) {
-      this.zona.idZona = this.form.value.idZona;
-      this.zona.nombreZona = this.form.value.nombreZona;
-      this.zona.latitudZona = this.form.value.latitudZona;
-      this.zona.longitudZona = this.form.value.longitudZona;
+      this.zona.idZona = this.form.value.codigo;
+      this.zona.nombreZona = this.form.value.nombre;
+      this.zona.latitudZona = this.form.value.latitud;
+      this.zona.longitudZona = this.form.value.longitud;
 
       if (this.edicion) {
         //actualizar
@@ -82,6 +82,11 @@ export class InsertareditarComponent implements OnInit{
         this.router.navigate(['zonas'])
       }
     }
+
+    cancelar() {
+    this.router.navigate(['zonas']);
+  }
+
   init() {
     if (this.edicion) {
       this.zS.listId(this.id).subscribe(data => {

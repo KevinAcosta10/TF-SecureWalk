@@ -9,9 +9,6 @@ import { ListarzonaComponent } from './listarzona/listarzona.component';
   templateUrl: './zona.component.html',
   styleUrl: './zona.component.css'
 })
-export class ZonaComponent implements OnInit{
+export class ZonaComponent{
  constructor(public route: ActivatedRoute){}
- ngOnInit(): void {
-     
- }
 }

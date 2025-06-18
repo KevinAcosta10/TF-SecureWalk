@@ -15,21 +15,15 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './listarzona.component.css'
 })
 export class ListarzonaComponent implements OnInit {
-  displayedColumns: string[] = [
-    'idZona',
-    'latitudZona',
-    'longitudZona',
-    'nombreZona',
-    'ediciones',
-    'eliminar'
-  ];
+  dataSource: MatTableDataSource<Zona> = new MatTableDataSource();
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  dataSource: MatTableDataSource<Zona> = new MatTableDataSource();
+  
   constructor(private zS: ZonaService) { }
   ngOnInit(): void {
-    this.zS.list().subscribe((data) => {
+    this.zS.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator;
     })

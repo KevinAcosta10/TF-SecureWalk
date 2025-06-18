@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ListarusuarioComponent } from './components/usuario/listarusuario/listarusuario.component';
 import { ZonaComponent } from './components/zona/zona.component';
-import { ListarzonaComponent } from './components/zona/listarzona/listarzona.component';
 import { ListarpreguntaComponent } from './components/pregunta/listarpregunta/listarpregunta.component';
 import { PreguntaComponent } from './components/pregunta/pregunta.component';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
@@ -15,19 +14,14 @@ export const routes: Routes = [
     {
         path: 'usuarios', component: UsuarioComponent,
         children: [
-            { path: 'listar', component: ListarusuarioComponent },
-            { path: 'insertar', component: UsuarioInsertarEditarComponent}
+            { path: 'ediciones/:id', component: UsuarioInsertarEditarComponent },
+            { path: 'formulario', component: UsuarioInsertarEditarComponent}
         ]
-
     },
     {
         path: 'zonas', component: ZonaComponent,
         children: [
-            { path: 'listar', component: ListarzonaComponent,
-                children: [
-          { path: 'ediciones/:id', component: ZonaInsertarEditarComponent }
-        ]},
-            { path: 'insertar', component: ZonaInsertarEditarComponent},
+            { path: 'ediciones/:id', component: ZonaInsertarEditarComponent },
             { path: 'formulario', component: ZonaInsertarEditarComponent},
         ]
     },

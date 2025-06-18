@@ -30,7 +30,7 @@ export class ZonaService {
   }
 
   update(z: Zona) {
-    return this.http.put(this.url, z)
+    return this.http.put(`${this.url}/modificar`, z)
   }
 
   deleteS(id: number) {

@@ -4,32 +4,32 @@
     <form [formGroup]="form" (submit)="aceptar()">
       <mat-form-field>
         <mat-label>Usuario</mat-label>
-        <input matInput formControlName="nombreUsuario" />
-        <mat-error *ngIf="form.get('nombreUsuario')?.hasError('required')">
+        <input matInput formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
           El nombre de usuario es obligatorio!!
         </mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput formControlName="emailUsuario" />
-        <mat-error *ngIf="form.get('emailUsuario')?.hasError('required')">
+        <input matInput formControlName="email" />
+        <mat-error *ngIf="form.get('email')?.hasError('required')">
           El campo email es obligatorio!!
         </mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Telefono Usuario</mat-label>
-        <input matInput formControlName="telefonoUsuario" />
-        <mat-error *ngIf="form.get('telefonoUsuario')?.hasError('required')">
+        <input matInput formControlName="telefono" />
+        <mat-error *ngIf="form.get('telefono')?.hasError('required')">
           El campo teléfono es obligatorio!!
         </mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Dirección Usuario</mat-label>
-        <input matInput formControlName="direccionUsuario" />
-        <mat-error *ngIf="form.get('direccionUsuario')?.hasError('required')">
+        <input matInput formControlName="direccion" />
+        <mat-error *ngIf="form.get('direccion')?.hasError('required')">
           La dirección es obligatoria!!
         </mat-error>
       </mat-form-field>
@@ -39,7 +39,7 @@
         <input
           matInput
           [matDatepicker]="picker"
-          formControlName="fechaRegistroUsuario"
+          formControlName="fechaRegistro"
         />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
@@ -48,7 +48,7 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error
-          *ngIf="form.get('fechaRegistroUsuario')?.hasError('required')"
+          *ngIf="form.get('fechaRegistro')?.hasError('required')"
         >
           La fecha es obligatoria!!
         </mat-error>
@@ -80,8 +80,8 @@
       </mat-form-field>
       <br>
 
-      <button mat-raised-button color="primary">Aceptar</button>
-      <button mat-raised-button color="warn" routerLink="/usuarios">
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button mat-raised-button color="warn" (click)="cancelar()" routerLink="/usuarios">
         Cancelar
       </button>
     </form>
