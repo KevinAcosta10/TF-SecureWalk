@@ -1,65 +1,56 @@
-<div class="container">
-  <div style="text-align: center;margin: 5%;">
-    <h1 class="titulo">Lista de zonas</h1>
+<div class="main-container">
+  <div class="list-container">
+    <div style="text-align: center; margin: 5%;">
+      <h1 class="titulo">Lista de zonas</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef>Latitud</th>
+        <td mat-cell *matCellDef="let element">{{ element.latitudZona }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef>Longitud</th>
+        <td mat-cell *matCellDef="let element">{{ element.longitudZona }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef>Zona</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombreZona }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef class="acciones-header"></th>
+        <td mat-cell *matCellDef="let element" class="acciones-cell">
+          <button mat-icon-button [routerLink]="['ediciones', element.idZona]" color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef class="acciones-header"></th>
+        <td mat-cell *matCellDef="let element" class="acciones-cell">
+          <button mat-icon-button (click)="eliminar(element.idZona)" color="warn">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]"
+      aria-label="Seleccionar paginación">
+    </mat-paginator>
   </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="c1">
-      <th mat-header-cell *matHeaderCellDef>ID.</th>
-      <td mat-cell *matCellDef="let element">{{ element.idZona }}</td>
+  <div class="map-container">
+  <google-map mapId="f404a59fc2fcb5b5" [center]="center" [zoom]="zoom" height="100%" width="100%">
+    <ng-container *ngFor="let position of markerPositions">
+      <map-advanced-marker [position]="position"></map-advanced-marker>
     </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="c2">
-      <th mat-header-cell *matHeaderCellDef>Latitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.latitudZona }}</td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="c3">
-      <th mat-header-cell *matHeaderCellDef>Longitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.longitudZona }}</td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="c4">
-      <th mat-header-cell *matHeaderCellDef>Zona</th>
-      <td mat-cell *matCellDef="let element">{{ element.nombreZona }}</td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="c5">
-      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-      <td mat-cell *matCellDef="let element">
-        <button matButton [routerLink]="['ediciones', element.idZona]">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="c6">
-      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-      <td mat-cell *matCellDef="let element">
-        <button matButton (click)="eliminar(element.idZona)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <!-- Paginador fuera de la tabla -->
-  <mat-paginator
-    [length]="dataSource.data.length"
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 15, 20]"
-    aria-label="Seleccionar paginación"
-  >
-  </mat-paginator>
+  </google-map>
+</div>
 </div>

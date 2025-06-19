@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Zona } from '../models/zona';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 const base_url = environment.base
 @Injectable({
@@ -35,5 +35,9 @@ export class ZonaService {
 
   deleteS(id: number) {
     return this.http.delete(`${this.url}/${id}`)
+  }
+
+  obtenerCoordenadas(): Observable<Zona[]> {
+    return this.http.get<Zona[]>(`${this.url}/listarCoordenadas`);
   }
 }
