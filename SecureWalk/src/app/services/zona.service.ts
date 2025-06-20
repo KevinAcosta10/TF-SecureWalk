@@ -38,6 +38,6 @@ export class ZonaService {
   }
 
   obtenerCoordenadas(): Observable<Zona[]> {
-    return this.http.get<Zona[]>(`${this.url}/listarCoordenadas`);
+    return this.http.get<Zona[]>(`${this.url}/listar`);
   }
 }
