@@ -1,32 +1,43 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Usuario } from '../../../models/usuario';
 import { UsuariosService } from '../../../services/usuarios.service';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselModule } from 'ngx-owl-carousel-o'
 
 @Component({
   selector: 'app-listarusuario',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, RouterLink],
+  imports: [MatIconModule, RouterLink, MatCardModule, CommonModule, CarouselModule, MatCardModule], // Agrega el módulo del carrusel
   templateUrl: './listarusuario.component.html',
   styleUrl: './listarusuario.component.css'
 })
 export class ListarusuarioComponent implements OnInit {
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  usuarios:Usuario[] = []
 
-  dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
+  customOptions: OwlOptions = {
+    loop: true, // Repetir el carrusel
+    mouseDrag: true, // Permitir arrastrar con el ratón
+    touchDrag: true, // Permitir arrastrar con el dedo en dispositivos táctiles
+    pullDrag: true,
+    dots: false, // Mostrar puntos de navegación
+    navSpeed: 700,
+    navText: ['<span class="owl-prev-icon">&lsaquo;</span>', '<span class="owl-next-icon">&rsaquo;</span>'],    
+    nav: true, // Mostrar flechas de navegación
+    slideBy: 1
+  }
+
   constructor(private uS: UsuariosService) { }
   ngOnInit(): void {
     this.uS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data)
-      this.dataSource.paginator = this.paginator;
+      this.usuarios = data
     })
      this.uS.getList().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
+      this.usuarios = data
     })
   }
   eliminar(id: number) {
