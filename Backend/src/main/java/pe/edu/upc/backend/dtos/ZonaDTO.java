@@ -2,8 +2,8 @@ package pe.edu.upc.backend.dtos;
 
 public class ZonaDTO {
     private int idZona;
-    private Float latitudZona;
-    private Float longitudZona;
+    private Double latitudZona;
+    private Double longitudZona;
     private String nombreZona;
 
     public int getIdZona() {
@@ -14,19 +14,19 @@ public class ZonaDTO {
         this.idZona = idZona;
     }
 
-    public Float getLatitudZona() {
+    public Double getLatitudZona() {
         return latitudZona;
     }
 
-    public void setLatitudZona(Float latitudZona) {
+    public void setLatitudZona(Double latitudZona) {
         this.latitudZona = latitudZona;
     }
 
-    public Float getLongitudZona() {
+    public Double getLongitudZona() {
         return longitudZona;
     }
 
-    public void setLongitudZona(Float longitudZona) {
+    public void setLongitudZona(Double longitudZona) {
         this.longitudZona = longitudZona;
     }
 

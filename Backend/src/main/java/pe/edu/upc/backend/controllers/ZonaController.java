@@ -25,6 +25,14 @@ public class ZonaController {
             return m.map(x, ZonaDTO.class);
         }).collect((Collectors.toList()));
     }
+    @GetMapping("/listarCoordenadas") // <--- Aquí está la nueva ruta
+    public List<ZonaDTO> listarCoordenadas() {
+        // Reutiliza la lógica de listar, ya que ZonaDTO ya tiene las coordenadas
+        return zS.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, ZonaDTO.class);
+        }).collect((Collectors.toList()));
+    }
     @PostMapping("/insertar")
     public void insertar(@RequestBody ZonaDTO dto) {
         ModelMapper m = new ModelMapper();

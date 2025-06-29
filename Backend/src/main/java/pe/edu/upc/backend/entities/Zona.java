@@ -8,15 +8,15 @@ import java.util.List;
 @Table(name = "Zona")
 public class Zona {
 
-//Primary Key + Atributos
+    //Primary Key + Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idZona;
 
     @Column(name = "latitudZona", nullable = false)
-    private Float latitudZona;
+    private Double latitudZona;
     @Column(name = "longitudZona", nullable = false)
-    private Float longitudZona;
+    private Double longitudZona;
     @Column(name = "nombreZona", nullable = false, length = 200)
     private String nombreZona;
 
@@ -29,7 +29,7 @@ public class Zona {
     public Zona() {
     }
 
-    public Zona(int idZona, Float latitudZona, Float longitudZona, String nombreZona, List<Ruta> rutas, List<Incidente> incidentes) {
+    public Zona(int idZona, Double latitudZona, Double longitudZona, String nombreZona, List<Ruta> rutas, List<Incidente> incidentes) {
         this.idZona = idZona;
         this.latitudZona = latitudZona;
         this.longitudZona = longitudZona;
@@ -46,19 +46,19 @@ public class Zona {
         this.idZona = idZona;
     }
 
-    public Float getLatitudZona() {
+    public Double getLatitudZona() {
         return latitudZona;
     }
 
-    public void setLatitudZona(Float latitudZona) {
+    public void setLatitudZona(Double latitudZona) {
         this.latitudZona = latitudZona;
     }
 
-    public Float getLongitudZona() {
+    public Double getLongitudZona() {
         return longitudZona;
     }
 
-    public void setLongitudZona(Float longitudZona) {
+    public void setLongitudZona(Double longitudZona) {
         this.longitudZona = longitudZona;
     }
 
