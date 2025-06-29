@@ -50,4 +50,12 @@ public class UsuarioController {
         UsuarioRolDTO dto =m.map(uS.listId(id), UsuarioRolDTO.class);
         return dto;
     }
+
+    @GetMapping("/busquedas")
+    public List<UsuarioDTO> buscarPorUsuario(@RequestParam String nombre){
+        return uS.buscar(nombre).stream().map(z->{
+            ModelMapper m = new ModelMapper();
+            return m.map(z, UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

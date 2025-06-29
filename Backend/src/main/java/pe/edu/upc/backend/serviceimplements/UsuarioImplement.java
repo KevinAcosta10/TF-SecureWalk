@@ -39,4 +39,8 @@ public class    UsuarioImplement implements IUsuarioService {
         return uR.findById(id).orElse(new Usuario());
     }
 
+    @Override
+    public List<Usuario> buscar(String nombre) {
+        return uR.buscarUsuario(nombre);
+    }
 }
