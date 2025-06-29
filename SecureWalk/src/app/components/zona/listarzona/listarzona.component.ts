@@ -23,9 +23,9 @@ import { MatInputModule } from '@angular/material/input';
     GoogleMap,
     MapAdvancedMarker,
     CommonModule,
-    FormsModule, 
-    MatFormFieldModule, 
-    MatInputModule 
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './listarzona.component.html',
   styleUrl: './listarzona.component.css'
@@ -40,7 +40,7 @@ export class ListarzonaComponent implements OnInit {
   displayedColumns: string[] = ['c2', 'c3', 'c4', 'c5', 'c6'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
- //propiedades para el buscador
+  //propiedades para el buscador
   searchLat: number | null = null;
   searchLng: number | null = null;
   temporaryMarkerPosition: google.maps.LatLngLiteral | null = null; // Marcador de la búsqueda
@@ -76,21 +76,23 @@ export class ListarzonaComponent implements OnInit {
   }
   cargarCoordenadas() {
     if (this.dataSource.data && this.dataSource.data.length > 0) {
-      this.markerPositions = this.dataSource.data.map(coord => ({
-        lat: coord.latitudZona,
-        lng: coord.longitudZona
-      }));
-      console.log('Marcadores generados:', this.markerPositions);
+      this.ngZone.run(() => {
+        this.markerPositions = this.dataSource.data.map(coord => ({
+          lat: coord.latitudZona,
+          lng: coord.longitudZona
+        }));
+        console.log('Marcadores generados:', this.markerPositions);
 
-      if (this.markerPositions.length > 0 && !this.temporaryMarkerPosition) {
-        this.center = this.markerPositions[0];
-      }
+        if (this.markerPositions.length > 0 && !this.temporaryMarkerPosition) {
+          this.center = this.markerPositions[0];
+        }
+      });
     } else {
       this.markerPositions = [];
       console.log('No hay datos en dataSource para cargar coordenadas.');
     }
   }
-//para el buscador
+  //para el buscador
 
   searchLocation(): void {
     if (this.searchLat !== null && this.searchLng !== null) {
