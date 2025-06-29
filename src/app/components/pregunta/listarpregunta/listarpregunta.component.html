@@ -1,0 +1,26 @@
+<div class="container">
+  <h1 class="titulo">Lista de preguntas</h1>
+
+  <div class="cards-container">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let element of preguntas">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>ID {{ element.idPregunta }}</mat-card-title>
+        <mat-card-subtitle>{{ element.tipoPregunta }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>{{ element.textoPregunta }}</p>
+      </mat-card-content>
+
+      <mat-card-actions class="card-actions">
+        <button mat-icon-button [routerLink]="['ediciones', element.idPregunta]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="eliminar(element.idPregunta)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
