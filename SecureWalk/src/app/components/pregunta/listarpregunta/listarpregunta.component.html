@@ -1,55 +1,26 @@
-<div class="container" >
-    <div>
-        <h1 class="titulo">Lista de preguntas</h1>
-    </div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="container">
+  <h1 class="titulo">Lista de preguntas</h1>
 
-        <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
+  <div class="cards-container">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let element of preguntas">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>ID {{ element.idPregunta }}</mat-card-title>
+        <mat-card-subtitle>{{ element.tipoPregunta }}</mat-card-subtitle>
+      </mat-card-header>
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="c1">
-            <th mat-header-cell *matHeaderCellDef> ID. </th>
-            <td mat-cell *matCellDef="let element"> {{element.idPregunta}} </td>
-        </ng-container>
+      <mat-card-content>
+        <p>{{ element.textoPregunta }}</p>
+      </mat-card-content>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="c2">
-            <th mat-header-cell *matHeaderCellDef> Pregunta </th>
-            <td mat-cell *matCellDef="let element"> {{element.textoPregunta}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="c3">
-            <th mat-header-cell *matHeaderCellDef> Tipos Pregunta </th>
-            <td mat-cell *matCellDef="let element"> {{element.tipoPregunta}} </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-    <ng-container matColumnDef="c4">
-      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-      <td mat-cell *matCellDef="let element">
-        <button matButton [routerLink]="['ediciones', element.idPregunta]">
+      <mat-card-actions class="card-actions">
+        <button mat-icon-button [routerLink]="['ediciones', element.idPregunta]">
           <mat-icon>edit</mat-icon>
         </button>
-      </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="c5">
-      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-      <td mat-cell *matCellDef="let element">
-        <button matButton (click)="eliminar(element.idPregunta)">
+        <button mat-icon-button (click)="eliminar(element.idPregunta)">
           <mat-icon>delete_forever</mat-icon>
         </button>
-      </td>
-    </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <!-- Paginador fuera de la tabla -->
-    <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
-        aria-label="Seleccionar paginación">
-    </mat-paginator>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

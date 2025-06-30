@@ -15,6 +15,8 @@ import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar, MatSnackBarModule  } from '@angular/material/snack-bar'; 
+
 
 @Component({
   selector: 'app-insertareditar',
@@ -29,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
     NgIf,
     MatOption,
     MatSelectModule,
+    MatSnackBarModule
   ],
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css',
@@ -51,14 +54,14 @@ export class InsertareditarComponent implements OnInit {
     private pS: PreguntaService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
-      //actualizar
       this.init();
     });
 
@@ -68,31 +71,54 @@ export class InsertareditarComponent implements OnInit {
       tipo: ['', Validators.required],
     });
   }
-  aceptar() {
-    if (this.form.valid) {
-      this.pregunta.idPregunta = this.form.value.codigo;
-      this.pregunta.textoPregunta = this.form.value.texto;
-      this.pregunta.tipoPregunta = this.form.value.tipo;
 
-      this.pS.insert(this.pregunta).subscribe((data) => {
-        this.pS.list().subscribe((data) => {
-          this.pS.setList(data);
-        });
-      });
-      this.router.navigate(['preguntas']);
+  aceptar() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
+
+    this.pregunta.idPregunta   = this.form.value.codigo;
+    this.pregunta.textoPregunta = this.form.value.texto;
+    this.pregunta.tipoPregunta  = this.form.value.tipo;
+
+    this.pS.insert(this.pregunta).subscribe({
+      next: () => {
+        // Mostrar snackbar con el texto de la pregunta
+        this.snackBar.open(
+          `"${this.form.value.texto}"`,
+          'Cerrar',
+          { duration: 3000 }
+        );
+        // Actualizar la lista en el service
+        this.pS.list().subscribe(listData => {
+          this.pS.setList(listData);
+        });
+        // Navegar de vuelta al listado
+        this.router.navigate(['preguntas']);
+      },
+      error: err => {
+        console.error('Error al guardar pregunta', err);
+        this.snackBar.open(
+          'Error al guardar pregunta',
+          'Cerrar',
+          { duration: 3000 }
+        );
+      }
+    });
   }
 
   cancelar() {
     this.router.navigate(['preguntas']);
   }
-  init() {
+
+  private init() {
     if (this.edicion) {
-      this.pS.listId(this.id).subscribe((data) => {
+      this.pS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idPregunta),
-          texto: new FormControl(data.textoPregunta),
-          tipo: new FormControl(data.tipoPregunta),          
+          texto:  new FormControl(data.textoPregunta, Validators.required),
+          tipo:   new FormControl(data.tipoPregunta, Validators.required),
         });
       });
     }
