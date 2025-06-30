@@ -59,7 +59,6 @@ export const routes: Routes = [
             { path: 'formulario', component: RutaInsertarEditarComponent },
         ]
     },
-    ,
     {
         path: 'incidentes', component: IncidenteComponent,
     }
