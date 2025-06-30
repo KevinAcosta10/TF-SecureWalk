@@ -8,6 +8,7 @@ import { InsertareditarComponent as UsuarioInsertarEditarComponent } from './com
 import { InsertareditarComponent as PreguntaInsertarEditarComponent } from './components/pregunta/insertareditar/insertareditar.component';
 import { InsertareditarComponent as ZonaInsertarEditarComponent } from './components/zona/insertareditar/insertareditar.component';
 import { BuscarusuarioComponent } from './components/usuario/buscarusuario/buscarusuario.component';
+import { IncidenteComponent } from './components/incidente/incidente.component';
 export const routes: Routes = [
     {
         path: 'usuarios', component: UsuarioComponent,
@@ -37,6 +38,9 @@ export const routes: Routes = [
             { path: 'ediciones/:id', component: EncuestaInsertarEditarComponent },
             { path: 'formulario', component: EncuestaInsertarEditarComponent}
         ]
+    },
+    {
+        path: 'incidentes', component: IncidenteComponent,
     }
 ];
 
