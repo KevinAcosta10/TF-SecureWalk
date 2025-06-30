@@ -12,6 +12,12 @@
   <button mat-button [matMenuTriggerFor]="menuEncuesta">Encuesta
     <mat-icon>poll</mat-icon>
   </button>
+  <button mat-button [matMenuTriggerFor]="menuRol">Rol
+    <mat-icon>poll</mat-icon>
+  </button>
+  <button mat-button [matMenuTriggerFor]="menuRuta">Ruta
+    <mat-icon>poll</mat-icon>
+  </button>
   <button mat-button [matMenuTriggerFor]="menuIncidentes">Incidentes
     <mat-icon>poll</mat-icon>
   </button>
@@ -36,10 +42,18 @@
 
 <mat-menu #menuEncuesta="matMenu">
   <button mat-menu-item routerLink="/encuestas">Listar</button>
-    <button mat-menu-item routerLink="/encuestas/formulario">Insertar</button>
+  <button mat-menu-item routerLink="/encuestas/formulario">Insertar</button>
+</mat-menu>
+<mat-menu #menuRol="matMenu">
+  <button mat-menu-item routerLink="/roles">Listar</button>
+  <button mat-menu-item routerLink="/roles/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuRuta="matMenu">
+  <button mat-menu-item routerLink="/rutas">Listar</button>
+  <button mat-menu-item routerLink="/rutas/formulario">Insertar</button>
 </mat-menu>
 <mat-menu #menuIncidentes="matMenu">
   <button mat-menu-item routerLink="/incidentes">Listar</button>
 </mat-menu>
-
 <router-outlet></router-outlet>
