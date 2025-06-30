@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Usuario } from '../../../models/usuario';
@@ -15,6 +18,8 @@ import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-insertareditar',
@@ -29,21 +34,25 @@ import { MatSelectModule } from '@angular/material/select';
     NgIf,
     MatOption,
     MatSelectModule,
+    MatIcon,
+    MatButtonModule,
   ],
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css',
 })
 export class InsertareditarComponent implements OnInit {
   form: FormGroup = new FormGroup({});
-  usuario: Usuario = new Usuario()
+  usuario: Usuario = new Usuario();
 
   enable: { value: boolean; viewValue: string }[] = [
     { value: true, viewValue: 'Sí' },
     { value: false, viewValue: 'No' },
   ];
 
-  id: number = 0
-  edicion: boolean = false
+  id: number = 0;
+  edicion: boolean = false;
+  usernamesRegistrados: string[] = [];
+  hidePassword: boolean = true;
 
   constructor(
     private uS: UsuariosService,
@@ -60,18 +69,50 @@ export class InsertareditarComponent implements OnInit {
       this.init();
     });
 
+    this.uS.list().subscribe((usuarios) => {
+      this.usernamesRegistrados = usuarios.map((u: Usuario) =>
+        u.username.toLowerCase()
+      );
+    });
+
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      email: ['', Validators.required],
-      direccion: ['', Validators.required],
-      telefono: ['', Validators.required],
-      fechaRegistro: ['', Validators.required],
-      username: ['', Validators.required],
+      nombre: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$')],
+      ],
+
+      email: ['', [Validators.required, Validators.email]],
+      direccion: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ ,.\\-#]*$'),
+        ],
+      ],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      fechaRegistro: ['', [Validators.required, this.fechaNoPasadaValidator]],
+      username: ['', [Validators.required, this.usernameDuplicadoValidator()]],
       password: ['', Validators.required],
       enable: ['', Validators.required],
     });
   }
+  usernameDuplicadoValidator = (): ValidatorFn => {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) return null;
+      const valor = control.value.toLowerCase();
+      const existe = this.usernamesRegistrados.includes(valor);
+      return existe ? { usernameDuplicado: true } : null;
+    };
+  };
+  fechaNoPasadaValidator(control: AbstractControl): ValidationErrors | null {
+    const valor = new Date(control.value);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0); // Quita horas para comparar solo fecha
+
+    return valor < hoy ? { fechaPasada: true } : null;
+  }
+
   aceptar() {
     if (this.form.valid) {
       this.usuario.idUsuario = this.form.value.codigo;
