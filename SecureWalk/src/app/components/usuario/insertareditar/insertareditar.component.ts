@@ -77,19 +77,9 @@ export class InsertareditarComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: [
-        '',
-        [Validators.required, Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$')],
-      ],
-
+      nombre: ['',[Validators.required, Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$')],],
       email: ['', [Validators.required, Validators.email]],
-      direccion: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ ,.\\-#]*$'),
-        ],
-      ],
+      direccion: ['',[Validators.required,Validators.pattern('^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ ,.\\-#]*$'),],],
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
       fechaRegistro: ['', [Validators.required, this.fechaNoPasadaValidator]],
       username: ['', [Validators.required, this.usernameDuplicadoValidator()]],
@@ -132,6 +122,7 @@ export class InsertareditarComponent implements OnInit {
       });
       this.router.navigate(['usuarios']);
     }
+    
   }
 
   cancelar() {

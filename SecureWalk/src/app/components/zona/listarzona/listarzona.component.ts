@@ -4,7 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ZonaService } from '../../../services/zona.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { GoogleMap, MapAdvancedMarker } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
@@ -35,10 +35,11 @@ export class ListarzonaComponent implements OnInit {
   center: google.maps.LatLngLiteral = { lat: -12.0873795, lng: -77.0500079 };
   zoom = 13;
   markerPositions: google.maps.LatLngLiteral[] = [];
+  nueva: number | null = null;
 
   dataSource: MatTableDataSource<Zona> = new MatTableDataSource();
   displayedColumns: string[] = ['c2', 'c3', 'c4', 'c5', 'c6'];
-
+  @ViewChild(GoogleMap) googleMap!: GoogleMap; //referencia al mapa
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   //propiedades para el buscador
   searchLat: number | null = null;
@@ -46,20 +47,28 @@ export class ListarzonaComponent implements OnInit {
   temporaryMarkerPosition: google.maps.LatLngLiteral | null = null; // Marcador de la búsqueda
 
 
-  constructor(private zS: ZonaService, private ngZone: NgZone) { }
+  constructor(private zS: ZonaService, private ngZone: NgZone, private router: Router) { }
+  
   ngOnInit(): void {
     this.zS.list().subscribe(data => {
+      this.actualizarTablaYMarcadores(data);
       console.log('Datos iniciales de zonas:', data);
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator;
       this.cargarCoordenadas();//llamada a los marcadores
     })
     this.zS.getList().subscribe(data => {
+      this.actualizarTablaYMarcadores(data);
       console.log('Datos actualizados de zonas:', data);
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator
       this.cargarCoordenadas();//actualiza los marcadores
     })
+  }
+  private actualizarTablaYMarcadores(data: Zona[]): void {
+    this.dataSource.data = data;
+    if (this.paginator) this.dataSource.paginator = this.paginator;
+    this.cargarCoordenadas(); 
   }
   ngAfterViewInit(): void {
     if (this.paginator) {
@@ -76,28 +85,33 @@ export class ListarzonaComponent implements OnInit {
   }
   cargarCoordenadas() {
     if (this.dataSource.data && this.dataSource.data.length > 0) {
-      this.ngZone.run(() => {
-        this.markerPositions = this.dataSource.data.map(coord => ({
-          lat: coord.latitudZona,
-          lng: coord.longitudZona
-        }));
-        console.log('Marcadores generados:', this.markerPositions);
+      this.markerPositions = this.dataSource.data.map(coord => ({
+        lat: coord.latitudZona,
+        lng: coord.longitudZona
+      }));
+      console.log('Marcadores generados:', this.markerPositions);
 
-        if (this.markerPositions.length > 0 && !this.temporaryMarkerPosition) {
-          this.center = this.markerPositions[0];
-        }
-      });
+      if (this.markerPositions.length > 0 && !this.temporaryMarkerPosition) {
+        this.center = this.markerPositions[0];
+      }
+      
     } else {
       this.markerPositions = [];
       console.log('No hay datos en dataSource para cargar coordenadas.');
+    }
+    if (this.markerPositions.length) {
+      const bounds = new google.maps.LatLngBounds();
+      this.markerPositions.forEach(pos => bounds.extend(pos));
+      // Espera a que el mapa exista en el DOM
+      setTimeout(() => this.googleMap.googleMap!.fitBounds(bounds));
     }
   }
   //para el buscador
 
   searchLocation(): void {
     if (this.searchLat !== null && this.searchLng !== null) {
-      const lat = parseFloat(this.searchLat.toString());
-      const lng = parseFloat(this.searchLng.toString());
+      const lat = this.searchLat;
+      const lng = this.searchLng;
 
       // Validacion de las coordenadas, si son números válidos
       if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
