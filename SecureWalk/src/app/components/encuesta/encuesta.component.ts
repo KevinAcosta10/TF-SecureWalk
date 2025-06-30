@@ -9,9 +9,6 @@ import { ListarencuestaComponent } from './listarencuesta/listarencuesta.compone
   templateUrl: './encuesta.component.html',
   styleUrl: './encuesta.component.css'
 })
-export class EncuestaComponent implements OnInit {
+export class EncuestaComponent{
   constructor(public route: ActivatedRoute) { }
-  ngOnInit(): void {
-
-  }
 }

@@ -1,0 +1,38 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Registro de roles</h1>
+  </div>
+  <div style="text-align: center;margin: 5%;">
+
+    <form [formGroup]="form" (submit)=" aceptar()">
+<mat-form-field>
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="nombre">
+          @for (nombre of nombres; track nombre) {
+          <mat-option [value]="nombre.value">{{nombre.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (food of listaUsuarios; track food) {
+          <mat-option [value]="food.idUsuario">{{food.nombreUsuario}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+
+    </form>
+  </div>
+</div>

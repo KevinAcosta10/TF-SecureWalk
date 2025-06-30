@@ -8,6 +8,11 @@ import { InsertareditarComponent as UsuarioInsertarEditarComponent } from './com
 import { InsertareditarComponent as PreguntaInsertarEditarComponent } from './components/pregunta/insertareditar/insertareditar.component';
 import { InsertareditarComponent as ZonaInsertarEditarComponent } from './components/zona/insertareditar/insertareditar.component';
 import { BuscarusuarioComponent } from './components/usuario/buscarusuario/buscarusuario.component';
+import { RolComponent } from './components/rol/rol.component';
+import { InsertareditarComponent as RolInsertarEditarComponent} from './components/rol/insertareditar/insertareditar.component';
+import { RutaComponent } from './components/ruta/ruta.component';
+import { InsertareditarComponent as RutaInsertarEditarComponent } from './components/ruta/insertareditar/insertareditar.component';
+
 export const routes: Routes = [
     {
         path: 'usuarios', component: UsuarioComponent,
@@ -37,7 +42,21 @@ export const routes: Routes = [
             { path: 'ediciones/:id', component: EncuestaInsertarEditarComponent },
             { path: 'formulario', component: EncuestaInsertarEditarComponent}
         ]
-    }
+    },
+    {
+        path: 'roles', component: RolComponent,
+        children: [
+            { path: 'ediciones/:id', component: RolInsertarEditarComponent },
+            { path: 'formulario', component: RolInsertarEditarComponent},
+        ]
+    },
+    {
+        path: 'rutas', component: RutaComponent,
+        children: [
+            { path: 'ediciones/:id', component: RutaInsertarEditarComponent },
+            { path: 'formulario', component: RutaInsertarEditarComponent},
+        ]
+    },
 ];
 
 

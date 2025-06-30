@@ -9,9 +9,6 @@ import { ListarusuarioComponent } from './listarusuario/listarusuario.component'
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.css'
 })
-export class UsuarioComponent implements OnInit {
+export class UsuarioComponent{
   constructor(public route: ActivatedRoute) { }
-  ngOnInit(): void {
-
-  }
 }
