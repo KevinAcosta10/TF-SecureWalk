@@ -7,7 +7,7 @@ public class IncidenteDTO {
     private String tipoIncidente;
     private LocalDate fechaIncidente;
     private String descripcionIncidente;
-    private ZonaDTO zona;
+    private ZonaDTO zona;/// 4
     private UsuarioRolDTO usuario;
 
     public int getIdIncidente() {
