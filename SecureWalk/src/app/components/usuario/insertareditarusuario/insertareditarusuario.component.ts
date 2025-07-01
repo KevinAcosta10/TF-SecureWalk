@@ -22,10 +22,9 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditarusuario',
   standalone: true,
-  imports: [
-    MatFormFieldModule,
+  imports: [MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
     MatNativeDateModule,
@@ -35,13 +34,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatOption,
     MatSelectModule,
     MatIcon,
-    MatButtonModule,
-  ],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css',
+    MatButtonModule],
+  templateUrl: './insertareditarusuario.component.html',
+  styleUrl: './insertareditarusuario.component.css'
 })
-export class InsertareditarComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
+export class InsertareditarusuarioComponent {
+form: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
 
   enable: { value: boolean; viewValue: string }[] = [
