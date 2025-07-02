@@ -2,6 +2,21 @@
   <div>
     <h1 class="titulo">Lista de usuarios</h1>
   </div>
+
+ <form [formGroup]="form" class="search-form"> <!-- Vinculamos el formulario al FormGroup 'form' -->
+    <mat-form-field appearance="outline" class="search-field"> <!-- Añadido 'appearance' para estilo -->
+      <mat-label>Buscar usuario</mat-label>
+      <!-- El input se vincula al FormControl 'usuario' dentro del FormGroup 'form' -->
+      <input matInput formControlName="usuario">
+      <mat-icon matSuffix>search</mat-icon> <!-- Ícono de búsqueda al final -->
+    </mat-form-field>
+
+    <!-- Botón para limpiar la búsqueda. Se muestra si el campo no está vacío. -->
+    <button mat-button color="accent" (click)="form.get('usuario')?.setValue('')" *ngIf="form.get('usuario')?.value" class="clear-button">
+      Limpiar búsqueda
+    </button>
+  </form>
+
  <div class="slider-container">
   <owl-carousel-o [options]="customOptions">
     <ng-template carouselSlide *ngFor="let usuario of usuarios">
