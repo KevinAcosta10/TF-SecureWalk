@@ -12,92 +12,32 @@ import java.io.IOException;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORS implements Filter {
-
-//    @Override
-//    public void init(FilterConfig filterConfig) throws ServletException {
-//    }
-//
-//    @Override
-//    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-//            throws IOException, ServletException {
-//        HttpServletResponse response = (HttpServletResponse) res;
-//        HttpServletRequest request = (HttpServletRequest) req;
-//
-//        response.setHeader("Access-Control-Allow-Origin", "*");
-//        response.setHeader("Access-Control-Allow-Methods", "DELETE, GET, OPTIONS, PATCH, POST, PUT");
-//        response.setHeader("Access-Control-Max-Age", "3600");
-//        response.setHeader("Access-Control-Allow-Headers",
-//                "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN");
-//
-//        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-//            response.setStatus(HttpServletResponse.SC_OK);
-//        } else {
-//            chain.doFilter(req, res);
-//        }
-//        // chain.doFilter(req, res);
-//    }
-
-
     @Override
-
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-
             throws IOException, ServletException {
-
         HttpServletResponse response = (HttpServletResponse) res;
-
         HttpServletRequest request = (HttpServletRequest) req;
 
+         String origin = request.getHeader("Origin"); // You might keep this for logging if needed
 
-        String origin = request.getHeader("Origin");
+        // --- TEMPORARILY COMMENT OUT THIS BLOCK FOR POSTMAN TESTING ---
+        // if (!"http://localhost:4200".equals(origin)) {
+        //     response.sendError(HttpServletResponse.SC_FORBIDDEN, "Origin not allowed");
+        //     return;
+        // }
+        // --- END TEMPORARY COMMENT ---
 
-        String method = request.getMethod();
-
-
-        if (!"http://localhost:4200".equals(origin)) {
-
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Origin not allowed");
-
-            return;
-
-        }
-
-
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200"); // Or "*" for broader testing
         response.setHeader("Access-Control-Allow-Methods", "DELETE, GET, OPTIONS, PATCH, POST, PUT");
-
-//        response.setHeader("Access-Control-Allow-Methods", "GET, POST");
-
         response.setHeader("Access-Control-Max-Age", "3600");
-
         response.setHeader("Access-Control-Allow-Headers",
-
                 "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN");
 
-
-        if ("OPTIONS".equalsIgnoreCase(method)) {
-
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
-
-//        } else if (!"GET".equalsIgnoreCase(method)) {
-//
-//            // Rechazar explícitamente métodos distintos de POST
-//
-//            response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Only GET is allowed");
-
-        }
-        else {
-
+        } else {
             chain.doFilter(req, res);
-
         }
-
-
     }
-
-    @Override
-    public void destroy() {
-        // TODO Auto-generated method stub
-    }
+    // ... destroy method
 }

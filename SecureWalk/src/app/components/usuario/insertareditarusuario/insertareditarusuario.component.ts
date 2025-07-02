@@ -22,7 +22,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditarusuario',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -37,10 +37,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatIcon,
     MatButtonModule,
   ],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css',
+  templateUrl: './insertareditarusuario.component.html',
+  styleUrl: './insertareditarusuario.component.css',
 })
-export class InsertareditarComponent implements OnInit {
+export class InsertareditarusuarioComponent {
   form: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
 
@@ -62,6 +62,12 @@ export class InsertareditarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uS.list().subscribe((usuarios) => {
+      this.usernamesRegistrados = usuarios.map((u: Usuario) =>
+        u.username.toLowerCase()
+      );
+    })
+
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
@@ -69,17 +75,20 @@ export class InsertareditarComponent implements OnInit {
       this.init();
     });
 
-    this.uS.list().subscribe((usuarios) => {
-      this.usernamesRegistrados = usuarios.map((u: Usuario) =>
-        u.username.toLowerCase()
-      );
-    });
-
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['',[Validators.required, Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$')],],
+      nombre: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$')],
+      ],
       email: ['', [Validators.required, Validators.email]],
-      direccion: ['',[Validators.required,Validators.pattern('^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ ,.\\-#]*$'),],],
+      direccion: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ ,.\\-#]*$'),
+        ],
+      ],
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
       fechaRegistro: ['', [Validators.required, this.fechaNoPasadaValidator]],
       username: ['', [Validators.required, this.usernameDuplicadoValidator()]],
@@ -115,32 +124,41 @@ export class InsertareditarComponent implements OnInit {
       this.usuario.password = this.form.value.password;
       this.usuario.enable = this.form.value.enable;
 
+      if (this.edicion) {
+      this.uS.update(this.usuario).subscribe((data) => {
+        this.uS.list().subscribe((data) => {
+          this.uS.setList(data);
+        });
+      });
+    } else {
+      //INSERTAR
       this.uS.insert(this.usuario).subscribe((data) => {
         this.uS.list().subscribe((data) => {
           this.uS.setList(data);
         });
       });
-      this.router.navigate(['usuarios']);
     }
-    
+    this.router.navigate(['usuarios']);
   }
+}
 
   cancelar() {
     this.router.navigate(['usuarios']);
   }
+  
   init() {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          codigo: new FormControl(data.idUsuario),
-          nombre: new FormControl(data.nombreUsuario),
-          email: new FormControl(data.emailUsuario),
-          direccion: new FormControl(data.direccionUsuario),
-          telefono: new FormControl(data.telefonoUsuario),
-          fechaRegistro: new FormControl(data.fechaRegistroUsuario),
-          username: new FormControl(data.username),
-          password: new FormControl(data.password),
-          enable: new FormControl(data.enable),
+            codigo: new FormControl(data.idUsuario),
+            nombre: new FormControl(data.nombreUsuario),
+            email: new FormControl(data.emailUsuario),
+            direccion: new FormControl(data.direccionUsuario),
+            telefono: new FormControl(data.telefonoUsuario),
+            fechaRegistro: new FormControl(data.fechaRegistroUsuario),
+            username: new FormControl(data.username),
+            password: new FormControl(data.password),
+            enable: new FormControl(data.enable),
         });
       });
     }
