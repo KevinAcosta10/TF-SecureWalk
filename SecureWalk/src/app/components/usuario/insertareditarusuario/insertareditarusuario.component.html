@@ -75,7 +75,7 @@
         </mat-error>
       </mat-form-field>
       <br />
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" *ngIf="!edicion"> <!-- Si está en modo edición no muestra el campo contraseña -->
         <mat-label>Contraseña</mat-label>
         <input
           matInput

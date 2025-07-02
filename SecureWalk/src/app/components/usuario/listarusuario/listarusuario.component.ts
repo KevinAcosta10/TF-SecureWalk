@@ -37,7 +37,7 @@ export class ListarusuarioComponent implements OnInit {
   usuarioBusqueda: string = '';
 
   customOptions: OwlOptions = {
-    loop: true, // Repetir el carrusel
+    loop: false, // Repetir el carrusel
     mouseDrag: true, // Permitir arrastrar con el ratón
     touchDrag: true, // Permitir arrastrar con el dedo en dispositivos táctiles
     pullDrag: true,
