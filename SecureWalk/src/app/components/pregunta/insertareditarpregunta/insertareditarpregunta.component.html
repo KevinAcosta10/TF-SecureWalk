@@ -1,32 +1,41 @@
-<div>
-    <div>Registro de encuestas</div>
-    <div>
-        <form [formGroup]="form" (submit)="aceptar()">
-            <br />
-            <mat-form-field>
-                <mat-label>Texto Pregunta</mat-label>
-                <input matInput formControlName="texto" />
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de preguntas</h1>
+  </div>
+  <div style="text-align: center">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <br />
+      <mat-form-field>
+        <mat-label>Texto Pregunta</mat-label>
+        <input matInput formControlName="texto" />
 
-                <mat-error *ngIf="form.get('texto')?.hasError('required')">
-                    El texto de la pregunta es obligatorio!!
-                </mat-error>
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Tipo de pregunta</mat-label>
-                <mat-select formControlName="tipo">
-                    <mat-option *ngFor="let tp of tipoPregunta" [value]="tp.value">
-                        {{ tp.viewValue }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <br />
+        <mat-error *ngIf="form.get('texto')?.hasError('required')">
+          El texto de la pregunta es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Tipo de pregunta</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option *ngFor="let tp of tipoPregunta" [value]="tp.value">
+            {{ tp.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+          El tipo de la pregunta es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
 
-            <button mat-raised-button color="primary" type="submit">Aceptar</button>
-            <button mat-raised-button color="warn" (click)="cancelar()" routerLink="/preguntas">
-                Cancelar
-            </button>
-        </form>
-    </div>
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="cancelar()"
+        routerLink="/preguntas"
+      >
+        Cancelar
+      </button>
+    </form>
+  </div>
 </div>
-  

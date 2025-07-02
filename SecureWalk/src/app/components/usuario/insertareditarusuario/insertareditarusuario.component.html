@@ -1,6 +1,8 @@
-<div>
-  <div>Registro de usuarios</div>
-  <div>
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de usuarios</h1>
+  </div>
+  <div style="text-align: center;">
     <form [formGroup]="form" (submit)="aceptar()">
       <mat-form-field>
         <mat-label>Usuario</mat-label>
@@ -75,7 +77,8 @@
         </mat-error>
       </mat-form-field>
       <br />
-      <mat-form-field appearance="fill" *ngIf="!edicion"> <!-- Si está en modo edición no muestra el campo contraseña -->
+      <mat-form-field appearance="fill" *ngIf="!edicion">
+        <!-- Si está en modo edición no muestra el campo contraseña -->
         <mat-label>Contraseña</mat-label>
         <input
           matInput
@@ -121,5 +124,3 @@
     </form>
   </div>
 </div>
-
-

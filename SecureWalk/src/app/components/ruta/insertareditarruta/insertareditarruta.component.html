@@ -1,55 +1,77 @@
 <div class="container">
-    <div style="text-align: center; margin: 5%">
-        <h1>Registro de rutas</h1>
-    </div>
-    <div style="text-align: center; margin: 5%">
-        <form [formGroup]="form" (submit)="aceptar()">
-            <mat-form-field>
-                <mat-label>Zona</mat-label>
-                <mat-select formControlName="zona">
-                    @for (zona of listaZonas; track zona) {
-                    <mat-option [value]="zona.idZona">{{ zona.nombreZona }}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <br />
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de rutas</h1>
+  </div>
+  <div style="text-align: center">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field>
+        <mat-label>Zona</mat-label>
+        <mat-select formControlName="zona">
+          @for (zona of listaZonas; track zona) {
+          <mat-option [value]="zona.idZona">{{ zona.nombreZona }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('zona')?.hasError('required')">
+          La zona es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
 
-            <mat-form-field>
-                <mat-label>Fecha</mat-label>
-                <input matInput [matDatepicker]="startDatePicker" formControlName="horaInicio" />
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-                <mat-datepicker #startDatePicker></mat-datepicker>
-                <mat-error *ngIf="form.get('horaInicio')?.hasError('required')">
-                    La fecha de inicio es obligatoria!!
-                </mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <mat-label>Fecha</mat-label>
-                <input matInput [matDatepicker]="endDatePicker" formControlName="horaFin" />
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-                <mat-datepicker #endDatePicker></mat-datepicker>
-                <mat-error *ngIf="form.get('horaFin')?.hasError('required')">
-                    El fin de fecha es obligatoria!!
-                </mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <mat-label>Nivel de seguridad</mat-label>
-                <input matInput formControlName="seguridad" />
-                <mat-error *ngIf="form.get('seguridad')?.hasError('required')">
-                    El indice de seguridad es obligatorio!!
-                </mat-error>
-            </mat-form-field>
-            <br />
+      <mat-form-field>
+        <mat-label>Fecha Inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="startDatePicker"
+          formControlName="horaInicio"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="startDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+        <mat-error *ngIf="form.get('horaInicio')?.hasError('required')">
+          La fecha de inicio es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Fecha Fin</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endDatePicker"
+          formControlName="horaFin"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="endDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <mat-error *ngIf="form.get('horaFin')?.hasError('required')">
+          El fin de fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Nivel de seguridad</mat-label>
+        <mat-select formControlName="seguridad">
+          @for (seguridad of seguridadd; track seguridad) {
+          <mat-option [value]="seguridad.value">{{
+            seguridad.viewValue
+          }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('seguridad')?.hasError('required')">
+          El indice de seguridad es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
 
-            <button mat-raised-button color="primary">Aceptar</button>
-            <button mat-raised-button color="warn" (click)="cancelar()">
-                Cancelar
-            </button>
-        </form>
-    </div>
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
 </div>
-  

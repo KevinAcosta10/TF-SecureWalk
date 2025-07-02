@@ -14,6 +14,8 @@ import { InsertareditarrutaComponent } from './components/ruta/insertareditarrut
 import { InsertareditarrolComponent } from './components/rol/insertareditarrol/insertareditarrol.component';
 import { InsertareditarencuestaComponent } from './components/encuesta/insertareditarencuesta/insertareditarencuesta.component';
 import { InsertareditarpreguntaComponent } from './components/pregunta/insertareditarpregunta/insertareditarpregunta.component';
+import { IncidenteComponent } from './components/incidente/incidente.component';
+import { InsertareditarincidenteComponent } from './components/incidente/insertareditarincidente/insertareditarincidente.component';
 
 export const routes: Routes = [
   {
@@ -80,9 +82,17 @@ export const routes: Routes = [
     canActivate: [seguridadGuard],
   },
   {
+    path: 'incidentes',
+    component: IncidenteComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarincidenteComponent },
+      { path: 'formulario', component: InsertareditarincidenteComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
     path: 'homes',
     component: HomeComponent,
     canActivate: [seguridadGuard],
-
   },
 ];
