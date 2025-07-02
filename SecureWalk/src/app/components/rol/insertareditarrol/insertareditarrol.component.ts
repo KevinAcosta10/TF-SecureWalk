@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Rol } from '../../../models/rol';
 import { RolService } from '../../../services/rol.service';
@@ -11,33 +11,34 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { UsuariosService } from '../../../services/usuarios.service';
-
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditarrol',
   standalone: true,
-  imports: [ReactiveFormsModule,
+  imports: [
+    ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     CommonModule,
     MatDatepickerModule,
     MatSelectModule,
-    MatButtonModule],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css',
+    MatButtonModule
+  ],
+  templateUrl: './insertareditarrol.component.html',
+  styleUrl: './insertareditarrol.component.css'
 })
-export class InsertareditarComponent {
+export class InsertareditarrolComponent implements OnInit{
   form: FormGroup = new FormGroup({});
   rol: Rol = new Rol();
 
   id: number = 0;
   edicion: boolean = false;
 
-  listaUsuarios:Usuario[]=[]
+  listaUsuarios: Usuario[] = []
 
-  nombres:{value:string;viewValue:string}[]=[
-    {value:'ADMINISTRADOR',viewValue:'ADMINISTRADOR'},
-    {value:'POLICIA',viewValue:'POLICIA'},
-    {value:'USUARIO',viewValue:'USUARIO'}
+  nombres: { value: string; viewValue: string }[] = [
+    { value: 'ADMINISTRADOR', viewValue: 'ADMINISTRADOR' },
+    { value: 'POLICIA', viewValue: 'POLICIA' },
+    { value: 'USUARIO', viewValue: 'USUARIO' }
   ]
 
   constructor(
@@ -46,7 +47,7 @@ export class InsertareditarComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS: UsuariosService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -60,8 +61,8 @@ export class InsertareditarComponent {
       nombre: ['', Validators.required],
       usuario: ['', Validators.required],
     });
-    this.uS.list().subscribe(data=>{
-      this.listaUsuarios=data
+    this.uS.list().subscribe(data => {
+      this.listaUsuarios = data
     })
   }
   aceptar() {

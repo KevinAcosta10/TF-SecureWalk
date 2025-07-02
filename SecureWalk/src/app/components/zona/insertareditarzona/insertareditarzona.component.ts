@@ -11,25 +11,25 @@ import { CommonModule, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { GoogleMapsModule, MapAdvancedMarker } from '@angular/google-maps';
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditarzona',
   standalone: true,
   imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    CommonModule,
-    NgIf,
-    MatOption,
-    MatSelectModule,
-    GoogleMapsModule,
-    MapAdvancedMarker
+     MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        CommonModule,
+        NgIf,
+        MatOption,
+        MatSelectModule,
+        GoogleMapsModule,
+        MapAdvancedMarker
   ],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css'
+  templateUrl: './insertareditarzona.component.html',
+  styleUrl: './insertareditarzona.component.css'
 })
-export class InsertareditarComponent implements OnInit {
+export class InsertareditarzonaComponent implements OnInit{
   form: FormGroup = new FormGroup({});
   zona: Zona = new Zona();
 

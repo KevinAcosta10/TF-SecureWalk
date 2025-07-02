@@ -3,17 +3,17 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ZonaComponent } from './components/zona/zona.component';
 import { PreguntaComponent } from './components/pregunta/pregunta.component';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
-import { InsertareditarComponent as EncuestaInsertarEditarComponent } from './components/encuesta/insertareditar/insertareditar.component';
-import { InsertareditarComponent as PreguntaInsertarEditarComponent } from './components/pregunta/insertareditar/insertareditar.component';
-import { InsertareditarComponent as ZonaInsertarEditarComponent } from './components/zona/insertareditar/insertareditar.component';
 import { RolComponent } from './components/rol/rol.component';
-import { InsertareditarComponent as RolInsertarEditarComponent } from './components/rol/insertareditar/insertareditar.component';
 import { RutaComponent } from './components/ruta/ruta.component';
-import { InsertareditarComponent as RutaInsertarEditarComponent } from './components/ruta/insertareditar/insertareditar.component';
 import { InsertareditarusuarioComponent } from './components/usuario/insertareditarusuario/insertareditarusuario.component';
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { HomeComponent } from './components/home/home.component';
+import { InsertareditarzonaComponent } from './components/zona/insertareditarzona/insertareditarzona.component';
+import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
+import { InsertareditarrolComponent } from './components/rol/insertareditarrol/insertareditarrol.component';
+import { InsertareditarencuestaComponent } from './components/encuesta/insertareditarencuesta/insertareditarencuesta.component';
+import { InsertareditarpreguntaComponent } from './components/pregunta/insertareditarpregunta/insertareditarpregunta.component';
 
 export const routes: Routes = [
   {
@@ -38,8 +38,8 @@ export const routes: Routes = [
     path: 'zonas',
     component: ZonaComponent,
     children: [
-      { path: 'ediciones/:id', component: ZonaInsertarEditarComponent },
-      { path: 'formulario', component: ZonaInsertarEditarComponent },
+      { path: 'ediciones/:id', component: InsertareditarzonaComponent },
+      { path: 'formulario', component: InsertareditarzonaComponent },
     ],
     canActivate: [seguridadGuard],
   },
@@ -47,8 +47,8 @@ export const routes: Routes = [
     path: 'preguntas',
     component: PreguntaComponent,
     children: [
-      { path: 'ediciones/:id', component: PreguntaInsertarEditarComponent },
-      { path: 'formulario', component: PreguntaInsertarEditarComponent },
+      { path: 'ediciones/:id', component: InsertareditarpreguntaComponent },
+      { path: 'formulario', component: InsertareditarpreguntaComponent },
     ],
     canActivate: [seguridadGuard],
   },
@@ -56,8 +56,8 @@ export const routes: Routes = [
     path: 'encuestas',
     component: EncuestaComponent,
     children: [
-      { path: 'ediciones/:id', component: EncuestaInsertarEditarComponent },
-      { path: 'formulario', component: EncuestaInsertarEditarComponent },
+      { path: 'ediciones/:id', component: InsertareditarencuestaComponent },
+      { path: 'formulario', component: InsertareditarencuestaComponent },
     ],
     canActivate: [seguridadGuard],
   },
@@ -65,8 +65,8 @@ export const routes: Routes = [
     path: 'roles',
     component: RolComponent,
     children: [
-      { path: 'ediciones/:id', component: RolInsertarEditarComponent },
-      { path: 'formulario', component: RolInsertarEditarComponent },
+      { path: 'ediciones/:id', component: InsertareditarrolComponent },
+      { path: 'formulario', component: InsertareditarrolComponent },
     ],
     canActivate: [seguridadGuard],
   },
@@ -74,8 +74,8 @@ export const routes: Routes = [
     path: 'rutas',
     component: RutaComponent,
     children: [
-      { path: 'ediciones/:id', component: RutaInsertarEditarComponent },
-      { path: 'formulario', component: RutaInsertarEditarComponent },
+      { path: 'ediciones/:id', component: InsertareditarrutaComponent },
+      { path: 'formulario', component: InsertareditarrutaComponent },
     ],
     canActivate: [seguridadGuard],
   },

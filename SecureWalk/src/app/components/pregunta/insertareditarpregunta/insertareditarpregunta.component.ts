@@ -17,7 +17,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditarpregunta',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -30,10 +30,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatOption,
     MatSelectModule,
   ],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css',
+  templateUrl: './insertareditarpregunta.component.html',
+  styleUrl: './insertareditarpregunta.component.css'
 })
-export class InsertareditarComponent implements OnInit {
+export class InsertareditarpreguntaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   pregunta: Pregunta = new Pregunta();
 
@@ -52,7 +52,7 @@ export class InsertareditarComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -92,7 +92,7 @@ export class InsertareditarComponent implements OnInit {
         this.form = new FormGroup({
           codigo: new FormControl(data.idPregunta),
           texto: new FormControl(data.textoPregunta),
-          tipo: new FormControl(data.tipoPregunta),          
+          tipo: new FormControl(data.tipoPregunta),
         });
       });
     }
