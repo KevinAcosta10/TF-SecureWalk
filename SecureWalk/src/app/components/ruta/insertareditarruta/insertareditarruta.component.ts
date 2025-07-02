@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ruta } from '../../../models/ruta';
 import { Zona } from '../../../models/zona';
@@ -12,30 +12,31 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
-
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditarruta',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [ReactiveFormsModule,
-      MatInputModule,
-      MatFormFieldModule,
-      CommonModule,
-      MatDatepickerModule,
-      MatSelectModule,
-      MatButtonModule,
-      MatDatepickerModule],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css'
+  imports: [
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    CommonModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDatepickerModule
+  ],
+  templateUrl: './insertareditarruta.component.html',
+  styleUrl: './insertareditarruta.component.css'
 })
-export class InsertareditarComponent {
+export class InsertareditarrutaComponent implements OnInit{
   form: FormGroup = new FormGroup({});
   ruta: Ruta = new Ruta();
 
   id: number = 0;
   edicion: boolean = false;
 
-  listaZonas:Zona[]=[]
+  listaZonas: Zona[] = []
 
   constructor(
     private rS: RutaService,
@@ -43,7 +44,7 @@ export class InsertareditarComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS: ZonaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -59,8 +60,8 @@ export class InsertareditarComponent {
       seguridad: ['', Validators.required],
       zona: ['', Validators.required]
     });
-    this.uS.list().subscribe(data=>{
-      this.listaZonas=data
+    this.uS.list().subscribe(data => {
+      this.listaZonas = data
     })
   }
   aceptar() {

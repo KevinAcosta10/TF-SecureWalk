@@ -14,9 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule, NgIf } from '@angular/common';
-
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditarencuesta',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -27,10 +26,10 @@ import { CommonModule, NgIf } from '@angular/common';
     CommonModule,
     NgIf,
   ],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css',
+  templateUrl: './insertareditarencuesta.component.html',
+  styleUrl: './insertareditarencuesta.component.css'
 })
-export class InsertareditarComponent implements OnInit {
+export class InsertareditarencuestaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   encuesta: Encuesta = new Encuesta();
 
@@ -42,7 +41,7 @@ export class InsertareditarComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -53,7 +52,7 @@ export class InsertareditarComponent implements OnInit {
     });
 
     this.form = this.formBuilder.group({
-      codigo: [''], 
+      codigo: [''],
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       fechaCreacion: ['', Validators.required],
@@ -77,18 +76,18 @@ export class InsertareditarComponent implements OnInit {
   }
 
   cancelar() {
-      this.router.navigate(['encuestas']);
-    }
-    init() {
-      if (this.edicion) {
-        this.eS.listId(this.id).subscribe((data) => {
-          this.form = new FormGroup({
-            codigo: new FormControl(data.idEncuesta),
-            nombre: new FormControl(data.nombreEncuesta),
-            descripcion: new FormControl(data.descripcionEncuesta),  
-            fechaCreacion: new FormControl(data.fechaCreacionEncuesta),       
-          });
+    this.router.navigate(['encuestas']);
+  }
+  init() {
+    if (this.edicion) {
+      this.eS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          codigo: new FormControl(data.idEncuesta),
+          nombre: new FormControl(data.nombreEncuesta),
+          descripcion: new FormControl(data.descripcionEncuesta),
+          fechaCreacion: new FormControl(data.fechaCreacionEncuesta),
         });
-      }
+      });
     }
+  }
 }
