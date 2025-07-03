@@ -16,6 +16,8 @@ import { InsertareditarencuestaComponent } from './components/encuesta/insertare
 import { InsertareditarpreguntaComponent } from './components/pregunta/insertareditarpregunta/insertareditarpregunta.component';
 import { IncidenteComponent } from './components/incidente/incidente.component';
 import { InsertareditarincidenteComponent } from './components/incidente/insertareditarincidente/insertareditarincidente.component';
+import { EvaluacionincidenteComponent } from './components/evaluacionincidente/evaluacionincidente.component';
+import { InsertarevaluacionincidenteComponent } from './components/evaluacionincidente/insertarevaluacionincidente/insertarevaluacionincidente.component';
 
 export const routes: Routes = [
   {
@@ -87,6 +89,15 @@ export const routes: Routes = [
     children: [
       { path: 'ediciones/:id', component: InsertareditarincidenteComponent },
       { path: 'formulario', component: InsertareditarincidenteComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'evaluacionincidentes',
+    component: EvaluacionincidenteComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertarevaluacionincidenteComponent },
+      { path: 'formulario', component: InsertarevaluacionincidenteComponent },
     ],
     canActivate: [seguridadGuard],
   },

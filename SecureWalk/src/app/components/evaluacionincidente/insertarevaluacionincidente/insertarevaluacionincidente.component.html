@@ -1,0 +1,68 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de evaluaciones de incidentes</h1>
+  </div>
+  <div style="text-align: center">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field>
+        <mat-label>Aprobacion de Incidente</mat-label>
+        <mat-select formControlName="aprobacion">
+          @for (food of tipos; track food) {
+          <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('aprobacion')?.hasError('required')">
+          Este campo es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fecha')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Incidente</mat-label>
+        <mat-select formControlName="incidente">
+          @for (food of listaIncidentes; track food) {
+          <mat-option [value]="food.idIncidente">{{ food.descripcionIncidente}}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('incidente')?.hasError('required')">
+          El incidente es obligatorio
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (food of listaUsuarios; track food) {
+          <mat-option [value]="food.idUsuario">{{ food.nombreUsuario }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El nombre de usuario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

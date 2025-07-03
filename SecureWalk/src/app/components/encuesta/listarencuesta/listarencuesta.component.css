@@ -1,3 +1,24 @@
+/* Contenedor principal de la página */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px; /* Espacio entre los elementos principales (título, formulario, carrusel) */
+  max-width: 1200px; /* Ancho máximo para el contenido */
+  margin: 0 auto; /* Centra el contenedor en la página */
+}
+    
+/* Estilos para el título principal */
 .titulo {
-    text-align: center;
-  }
+  color: #3f51b5; /* Un azul primario de Material Design */
+  margin-bottom: 10px;
+  font-size: 2.5em; /* Tamaño de fuente grande para el título */
+  font-weight: 600; /* Peso de fuente semi-negrita */
+  text-align: center;
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+  max-width: 960px; /* Ajusta este ancho para controlar el tamaño general del carrusel */
+  margin-top: 20px;
+}
