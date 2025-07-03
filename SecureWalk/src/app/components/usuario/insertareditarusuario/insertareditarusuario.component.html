@@ -43,6 +43,9 @@
         <mat-error *ngIf="form.get('direccion')?.hasError('required')">
           La dirección es obligatoria!!
         </mat-error>
+        <mat-error *ngIf="form.get('direccion')?.hasError('pattern')">
+          La direccion no debe tener caracteres especiales.
+        </mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>

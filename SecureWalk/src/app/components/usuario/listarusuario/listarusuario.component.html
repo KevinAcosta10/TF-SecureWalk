@@ -22,11 +22,14 @@
     <ng-template carouselSlide *ngFor="let usuario of usuarios">
       <mat-card class="usuario-card">
         <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+              <img mat-card-image [src]="'https://randomuser.me/api/portraits/lego/' + (usuario.idUsuario % 10) + '.jpg'" alt="Avatar de usuario">
+          </div>
           <mat-card-title>{{ usuario.nombreUsuario }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>Fecha de registro: {{ usuario.fechaRegistroUsuario }}</p>
-          <p>Estado: {{ usuario.enable }}</p>
+          <p>Estado: {{ usuario.enable ? 'Habilitado' : 'Deshabilitado'  }}</p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-button color="primary" [routerLink]="['ediciones', usuario.idUsuario]"><mat-icon>edit</mat-icon></button>

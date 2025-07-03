@@ -20,6 +20,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditarusuario',
@@ -40,7 +41,8 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './insertareditarusuario.component.html',
   styleUrl: './insertareditarusuario.component.css',
 })
-export class InsertareditarusuarioComponent implements OnInit { // Agrega implements OnInit
+export class InsertareditarusuarioComponent implements OnInit {
+  // Agrega implements OnInit
   form: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
 
@@ -58,7 +60,8 @@ export class InsertareditarusuarioComponent implements OnInit { // Agrega implem
     private uS: UsuariosService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -93,10 +96,21 @@ export class InsertareditarusuarioComponent implements OnInit { // Agrega implem
       // y estos se cargan asíncronamente, necesitas actualizar el validador
       // o el estado del control de username después de que se carguen.
       // Una forma es llamar a updateValueAndValidity() si el formulario ya estaba creado.
-      if (this.edicion) { // Si es edición, el username actual no debe ser marcado como duplicado consigo mismo
-        this.form.get('username')?.setValidators([Validators.required, this.usernameDuplicadoValidator(this.form.get('username')?.value)]);
+      if (this.edicion) {
+        // Si es edición, el username actual no debe ser marcado como duplicado consigo mismo
+        this.form
+          .get('username')
+          ?.setValidators([
+            Validators.required,
+            this.usernameDuplicadoValidator(this.form.get('username')?.value),
+          ]);
       } else {
-        this.form.get('username')?.setValidators([Validators.required, this.usernameDuplicadoValidator()]);
+        this.form
+          .get('username')
+          ?.setValidators([
+            Validators.required,
+            this.usernameDuplicadoValidator(),
+          ]);
       }
       this.form.get('username')?.updateValueAndValidity();
     });
@@ -113,7 +127,9 @@ export class InsertareditarusuarioComponent implements OnInit { // Agrega implem
       if (!control.value) return null;
       const valor = control.value.toLowerCase();
       // En modo edición, el username actual no debería contarse como "duplicado" consigo mismo.
-      const existe = this.usernamesRegistrados.includes(valor) && (currentUsername ? valor !== currentUsername.toLowerCase() : true);
+      const existe =
+        this.usernamesRegistrados.includes(valor) &&
+        (currentUsername ? valor !== currentUsername.toLowerCase() : true);
       return existe ? { usernameDuplicado: true } : null;
     };
   };
@@ -169,6 +185,11 @@ export class InsertareditarusuarioComponent implements OnInit { // Agrega implem
       });
     }
     this.router.navigate(['usuarios']);
+    this.snackBar.open('Usuario registrado exitosamente', 'Cerrar', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
   cancelar() {
@@ -196,11 +217,16 @@ export class InsertareditarusuarioComponent implements OnInit { // Agrega implem
         // quita el validador 'required' si no quieres que sea obligatorio al editar
         // si no se muestra el campo. O maneja su valor de otra forma.
         if (this.edicion) {
-            this.form.get('password')?.clearValidators();
-            this.form.get('password')?.updateValueAndValidity();
+          this.form.get('password')?.clearValidators();
+          this.form.get('password')?.updateValueAndValidity();
         }
         // También actualiza el validador de username para no considerarse duplicado a sí mismo
-        this.form.get('username')?.setValidators([Validators.required, this.usernameDuplicadoValidator(data.username)]);
+        this.form
+          .get('username')
+          ?.setValidators([
+            Validators.required,
+            this.usernameDuplicadoValidator(data.username),
+          ]);
         this.form.get('username')?.updateValueAndValidity();
       });
     }
