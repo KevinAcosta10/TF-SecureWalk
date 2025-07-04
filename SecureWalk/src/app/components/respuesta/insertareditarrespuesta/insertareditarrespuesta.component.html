@@ -1,1 +1,65 @@
-<p>insertareditarrespuesta works!</p>
+<div>
+  <div>Registro de Respuesta</div>
+  <div>
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field>
+        <mat-label>Texto de Respuesta</mat-label>
+        <input matInput formControlName="texto" />
+        <mat-error *ngIf="form.get('texto')?.hasError('required')">
+          El texto de respuesta es obligatorio!!
+        </mat-error>
+        <mat-error *ngIf="form.get('texto')?.hasError('pattern')">
+          No se permiten carácteres especiales
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fecha"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fecha')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Encuesta de Pregunta</mat-label>
+        <mat-select formControlName="zona">
+          @for (encuesta of listaencuestapregunta; track encuesta) {
+          <mat-option [value]="encuesta.idEncuestaPregunta">{{ encuesta.encuesta.nombreEncuesta }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+<mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="zona">
+          @for (persona of listaUsuario; track persona) {
+          <mat-option [value]="persona.idUsuario">{{ persona.nombreUsuario }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field> 
+      <br />
+
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="cancelar()"
+        routerLink="/usuarios"
+      >
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
+
+

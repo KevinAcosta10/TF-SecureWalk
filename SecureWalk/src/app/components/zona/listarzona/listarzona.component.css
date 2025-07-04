@@ -1,0 +1,212 @@
+/* listarzona.component.css */
+
+.main-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 64px);
+  box-sizing: border-box;
+}
+
+.list-container {
+  flex: 1;
+  max-width: 400px;
+  min-width: 300px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Permite desplazamiento si hay muchas filas */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor del mapa */
+.map-container {
+  flex: 2;
+  min-height: 400px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Estilo para la tabla */
+table {
+  width: 100%;
+  margin-bottom: 10px;
+  table-layout: fixed; /* Ayuda a que las columnas respeten el ancho asignado */
+}
+
+/* Estilos para el nuevo contenedor del buscador */
+.search-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+  gap: 10px; /* Espacio entre los campos y botones */
+  padding: 15px;
+  border-bottom: 1px solid #ddd; /* Separador visual */
+  margin-bottom: 15px; /* Espacio debajo del buscador */
+  align-items: center; /* Alinea verticalmente los items */
+}
+
+.search-field {
+  flex: 1; /* Permite que los campos crezcan y ocupen espacio */
+  min-width: 120px; /* Ancho mínimo para cada campo */
+  max-width: 180px; /* Ancho máximo para cada campo */
+}
+
+/* Ajustes para el botón de búsqueda */
+.search-container button {
+  height: 56px; /* Ajusta la altura del botón */
+}
+
+/* Responsive adjustments for search container */
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column; /* Apila los campos y botones en pantallas pequeñas */
+    align-items: stretch; /* Estira los elementos para que ocupen todo el ancho */
+  }
+
+  .search-field {
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+  }
+
+  .search-container button {
+    width: 100%; /* Botones también ocupan todo el ancho */
+  }
+}
+
+/* Estilo para Material table header */
+.mat-header-cell {
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+/* Estilo para Material table rows */
+.mat-row:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.mat-row:hover {
+  background-color: #e0e0e0;
+}
+
+.mat-cell {
+  padding: 6px 12px;
+  font-size: 0.9em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Estilos específicos para las celdas de las acciones (eliminar/actualizar) */
+.acciones-header,
+.acciones-cell {
+  width: 50px; /* Ancho fijo y pequeño para las columnas de iconos */
+  text-align: center;
+  padding: 0px; /* Elimina el padding de estas celdas */
+}
+
+.acciones-header {
+  border-left: 1px solid rgba(255, 255, 255, 0.2); /* Separador sutil para los encabezados de acción */
+}
+
+.acciones-cell {
+  border-left: 1px solid rgba(0, 0, 0, 0.05); /* Separador sutil para las celdas de acción */
+}
+
+/* Asegura que los iconos dentro de los botones sean pequeños */
+.mat-icon-button .mat-icon {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
+}
+
+/* Paginador styling */
+mat-paginator {
+  background-color: transparent;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+}
+
+/* Title styling */
+.titulo {
+  color: #3f51b5;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  padding-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .list-container {
+    max-width: 100%;
+    min-width: unset;
+  }
+
+  .map-container {
+    min-height: 300px;
+  }
+}
+
+/* Scroll smooth para la fila seleccionada */
+.selected {
+  background-color: #d3f8e2; /* Resalta la fila seleccionada */
+  font-weight: bold;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 400px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.store {
+  h3,
+  p {
+    margin: 0;
+  }
+  h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+
+  &.active {
+    background-color: #e0e0e0;
+    border: 2px solid #3f51b5;
+  }
+
+  &.hover {
+    background-color: #e0e0e0;
+  }
+}
+
+.sidebar:last-child {
+  margin-bottom: 0;
+}

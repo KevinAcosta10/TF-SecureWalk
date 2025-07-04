@@ -1,1 +1,32 @@
-<p>insertareditarencuestapregunta works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de Encuestas de las preguntas</h1>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field>
+        <mat-label>Encuesta</mat-label>
+        <mat-select formControlName="zona">
+          @for (encuesta of listaEncuesta; track encuesta) {
+          <mat-option [value]="encuesta.idEncuesta">{{ encuesta.nombreEncuesta }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+<mat-form-field>
+        <mat-label>Pregunta</mat-label>
+        <mat-select formControlName="zona">
+          @for (pregunta of listaPregunta; track pregunta) {
+          <mat-option [value]="pregunta.idPregunta">{{ pregunta.textoPregunta }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

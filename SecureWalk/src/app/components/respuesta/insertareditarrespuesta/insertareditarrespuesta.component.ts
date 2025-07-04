@@ -1,18 +1,33 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Respuesta } from '../../../models/respuesta';
 import { EncuestaPregunta } from '../../../models/encuestapregunta';
 import { Usuario } from '../../../models/usuario';
 import { RespuestaService } from '../../../services/respuesta.service';
-import { Router } from 'express';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router,ActivatedRoute, Params } from '@angular/router';
 import { EncuestapreguntaService } from '../../../services/encuestapregunta.service';
 import { UsuariosService } from '../../../services/usuarios.service';
+import { MatNativeDateModule, MatOption, provideNativeDateAdapter } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule, NgIf } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-insertareditarrespuesta',
-  standalone: true,
-  imports: [],
+  providers: [provideNativeDateAdapter()],
+    imports: [    MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        CommonModule,
+        NgIf,
+        MatOption,
+        MatSelectModule,
+        MatButtonModule,],
   templateUrl: './insertareditarrespuesta.component.html',
   styleUrl: './insertareditarrespuesta.component.css'
 })
@@ -78,12 +93,12 @@ form: FormGroup = new FormGroup({});
           })
         })
       }
-      this.router.navigate(['usuarioRuta'])
+      this.router.navigate(['respuesta'])
     }
   }
 
   cancelar() {
-    this.router.navigate(['usuarioRuta']);
+    this.router.navigate(['respuesta']);
   }
   init() {
     if (this.edicion) {
