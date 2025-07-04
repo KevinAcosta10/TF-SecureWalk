@@ -13,14 +13,13 @@ public interface IEncuestaPreguntaRepository extends JpaRepository<EncuestaPregu
     @Query("SELECT ep FROM EncuestaPregunta ep " +
             "LEFT JOIN FETCH ep.encuesta e " + // Carga ansiosa la entidad Encuesta
             "LEFT JOIN FETCH ep.pregunta p " + // Carga ansiosa la entidad Pregunta
-            "WHERE e.idEncuesta = :idEncuesta " +
-            "ORDER BY ep.orden ASC")
+            "WHERE e.idEncuesta = :idEncuesta ")
         // Asegura que la lista esté ordenada
     List<EncuestaPregunta> listarEncuestaPreguntas(@Param("idEncuesta") int idEncuesta);
 
     @Query("SELECT ep FROM EncuestaPregunta ep " +
             "LEFT JOIN FETCH ep.encuesta e " +
             "LEFT JOIN FETCH ep.pregunta p " +
-            "ORDER BY e.idEncuesta ASC, ep.orden ASC")
+            "ORDER BY e.idEncuesta ASC")
     List<EncuestaPregunta> findAllByOrderByEncuestaIdEncuestaAscOrdenAsc();
 }

@@ -78,48 +78,41 @@ public class EncuestaPreguntaController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/agrupadas") // Este es el endpoint que el frontend consumirá
+    @GetMapping("/agrupadas")
     public List<EncuestaConPreguntasDTO> listarEncuestasConPreguntasAgrupadas() {
-
-        // 1. Obtener todas las relaciones EncuestaPregunta de forma eficiente
         List<EncuestaPregunta> todasLasRelaciones = encuestaPreguntaRepository.findAllByOrderByEncuestaIdEncuestaAscOrdenAsc();
 
-        // 2. Agrupar las relaciones por la entidad Encuesta (para la estructura final)
         Map<Encuesta, List<EncuestaPregunta>> groupedByEncuesta = todasLasRelaciones.stream()
                 .collect(Collectors.groupingBy(EncuestaPregunta::getEncuesta));
 
-        // 3. Preparar la lista final de DTOs
         List<EncuestaConPreguntasDTO> resultado = new ArrayList<>();
 
-        // 4. Iterar sobre cada grupo y construir los DTOs manualmente
         groupedByEncuesta.forEach((encuesta, relacionesDeEstaEncuesta) -> {
-            // Crear el DTO de la encuesta y copiar las propiedades manualmente
             EncuestaConPreguntasDTO encuestaDto = new EncuestaConPreguntasDTO();
             encuestaDto.setIdEncuesta(encuesta.getIdEncuesta());
             encuestaDto.setNombreEncuesta(encuesta.getNombreEncuesta());
             encuestaDto.setDescripcionEncuesta(encuesta.getDescripcionEncuesta());
-            encuestaDto.setFechaCreacionEncuesta(encuesta.getFechaCreacionEncuesta()); // Asumiendo que el tipo es compatible
+            encuestaDto.setFechaCreacionEncuesta(encuesta.getFechaCreacionEncuesta());
 
-            // Crear la lista de PreguntaDTOs para esta encuesta
             List<PreguntaDTO> preguntasDto = relacionesDeEstaEncuesta.stream()
                     .map(relacion -> {
-                        // Crear el DTO de la pregunta y copiar las propiedades manualmente
                         Pregunta preguntaEntidad = relacion.getPregunta();
                         PreguntaDTO preguntaDto = new PreguntaDTO();
                         preguntaDto.setIdPregunta(preguntaEntidad.getIdPregunta());
                         preguntaDto.setTextoPregunta(preguntaEntidad.getTextoPregunta());
                         preguntaDto.setTipoPregunta(preguntaEntidad.getTipoPregunta());
-                        preguntaDto.setOrden(relacion.getOrden()); // El orden viene de la relación EncuestaPregunta
+                        // ¡CAMBIO CLAVE: Se elimina la asignación de 'orden'!
+                        // preguntaDto.setOrden(relacion.getOrden());
                         return preguntaDto;
                     })
-                    .sorted(Comparator.comparing(PreguntaDTO::getOrden)) // Asegurar el orden final
+                    // ¡CAMBIO CLAVE: Se elimina el ordenamiento por 'orden'!
+                    // .sorted(Comparator.comparing(PreguntaDTO::getOrden))
                     .collect(Collectors.toList());
 
-            encuestaDto.setPreguntas(preguntasDto); // Asignar las preguntas a la encuesta DTO
-            resultado.add(encuestaDto); // Añadir la encuesta DTO completa a la lista final
+            encuestaDto.setPreguntas(preguntasDto);
+            resultado.add(encuestaDto);
         });
 
-        // Opcional: Ordenar las encuestas por ID o algún otro criterio
         resultado.sort(Comparator.comparing(EncuestaConPreguntasDTO::getIdEncuesta));
 
         return resultado;

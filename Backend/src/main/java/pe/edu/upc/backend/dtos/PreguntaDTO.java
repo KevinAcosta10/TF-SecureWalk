@@ -4,7 +4,6 @@ public class PreguntaDTO {
     private Integer idPregunta;
     private String textoPregunta;
     private String tipoPregunta;
-    private Integer orden; // Incluimos el orden de la relación EncuestaPregunta aquí
 
     public PreguntaDTO() {}
 
@@ -30,13 +29,5 @@ public class PreguntaDTO {
 
     public void setTipoPregunta(String tipoPregunta) {
         this.tipoPregunta = tipoPregunta;
-    }
-
-    public Integer getOrden() {
-        return orden;
-    }
-
-    public void setOrden(Integer orden) {
-        this.orden = orden;
     }
 }

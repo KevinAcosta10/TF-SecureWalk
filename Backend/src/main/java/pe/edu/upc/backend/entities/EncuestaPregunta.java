@@ -19,8 +19,7 @@ public class EncuestaPregunta {
     @ManyToOne
     @JoinColumn(name = "idPregunta")
     private Pregunta pregunta;
-    @Column(name = "orden")
-    private int orden;
+
 
     @OneToMany(mappedBy = "encuestaPregunta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Respuesta> respuestas;
@@ -28,11 +27,10 @@ public class EncuestaPregunta {
     public EncuestaPregunta() {
     }
 
-    public EncuestaPregunta(int idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta, int orden, List<Respuesta> respuestas) {
+    public EncuestaPregunta(int idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta, List<Respuesta> respuestas) {
         this.idEncuestaPregunta = idEncuestaPregunta;
         this.encuesta = encuesta;
         this.pregunta = pregunta;
-        this.orden = orden;
         this.respuestas = respuestas;
     }
 
@@ -58,14 +56,6 @@ public class EncuestaPregunta {
 
     public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
-    }
-
-    public int getOrden() {
-        return orden;
-    }
-
-    public void setOrden(int orden) {
-        this.orden = orden;
     }
 
     public List<Respuesta> getRespuestas() {

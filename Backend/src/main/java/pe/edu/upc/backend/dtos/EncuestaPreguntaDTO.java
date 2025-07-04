@@ -4,7 +4,6 @@ public class EncuestaPreguntaDTO {
     private long idEncuestaPregunta;
     private EncuestaDTO encuesta;
     private PreguntaDTO pregunta;
-    private int orden;
 
     public long getIdEncuestaPregunta() {
         return idEncuestaPregunta;
@@ -28,12 +27,5 @@ public class EncuestaPreguntaDTO {
 
     public void setPregunta(PreguntaDTO pregunta) {
         this.pregunta = pregunta;
-    }
-
-    public int getOrden() {
-        return orden;
-    }
-    public void setOrden(int orden) {
-        this.orden = orden;
     }
 }
