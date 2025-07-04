@@ -67,25 +67,20 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // 1. Inicializa el formulario con sus controles y validadores
-    // Los nombres de los controles deben coincidir con los formControlName en el HTML
     this.form = this.formBuilder.group({
-      codigo: [''], // ID de la relación EncuestaPregunta (oculto en HTML)
-      encuesta: ['', Validators.required], // ID de la encuesta seleccionada
-      pregunta: ['', Validators.required], // ID de la pregunta seleccionada
+      codigo: [''], 
+      encuesta: ['', Validators.required], 
+      pregunta: ['', Validators.required], 
     });
 
     // 2. Carga las listas para los dropdowns
     this.eS.list().subscribe((data) => {
-      // Asumiendo que eS.list() devuelve List<Encuesta>
       this.listaEncuestas = data;
     });
     this.pS.list().subscribe((data) => {
-      // Asumiendo que pS.list() devuelve List<Pregunta>
       this.listaPreguntas = data;
     });
 
-    // 3. Obtiene el ID de la ruta para determinar si es edición
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
@@ -93,9 +88,7 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
     });
   }
 
-  /**
-   * Maneja el envío del formulario (aceptar).
-   */
+
   aceptar(): void {
     // Si el formulario no es válido, marca todos los controles como 'touched'
     // para mostrar los mensajes de error y detiene la ejecución.
@@ -108,7 +101,7 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          panelClass: ['error-snackbar'], // Clase CSS para estilizar el snackbar de error
+          panelClass: ['error-snackbar'],
         }
       );
       return;
@@ -117,7 +110,6 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
     // Mapea los valores del formulario a la instancia de EncuestaPregunta
     // ¡IMPORTANTE! Necesitas crear instancias de Encuesta y Pregunta y asignar solo sus IDs
     // Tu backend esperará objetos completos o solo IDs, dependiendo de cómo manejes las relaciones.
-    // Aquí, asumimos que tu backend puede recibir objetos de Encuesta y Pregunta con solo el ID seteado.
     this.encuestapregunta.idEncuestaPregunta = this.form.value.codigo;
 
     // Crea instancias de Encuesta y Pregunta y asigna el ID seleccionado del dropdown
