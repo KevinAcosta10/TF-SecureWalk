@@ -1,0 +1,51 @@
+<div class="container">
+    <div style="text-align: center; margin: 5%">
+        <h1>Registro de comentarios</h1>
+    </div>
+    <div style="text-align: center">
+        <form [formGroup]="form" (submit)="aceptar()">
+            <mat-form-field>
+                <mat-label>Descripción Comentario</mat-label>
+                <input matInput formControlName="descripcionComentario" />
+
+                <mat-error *ngIf="form.get('descripcionComentario')?.hasError('required')">
+                    La descripcion del comentario es obligatorio!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field>
+                <mat-label>Post</mat-label>
+                <mat-select formControlName="descripcionPost">
+                    @for (food of listaPost; track food) {
+                    <mat-option [value]="food.idPost">{{ food.descripcionPost }}</mat-option>
+                    }
+                </mat-select>
+                <mat-error *ngIf="form.get('post')?.hasError('required')">
+                    El post es obligatoria!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Usuario</mat-label>
+                <mat-select formControlName="usuario">
+                    @for (food of listaUsuarios; track food) {
+                    <mat-option [value]="food.idUsuario">{{
+                        food.nombreUsuario
+                        }}</mat-option>
+                    }
+                </mat-select>
+                <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+                    El usuario es obligatorio!
+                </mat-error>
+            </mat-form-field>
+            <br />
+
+            <button mat-raised-button color="primary">Aceptar</button>
+            <button mat-raised-button color="warn" (click)="cancelar()">
+                Cancelar
+                </button>
+        </form>
+    </div>
+</div>
+  

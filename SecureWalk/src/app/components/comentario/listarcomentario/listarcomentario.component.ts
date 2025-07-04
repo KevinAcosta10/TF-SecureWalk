@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
-import { Incidente } from '../../../models/incidente';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { IncidenteService } from '../../../services/incidente.service';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { Comentario } from '../../../models/comentario';
+import { ComentarioService } from '../../../services/comentario.service';
 
 @Component({
-  selector: 'app-listarincidente',
+  selector: 'app-listarcomentario',
   standalone: true,
   imports: [
     MatTableModule,
@@ -23,12 +22,11 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
     CarouselModule,
     MatCardModule
   ],
-  templateUrl: './listarincidente.component.html',
-  styleUrl: './listarincidente.component.css',
+  templateUrl: './listarcomentario.component.html',
+  styleUrl: './listarcomentario.component.css'
 })
-export class ListarincidenteComponent {
-  incidentes: Incidente[] = [];
-
+export class ListarcomentarioComponent {
+  comentarios: Comentario[] = [];
   customOptions: OwlOptions = {
     loop: false, // Repetir el carrusel
     mouseDrag: true, // Permitir arrastrar con el ratón
@@ -44,20 +42,19 @@ export class ListarincidenteComponent {
     slideBy: 1,
   };
 
-  constructor(private iS: IncidenteService) {}
-
+  constructor(private cS: ComentarioService) {}
   ngOnInit(): void {
-    this.iS.list().subscribe((data) => {
-      this.incidentes = data;
+    this.cS.list().subscribe((data) => {
+      this.comentarios = data;
     });
-    this.iS.getList().subscribe((data) => {
-      this.incidentes = data;
+    this.cS.getList().subscribe((data) => {
+      this.comentarios = data;
     });
   }
   eliminar(id: number) {
-    this.iS.deleteS(id).subscribe((data) => {
-      this.iS.list().subscribe((data) => {
-        this.iS.setList(data);
+    this.cS.deleteS(id).subscribe((data) => {
+      this.cS.list().subscribe((data) => {
+        this.cS.setList(data);
       });
     });
   }
