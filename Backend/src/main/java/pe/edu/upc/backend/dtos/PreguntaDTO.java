@@ -1,16 +1,18 @@
 package pe.edu.upc.backend.dtos;
 
 public class PreguntaDTO {
-
-    private int idPregunta;
+    private Integer idPregunta;
     private String textoPregunta;
     private String tipoPregunta;
+    private Integer orden; // Incluimos el orden de la relación EncuestaPregunta aquí
 
-    public int getIdPregunta() {
+    public PreguntaDTO() {}
+
+    public Integer getIdPregunta() {
         return idPregunta;
     }
 
-    public void setIdPregunta(int idPregunta) {
+    public void setIdPregunta(Integer idPregunta) {
         this.idPregunta = idPregunta;
     }
 
@@ -30,4 +32,11 @@ public class PreguntaDTO {
         this.tipoPregunta = tipoPregunta;
     }
 
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
 }
