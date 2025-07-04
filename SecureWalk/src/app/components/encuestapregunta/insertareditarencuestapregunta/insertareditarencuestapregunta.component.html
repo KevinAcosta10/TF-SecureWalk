@@ -1,0 +1,71 @@
+<!-- src/app/components/insertareditarencuestapregunta/insertareditarencuestapregunta.component.html -->
+
+<div class="container">
+  <div class="form-header">
+    <h1>{{ edicion ? 'Editar Relación Encuesta-Pregunta' : 'Registrar Nueva Relación' }}</h1>
+  </div>
+  <div class="form-content">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <!-- Campo oculto para el código (ID de la relación EncuestaPregunta) -->
+      <!-- Este campo solo se usa en edición para enviar el ID, no es visible para el usuario -->
+      <input type="hidden" formControlName="codigo">
+
+      <!-- Campo para seleccionar Encuesta -->
+      <mat-form-field appearance="outline">
+        <mat-label>Seleccionar Encuesta</mat-label>
+        <mat-select formControlName="encuesta">
+          <!-- Muestra un mensaje si no hay encuestas cargadas -->
+          <mat-option *ngIf="listaEncuestas.length === 0" [value]="null" disabled>
+            No hay encuestas disponibles
+          </mat-option>
+          <!-- Itera sobre la lista de encuestas disponibles -->
+          @for (enc of listaEncuestas; track enc.idEncuesta) {
+            <mat-option [value]="enc.idEncuesta">
+              {{ enc.nombreEncuesta }} (ID: {{ enc.idEncuesta }})
+            </mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('encuesta')?.hasError('required') && form.get('encuesta')?.touched">
+          La encuesta es obligatoria.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Campo para seleccionar Pregunta -->
+      <mat-form-field appearance="outline">
+        <mat-label>Seleccionar Pregunta</mat-label>
+        <mat-select formControlName="pregunta">
+          <!-- Muestra un mensaje si no hay preguntas cargadas -->
+          <mat-option *ngIf="listaPreguntas.length === 0" [value]="null" disabled>
+            No hay preguntas disponibles
+          </mat-option>
+          <!-- Itera sobre la lista de preguntas disponibles -->
+          @for (preg of listaPreguntas; track preg.idPregunta) {
+            <mat-option [value]="preg.idPregunta">
+              {{ preg.textoPregunta }} (ID: {{ preg.idPregunta }})
+            </mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('pregunta')?.hasError('required') && form.get('pregunta')?.touched">
+          La pregunta es obligatoria.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botones de Acción -->
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>save</mat-icon> {{ edicion ? 'Actualizar' : 'Registrar' }}
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="cancelar()"
+          type="button" 
+          routerLink="/encuestasPreguntas"
+        >
+          <mat-icon>cancel</mat-icon> Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

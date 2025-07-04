@@ -81,11 +81,11 @@ export class InsertareditarencuestaComponent implements OnInit {
   init() {
     if (this.edicion) {
       this.eS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idEncuesta),
-          nombre: new FormControl(data.nombreEncuesta),
-          descripcion: new FormControl(data.descripcionEncuesta),
-          fechaCreacion: new FormControl(data.fechaCreacionEncuesta),
+        this.form.patchValue({
+          codigo: data.idEncuesta,
+          descripcion: data.descripcionEncuesta,
+          nombre: data.nombreEncuesta,
+          fechaCreacion: data.fechaCreacionEncuesta,
         });
       });
     }

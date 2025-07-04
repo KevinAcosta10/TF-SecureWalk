@@ -18,6 +18,10 @@ import { IncidenteComponent } from './components/incidente/incidente.component';
 import { InsertareditarincidenteComponent } from './components/incidente/insertareditarincidente/insertareditarincidente.component';
 import { EvaluacionincidenteComponent } from './components/evaluacionincidente/evaluacionincidente.component';
 import { InsertarevaluacionincidenteComponent } from './components/evaluacionincidente/insertarevaluacionincidente/insertarevaluacionincidente.component';
+import { UsuariorutaComponent } from './components/usuarioruta/usuarioruta.component';
+import { InsertareditarusuariorutaComponent } from './components/usuarioruta/insertareditarusuarioruta/insertareditarusuarioruta.component';
+import { EncuestapreguntaComponent } from './components/encuestapregunta/encuestapregunta.component';
+import { InsertareditarencuestapreguntaComponent } from './components/encuestapregunta/insertareditarencuestapregunta/insertareditarencuestapregunta.component';
 
 export const routes: Routes = [
   {
@@ -96,8 +100,29 @@ export const routes: Routes = [
     path: 'evaluacionincidentes',
     component: EvaluacionincidenteComponent,
     children: [
-      { path: 'ediciones/:id', component: InsertarevaluacionincidenteComponent },
+      {
+        path: 'ediciones/:id',
+        component: InsertarevaluacionincidenteComponent,
+      },
       { path: 'formulario', component: InsertarevaluacionincidenteComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'usuarioRutas',
+    component: UsuariorutaComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarusuariorutaComponent },
+      { path: 'formulario', component: InsertareditarusuariorutaComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'encuestasPreguntas',
+    component: EncuestapreguntaComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarencuestapreguntaComponent },
+      { path: 'formulario', component: InsertareditarencuestapreguntaComponent },
     ],
     canActivate: [seguridadGuard],
   },

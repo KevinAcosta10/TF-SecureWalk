@@ -53,6 +53,19 @@
       <mat-icon>poll</mat-icon>
     </button>
   </div>
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuUsuarioRuta">
+      Usuario Ruta
+      <mat-icon>poll</mat-icon>
+    </button>
+  </div>
+ <div>
+    <button mat-button [matMenuTriggerFor]="menuEncuestaPregunta">
+      Encuesta Pregunta
+      <mat-icon>poll</mat-icon>
+    </button>
+  </div>
+
   <span class="toolbar-spacer"></span>
   <div class="right-menu">
     <button mat-button [matMenuTriggerFor]="menuSalir">
@@ -98,6 +111,16 @@
 <mat-menu #menuEvaluacionIncidente="matMenu">
   <button mat-menu-item routerLink="/evaluacionincidentes">Listar</button>
   <button mat-menu-item routerLink="/evaluacionincidentes/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuUsuarioRuta="matMenu">
+  <button mat-menu-item routerLink="/usuarioRutas">Listar</button>
+  <button mat-menu-item routerLink="/usuarioRutas/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuEncuestaPregunta="matMenu">
+  <button mat-menu-item routerLink="/encuestasPreguntas">Listar</button>
+  <button mat-menu-item routerLink="/encuestasPreguntas/formulario">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuSalir="matMenu">

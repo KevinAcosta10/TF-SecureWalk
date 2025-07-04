@@ -1,0 +1,27 @@
+<div class="container">
+    <div>
+        <h1 class="titulo">Lista de rutas por usuario</h1>
+    </div>
+ <div class="slider-container">
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide *ngFor="let usuarioruta of usuarioruta">
+      <mat-card class="usuario-card">
+        <mat-card-header>
+          <mat-card-title>{{ usuarioruta.usuario.username }}</mat-card-title>     
+        </mat-card-header>
+        <mat-card-content>
+          <p>Zonas: {{ usuarioruta.ruta.zona.nombreZona }}</p>
+          <p>Nivel de seguridad de la ruta: {{ usuarioruta.ruta.nivelSeguridad }}</p>
+          <p>Hora de inicio: {{ usuarioruta.ruta.horaInicio }}</p>
+          <p>Hora fin: {{ usuarioruta.ruta.horaFin }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" [routerLink]="['ediciones', usuarioruta.idUsuarioRuta]"><mat-icon>edit</mat-icon></button>
+          <button mat-button color="warn" (click)="eliminar(usuarioruta.idUsuarioRuta)"><mat-icon>delete_forever</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
+  </owl-carousel-o>
+</div>
+</div>
+  
