@@ -18,6 +18,10 @@ import { IncidenteComponent } from './components/incidente/incidente.component';
 import { InsertareditarincidenteComponent } from './components/incidente/insertareditarincidente/insertareditarincidente.component';
 import { EvaluacionincidenteComponent } from './components/evaluacionincidente/evaluacionincidente.component';
 import { InsertarevaluacionincidenteComponent } from './components/evaluacionincidente/insertarevaluacionincidente/insertarevaluacionincidente.component';
+import { PostComponent } from './components/post/post.component';
+import { InsertareditarpostComponent } from './components/post/insertareditarpost/insertareditarpost.component';
+import { ComentarioComponent } from './components/comentario/comentario.component';
+import { InsertareditarcomentarioComponent } from './components/comentario/insertareditarcomentario/insertareditarcomentario.component';
 
 export const routes: Routes = [
   {
@@ -98,6 +102,24 @@ export const routes: Routes = [
     children: [
       { path: 'ediciones/:id', component: InsertarevaluacionincidenteComponent },
       { path: 'formulario', component: InsertarevaluacionincidenteComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'post',
+    component: PostComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarpostComponent },
+      { path: 'formulario', component: InsertareditarpostComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'comentario',
+    component: ComentarioComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarcomentarioComponent },
+      { path: 'formulario', component: InsertareditarcomentarioComponent },
     ],
     canActivate: [seguridadGuard],
   },

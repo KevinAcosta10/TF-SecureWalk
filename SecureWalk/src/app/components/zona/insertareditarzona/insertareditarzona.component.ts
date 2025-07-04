@@ -37,9 +37,13 @@ export class InsertareditarzonaComponent implements OnInit{
   edicion: boolean = false
 
   mapOptions: google.maps.MapOptions = {
-    center: { lat: -12.046374, lng: -77.042793 }, // Por defecto, Lima, Perú
+    center: { lat: -12.046374, lng: -77.042793 },
     zoom: 12,
-  };
+    mapTypeControl: true,
+    streetViewControl: true,
+    fullscreenControl: true,
+  }
+
   markerPosition: google.maps.LatLngLiteral | undefined;
 
   constructor(

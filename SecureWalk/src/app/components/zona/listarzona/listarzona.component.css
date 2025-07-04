@@ -1,221 +1,357 @@
-/* listarzona.component.css */
-    
-/* Estilos para el título principal */
-.titulo {
-  color: #3f51b5; /* Un azul primario de Material Design */
-  margin-bottom: 10px;
-  font-size: 2.5em; /* Tamaño de fuente grande para el título */
-  font-weight: 600; /* Peso de fuente semi-negrita */
-  text-align: center;
-}
-
-.main-container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  height: calc(100vh - 64px);
-  box-sizing: border-box;
-}
-
-.list-container {
-  flex: 1;
-  max-width: 400px;
-  min-width: 300px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Permite desplazamiento si hay muchas filas */
-  display: flex;
-  flex-direction: column;
-}
-
-/* Contenedor del mapa */
-.map-container {
-  flex: 2;
-  min-height: 400px;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-/* Estilo para la tabla */
-table {
-  width: 100%;
-  margin-bottom: 10px;
-  table-layout: fixed; /* Ayuda a que las columnas respeten el ancho asignado */
-}
-
-/* Estilos para el nuevo contenedor del buscador */
-.search-container {
-  display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-  gap: 10px; /* Espacio entre los campos y botones */
-  padding: 15px;
-  border-bottom: 1px solid #ddd; /* Separador visual */
-  margin-bottom: 15px; /* Espacio debajo del buscador */
-  align-items: center; /* Alinea verticalmente los items */
-}
-
-.search-field {
-  flex: 1; /* Permite que los campos crezcan y ocupen espacio */
-  min-width: 120px; /* Ancho mínimo para cada campo */
-  max-width: 180px; /* Ancho máximo para cada campo */
-}
-
-/* Ajustes para el botón de búsqueda */
-.search-container button {
-  height: 56px; /* Ajusta la altura del botón */
-}
-
-/* Responsive adjustments for search container */
-@media (max-width: 768px) {
-  .search-container {
-    flex-direction: column; /* Apila los campos y botones en pantallas pequeñas */
-    align-items: stretch; /* Estira los elementos para que ocupen todo el ancho */
+/* Variables CSS para consistencia */
+:root {
+    --primary-color: #3f51b5;
+    --accent-color: #ff4081;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --error-color: #f44336;
+    --background-light: #f5f5f5;
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
   }
-
-  .search-field {
-    max-width: 100%; /* Ocupa todo el ancho disponible */
-  }
-
-  .search-container button {
-    width: 100%; /* Botones también ocupan todo el ancho */
-  }
-}
-
-/* Estilo para Material table header */
-.mat-header-cell {
-  background-color: #3f51b5;
-  color: white;
-  font-weight: bold;
-  padding: 8px 12px;
-  text-align: left;
-}
-
-/* Estilo para Material table rows */
-.mat-row:nth-child(even) {
-  background-color: #f0f0f0;
-}
-
-.mat-row:hover {
-  background-color: #e0e0e0;
-}
-
-.mat-cell {
-  padding: 6px 12px;
-  font-size: 0.9em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Estilos específicos para las celdas de las acciones (eliminar/actualizar) */
-.acciones-header,
-.acciones-cell {
-  width: 50px; /* Ancho fijo y pequeño para las columnas de iconos */
-  text-align: center;
-  padding: 0px; /* Elimina el padding de estas celdas */
-}
-
-.acciones-header {
-  border-left: 1px solid rgba(255, 255, 255, 0.2); /* Separador sutil para los encabezados de acción */
-}
-
-.acciones-cell {
-  border-left: 1px solid rgba(0, 0, 0, 0.05); /* Separador sutil para las celdas de acción */
-}
-
-/* Asegura que los iconos dentro de los botones sean pequeños */
-.mat-icon-button .mat-icon {
-  font-size: 18px;
-  height: 18px;
-  width: 18px;
-  line-height: 18px;
-}
-
-/* Paginador styling */
-mat-paginator {
-  background-color: transparent;
-  padding: 10px 0;
-  border-top: 1px solid #ddd;
-}
-
-/* Title styling */
-.titulo {
-  color: #3f51b5;
-  margin-bottom: 20px;
-  font-size: 1.8em;
-  padding-top: 10px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
+  
+  /* Layout principal */
   .main-container {
-    flex-direction: column;
-    height: auto;
+    display: flex;
+    gap: 1px;
+    padding: 1px;
+    height: calc(100vh - 64px);
+    box-sizing: border-box;
   }
-
+  
   .list-container {
-    max-width: 100%;
-    min-width: unset;
+    flex: 1;
+    max-width: 450px;
+    min-width: 350px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
-
+  
   .map-container {
-    min-height: 300px;
+    flex: 2;
+    min-height: 400px;
+    background-color: var(--background-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    position: relative;
   }
-}
-
-/* Scroll smooth para la fila seleccionada */
-.selected {
-  background-color: #d3f8e2; /* Resalta la fila seleccionada */
-  font-weight: bold;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-.container {
-  display: flex;
-  height: 100vh;
-}
-
-.sidebar {
-  width: 400px;
-  background-color: #f5f5f5;
-  padding: 20px;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.store {
-  h3,
-  p {
-    margin: 0;
+  
+  /* Header mejorado */
+  .header-section {
+    padding: 5px;
+    background: linear-gradient(135deg, var(--primary-color), #5c6bc0);
+    color: rgb(163, 31, 31);
+    text-align: center;
   }
-  h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
+  
+  .titulo {
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+    font-weight: 500;
   }
-
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  cursor: pointer;
-
-  &.active {
-    background-color: #e0e0e0;
-    border: 2px solid #3f51b5;
+  
+  .stats-info,
+  .search-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    opacity: 0.9;
   }
-
-  &.hover {
-    background-color: #e0e0e0;
+  
+  .clear-search-btn {
+    color: white;
+    margin-left: 8px;
   }
-}
-
-.sidebar:last-child {
-  margin-bottom: 0;
-}
+  
+  /* Sección de búsqueda mejorada */
+  .search-container {
+    padding: 5px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #fafafa;
+  }
+  
+  .search-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    color: var(--primary-color);
+  }
+  
+  .search-inputs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .search-field {
+    flex: 1;
+  }
+  
+  .search-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .search-actions button {
+    flex: 1;
+  }
+  
+  /* Tabla mejorada */
+  .table-container {
+    flex: 1;
+    overflow: auto;
+  }
+  
+  .mat-elevation-z8 {
+    box-shadow: none;
+    border-radius: 0;
+  }
+  
+  .mat-header-cell {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 800;
+    padding: 12px 16px;
+    border-bottom: none;
+  }
+  
+  .mat-cell {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: var(--transition);
+  }
+  
+  .mat-row {
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  
+  .mat-row:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Fila seleccionada con animación */
+  .selected-row {
+    background-color: #e8f5e8 !important;
+    border-left: 4px solid var(--success-color);
+    animation: highlight-pulse 1s ease-in-out;
+  }
+  
+  @keyframes highlight-pulse {
+    0% {
+      background-color: #c8e6c9;
+    }
+    50% {
+      background-color: #e8f5e8;
+    }
+    100% {
+      background-color: #e8f5e8;
+    }
+  }
+  
+  .zone-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .selected-icon {
+    color: var(--success-color);
+    font-size: 18px;
+    animation: bounce 0.5s ease-in-out;
+  }
+  
+  @keyframes bounce {
+    0%,
+    20%,
+    60%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-4px);
+    }
+    80% {
+      transform: translateY(-2px);
+    }
+  }
+  
+  /* Acciones */
+  .acciones-header,
+  .acciones-cell {
+    width: 80px;
+    text-align: center;
+    padding: 8px !important;
+  }
+  
+  /* Marcadores personalizados */
+  .custom-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .custom-marker mat-icon {
+    transform: rotate(45deg);
+    font-size: 20px;
+    color: white;
+  }
+  
+  .zone-marker {
+    background-color: var(--error-color);
+  }
+  
+  .zone-marker:hover {
+    transform: rotate(-45deg) scale(1.1);
+    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4);
+  }
+  
+  .selected-marker {
+    background-color: var(--success-color) !important;
+    transform: rotate(-45deg) scale(1.2);
+    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.5);
+    z-index: 1000;
+  }
+  
+  .search-marker {
+    background-color: #2196f3;
+  }
+  
+  .marker-label {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .custom-marker:hover .marker-label {
+    opacity: 1;
+  }
+  
+  /* Información de zona seleccionada */
+  .selected-zone-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    min-width: 200px;
+    z-index: 1000;
+  }
+  
+  .info-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: var(--success-color);
+    color: rgb(169, 43, 43);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-weight: 500;
+  }
+  
+  .info-header button {
+    margin-left: auto;
+    color: white;
+  }
+  
+  .info-content {
+    padding: 16px;
+  }
+  
+  .info-content p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+  }
+  
+  /* Botón flotante */
+  .add-zone-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    background-color: var(--error-color);
+  }
+  
+  /* Paginador */
+  mat-paginator {
+    border-top: 1px solid #e0e0e0;
+    background-color: #fafafa;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .main-container {
+      flex-direction: column;
+      height: auto;
+      gap: 10px;
+      padding: 10px;
+    }
+  
+    .list-container {
+      max-width: 100%;
+      min-width: unset;
+    }
+  
+    .map-container {
+      min-height: 300px;
+    }
+  
+    .search-inputs {
+      flex-direction: column;
+    }
+  
+    .search-actions {
+      flex-direction: column;
+    }
+  
+    .selected-zone-info {
+      position: relative;
+      top: auto;
+      right: auto;
+      margin: 10px;
+    }
+  }
+  
+  /* Snackbar personalizado */
+  ::ng-deep .success-snackbar {
+    background-color: var(--success-color);
+  }
+  
+  ::ng-deep .error-snackbar {
+    background-color: var(--error-color);
+  }
+  
+  ::ng-deep .warning-snackbar {
+    background-color: var(--warning-color);
+  }
+  
