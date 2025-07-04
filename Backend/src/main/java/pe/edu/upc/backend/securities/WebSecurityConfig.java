@@ -71,7 +71,8 @@ public class WebSecurityConfig {
                                 "/usuarios/insertar",
                                 "/usuarios/listar",
                                 "/usuarios/{id}",
-                                "/encuestasPreguntas/agrupadas"
+                                "/encuestasPreguntas/agrupadas",
+                                "/preguntas/listar"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
