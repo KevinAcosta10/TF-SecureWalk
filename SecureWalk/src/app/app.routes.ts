@@ -26,6 +26,8 @@ import { EncuestapreguntaComponent } from './components/encuestapregunta/encuest
 import { InsertareditarencuestapreguntaComponent } from './components/encuestapregunta/insertareditarencuestapregunta/insertareditarencuestapregunta.component';
 import { ComentarioComponent } from './components/comentario/comentario.component';
 import { InsertareditarcomentarioComponent } from './components/comentario/insertareditarcomentario/insertareditarcomentario.component';
+import { RespuestaComponent } from './components/respuesta/respuesta.component';
+import { InsertareditarrespuestaComponent } from './components/respuesta/insertareditarrespuesta/insertareditarrespuesta.component';
 
 export const routes: Routes = [
   {
@@ -121,32 +123,50 @@ export const routes: Routes = [
     ],
     canActivate: [seguridadGuard],
   },
-{
-    path: 'post',
-      component: PostComponent,
-      children: [
-        { path: 'ediciones/:id', component: InsertareditarpostComponent },
-        { path: 'formulario', component: InsertareditarpostComponent },
-      ],
-},
+  {
+    path: 'posts',
+    component: PostComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarpostComponent },
+      { path: 'formulario', component: InsertareditarpostComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
 
   {
     path: 'encuestasPreguntas',
-        component: EncuestapreguntaComponent,
-        children: [
-          { path: 'ediciones/:id', component: InsertareditarencuestapreguntaComponent },
-          { path: 'formulario', component: InsertareditarencuestapreguntaComponent },
-        ],
+    component: EncuestapreguntaComponent,
+    children: [
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarencuestapreguntaComponent,
+      },
+      {
+        path: 'formulario',
+        component: InsertareditarencuestapreguntaComponent,
+      },
+    ],
+    canActivate: [seguridadGuard],
   },
-{
-    path: 'comentario',
-        component: ComentarioComponent,
-        children: [
-          { path: 'ediciones/:id', component: InsertareditarcomentarioComponent },
-          { path: 'formulario', component: InsertareditarcomentarioComponent },
-        ],
-},
-    
+  {
+    path: 'comentarios',
+    component: ComentarioComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarcomentarioComponent },
+      { path: 'formulario', component: InsertareditarcomentarioComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'respuestas',
+    component: RespuestaComponent,
+    children: [
+      { path: 'ediciones/:id', component: InsertareditarrespuestaComponent },
+      { path: 'formulario', component: InsertareditarrespuestaComponent },
+    ],
+    canActivate: [seguridadGuard],
+  },
+
   {
     path: 'homes',
     component: HomeComponent,

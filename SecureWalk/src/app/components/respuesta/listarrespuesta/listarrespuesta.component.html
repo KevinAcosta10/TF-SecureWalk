@@ -1,1 +1,63 @@
-<p>listarrespuesta works!</p>
+<!-- Componente HTML para listar y visualizar respuestas -->
+<div class="container mx-auto p-4 font-inter">
+  <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center rounded-lg p-2 shadow-md bg-gradient-to-r from-blue-100 to-indigo-100">
+    Listado de Respuestas
+  </h2>
+
+  <!-- Sección del carrusel de respuestas -->
+  <div *ngIf="respuesta && respuesta.length > 0; else noRespuestas" class="bg-white p-6 rounded-xl shadow-lg">
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let res of respuesta">
+        <div class="p-6 border border-gray-200 rounded-lg shadow-sm bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col h-full">
+          <div class="flex-grow">
+            <p class="text-sm text-gray-500 mb-2">
+              <span class="font-semibold text-gray-700">ID Respuesta:</span> {{ res.idRespuesta }}
+            </p>
+            <p class="text-xl font-semibold text-indigo-700 mb-3">
+              "{{ res.textoRespuesta }}"
+            </p>
+            <p class="text-sm text-gray-600 mb-1">
+              <span class="font-medium text-gray-700">Fecha:</span> {{ res.fechaRespuesta | date:'dd/MM/yyyy HH:mm' }}
+            </p>
+
+            <hr class="my-4 border-gray-200">
+
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Detalles de la Encuesta y Pregunta:</h3>
+            <p class="text-md text-gray-700 mb-1">
+              <span class="font-semibold">Encuesta:</span> {{ res.encuestaPregunta.encuesta.nombreEncuesta || 'N/A' }}
+            </p>
+            <p class="text-md text-gray-700 mb-3">
+              <span class="font-semibold">Pregunta:</span> {{ res.encuestaPregunta.pregunta.textoPregunta }}
+            </p>
+
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Usuario que Respondió:</h3>
+            <p class="text-md text-gray-700 mb-1">
+              <span class="font-semibold">Nombre:</span> {{ res.usuario.nombreUsuario || 'N/A' }}
+            </p>
+            <p class="text-md text-gray-700 mb-3">
+              <span class="font-semibold">Email:</span> {{ res.usuario.emailUsuario || 'N/A' }}
+            </p>
+          </div>
+
+          <div class="mt-4 text-right">
+            <button
+              (click)="eliminar(res.idRespuesta)"
+              class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transition-colors duration-200"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+
+  <!-- Plantilla si no hay respuestas -->
+  <ng-template #noRespuestas>
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md shadow-md text-center">
+      <p class="font-bold">¡Atención!</p>
+      <p>No hay respuestas disponibles para mostrar en este momento.</p>
+    </div>
+  </ng-template>
+</div>
+
