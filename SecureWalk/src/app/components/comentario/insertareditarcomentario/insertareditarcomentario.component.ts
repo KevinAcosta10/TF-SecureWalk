@@ -55,7 +55,7 @@ ngOnInit(): void {
     this.form = this.formBuilder.group({
       codigo: [''], 
       descripcionComentario: ['', Validators.required],
-      post: ['', Validators.required],
+      descripcionPost: ['', Validators.required],
       usuario: ['', Validators.required],
     });
     this.uS.list().subscribe((data) => {
@@ -88,12 +88,12 @@ ngOnInit(): void {
           });
         });
       }
-      this.router.navigate(['comentario']);
+      this.router.navigate(['comentarios']);
     }
   }
 
   cancelar() {
-    this.router.navigate(['comentario']);
+    this.router.navigate(['comentarios']);
   }
 
   init() {
@@ -102,7 +102,7 @@ ngOnInit(): void {
         this.form.patchValue({
           codigo: data.idComentario,
           descripcionComentario: data.descripcionComentario,
-          post: data.post.descripcionPost,
+          descripcionPost: data.post.descripcionPost,
           usuario: data.usuario.idUsuario,
         });
       });

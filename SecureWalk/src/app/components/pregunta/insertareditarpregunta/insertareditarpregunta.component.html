@@ -1,41 +1,39 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h1>Registro de preguntas</h1>
-  </div>
-  <div style="text-align: center">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <br />
-      <mat-form-field>
-        <mat-label>Texto Pregunta</mat-label>
-        <input matInput formControlName="texto" />
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">Registro de Preguntas</h1>
 
+    <form [formGroup]="form" (submit)="aceptar()" class="question-form">
+      <!-- Campo Texto Pregunta -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Texto de la Pregunta</mat-label>
+        <input matInput formControlName="texto" />
         <mat-error *ngIf="form.get('texto')?.hasError('required')">
-          El texto de la pregunta es obligatorio!!
+          El texto de la pregunta es obligatorio.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Tipo de pregunta</mat-label>
+
+      <!-- Campo Tipo de Pregunta (MatSelect) -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Tipo de Pregunta</mat-label>
         <mat-select formControlName="tipo">
           <mat-option *ngFor="let tp of tipoPregunta" [value]="tp.value">
             {{ tp.viewValue }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('tipo')?.hasError('required')">
-          El tipo de la pregunta es obligatorio!!
+          El tipo de la pregunta es obligatorio.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
-      <button
-        mat-raised-button
-        color="warn"
-        (click)="cancelar()"
-        routerLink="/preguntas"
-      >
-        Cancelar
-      </button>
+      <!-- Botones de Acción -->
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>

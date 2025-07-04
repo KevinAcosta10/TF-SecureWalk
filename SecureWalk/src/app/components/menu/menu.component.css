@@ -1,25 +1,52 @@
 .custom-toolbar {
-  background-color: rgb(215, 55, 11); /* rojo */
+  background-color: #3f51b5; /* Azul oscuro que combina con el gradiente (Primary Blue) */
+  color: white; /* Asegura que el texto general de la toolbar sea blanco */
+  min-height: 70px; /* Aumenta la altura mínima de la barra */
+  padding: 0 20px; /* Un poco de padding horizontal, el vertical se ajusta con el contenido */
+  display: flex; /* Asegura que el contenido se alinee correctamente */
+  align-items: center; /* Centra verticalmente el contenido */
 }
 
 /* Esto afecta el texto e íconos dentro del botón */
 .btn-rojo {
-  background-color: rgb(215, 55, 11);
-  border-radius: 4px;
-  margin: 4px;
+  background-color: #3f51b5; /* Mismo azul para los botones de la toolbar (Primary Blue) */
+  border-radius: 6px; /* Ligeramente más redondeado */
+  margin: 0 6px; /* Ajusta el margen horizontal entre botones */
   border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Añadimos transform para el hover */
+  padding: 10px 18px; /* Aumenta el padding para hacer los botones más grandes */
+  font-size: 1.1em; /* Aumenta ligeramente el tamaño de la fuente de los botones */
+  display: flex; /* Permite alinear el ícono y el texto */
+  align-items: center; /* Centra verticalmente el contenido del botón */
+  gap: 8px; /* Espacio entre el ícono y el texto del botón */
 }
 
-/* Asegura que el <mat-icon> también sea blanco */
+.btn-rojo:hover {
+  background-color: #5c6bc0; /* Un azul más claro del gradiente para el efecto hover (Secondary Blue) */
+  transform: translateY(-2px); /* Pequeño efecto de levantamiento al pasar el ratón */
+}
+
+/* Asegura que el <mat-icon> también sea blanco y más grande dentro de los botones */
 .btn-rojo mat-icon {
   color: white;
+  font-size: 24px; /* Aumenta el tamaño del ícono */
+  width: 24px; /* Asegura el ancho del ícono */
+  height: 24px; /* Asegura la altura del ícono */
 }
 
-/* Si necesitas que también el texto de la toolbar sea blanco */
+/* Si necesitas que también el texto de la toolbar sea blanco y los íconos generales */
 .custom-toolbar button,
 .custom-toolbar mat-icon {
   color: white;
 }
+
+/* Puedes añadir un estilo para los íconos directos en la toolbar si los tienes, no solo dentro de botones */
+.custom-toolbar mat-icon {
+    font-size: 28px; /* Haz los íconos un poco más grandes si están solos en la toolbar */
+    width: 28px;
+    height: 28px;
+}
+
 .toolbar-spacer {
   flex: 1 1 auto;
 }

@@ -21,7 +21,7 @@
                     <mat-option [value]="food.idPost">{{ food.descripcionPost }}</mat-option>
                     }
                 </mat-select>
-                <mat-error *ngIf="form.get('post')?.hasError('required')">
+                <mat-error *ngIf="form.get('descripcionPost')?.hasError('required')">
                     El post es obligatoria!!
                 </mat-error>
             </mat-form-field>

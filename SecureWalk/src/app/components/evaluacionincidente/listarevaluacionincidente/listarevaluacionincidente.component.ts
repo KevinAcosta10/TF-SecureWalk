@@ -31,34 +31,51 @@ export class ListarevaluacionincidenteComponent {
     { value: false, viewValue: 'Desaprobado' },
   ];
   customOptions: OwlOptions = {
-    loop: false, // Repetir el carrusel
-    mouseDrag: true, // Permitir arrastrar con el ratón
-    touchDrag: true, // Permitir arrastrar con el dedo en dispositivos táctiles
-    pullDrag: true,
-    dots: false, // Mostrar puntos de navegación
-    navSpeed: 700,
-    navText: [
-      '<span class="owl-prev-icon">&lsaquo;</span>',
-      '<span class="owl-next-icon">&rsaquo;</span>',
-    ],
-    nav: true, // Mostrar flechas de navegación
-    slideBy: 1,
-  };
+  loop: false,
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: true,
+  dots: true, 
+  navSpeed: 700,
+  navText: [
+    '<span class="owl-prev-icon">&lsaquo;</span>', // 
+    '<span class="owl-next-icon">&rsaquo;</span>', // 
+  ],
+  nav: true,
+  slideBy: 1, 
+  autoplay: true, 
+  autoplayTimeout: 5000, 
+  autoplayHoverPause: true, 
+  responsive: { 
+    0: {
+      items: 1
+    },
+    768: {
+      items: 2
+    },
+    1024: {
+      items: 3 
+    },
+    1400: {
+      items: 4 
+    }
+  },
+};
 
-  constructor(private eS: EvaluacionincidenteService) {}
+  constructor(private eiS: EvaluacionincidenteService) {}
 
   ngOnInit(): void {
-    this.eS.list().subscribe((data) => {
+    this.eiS.list().subscribe((data) => {
       this.evaluacionincidente = data;
     });
-    this.eS.getList().subscribe((data) => {
+    this.eiS.getList().subscribe((data) => {
       this.evaluacionincidente = data;
     });
   }
   eliminar(id: number) {
-    this.eS.deleteS(id).subscribe((data) => {
-      this.eS.list().subscribe((data) => {
-        this.eS.setList(data);
+    this.eiS.deleteS(id).subscribe((data) => {
+      this.eiS.list().subscribe((data) => {
+        this.eiS.setList(data);
       });
     });
   }

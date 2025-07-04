@@ -1,48 +1,66 @@
-<div class="container">
-    <div style="text-align: center; margin: 5%">
-        <h1>Registro de zonas</h1>
-    </div>
-    <div style="text-align: center;">
-        <form [formGroup]="form" (submit)="aceptar()">
-            <br />
-            <mat-form-field>
-                <mat-label>Longitud</mat-label>
-                <input matInput formControlName="longitud" type="number">
+<div class="main-container">
+  <div class="form-map-container">
+    <div class="form-card-container">
+      <h1 class="form-title">Registro de Zonas</h1>
 
-                <mat-error *ngIf="form.get('longitud')?.hasError('required')">
-                    La longitud es obligatoria
-                </mat-error>
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Latitud</mat-label>
-                <input matInput formControlName="latitud" type="number">
+      <form [formGroup]="form" (submit)="aceptar()" class="zone-form">
+        <!-- Campo Nombre de Zona -->
+        <mat-form-field appearance="outline" class="full-width-field">
+          <mat-label>Nombre de Zona</mat-label>
+          <input matInput formControlName="nombre" />
+          <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+            El nombre de la zona es obligatorio.
+          </mat-error>
+        </mat-form-field>
 
-                <mat-error *ngIf="form.get('latitud')?.hasError('required')">
-                    La latitud es obligatoria
-                </mat-error>
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Nombre de zona</mat-label>
-                <input matInput formControlName="nombre">
+        <!-- Campo Latitud -->
+        <mat-form-field appearance="outline" class="full-width-field">
+          <mat-label>Latitud</mat-label>
+          <input matInput formControlName="latitud" type="number" />
+          <mat-error *ngIf="form.get('latitud')?.hasError('required')">
+            La latitud es obligatoria.
+          </mat-error>
+          <mat-error *ngIf="form.get('latitud')?.hasError('pattern')">
+            Formato de latitud inválido.
+          </mat-error>
+          <mat-error *ngIf="form.get('latitud')?.hasError('min') || form.get('latitud')?.hasError('max')">
+            La latitud debe estar entre -90 y 90.
+          </mat-error>
+        </mat-form-field>
 
-                <mat-error *ngIf="form.get('nombre')?.hasError('required')">
-                    El nombre de la zona es obligatorio
-                </mat-error>
-            </mat-form-field>
-            <br />
+        <!-- Campo Longitud -->
+        <mat-form-field appearance="outline" class="full-width-field">
+          <mat-label>Longitud</mat-label>
+          <input matInput formControlName="longitud" type="number" />
+          <mat-error *ngIf="form.get('longitud')?.hasError('required')">
+            La longitud es obligatoria.
+          </mat-error>
+          <mat-error *ngIf="form.get('longitud')?.hasError('pattern')">
+            Formato de longitud inválido.
+          </mat-error>
+          <mat-error *ngIf="form.get('longitud')?.hasError('min') || form.get('longitud')?.hasError('max')">
+            La longitud debe estar entre -180 y 180.
+          </mat-error>
+        </mat-form-field>
 
-            <button mat-raised-button color="primary" type="submit">Aceptar</button>
-            <button mat-raised-button color="warn" (click)="cancelar()">
-                Cancelar
-            </button>
-        </form>
+        <!-- Botones de Acción -->
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            Aceptar
+          </button>
+          <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+            Cancelar
+          </button>
+        </div>
+      </form>
     </div>
-    <div style="width: 100%; height: 400px; margin-top: 20px;">
-        <google-map mapId="f404a59fc2fcb5b5" [options]="mapOptions">
-            <map-advanced-marker *ngIf="markerPosition" [position]="markerPosition" title="Ubicación de la Zona">
-            </map-advanced-marker>
-        </google-map>
+
+    <!-- Contenedor del Mapa -->
+    <div class="map-wrapper">
+      <google-map mapId="f404a59fc2fcb5b5" [options]="mapOptions">
+        <map-advanced-marker *ngIf="markerPosition" [position]="markerPosition" title="Ubicación de la Zona">
+        </map-advanced-marker>
+      </google-map>
     </div>
-    </div>
+  </div>
+</div>
