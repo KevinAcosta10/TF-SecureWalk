@@ -1,200 +1,202 @@
 /* Contenedor principal de la página */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
-    padding: 20px;
-    gap: 20px; /* Espacio entre los elementos principales (título, formulario, carrusel) */
-    max-width: 1200px; /* Ancho máximo para el contenido */
-    margin: 0 auto; /* Centra el contenedor en la página */
-  }
-  
-  /* Estilos para el título principal */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos horizontalmente */
+  padding: 20px;
+  gap: 20px; /* Espacio entre los elementos principales (título, formulario, carrusel) */
+  max-width: 1200px; /* Ancho máximo para el contenido */
+  margin: 0 auto; /* Centra el contenedor en la página */
+}
+
+/* Estilos para el título principal */
+.titulo {
+  color: #3f51b5; /* Un azul primario de Material Design */
+  margin-bottom: 10px;
+  font-size: 2.5em; /* Tamaño de fuente grande para el título */
+  font-weight: 600; /* Peso de fuente semi-negrita */
+  text-align: center;
+}
+
+/* Contenedor del carrusel */
+.slider-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Estilos para las tarjetas de usuario dentro del carrusel */
+.usuario-card {
+  width: 100%;
+  max-width: 350px; /* o el ancho que consideres adecuado */
+  margin: auto;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.usuario-card:hover {
+  transform: translateY(-5px); /* Pequeño levantamiento en hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa en hover */
+}
+
+.usuario-card mat-card-header {
+  padding-bottom: 5px; /* Ajusta el padding si es necesario */
+  align-items: center; /* Alinea ítems en el header */
+}
+
+.usuario-card mat-card-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #303f9f; /* Color más oscuro para el título */
+  margin-bottom: 5px;
+}
+
+.usuario-card mat-card-content {
+  font-size: 0.95em;
+  color: #555;
+  padding-top: 10px;
+  flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+}
+
+.usuario-card mat-card-content p {
+  margin-bottom: 5px; /* Espacio entre párrafos */
+}
+
+.usuario-card mat-card-actions {
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  padding: 8px 16px 16px 16px; /* Más padding en la parte inferior */
+}
+
+/* Estilos para los botones de acción dentro de la tarjeta */
+.usuario-card mat-card-actions button {
+  min-width: 40px; /* Ancho mínimo para los botones de icono */
+  padding: 0; /* Elimina padding por defecto si solo hay icono */
+  border-radius: 50%; /* Botones redondos para iconos */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px; /* Espacio entre botones */
+}
+
+.usuario-card mat-card-actions button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos para las flechas de navegación de Owl Carousel */
+/* Puedes personalizarlos según tu tema de Material */
+:host ::ng-deep .owl-nav button.owl-prev,
+:host ::ng-deep .owl-nav button.owl-next {
+  background: rgba(
+    63,
+    81,
+    181,
+    0.8
+  ) !important; /* Fondo azul con transparencia */
+  color: white !important; /* Color de las flechas */
+  font-size: 2em !important;
+  border-radius: 50% !important; /* Botones redondos */
+  width: 45px !important;
+  height: 45px !important;
+  line-height: 45px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease-in-out;
+}
+
+:host ::ng-deep .owl-nav button.owl-prev:hover,
+:host ::ng-deep .owl-nav button.owl-next:hover {
+  background: #303f9f !important; /* Color más oscuro en hover */
+}
+
+:host ::ng-deep .owl-nav button.owl-prev {
+  left: -20px; /* Posiciona la flecha izquierda fuera del carrusel */
+}
+
+:host ::ng-deep .owl-nav button.owl-next {
+  right: -20px; /* Posiciona la flecha derecha fuera del carrusel */
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
   .titulo {
-    color: #3f51b5; /* Un azul primario de Material Design */
-    margin-bottom: 10px;
-    font-size: 2.5em; /* Tamaño de fuente grande para el título */
-    font-weight: 600; /* Peso de fuente semi-negrita */
-    text-align: center;
+    font-size: 2em;
   }
-  
-  /* Contenedor del carrusel */
-  .slider-container {
+
+  .search-form {
+    flex-direction: column; /* Apila el campo y el botón en pantallas pequeñas */
+    align-items: stretch; /* Estira los elementos al 100% de ancho */
+  }
+
+  .search-field {
+    min-width: unset; /* Quita el mínimo para que se estire */
     width: 100%;
-    max-width: 960px; /* Ajusta este ancho para controlar el tamaño general del carrusel */
-    margin-top: 20px;
   }
-  
-  /* Estilos para las tarjetas de usuario dentro del carrusel */
+
+  .clear-button {
+    width: 100%;
+  }
+
   .usuario-card {
-    width: 300px; /* Ancho fijo para cada tarjeta, ajusta según cuántas quieras ver por diapositiva */
-    margin: 10px; /* Espacio alrededor de cada tarjeta */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada para un efecto flotante */
-    border-radius: 12px; /* Bordes más redondeados */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Empuja las acciones hacia la parte inferior */
-    height: 240px; /* Altura fija para las tarjetas */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transición suave para hover */
+    width: 90%; /* Ajusta el ancho de las tarjetas en móviles */
+    margin: 10px auto; /* Centra las tarjetas */
   }
-  
-  .usuario-card:hover {
-    transform: translateY(-5px); /* Pequeño levantamiento en hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa en hover */
-  }
-  
-  .usuario-card mat-card-header {
-    padding-bottom: 5px; /* Ajusta el padding si es necesario */
-    align-items: center; /* Alinea ítems en el header */
-  }
-  
-  .usuario-card mat-card-title {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #303f9f; /* Color más oscuro para el título */
-    margin-bottom: 5px;
-  }
-  
-  .usuario-card mat-card-content {
-    font-size: 0.95em;
-    color: #555;
-    padding-top: 10px;
-    flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
-  }
-  
-  .usuario-card mat-card-content p {
-    margin-bottom: 5px; /* Espacio entre párrafos */
-  }
-  
-  .usuario-card mat-card-actions {
-    display: flex;
-    justify-content: flex-end; /* Alinea los botones a la derecha */
-    padding: 8px 16px 16px 16px; /* Más padding en la parte inferior */
-  }
-  
-  /* Estilos para los botones de acción dentro de la tarjeta */
-  .usuario-card mat-card-actions button {
-    min-width: 40px; /* Ancho mínimo para los botones de icono */
-    padding: 0; /* Elimina padding por defecto si solo hay icono */
-    border-radius: 50%; /* Botones redondos para iconos */
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 8px; /* Espacio entre botones */
-  }
-  
-  .usuario-card mat-card-actions mat-icon {
-    font-size: 20px; /* Tamaño del icono */
-    width: 20px;
-    height: 20px;
-  }
-  
-  /* Estilos para las flechas de navegación de Owl Carousel */
-  /* Puedes personalizarlos según tu tema de Material */
+
   :host ::ng-deep .owl-nav button.owl-prev,
   :host ::ng-deep .owl-nav button.owl-next {
-    background: rgba(
-      63,
-      81,
-      181,
-      0.8
-    ) !important; /* Fondo azul con transparencia */
-    color: white !important; /* Color de las flechas */
-    font-size: 2em !important;
-    border-radius: 50% !important; /* Botones redondos */
-    width: 45px !important;
-    height: 45px !important;
-    line-height: 45px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background 0.2s ease-in-out;
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 1.5em !important;
+    line-height: 35px !important;
+    top: auto; /* Desactiva el posicionamiento vertical fijo */
+    bottom: -45px; /* Posiciona las flechas debajo del carrusel */
   }
-  
-  :host ::ng-deep .owl-nav button.owl-prev:hover,
-  :host ::ng-deep .owl-nav button.owl-next:hover {
-    background: #303f9f !important; /* Color más oscuro en hover */
-  }
-  
+
   :host ::ng-deep .owl-nav button.owl-prev {
-    left: -20px; /* Posiciona la flecha izquierda fuera del carrusel */
+    left: 20%; /* Ajusta la posición para que no se superpongan */
   }
-  
+
   :host ::ng-deep .owl-nav button.owl-next {
-    right: -20px; /* Posiciona la flecha derecha fuera del carrusel */
+    right: 20%; /* Ajusta la posición para que no se superpongan */
   }
-  
-  /* Media Queries para responsividad */
-  @media (max-width: 768px) {
-    .titulo {
-      font-size: 2em;
-    }
-  
-    .search-form {
-      flex-direction: column; /* Apila el campo y el botón en pantallas pequeñas */
-      align-items: stretch; /* Estira los elementos al 100% de ancho */
-    }
-  
-    .search-field {
-      min-width: unset; /* Quita el mínimo para que se estire */
-      width: 100%;
-    }
-  
-    .clear-button {
-      width: 100%;
-    }
-  
-    .usuario-card {
-      width: 90%; /* Ajusta el ancho de las tarjetas en móviles */
-      margin: 10px auto; /* Centra las tarjetas */
-    }
-  
-    :host ::ng-deep .owl-nav button.owl-prev,
-    :host ::ng-deep .owl-nav button.owl-next {
-      width: 35px !important;
-      height: 35px !important;
-      font-size: 1.5em !important;
-      line-height: 35px !important;
-      top: auto; /* Desactiva el posicionamiento vertical fijo */
-      bottom: -45px; /* Posiciona las flechas debajo del carrusel */
-    }
-  
-    :host ::ng-deep .owl-nav button.owl-prev {
-      left: 20%; /* Ajusta la posición para que no se superpongan */
-    }
-  
-    :host ::ng-deep .owl-nav button.owl-next {
-      right: 20%; /* Ajusta la posición para que no se superpongan */
-    }
-  
-    :host ::ng-deep .owl-stage-outer {
-      padding-bottom: 60px; /* Deja espacio para las flechas si están abajo */
-    }
+
+  :host ::ng-deep .owl-stage-outer {
+    padding-bottom: 60px; /* Deja espacio para las flechas si están abajo */
   }
-  
-  @media (max-width: 480px) {
-    .titulo {
-      font-size: 1.8em;
-    }
-  
-    .container {
-      padding: 15px;
-    }
-  
-    .usuario-card {
-      width: 95%; /* Un poco más de ancho en pantallas muy pequeñas */
-    }
-  
-    :host ::ng-deep .owl-nav button.owl-prev,
-    :host ::ng-deep .owl-nav button.owl-next {
-      bottom: -40px; /* Ajuste final para móviles pequeños */
-    }
+}
+
+@media (max-width: 480px) {
+  .titulo {
+    font-size: 1.8em;
   }
-  
+
+  .container {
+    padding: 15px;
+  }
+
+  .usuario-card {
+    width: 95%; /* Un poco más de ancho en pantallas muy pequeñas */
+  }
+
+  :host ::ng-deep .owl-nav button.owl-prev,
+  :host ::ng-deep .owl-nav button.owl-next {
+    bottom: -40px; /* Ajuste final para móviles pequeños */
+  }
+}

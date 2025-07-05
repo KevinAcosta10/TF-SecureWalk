@@ -1,12 +1,12 @@
 <div class="container">
-  <h1 class="page-title">Relaciones Encuesta-Pregunta (Slider)</h1>
+  <h1 class="titulo">Relaciones Encuesta-Pregunta (Slider)</h1>
 
-  <div *ngIf="encuestaPregunta.length > 0; else noDataFound" class="carousel-wrapper">
+  <div *ngIf="encuestaPregunta.length > 0; else noDataFound" class="slider-container">
     <owl-carousel-o [options]="customOptions">
       <ng-template carouselSlide *ngFor="let ep of encuestaPregunta">
-        <mat-card class="ep-card mat-elevation-z4">
+        <mat-card class="usuario-card">
           <mat-card-header>
-            <mat-card-title class="card-title">
+            <mat-card-title>
               Relación ID: {{ ep.idEncuestaPregunta }}
             </mat-card-title>
             <mat-card-subtitle>
@@ -15,20 +15,20 @@
           </mat-card-header>
 
           <mat-card-content>
-            <div class="question-details">
+            <div>
               <p><strong>Texto de Pregunta:</strong> {{ ep.pregunta.textoPregunta }}</p>
               <p><strong>Tipo de Pregunta:</strong> {{ ep.pregunta.tipoPregunta }}</p>
               <p><small>ID Pregunta: {{ ep.pregunta.idPregunta}}</small></p>
             </div>
           </mat-card-content>
 
-          <mat-card-actions class="card-actions">
+          <mat-card-actions>
             <!-- Botón para eliminar la relación EncuestaPregunta -->
             <button mat-raised-button color="warn" (click)="eliminar(ep.idEncuestaPregunta)">
-              <mat-icon>delete_forever</mat-icon> Eliminar Relación
+              <mat-icon>delete_forever</mat-icon>
             </button>
-            <button mat-raised-button color="accent" [routerLink]="['ediciones', ep.idEncuestaPregunta]">
-              <mat-icon>edit</mat-icon> Editar Relación
+            <button mat-raised-button color="primary" [routerLink]="['ediciones', ep.idEncuestaPregunta]">
+              <mat-icon>edit</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>

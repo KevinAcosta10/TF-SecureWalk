@@ -1,8 +1,9 @@
 .custom-toolbar {
+  flex-wrap: wrap;
   background-color: #3f51b5; /* Azul oscuro que combina con el gradiente (Primary Blue) */
   color: white; /* Asegura que el texto general de la toolbar sea blanco */
   min-height: 70px; /* Aumenta la altura mínima de la barra */
-  padding: 0 20px; /* Un poco de padding horizontal, el vertical se ajusta con el contenido */
+  padding: 0.5rem; /* Un poco de padding horizontal, el vertical se ajusta con el contenido */
   display: flex; /* Asegura que el contenido se alinee correctamente */
   align-items: center; /* Centra verticalmente el contenido */
 }
