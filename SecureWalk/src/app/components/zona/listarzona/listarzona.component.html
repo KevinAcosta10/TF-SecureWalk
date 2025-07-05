@@ -53,20 +53,7 @@
     <!-- Tabla con selección mejorada -->
     <div class="table-container">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="c2">
-          <th mat-header-cell *matHeaderCellDef>Latitud</th>
-          <td mat-cell *matCellDef="let element" [class.selected-row]="isZoneSelected(element)">
-            {{ element.latitudZona | number:'1.6-6' }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="c3">
-          <th mat-header-cell *matHeaderCellDef>Longitud</th>
-          <td mat-cell *matCellDef="let element" [class.selected-row]="isZoneSelected(element)">
-            {{ element.longitudZona | number:'1.6-6' }}
-          </td>
-        </ng-container>
-
+        
         <ng-container matColumnDef="c4">
           <th mat-header-cell *matHeaderCellDef>Zona</th>
           <td mat-cell *matCellDef="let element" [class.selected-row]="isZoneSelected(element)">
