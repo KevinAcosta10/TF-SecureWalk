@@ -1,3 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* ====================================================== */
+/* === src/styles.css (Minimalista)                   === */
+/* ====================================================== */
+
+/* Estas reglas son ABSOLUTAMENTE NECESARIAS para que Flexbox funcione de raíz */
+html, body {
+  height: 100%; /* Asegura que HTML y BODY ocupen toda la altura del viewport */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+body {
+  display: flex; /* Convierte el body en un contenedor flex */
+  flex-direction: column; /* Organiza sus hijos (app-root) verticalmente */
+  min-height: 100vh; /* Asegura que ocupe al menos toda la altura del viewport */
+  background-color: #f0f2f5; /* Light Gray: Fondo general de la página, por si el contenido no cubre todo */
+}
+
+/* app-root debe ser un contenedor flex que se estire */
+app-root {
+  display: flex; /* Convierte app-root en un contenedor flex */
+  flex-direction: column; /* Organiza sus hijos verticalmente */
+  flex-grow: 1; /* Permite que app-root ocupe todo el espacio vertical disponible */
+}
+
+/* El contenido inyectado por router-outlet también debe ser un contenedor flex que crezca */
+router-outlet + * {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* **NOTA:** Hemos quitado los estilos de `snackbar` aquí para mantenerlo minimalista.
+   Si los necesitas, considera moverlos a un componente específico o crear
+   un archivo de estilos más general para utilidades globales. */

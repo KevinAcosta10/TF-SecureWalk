@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Encuesta } from '../models/encuesta';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { EncuestaConPreguntasDTO } from '../models/encuestaconpreguntasDTO';
 
 const base_url = environment.base
+const ENCUESTAS_PREGUNTAS_BASE_URL = `${base_url}/encuestasPreguntas`; // URL para operaciones de EncuestaPregunta
+
 @Injectable({
   providedIn: 'root'
 })
 export class EncuestaService {
 private listaCambio = new Subject<Encuesta[]>()
 private url = `${base_url}/encuestas`
+
   constructor(private http: HttpClient) { }
   list() {
     return this.http.get<Encuesta[]>(`${this.url}/listar`)
@@ -37,4 +41,7 @@ private url = `${base_url}/encuestas`
     deleteS(id: number) {
       return this.http.delete(`${this.url}/${id}`);
     }
+     listarEncuestasConPreguntasAgrupadas(): Observable<EncuestaConPreguntasDTO[]> {
+    return this.http.get<EncuestaConPreguntasDTO[]>(`${ENCUESTAS_PREGUNTAS_BASE_URL}/agrupadas`);
+  }
 }

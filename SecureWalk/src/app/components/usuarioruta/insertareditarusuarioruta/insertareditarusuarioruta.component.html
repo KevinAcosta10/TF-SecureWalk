@@ -1,0 +1,69 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de rutas</h1>
+  </div>
+  <div style="text-align: center">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (usuario of listaUsuarios; track usuario) {
+          <mat-option [value]="usuario.idUsuario">{{
+            usuario.nombreUsuario
+          }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El nombre de usuario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Zonas</mat-label>
+        <mat-select formControlName="zonas">
+          @for (ruta of listaRutas; track ruta) {
+          <mat-option [value]="ruta.idRuta">{{
+            ruta.zona.nombreZona
+          }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('zonas')?.hasError('required')">
+          Debe registrar por lo menos una zona!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" formControlName="horaInicio" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerInicio"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+        <mat-error *ngIf="form.get('horaInicio')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="horaFin" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('horaFin')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

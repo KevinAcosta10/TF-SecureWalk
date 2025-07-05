@@ -1,24 +1,200 @@
-/* Contenedor principal de la página */
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 20px; /* Espacio entre los elementos principales (título, formulario, carrusel) */
-  max-width: 1200px; /* Ancho máximo para el contenido */
-  margin: 0 auto; /* Centra el contenedor en la página */
-}
-    
-/* Estilos para el título principal */
-.titulo {
-  color: #3f51b5; /* Un azul primario de Material Design */
-  margin-bottom: 10px;
-  font-size: 2.5em; /* Tamaño de fuente grande para el título */
-  font-weight: 600; /* Peso de fuente semi-negrita */
-  text-align: center;
+/* Variables CSS para consistencia (Asegúrate de que estas variables estén definidas globalmente o en un archivo compartido) */
+/* Si no están definidas globalmente, puedes copiarlas aquí o en :root */
+:root {
+    --primary-color: #3f51b5; /* Primary Blue */
+    --secondary-blue: #5c6bc0; /* Secondary Blue */
+    --green-success: #4CAF50; /* Green (Success/Safe) */
+    --orange-warning: #FFC107; /* Orange/Amber (Warning/Caution) */
+    --red-error: #F44336; /* Red (Danger/Error/Critical Alert) */
+    --light-gray: #f0f2f5; /* Light Gray */
+    --white-color: #FFFFFF; /* White */
+    --dark-gray: #333333; /* Dark Gray/Near Black */
+    --dark-gray-rgb: 51, 51, 51; /* Para uso con rgba() */
+
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
 }
 
-.mat-elevation-z8 {
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--light-gray); /* Fondo general de la página */
+}
+
+/* Contenedor principal de la página */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px; /* Padding para el contenido principal */
+  gap: 30px; /* Espacio entre secciones */
+  max-width: 1200px; /* Ancho máximo para el contenido */
+  margin: 0 auto; /* Centra el contenedor en la página */
+  min-height: calc(100vh - 64px - 80px); /* Altura mínima, restando toolbar y padding */
+}
+ 
+/* Header de la sección (ahora solo con el título) */
+.header-section {
+  display: flex; /* Mantenemos flex para centrar el título */
+  justify-content: center; /* Centra el título */
+  align-items: center;
+  padding: 20px 30px; /* Padding interno */
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-blue)); /* Gradiente de azules */
+  color: var(--white-color); /* Texto blanco */
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+}
+ 
+/* Estilos para el título principal */
+.titulo {
+  margin: 0; /* Elimina márgenes por defecto del h1 */
+  font-size: 2.8em; /* Tamaño de fuente grande para el título */
+  font-weight: 700; /* Peso de fuente semi-negrita */
+  color: var(--white-color); /* Color blanco para el título */
+  text-align: center; /* Asegura que el título esté centrado */
+  width: 100%; /* Asegura que ocupe el ancho para centrarlo */
+}
+
+/* Los estilos para .add-button han sido eliminados ya que el botón no existe en el HTML */
+
+/* Contenedor de la tabla */
+.table-container {
   width: 100%;
-  max-width: 960px; /* Ajusta este ancho para controlar el tamaño general del carrusel */
-  margin-top: 20px;
+  background-color: var(--white-color); /* Fondo blanco para la tabla */
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden; /* Asegura que los bordes redondeados se apliquen */
+}
+
+/* Estilos para la tabla de Material */
+.mat-elevation-z8 {
+  box-shadow: none; /* La sombra se aplica al .table-container */
+  border-radius: 0; /* Los bordes redondeados se aplican al .table-container */
+}
+
+.mat-table {
+  width: 100%; /* La tabla ocupa todo el ancho de su contenedor */
+}
+
+.mat-header-cell {
+  background-color: var(--primary-color); /* Cabeceras de tabla en Primary Blue */
+  color: var(--white-color); /* Texto de cabeceras en blanco */
+  font-weight: 600; /* Peso de fuente para las cabeceras */
+  padding: 12px 16px;
+  border-bottom: none;
+  font-size: 1em;
+}
+
+.mat-cell {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0; /* Borde entre celdas en Light Gray */
+  color: var(--dark-gray); /* Color del texto de las celdas */
+  font-size: 0.95em;
+  transition: var(--transition);
+}
+
+.mat-row {
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.mat-row:hover {
+  background-color: #f8f9fa; /* Gris muy suave al pasar el ratón */
+}
+
+/* Estilos para los botones de acción en las celdas */
+.mat-cell button.mat-icon-button {
+  color: var(--primary-color); /* Íconos de editar en Primary Blue */
+  transition: var(--transition);
+}
+
+.mat-cell button.mat-icon-button[color="warn"] {
+  color: var(--red-error); /* Íconos de eliminar en Red Error */
+}
+
+.mat-cell button.mat-icon-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.05); /* Sutil fondo al pasar el ratón */
+}
+
+/* Fila cuando no hay datos */
+.mat-no-data-row {
+  text-align: center;
+  padding: 20px;
+  color: var(--dark-gray);
+  font-style: italic;
+}
+
+/* Paginador */
+mat-paginator {
+  border-top: 1px solid #e0e0e0; /* Borde superior en un gris claro */
+  background-color: #fafafa; /* Fondo del paginador en un gris muy muy claro */
+  color: var(--dark-gray); /* Color del texto del paginador */
+}
+
+/* Snackbar personalizado (copiado de componentes anteriores para consistencia) */
+::ng-deep .snackbar-success {
+  background-color: var(--green-success) !important; /* Green (Success/Safe) */
+  color: var(--white-color) !important;
+  border-radius: 8px;
+}
+
+::ng-deep .snackbar-error {
+  background-color: var(--red-error) !important; /* Red (Danger/Error/Critical Alert) */
+  color: var(--white-color) !important;
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 20px 10px;
+    gap: 20px;
+  }
+
+  .header-section {
+    flex-direction: column; /* Apila el título */
+    align-items: center; /* Centra el título */
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .titulo {
+    font-size: 2.2em;
+    text-align: center; /* Centra el título en móvil */
+    width: 100%;
+  }
+
+  /* Ajustes para la tabla en pantallas pequeñas */
+  .mat-table {
+    display: block; /* Permite que la tabla se desplace horizontalmente */
+    overflow-x: auto; /* Habilita el scroll horizontal */
+  }
+
+  .mat-header-row, .mat-row {
+    width: max-content; /* Permite que las filas sean más anchas que la pantalla */
+  }
+
+  .mat-header-cell, .mat-cell {
+    padding: 8px 12px; /* Reduce padding en celdas */
+  }
+
+  .acciones-header, .acciones-cell {
+    width: 60px; /* Reduce ancho de columna de acciones */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 15px 5px;
+  }
+
+  .header-section {
+    padding: 15px;
+  }
+
+  .titulo {
+    font-size: 1.8em;
+  }
 }

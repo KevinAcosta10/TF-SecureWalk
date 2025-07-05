@@ -33,5 +33,4 @@ public class EncuestaImplement implements IEncuestaService {
     public Encuesta listId(int id) {
         return eR.findById(id).orElse(new Encuesta());
     }
-
 }

@@ -10,5 +10,7 @@ public interface IEncuestaPreguntaService {
     public void update(EncuestaPregunta ep);
     public void eliminar(int id);
     public EncuestaPregunta listId(int id);
+    public List<EncuestaPregunta> listarEncuestaPreguntas(int id);
+    public List<EncuestaPregunta> findAllByOrderByEncuestaIdEncuestaAscOrdenAsc();
 
 }

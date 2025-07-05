@@ -42,6 +42,5 @@ export class IncidenteService {
 
   getQuantity(): Observable<IncidentePorUsuarioDTO[]> {
     return this.http.get<IncidentePorUsuarioDTO[]>(`${this.url}/incidentesPorUsuario`)
-
   }
 }

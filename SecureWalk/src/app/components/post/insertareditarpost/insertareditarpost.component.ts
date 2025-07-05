@@ -79,12 +79,12 @@ export class InsertareditarpostComponent {
           });
         });
       }
-      this.router.navigate(['post']);
+      this.router.navigate(['posts']);
     }
   }
 
   cancelar() {
-    this.router.navigate(['post']);
+    this.router.navigate(['posts']);
   }
 
   init() {

@@ -31,7 +31,6 @@ interface MarkerData {
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-   MapInfoWindow
   ],
   templateUrl: './listarzona.component.html',
   styleUrl: './listarzona.component.css'
@@ -40,7 +39,7 @@ export class ListarzonaComponent implements OnInit {
   // Datos principales
   coordenadas: Zona[] = []
   dataSource: MatTableDataSource<Zona> = new MatTableDataSource()
-  displayedColumns: string[] = ["c2", "c3", "c4", "c5", "c6"]
+  displayedColumns: string[] = ["c4", "c5", "c6"]
   
   // Configuración del mapa
   center: google.maps.LatLngLiteral = { lat: -12.0698355, lng: -77.0428575 }
