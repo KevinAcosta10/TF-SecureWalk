@@ -4,10 +4,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { RouterLink } from '@angular/router';
 import { Post } from '../../../models/post';
 import { PostService } from '../../../services/post.service';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-listarpost',
@@ -17,29 +16,16 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     MatIconModule,
     RouterLink,
     MatCardModule,
-    CarouselModule,
-    CommonModule
+    CommonModule,
+    MatPaginatorModule,
+    MatButtonModule
   ],
   templateUrl: './listarpost.component.html',
   styleUrl: './listarpost.component.css'
 })
 export class ListarpostComponent {
   posts: Post[] = []
-    customOptions: OwlOptions = {
-    loop: false, // Repetir el carrusel
-    mouseDrag: true, // Permitir arrastrar con el ratón
-    touchDrag: true, // Permitir arrastrar con el dedo en dispositivos táctiles
-    pullDrag: true,
-    dots: false, // Mostrar puntos de navegación
-    navSpeed: 700,
-    navText: [
-      '<span class="owl-prev-icon">&lsaquo;</span>',
-      '<span class="owl-next-icon">&rsaquo;</span>',
-    ],
-    nav: true, // Mostrar flechas de navegación
-    slideBy: 1,
-  };
-
+    
   constructor(private pS: PostService) {
    }
   ngOnInit(): void {

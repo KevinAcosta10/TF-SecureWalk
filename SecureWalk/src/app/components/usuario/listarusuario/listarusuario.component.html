@@ -1,5 +1,4 @@
-<div class="main-container">
-  <div class="top-header-section">
+<div class="page-main-content"> <div class="top-header-section">
     <div class="title-search-block">
       <h1 class="titulo">Lista de Usuarios</h1>
 
@@ -21,8 +20,7 @@
         </button>
       </form>
     </div>
-
-    </div>
+  </div>
 
   <div class="content-cards-section">
     <div *ngIf="notResults" class="no-results-message">
@@ -30,7 +28,7 @@
     </div>
 
     <div class="cards-grid-container" *ngIf="!notResults">
-      <mat-card class="usuario-card" *ngFor="let usuario of usuarios">
+      <mat-card class="usuario-card" *ngFor="let usuario of dataSource.connect() | async">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image">
             <img
@@ -75,5 +73,14 @@
         </mat-card-actions>
       </mat-card>
     </div>
+
+    <mat-paginator
+      [length]="dataSource.data.length"
+      [pageSize]="3"
+      [pageSizeOptions]="[3, 6, 9, 12]"
+      aria-label="Seleccionar página de usuarios"
+      class="user-paginator"
+    >
+    </mat-paginator>
   </div>
-</div>
+</div> <footer class="app-footer"></footer>

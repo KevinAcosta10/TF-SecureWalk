@@ -1,26 +1,60 @@
-<div class="container">
-    <div>
-        <h1 class="titulo">Lista de Evaluación de Incidentes</h1>
-    </div>
- <div class="slider-container">
-  <owl-carousel-o [options]="customOptions">
-    <ng-template carouselSlide *ngFor="let evaluacionincidente of evaluacionincidente">
-      <mat-card class="usuario-card">
+<div class="main-container">
+  <div class="top-header-section">
+    <div class="title-search-block">
+      <h1 class="page-title">Lista de Evaluación de Incidentes</h1>
+      </div>
+  </div>
+
+  <div class="content-cards-section">
+    <div class="cards-grid">
+      <mat-card class="evaluation-card" *ngFor="let evaluacionincidente of evaluacionincidente">
         <mat-card-header>
-          <mat-card-title>{{ evaluacionincidente.aprobacionIncidente ? 'Aprobado' : 'Desaprobado' }}</mat-card-title>     
+          <mat-card-title>
+            <mat-icon
+              class="status-icon"
+              [ngStyle]="{
+                'color': evaluacionincidente.aprobacionIncidente ? '#4CAF50' : '#F44336'
+              }"
+            >
+              {{ evaluacionincidente.aprobacionIncidente ? 'check_circle' : 'cancel' }}
+            </mat-icon>
+            {{ evaluacionincidente.aprobacionIncidente ? 'Aprobado' : 'Desaprobado' }}
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>ID: {{ evaluacionincidente.idEvaluacionIncidente }}</p>
-          <p>Fecha de creación: {{ evaluacionincidente.fechaCreacionIncidente }}</p>
-          <p>Usuario: {{ evaluacionincidente.usuario.nombreUsuario }}</p>
-        </mat-card-content>
+          <p>
+            <mat-icon class="card-icon">vpn_key</mat-icon> ID:
+            {{ evaluacionincidente.idEvaluacionIncidente }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">event</mat-icon> Fecha de creación:
+            {{ evaluacionincidente.fechaCreacionIncidente | date : 'shortDate' }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">person</mat-icon> Usuario:
+            {{ evaluacionincidente.usuario.nombreUsuario }}
+          </p>
+          </mat-card-content>
         <mat-card-actions>
-          <button mat-button color="primary" [routerLink]="['ediciones', evaluacionincidente.idEvaluacionIncidente]"><mat-icon>edit</mat-icon></button>
-          <button mat-button color="warn" (click)="eliminar(evaluacionincidente.idEvaluacionIncidente)"><mat-icon>delete_forever</mat-icon></button>
+          <button mat-button color="primary" [routerLink]="['ediciones', evaluacionincidente.idEvaluacionIncidente]">
+            <mat-icon>edit</mat-icon> Editar
+          </button>
+          <button mat-button color="warn" (click)="eliminar(evaluacionincidente.idEvaluacionIncidente)">
+            <mat-icon>delete_forever</mat-icon> Eliminar
+          </button>
         </mat-card-actions>
       </mat-card>
-    </ng-template>
-  </owl-carousel-o>
+    </div>
+
+    <mat-paginator
+      [length]="evaluacionincidente ? evaluacionincidente.length : 0"
+      [pageSize]="3"
+      [pageSizeOptions]="[3, 6, 9, 12]"
+      aria-label="Seleccionar página de evaluaciones de incidentes"
+      class="user-paginator"
+    >
+    </mat-paginator>
+  </div>
 </div>
-</div>
-  
+
+<footer class="app-footer"></footer>

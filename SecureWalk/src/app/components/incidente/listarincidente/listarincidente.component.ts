@@ -6,9 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { IncidenteService } from '../../../services/incidente.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-listarincidente',
@@ -20,8 +20,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
     MatCardModule,
     RouterLink,
     MatButtonModule,
-    CarouselModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ],
   templateUrl: './listarincidente.component.html',
   styleUrl: './listarincidente.component.css',

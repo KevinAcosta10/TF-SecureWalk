@@ -1,0 +1,10 @@
+/* ====================================================== */
+/* === src/app/usuario/usuario.component.css          === */
+/* ====================================================== */
+
+/* :host se refiere al elemento <app-usuario> */
+:host {
+  display: flex; /* Convierte <app-usuario> en un contenedor flex */
+  flex-direction: column; /* Apila sus hijos verticalmente */
+  flex-grow: 1; /* Permite que <app-usuario> ocupe todo el espacio vertical disponible de su padre (app-root) */
+}

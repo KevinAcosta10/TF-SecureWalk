@@ -5,9 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion'; 
 import { EncuestaPregunta } from '../../../models/encuestapregunta';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { EncuestapreguntaService } from '../../../services/encuestapregunta.service';
 import { RouterLink } from '@angular/router';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @Component({
@@ -19,29 +19,14 @@ CommonModule,
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
-    CarouselModule,
-    RouterLink
+    RouterLink,
+    MatPaginatorModule
   ],
   templateUrl: './listarencuestapregunta.component.html',
   styleUrl: './listarencuestapregunta.component.css'
 })
 export class ListarencuestapreguntaComponent implements OnInit{
   encuestaPregunta: EncuestaPregunta[] = [];
-  
-    customOptions: OwlOptions = {
-      loop: false, // Repetir el carrusel
-      mouseDrag: true, // Permitir arrastrar con el ratón
-      touchDrag: true, // Permitir arrastrar con el dedo en dispositivos táctiles
-      pullDrag: true,
-      dots: false, // Mostrar puntos de navegación
-      navSpeed: 700,
-      navText: [
-        '<span class="owl-prev-icon">&lsaquo;</span>',
-        '<span class="owl-next-icon">&rsaquo;</span>',
-      ],
-      nav: true, // Mostrar flechas de navegación
-      slideBy: 1,
-    };
   
     constructor(private epS: EncuestapreguntaService) {}
     

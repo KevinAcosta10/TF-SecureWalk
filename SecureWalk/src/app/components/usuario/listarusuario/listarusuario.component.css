@@ -1,40 +1,40 @@
-/* Overall page background and font */
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f0f2f5; /* Light Gray: Fondo general de la página */
+/* ====================================================== */
+/* === src/app/listar-usuarios/listar-usuarios.component.css         === */
+/* ====================================================== */
+
+/* El propio componente <app-listarusuario> debe ser un contenedor flex que crezca */
+:host { /* :host se refiere al elemento <app-listarusuario> */
+  display: flex; /* Convierte <app-listarusuario> en un contenedor flex */
+  flex-direction: column; /* Apila sus hijos verticalmente */
+  flex-grow: 1; /* Hace que app-listarusuario se estire dentro de su padre (el div oculto/visible en app-usuario) */
 }
 
-/* Main container for the overall layout */
-.main-container {
+/* NUEVO: Contenedor principal del contenido (header, cards, paginator) */
+.page-main-content {
   display: flex;
-  flex-direction: column; /* Stack sections vertically */
-  min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
-  padding: 0; /* Padding will be managed by inner sections */
+  flex-direction: column; /* Apila los elementos internos verticalmente */
+  flex-grow: 1; /* ¡Esto hace que el contenido se estire y empuje el footer! */
 }
+
 
 /* TOP HEADER SECTION: Contains title, search */
 .top-header-section {
-  background: linear-gradient(
-    135deg,
-    #3f51b5 0%, /* Primary Blue: Inicio del gradiente */
-    #5c6bc0 100% /* Secondary Blue: Fin del gradiente */
-  );
-  color: white; /* Color del texto y los íconos dentro de esta sección */
-  padding: 40px 60px; /* Amplio espaciado interno */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background: #3f51b5; /* Primary Blue */
+  color: white;
+  padding: 40px 60px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Apila el título y el buscador */
-  align-items: center; /* Centra el contenido horizontalmente */
-  position: relative; /* Para posibles posicionamientos absolutos internos */
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .title-search-block {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra el título y el buscador dentro de este bloque */
+  align-items: center;
   width: 100%;
-  max-width: 900px; /* Ancho máximo para el contenido central */
+  max-width: 900px;
   text-align: center;
 }
 
@@ -42,79 +42,80 @@ body {
 .titulo {
   font-size: 4em;
   font-weight: 800;
-  color: #ffffff; /* White: Color del título */
-  margin-bottom: 30px; /* Espacio debajo del título */
+  color: #ffffff; /* White */
+  margin-bottom: 30px;
   line-height: 1.1;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para el texto */
-  word-wrap: break-word; /* Permite que el texto se rompa en líneas si es muy largo */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
 }
 
-/* Search form styling */
+/* Estilos del formulario de búsqueda */
 .search-form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Espacio entre el campo de búsqueda y el botón */
+  gap: 15px;
   width: 100%;
-  max-width: 500px; /* Ancho máximo para el formulario de búsqueda */
+  max-width: 500px;
   margin: 0 auto;
   padding-bottom: 0;
 }
 
 /* Styling for the MatFormField and MatInput within the search form */
+/* ¡CORRECCIONES AQUÍ PARA EL FONDO BLANCO Y COLORES DE TEXTO/ICONOS! */
 .search-field {
   width: 100%;
 
-  /* OBJETIVO CLAVE: Fondo semi-transparente, bordes y texto más notorios */
-
-  /* Fondo del campo de búsqueda */
+  /* Fondo del campo de búsqueda y del input */
+  ::ng-deep .mat-mdc-form-field-wrapper,
+  ::ng-deep .mat-mdc-text-field-wrapper,
+  ::ng-deep input.mat-mdc-input-element { /* Más específico para asegurar el fondo */
+    background-color: #FFFFFF !important; /* BLANCO PURO AHORA */
+  }
   ::ng-deep .mat-mdc-form-field-wrapper {
-    background-color: rgba(255, 255, 255, 0.3); /* Blanco semi-transparente */
     border-radius: 10px;
     padding: 8px 20px;
     transition: background-color 0.3s ease;
-  }
-  ::ng-deep .mat-mdc-form-field-wrapper:hover {
-    background-color: rgba(255, 255, 255, 0.4); /* Ligeramente más opaco al pasar el ratón */
   }
 
   /* Color del borde (contorno) */
   ::ng-deep .mat-mdc-form-field-outline-start,
   ::ng-deep .mat-mdc-form-field-outline-gap,
   ::ng-deep .mat-mdc-form-field-outline-end {
-    border-color: #FFFFFF !important; /* Borde blanco */
-    border-width: 2px !important; /* Borde más grueso */
+    border-color: #5c6bc0 !important; /* Secondary Blue: Borde ahora azul para contraste */
+    border-width: 2px !important;
   }
-  /* Asegurar que el borde se mantenga blanco y grueso en el estado de foco */
+  /* Asegurar que el borde se mantenga azul en el estado de foco */
   ::ng-deep .mat-mdc-form-field-appearance-outline.mat-focused .mat-mdc-form-field-outline-start,
   ::ng-deep .mat-mdc-form-field-appearance-outline.mat-focused .mat-mdc-form-field-outline-gap,
   ::ng-deep .mat-mdc-form-field-appearance-outline.mat-focused .mat-mdc-form-field-outline-end {
-    border-color: #FFFFFF !important; /* Borde blanco cuando está enfocado */
+    border-color: #3f51b5 !important; /* Primary Blue cuando está enfocado */
   }
-
 
   /* Color de la etiqueta (placeholder) */
   ::ng-deep .mat-mdc-form-field-label {
-    color: #FFFFFF !important; /* White: Color de la etiqueta para alta visibilidad */
+    color: #424242 !important; /* Dark Gray/Near Black: Color de la etiqueta */
   }
   /* Color del texto de entrada */
   ::ng-deep input.mat-mdc-input-element {
-    color: #FFFFFF; /* White: Color del texto de entrada */
+    color: #333333; /* Dark Gray/Near Black: Color del texto de entrada */
   }
   /* Color del ícono de búsqueda */
   ::ng-deep .mat-icon {
-    color: #FFFFFF; /* White: Color del ícono de búsqueda */
+    color: #5c6bc0; /* Secondary Blue: Color del ícono de búsqueda */
   }
 }
 
-/* Clear search button styling */
+/* Estilo para el botón de limpiar búsqueda */
 .clear-button {
-  align-self: center; /* Centra el botón */
+  align-self: center;
   border-radius: 8px;
   color: #fff; /* White */
-  border: 1px solid rgba(255, 255, 255, 0.6); /* Borde blanco semi-transparente */
+  border: 1px solid rgba(255, 255, 255, 0.6);
   padding: 8px 20px;
-  background-color: rgba(255, 255, 255, 0.15); /* Fondo blanco semi-transparente */
+  background-color: rgba(255, 255, 255, 0.15);
   transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  font-size: 1em;
 }
 
 .clear-button:hover {
@@ -122,37 +123,40 @@ body {
   transform: translateY(-2px);
 }
 
-/* CONTENT CARDS SECTION: Where the grid of cards live */
+/* Sección de tarjetas de contenido */
+/* ¡CORRECCIÓN AQUÍ PARA APILAR Y CENTRAR LAS TARJETAS Y EL PAGINADOR! */
 .content-cards-section {
   padding: 40px;
   background-color: #f0f2f5; /* Light Gray: Fondo de la sección de tarjetas */
-  flex-grow: 1; /* Permite que ocupe el espacio restante */
+  display: flex; /* Lo convierte en un contenedor flex */
+  flex-direction: column; /* Apila los elementos hijos verticalmente (cuadrícula de tarjetas, paginador) */
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  /* justify-content: center; <--- ELIMINADO: esto causaba que el paginador se fuera de lado */
 }
 
-/* Cards Grid Container (Tamaño de tarjetas aumentado en ~15%) */
+/* Contenedor de la cuadrícula de tarjetas */
 .cards-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(368px, 1fr)); /* Aumentado a 368px */
+  grid-template-columns: repeat(auto-fit, minmax(368px, 1fr));
   gap: 30px; /* Espacio entre las tarjetas */
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  justify-content: center;
+  width: 100%; /* Permite que la cuadrícula ocupe el ancho disponible */
+  max-width: 1400px; /* Limita el ancho máximo */
+  justify-content: center; /* Centra los items dentro de la cuadrícula si no llenan la fila */
 }
 
-/* No results message */
+/* Mensaje de "No hay resultados" */
 .no-results-message {
   text-align: center;
   font-size: 1.3em;
-  color: #424242; /* Dark Gray/Near Black: Color del texto "No se encontraron resultados" */
+  color: #424242; /* Dark Gray/Near Black */
   padding: 60px;
-  background-color: #E0E0E0; /* CAMBIO AQUÍ: Light Gray para el fondo del mensaje */
+  background-color: #e0e0e0; /* Light Gray */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin-top: 50px;
 }
 
-/* User Card styling (mostly unchanged in structure) */
+/* Estilos para las tarjetas de usuario (mat-card) */
 .usuario-card {
   margin: 0;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -161,8 +165,9 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: auto;
-  background-color: #E0E0E0; /* CAMBIO AQUÍ: Light Gray para suavizar el fondo de la tarjeta */
+  background-color: #e0e0e0; /* Light Gray para suavizar el fondo de la tarjeta */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
 }
 
 .usuario-card:hover {
@@ -170,20 +175,23 @@ body {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
+/* Estilos para los elementos internos de mat-card */
 .usuario-card mat-card-header {
   padding: 20px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #f0f0f0; /* Light Gray: Borde inferior del header de la tarjeta */
+  border-bottom: 1px solid #f0f0f0; /* Light Gray */
+  background-color: #fcfcfc; /* Un blanco suave para el header de la tarjeta */
 }
 
 .usuario-card mat-card-title {
   font-size: 1.5em;
   font-weight: 700;
-  color: #333333; /* Dark Gray/Near Black: Color del título de la tarjeta */
+  color: #333333; /* Dark Gray/Near Black */
   margin-left: 15px;
 }
 
+/* Estilos para el avatar de la tarjeta (mat-card-avatar) */
 .example-header-image {
   width: 70px;
   height: 70px;
@@ -191,14 +199,16 @@ body {
   overflow: hidden;
   flex-shrink: 0;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  border: 3px solid #3f51b5; /* Primary Blue: Borde del avatar, coherente con la paleta */
+  border: 3px solid #3f51b5; /* Primary Blue */
+  background-color: #E0E0E0; /* Placeholder color si la imagen no carga */
 }
-
+/* Estilo para la imagen dentro del avatar */
 .example-header-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 
 .usuario-card mat-card-content {
   padding: 20px;
@@ -207,15 +217,16 @@ body {
 
 .usuario-card mat-card-content p {
   margin-bottom: 12px;
-  color: #424242; /* Dark Gray/Near Black: Color del texto en el contenido de la tarjeta */
+  color: #424242; /* Dark Gray/Near Black */
   display: flex;
   align-items: center;
   font-size: 1em;
 }
 
+/* Estilos para los íconos dentro del contenido de la tarjeta */
 .card-icon {
   margin-right: 10px;
-  color: #3f51b5; /* Primary Blue: Color de los íconos en el contenido de la tarjeta */
+  color: #3f51b5; /* Primary Blue */
   font-size: 1.2em;
 }
 
@@ -223,9 +234,10 @@ body {
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px 20px;
-  border-top: 1px solid #f0f0f0; /* Light Gray: Borde superior de las acciones de la tarjeta */
+  border-top: 1px solid #f0f0f0; /* Light Gray */
 }
 
+/* Estilos para los botones dentro de mat-card-actions */
 .usuario-card mat-card-actions button {
   border-radius: 8px;
   margin-left: 10px;
@@ -235,7 +247,42 @@ body {
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
+/* Estilos para el paginador (mat-paginator) */
+.user-paginator {
+  text-align: center;
+  margin-top: 30px;
+  background-color: #e0e0e0; /* Light Gray */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  color: #424242; /* Dark Gray/Near Black */
+  font-size: 0.9em;
+  /* === INICIO DE CAMBIOS === */
+  width: 100%; /* Asegura que ocupe el 100% del espacio disponible de su padre */
+  max-width: 1400px; /* Limita su ancho máximo para que coincida con las tarjetas */
+  /* === FIN DE CAMBIOS === */
+}
+
+/* Estilos del footer */
+.app-footer {
+  background-color: #3f51b5; /* Primary Blue */
+  min-height: 100px; /* FOOTER MÁS GRANDE */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9em;
+  padding: 10px 20px;
+  box-sizing: border-box; /* Asegura que padding no aumente el ancho */
+  margin-top: auto; /* ¡Esta es la línea clave para empujar el footer hacia abajo! */
+}
+
+
+/* ====================================================== */
+/* === Responsive Design (Media Queries)              === */
+/* ====================================================== */
+
 @media (max-width: 1000px) {
   .top-header-section {
     padding: 30px 30px;
@@ -251,7 +298,7 @@ body {
   }
 
   .cards-grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); /* Ajuste para pantallas medianas */
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     gap: 20px;
   }
 }
@@ -275,13 +322,17 @@ body {
   }
 
   .cards-grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajuste para tablets */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
   }
 
   .usuario-card {
-    max-width: none; /* Permite que las tarjetas se expandan en pantallas más pequeñas */
+    max-width: none;
     margin: 0;
+  }
+
+  .app-footer {
+    min-height: 80px; /* Ajuste para pantallas pequeñas */
   }
 }
 
@@ -300,6 +351,6 @@ body {
   }
 
   .cards-grid-container {
-    grid-template-columns: 1fr; /* Una columna en móviles */
+    grid-template-columns: 1fr;
   }
 }
