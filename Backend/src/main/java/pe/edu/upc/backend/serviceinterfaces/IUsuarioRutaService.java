@@ -9,4 +9,5 @@ public interface IUsuarioRutaService {
     public void update(UsuarioRuta ur);
     public void delete(int id);
     public UsuarioRuta listId(int id);
+    List<String[]> zonaxUsuario();
 }

@@ -2,7 +2,6 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.*;
 import pe.edu.upc.backend.entities.Zona;
@@ -15,13 +14,20 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/zonas")
-@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class ZonaController {
     @Autowired
     private IZonaService zS;
 
     @GetMapping("/listar")
     public List<ZonaDTO> listar() {
+        return zS.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, ZonaDTO.class);
+        }).collect((Collectors.toList()));
+    }
+    @GetMapping("/listarCoordenadas") // <--- Aquí está la nueva ruta
+    public List<ZonaDTO> listarCoordenadas() {
+        // Reutiliza la lógica de listar, ya que ZonaDTO ya tiene las coordenadas
         return zS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, ZonaDTO.class);
@@ -88,5 +94,18 @@ public class ZonaController {
         ModelMapper m = new ModelMapper();
         ZonaDTO dto =m.map(zS.listId(id), ZonaDTO.class);
         return dto;
+    }
+
+    @GetMapping("/nombreZonaxAprobacion")
+    public List<NombreZonaxAprobacionDTO> consulta01() {
+        List<String[]> filaLista = zS.nombreZonaxAprobacion();
+        List<NombreZonaxAprobacionDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            NombreZonaxAprobacionDTO dto = new NombreZonaxAprobacionDTO();
+            dto.setNombre_zona(columna[0]);
+            dto.setCantAprobacion(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }

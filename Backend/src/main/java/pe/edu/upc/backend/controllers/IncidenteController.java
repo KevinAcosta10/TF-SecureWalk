@@ -2,7 +2,6 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.IncidenteDTO;
 import pe.edu.upc.backend.dtos.IncidentesPorUsuarioDTO;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/incidentes")
-@PreAuthorize("hasAnyAuthority('POLICIA','ADMINISTRADOR','USUARIO')")
 public class IncidenteController {
     @Autowired
     private IIncidenteService iS;
@@ -49,22 +47,19 @@ public class IncidenteController {
         iS.delete(id);
     }
 
-    @GetMapping("/incidentesPorUsuario")
-    public List<IncidentesPorUsuarioDTO> IncidentesUsuarios(){
-        List<String[]> lista = iS.IncidentesPorUsuario();
-        List<IncidentesPorUsuarioDTO> listaDTO= new ArrayList<>();
-        for (String[] columna : lista) {
+    @GetMapping("/incidentexUsuario")
+    public List<IncidentesPorUsuarioDTO> consulta01() {
+        List<String[]> filaLista = iS.tipoIncidentexUsuario();
+        List<IncidentesPorUsuarioDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
             IncidentesPorUsuarioDTO dto = new IncidentesPorUsuarioDTO();
-            dto.setIdIncidente(Long.parseLong(columna[0]));
-            dto.setDescripcionIncidente(columna[1]);
-            dto.setFechaIncidente(LocalDate.parse(columna[2]));
-            dto.setTipoIncidente(columna[3]);
-            dto.setIdUsuario(Long.parseLong(columna[4]));
-            dto.setNombreUsuario(columna[5]);
-            listaDTO.add(dto);
+            dto.setTipoIncidente(columna[0]);
+            dto.setCantUsuario(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
         }
-        return listaDTO;
+        return dtoLista;
     }
+
     @GetMapping("/{id}")
     public IncidenteDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();

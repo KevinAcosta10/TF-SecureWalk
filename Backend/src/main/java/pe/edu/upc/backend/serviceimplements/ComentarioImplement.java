@@ -43,5 +43,15 @@ public class ComentarioImplement implements IComentarioService {
         return cR.findById(id).orElse(new Comentario());
     }
 
+    @Override
+    public List<String[]> nombreZonaxComentario() {
+        return cR.nombreZonaxComentario();
+    }
+
+    @Override
+    public List<String[]> comentarioxTipoPregunta() {
+        return cR.comentarioxTipoPregunta();
+    }
+
 
 }

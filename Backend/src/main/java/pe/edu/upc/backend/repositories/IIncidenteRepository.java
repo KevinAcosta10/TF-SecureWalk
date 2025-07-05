@@ -12,10 +12,12 @@ import java.util.List;
 @Repository
 public interface IIncidenteRepository extends JpaRepository<Incidente, Integer> {
 
-    @Query(value = "SELECT i.id_incidente, i.descripcion_incidente, i.fecha_incidente, i.tipo_incidente, \n" +
-            "       u.id_usuario, u.nombre_usuario\n" +
-            " FROM incidente i\n" +
-            " JOIN usuario u ON i.id_usuario = u.id_usuario\n" +
-            " ORDER BY i.fecha_incidente DESC", nativeQuery = true)
-    public List<String[]> IncidentesPorUsuario();
+
+    @Query(value = "SELECT tipo_incidente,COUNT(a.id_usuario) FROM incidente a\n" +
+            "INNER JOIN usuario b\n" +
+            "ON a.id_usuario = b.id_usuario\n" +
+            "LEFT JOIN zona c\n" +
+            "ON a.id_zona = c.id_zona\n" +
+            "GROUP BY 1", nativeQuery = true)
+    List<String[]> tipoIncidentexUsuario();
 }

@@ -34,4 +34,8 @@ public class EncuestaImplement implements IEncuestaService {
         return eR.findById(id).orElse(new Encuesta());
     }
 
+    @Override
+    public List<String[]> nombreEncuestaxUsuario() {
+        return eR.nombreEncuestaxUsuario();
+    }
 }

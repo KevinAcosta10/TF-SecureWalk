@@ -2,18 +2,18 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.UsuarioRutaDTO;
+import pe.edu.upc.backend.dtos.zonaxUsuario;
 import pe.edu.upc.backend.entities.UsuarioRuta;
 import pe.edu.upc.backend.serviceinterfaces.IUsuarioRutaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarioRutas")
-@PreAuthorize("hasAnyAuthority('POLICIA','ADMINISTRADOR','USUARIO')")
 public class UsuarioRutaController {
     @Autowired
     private IUsuarioRutaService urS;
@@ -51,6 +51,19 @@ public class UsuarioRutaController {
         ModelMapper m = new ModelMapper();
         UsuarioRutaDTO dto =m.map(urS.listId(id), UsuarioRutaDTO.class);
         return dto;
+    }
+
+    @GetMapping("/zonaxUsuario")
+    public List<zonaxUsuario> consulta01() {
+        List<String[]> filaLista = urS.zonaxUsuario();
+        List<zonaxUsuario> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            zonaxUsuario dto = new zonaxUsuario();
+            dto.setNombreZona(columna[0]);
+            dto.setCantUsuario(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }
 

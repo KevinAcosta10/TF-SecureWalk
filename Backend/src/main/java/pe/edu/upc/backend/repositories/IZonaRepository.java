@@ -33,4 +33,14 @@ public interface IZonaRepository extends JpaRepository<Zona, Integer> {
             "INNER JOIN zona z ON z.id_zona = r.id_zona\n" +
             "where z.nombre_zona = :zona", nativeQuery = true)
     public List<String[]> SeguridadPorZona(@Param("zona") String zona);
+
+    @Query(value = "SELECT nombre_zona,SUM(case when d.aprobacion_incidente = true THEN 1 ELSE 0 END)APROBADOS FROM zona a \n" +
+            "INNER JOIN ruta b\n" +
+            "ON a.id_zona = b.id_zona\n" +
+            "INNER JOIN usuario_ruta c \n" +
+            "ON b.id_ruta = c.id_ruta\n" +
+            "INNER JOIN evaluacion_incidente d\n" +
+            "ON c.id_usuario = d.id_usuario\n" +
+            "GROUP BY 1", nativeQuery = true)
+    List<String[]> nombreZonaxAprobacion();
 }

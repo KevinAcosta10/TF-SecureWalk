@@ -37,4 +37,10 @@ public class UsuarioRutaImplement implements IUsuarioRutaService {
     public UsuarioRuta listId(int id) {
         return urR.findById(id).orElse(new UsuarioRuta());
     }
+
+
+    @Override
+    public List<String[]> zonaxUsuario() {
+        return urR.zonaxUsuario();
+    }
 }

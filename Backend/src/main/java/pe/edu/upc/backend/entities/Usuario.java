@@ -18,7 +18,7 @@ public class Usuario implements Serializable {
     @Column(name = "emailUsuario", nullable = false)
     private String emailUsuario;
     @Column(name = "telefonoUsuario", nullable = false)
-    private int telefonoUsuario;
+    private String telefonoUsuario;
     @Column(name = "direccionUsuario", nullable = false)
     private String direccionUsuario;
     @Column(name = "fechaRegistroUsuario", nullable = false)
@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, int telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password, boolean enable, List<Rol> roles, List<Post> posts, List<EvaluacionIncidente> evaluacionesIncidente, List<Incidente> incidentes, List<UsuarioRuta> usuariosRutas, List<Comentario> comentarios, List<Respuesta> respuestas) {
+    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, String telefonoUsuario, String direccionUsuario, LocalDate fechaRegistroUsuario, String username, String password, boolean enable, List<Rol> roles, List<Post> posts, List<EvaluacionIncidente> evaluacionesIncidente, List<Incidente> incidentes, List<UsuarioRuta> usuariosRutas, List<Comentario> comentarios, List<Respuesta> respuestas) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.emailUsuario = emailUsuario;
@@ -98,11 +98,11 @@ public class Usuario implements Serializable {
         this.emailUsuario = emailUsuario;
     }
 
-    public int getTelefonoUsuario() {
+    public String getTelefonoUsuario() {
         return telefonoUsuario;
     }
 
-    public void setTelefonoUsuario(int telefonoUsuario) {
+    public void setTelefonoUsuario(String telefonoUsuario) {
         this.telefonoUsuario = telefonoUsuario;
     }
 

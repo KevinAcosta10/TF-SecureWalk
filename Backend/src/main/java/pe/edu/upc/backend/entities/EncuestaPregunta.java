@@ -2,6 +2,7 @@ package pe.edu.upc.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -19,16 +20,18 @@ public class EncuestaPregunta {
     @JoinColumn(name = "idPregunta")
     private Pregunta pregunta;
 
+
     @OneToMany(mappedBy = "encuestaPregunta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Respuesta> respuestas;
 
     public EncuestaPregunta() {
     }
 
-    public EncuestaPregunta(int idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta) {
+    public EncuestaPregunta(int idEncuestaPregunta, Encuesta encuesta, Pregunta pregunta, List<Respuesta> respuestas) {
         this.idEncuestaPregunta = idEncuestaPregunta;
         this.encuesta = encuesta;
         this.pregunta = pregunta;
+        this.respuestas = respuestas;
     }
 
     public int getIdEncuestaPregunta() {
@@ -53,5 +56,13 @@ public class EncuestaPregunta {
 
     public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
+    }
+
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
     }
 }

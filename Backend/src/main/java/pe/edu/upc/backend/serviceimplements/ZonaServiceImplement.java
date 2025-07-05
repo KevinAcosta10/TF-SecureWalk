@@ -52,4 +52,9 @@ public class ZonaServiceImplement implements IZonaService {
     public Zona listId(int id) {
         return zR.findById(id).orElse(new Zona());
     }
+
+    @Override
+    public List<String[]> nombreZonaxAprobacion() {
+        return zR.nombreZonaxAprobacion();
+    }
 }

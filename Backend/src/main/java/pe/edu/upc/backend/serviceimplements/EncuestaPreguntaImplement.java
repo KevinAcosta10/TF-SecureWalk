@@ -38,4 +38,13 @@ public class EncuestaPreguntaImplement implements IEncuestaPreguntaService {
         return eIR.findById(id).orElse(new EncuestaPregunta());
     }
 
+    @Override
+    public List<EncuestaPregunta> listarEncuestaPreguntas(int id) {
+        return eIR.listarEncuestaPreguntas(id);
+    }
+
+    @Override
+    public List<EncuestaPregunta> findAllByOrderByEncuestaIdEncuestaAscOrdenAsc() {
+        return eIR.findAllByOrderByEncuestaIdEncuestaAscOrdenAsc();
+    }
 }

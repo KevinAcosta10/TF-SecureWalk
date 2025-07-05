@@ -11,4 +11,5 @@ public interface IUsuarioService {
     public void update(Usuario u);
     public void delete(int id);
     public Usuario listId(int id);
+    public List<Usuario> buscar(String nombre);
 }

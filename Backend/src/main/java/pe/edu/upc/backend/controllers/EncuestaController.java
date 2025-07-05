@@ -2,20 +2,19 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.EncuestaDTO;
+import pe.edu.upc.backend.dtos.NombreEncuestaxUsuarioDTO;
 import pe.edu.upc.backend.entities.Encuesta;
 import pe.edu.upc.backend.serviceinterfaces.IEncuestaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/encuestas")
-@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class EncuestaController {
-
     @Autowired
     private IEncuestaService eR;
 
@@ -51,5 +50,19 @@ public class EncuestaController {
         ModelMapper m = new ModelMapper();
         EncuestaDTO dto =m.map(eR.listId(id), EncuestaDTO.class);
         return dto;
+    }
+
+
+    @GetMapping("/nombreEncuestaxUsuario")
+    public List<NombreEncuestaxUsuarioDTO> consulta01() {
+        List<String[]> filaLista = eR.nombreEncuestaxUsuario();
+        List<NombreEncuestaxUsuarioDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            NombreEncuestaxUsuarioDTO dto = new NombreEncuestaxUsuarioDTO();
+            dto.setNombreEncuesta(columna[0]);
+            dto.setCantUsuario(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }
