@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comentarios") //las puse /api a todas para mandarla al WebSecurityConfig y acceder sin autorizacion a todos los controllers
-@PreAuthorize("hasRole('ADMIN')")
 public class ComentarioController {
     @Autowired
     private IComentarioService cS;
