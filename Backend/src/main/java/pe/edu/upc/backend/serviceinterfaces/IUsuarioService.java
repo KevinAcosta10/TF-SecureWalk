@@ -1,6 +1,5 @@
 package pe.edu.upc.backend.serviceinterfaces;
 
-import pe.edu.upc.backend.dtos.UsuarioDTO;
 import pe.edu.upc.backend.entities.Usuario;
 
 import java.util.List;
