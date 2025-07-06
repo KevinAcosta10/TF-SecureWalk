@@ -1,57 +1,56 @@
 <div class="main-container">
   <div class="top-header-section">
     <div class="title-add-block">
-      <h1 class="page-title">Listado de Encuestas y sus Preguntas</h1>
-    </div>
+      <h1 class="page-title">Lista de Encuestas</h1>
+      </div>
   </div>
 
   <div class="content-cards-section">
-    <div *ngIf="encuestasConPreguntas.length > 0; else noDataFound" class="cards-grid">
-      <mat-card *ngFor="let encuesta of encuestasConPreguntas" class="survey-card mat-elevation-z4">
-        <mat-card-header>
-          <mat-card-title class="card-title">{{ encuesta.nombreEncuesta }} (ID: {{ encuesta.idEncuesta }})</mat-card-title>
-          <mat-card-subtitle class="card-subtitle">
-            Creada el: {{ encuesta.fechaCreacionEncuesta | date:'longDate' }}
-          </mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-          <p class="card-description">{{ encuesta.descripcionEncuesta }}</p>
-
-          <mat-expansion-panel class="questions-expansion-panel" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title class="panel-title">
-                Preguntas de la Encuesta ({{ encuesta.preguntas.length }} preguntas)
-              </mat-panel-title>
-              <mat-panel-description class="panel-description">
-                Haz clic para ver/ocultar las preguntas
-              </mat-panel-description>
-              <mat-icon class="expansion-toggle-icon">expand_more</mat-icon>
-            </mat-expansion-panel-header>
-
-            <div class="questions-list">
-              <div *ngIf="encuesta.preguntas.length > 0; else noQuestionsForSurvey">
-                <div *ngFor="let pregunta of encuesta.preguntas" class="question-item">
-                  <p><strong>Pregunta: </strong>{{ pregunta.textoPregunta }}</p>
-                  <p><small><strong>Tipo: </strong>{{ pregunta.tipoPregunta }}</small></p>
-                  <div class="item-separator"></div>
-                </div>
-              </div>
-              <ng-template #noQuestionsForSurvey>
-                <p class="no-questions-message">Esta encuesta no tiene preguntas asociadas.</p>
-              </ng-template>
-            </div>
-          </mat-expansion-panel>
-
-        </mat-card-content>
-      </mat-card>
+    <div class="cards-grid">
+      <div class="survey-card" *ngFor="let encuesta of dataSource.connect() | async">
+        <div class="card-header">
+          <h2 class="card-title">{{ encuesta.nombreEncuesta }}</h2>
+          </div>
+        <div class="card-content">
+          <p>
+            <mat-icon class="card-icon">event</mat-icon> Fecha de Creación:
+            {{ encuesta.fechaCreacionEncuesta| date : 'shortDate' }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">description</mat-icon> Descripción:
+            {{ encuesta.descripcionEncuesta }}
+          </p>
+          </div>
+        <div class="card-actions">
+          <button
+            mat-button
+            color="primary"
+            [routerLink]="['ediciones', encuesta.idEncuesta]"
+            aria-label="Editar encuesta"
+          >
+            <mat-icon>edit</mat-icon> Editar
+          </button>
+          <button
+            mat-button
+            color="warn"
+            (click)="eliminar(encuesta.idEncuesta)"
+            aria-label="Eliminar encuesta"
+          >
+            <mat-icon>delete_forever</mat-icon> Eliminar
+          </button>
+        </div>
+      </div>
     </div>
 
-    <ng-template #noDataFound>
-      <div class="no-data-container">
-        <p>No se encontraron encuestas con preguntas para mostrar.</p>
-        <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
-      </div>
-    </ng-template>
+    <mat-paginator
+      [length]="dataSource.data.length"
+      [pageSize]="3"
+      [pageSizeOptions]="[3, 6, 9, 12]"
+      aria-label="Seleccionar página de encuestas"
+      class="user-paginator"
+    >
+    </mat-paginator>
   </div>
 </div>
+
+<footer class="app-footer"></footer>

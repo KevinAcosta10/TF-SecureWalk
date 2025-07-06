@@ -5,9 +5,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { EvaluacionIncidente } from '../../../models/evaluacionincidente';
 import { EvaluacionincidenteService } from '../../../services/evaluacionincidente.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-listarevaluacionincidente',
@@ -19,7 +19,7 @@ import { EvaluacionincidenteService } from '../../../services/evaluacionincident
     MatCardModule,
     RouterLink,
     MatButtonModule,
-    CarouselModule,
+    MatPaginatorModule,
   ],
   templateUrl: './listarevaluacionincidente.component.html',
   styleUrl: './listarevaluacionincidente.component.css',
@@ -30,37 +30,6 @@ export class ListarevaluacionincidenteComponent {
     { value: true, viewValue: 'Aprobado' },
     { value: false, viewValue: 'Desaprobado' },
   ];
-  customOptions: OwlOptions = {
-  loop: false,
-  mouseDrag: true,
-  touchDrag: true,
-  pullDrag: true,
-  dots: true, 
-  navSpeed: 700,
-  navText: [
-    '<span class="owl-prev-icon">&lsaquo;</span>', // 
-    '<span class="owl-next-icon">&rsaquo;</span>', // 
-  ],
-  nav: true,
-  slideBy: 1, 
-  autoplay: true, 
-  autoplayTimeout: 5000, 
-  autoplayHoverPause: true, 
-  responsive: { 
-    0: {
-      items: 1
-    },
-    768: {
-      items: 2
-    },
-    1024: {
-      items: 3 
-    },
-    1400: {
-      items: 4 
-    }
-  },
-};
 
   constructor(private eiS: EvaluacionincidenteService) {}
 
