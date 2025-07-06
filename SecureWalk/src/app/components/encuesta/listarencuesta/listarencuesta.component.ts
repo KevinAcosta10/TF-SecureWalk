@@ -12,20 +12,19 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-listarencuesta',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatExpansionModule,
-    DatePipe,
-    RouterModule,
-    MatPaginatorModule 
-  ],
-  templateUrl: './listarencuesta.component.html',
-  styleUrls: ['./listarencuesta.component.css']
+    selector: 'app-listarencuesta',
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatExpansionModule,
+        DatePipe,
+        RouterModule,
+        MatPaginatorModule
+    ],
+    templateUrl: './listarencuesta.component.html',
+    styleUrls: ['./listarencuesta.component.css']
 })
 export class ListarencuestaComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Encuesta> = new MatTableDataSource();

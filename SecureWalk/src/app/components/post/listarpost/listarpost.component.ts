@@ -14,10 +14,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-listarpost',
-  standalone: true,
-  imports: [
-    MatIconModule,
+    selector: 'app-listarpost',
+    imports: [
+        MatIconModule,
         RouterLink,
         MatCardModule,
         CommonModule,
@@ -27,9 +26,9 @@ import { MatInputModule } from '@angular/material/input';
         MatButtonModule,
         MatPaginatorModule,
         MatTableModule
-  ],
-  templateUrl: './listarpost.component.html',
-  styleUrl: './listarpost.component.css'
+    ],
+    templateUrl: './listarpost.component.html',
+    styleUrl: './listarpost.component.css'
 })
 export class ListarpostComponent implements OnInit, AfterViewInit { // ¡IMPLEMENTA AfterViewInit!
 

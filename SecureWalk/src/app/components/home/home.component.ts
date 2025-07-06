@@ -8,19 +8,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatCardModule,
-    MatGridListModule,
-    MatIconModule,
-    RouterLink,
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+    selector: 'app-home',
+    imports: [
+        MatDialogModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatCardModule,
+        MatGridListModule,
+        MatIconModule,
+        RouterLink,
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent {
   @ViewChild('aboutDialog') aboutDialog!: TemplateRef<any>;

@@ -13,20 +13,19 @@ import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackB
 
 
 @Component({
-  selector: 'app-listarencuestapregunta',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatExpansionModule, // Mantener si se usa en otro lugar del componente
-    RouterLink,
-    MatPaginatorModule, // Asegurarse que esté
-    MatTableModule, // Asegurarse que esté para MatTableDataSource
-  ],
-  templateUrl: './listarencuestapregunta.component.html',
-  styleUrl: './listarencuestapregunta.component.css'
+    selector: 'app-listarencuestapregunta',
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatExpansionModule, // Mantener si se usa en otro lugar del componente
+        RouterLink,
+        MatPaginatorModule, // Asegurarse que esté
+        MatTableModule, // Asegurarse que esté para MatTableDataSource
+    ],
+    templateUrl: './listarencuestapregunta.component.html',
+    styleUrl: './listarencuestapregunta.component.css'
 })
 export class ListarencuestapreguntaComponent implements OnInit, AfterViewInit { // Implementar AfterViewInit
 

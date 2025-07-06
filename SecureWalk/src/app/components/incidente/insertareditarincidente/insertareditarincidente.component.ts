@@ -21,21 +21,20 @@ import { UsuariosService } from '../../../services/usuarios.service';
 import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-insertareditarincidente',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    CommonModule,
-    MatInputModule,
-    NgIf
-  ],
-  templateUrl: './insertareditarincidente.component.html',
-  styleUrl: './insertareditarincidente.component.css',
+    selector: 'app-insertareditarincidente',
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        CommonModule,
+        MatInputModule,
+        NgIf
+    ],
+    templateUrl: './insertareditarincidente.component.html',
+    styleUrl: './insertareditarincidente.component.css'
 })
 export class InsertareditarincidenteComponent {
   form: FormGroup = new FormGroup({});

@@ -28,23 +28,22 @@ import { Encuesta } from '../../../models/encuesta';
 import { Pregunta } from '../../../models/pregunta';
 
 @Component({
-  selector: 'app-insertareditarencuestapregunta',
-  standalone: true,
-  imports: [
-    CommonModule, // Necesario para *ngFor, *ngIf
-    ReactiveFormsModule, // Necesario para formularios reactivos
-    MatFormFieldModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatDatepickerModule, // Se mantiene por si se usa en otros contextos o por consistencia de imports
-    MatSelectModule, // Para los dropdowns de Encuesta y Pregunta
-    MatOption, // Para las opciones dentro de mat-select
-    MatIcon, // Para los iconos
-    MatButtonModule, // Para los botones
-    NgIf, // Para *ngIf
-  ],
-  templateUrl: './insertareditarencuestapregunta.component.html',
-  styleUrl: './insertareditarencuestapregunta.component.css',
+    selector: 'app-insertareditarencuestapregunta',
+    imports: [
+        CommonModule, // Necesario para *ngFor, *ngIf
+        ReactiveFormsModule, // Necesario para formularios reactivos
+        MatFormFieldModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule, // Se mantiene por si se usa en otros contextos o por consistencia de imports
+        MatSelectModule, // Para los dropdowns de Encuesta y Pregunta
+        MatOption, // Para las opciones dentro de mat-select
+        MatIcon, // Para los iconos
+        MatButtonModule, // Para los botones
+        NgIf, // Para *ngIf
+    ],
+    templateUrl: './insertareditarencuestapregunta.component.html',
+    styleUrl: './insertareditarencuestapregunta.component.css'
 })
 export class InsertareditarencuestapreguntaComponent implements OnInit {
   // ¡Añade implements OnInit!

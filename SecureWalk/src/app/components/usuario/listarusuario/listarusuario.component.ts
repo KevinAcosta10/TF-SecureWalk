@@ -14,22 +14,21 @@ import { MatTableDataSource } from '@angular/material/table'; // Importar MatTab
 import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
 
 @Component({
-  selector: 'app-listarusuario',
-  standalone: true,
-  imports: [
-    MatIconModule,
-    RouterLink,
-    MatCardModule,
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    DatePipe,
-    MatPaginatorModule, // Añadir MatPaginatorModule a imports
-  ],
-  templateUrl: './listarusuario.component.html',
-  styleUrl: './listarusuario.component.css',
+    selector: 'app-listarusuario',
+    imports: [
+        MatIconModule,
+        RouterLink,
+        MatCardModule,
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        DatePipe,
+        MatPaginatorModule, // Añadir MatPaginatorModule a imports
+    ],
+    templateUrl: './listarusuario.component.html',
+    styleUrl: './listarusuario.component.css'
 })
 export class ListarusuarioComponent implements OnInit {
   // Cambiamos 'usuarios' a 'dataSource' para usar MatTableDataSource

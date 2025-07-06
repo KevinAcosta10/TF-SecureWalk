@@ -8,19 +8,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-landing',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatCardModule,
-    MatGridListModule,
-    MatIconModule,
-    RouterLink,
-  ],
-  templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css',
+    selector: 'app-landing',
+    imports: [
+        MatDialogModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatCardModule,
+        MatGridListModule,
+        MatIconModule,
+        RouterLink,
+    ],
+    templateUrl: './landing.component.html',
+    styleUrl: './landing.component.css'
 })
 export class LandingComponent {
   @ViewChild('aboutDialog') aboutDialog!: TemplateRef<any>;

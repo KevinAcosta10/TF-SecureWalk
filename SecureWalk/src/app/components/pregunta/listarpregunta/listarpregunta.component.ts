@@ -9,17 +9,16 @@ import { MatButtonModule } from '@angular/material/button'; // Importar MatButto
 import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
 
 @Component({
-  selector: 'app-listarpregunta',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-    RouterLink,
-    MatButtonModule, // Añadir MatButtonModule
-  ],
-  templateUrl: './listarpregunta.component.html',
-  styleUrl: './listarpregunta.component.css',
+    selector: 'app-listarpregunta',
+    imports: [
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        RouterLink,
+        MatButtonModule, // Añadir MatButtonModule
+    ],
+    templateUrl: './listarpregunta.component.html',
+    styleUrl: './listarpregunta.component.css'
 })
 export class ListarpreguntaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'pregunta', 'tipo', 'actualizar', 'eliminar']; // Nombres de columnas más descriptivos

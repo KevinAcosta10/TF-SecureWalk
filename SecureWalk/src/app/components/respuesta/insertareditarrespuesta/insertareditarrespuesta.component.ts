@@ -1,3 +1,4 @@
+import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -5,36 +6,36 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { Respuesta } from '../../../models/respuesta';
-import { EncuestaPregunta } from '../../../models/encuestapregunta';
 import { Usuario } from '../../../models/usuario';
+import { EncuestaPregunta } from '../../../models/encuestapregunta';
 import { RespuestaService } from '../../../services/respuesta.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { EncuestapreguntaService } from '../../../services/encuestapregunta.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSelectModule } from '@angular/material/select';
-import { MatNativeDateModule } from '@angular/material/core';
-import { CommonModule, NgIf } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
+
 
 @Component({
-  selector: 'app-insertareditarrespuesta',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    CommonModule,
-    MatInputModule,
-    NgIf,
-  ],
-  templateUrl: './insertareditarrespuesta.component.html',
-  styleUrl: './insertareditarrespuesta.component.css',
+    selector: 'app-insertareditarrespuesta',
+    standalone:true,
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        CommonModule,
+        MatInputModule,
+        NgIf,
+    ],
+    templateUrl: './insertareditarrespuesta.component.html',
+    styleUrl: './insertareditarrespuesta.component.css'
 })
 export class InsertareditarrespuestaComponent {
   form: FormGroup = new FormGroup({});

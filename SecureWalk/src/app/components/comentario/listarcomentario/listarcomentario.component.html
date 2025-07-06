@@ -6,25 +6,33 @@
   </div>
 
   <div class="content-cards-section">
-    <div class="cards-grid">
-      <mat-card class="comment-card" *ngFor="let comentario of comentarios">
+    <div *ngIf="dataSource.data.length === 0" class="no-data-container">
+      <p>No se encontraron comentarios para mostrar.</p>
+      <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
+    </div>
+
+    <div class="cards-grid" *ngIf="dataSource.data.length > 0">
+      <mat-card class="comment-card" *ngFor="let comentario of dataSource.connect() | async">
         <mat-card-header>
-          <mat-card-title>{{ comentario.idComentario }}</mat-card-title>
+          <mat-card-title>
+            <mat-icon class="card-title-icon">comment</mat-icon> Comentario ID:
+            {{ comentario.idComentario }}
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>
-            <mat-icon class="card-icon">description</mat-icon> Descripción:
+            <mat-icon class="card-icon">description</mat-icon> <strong>Descripción:</strong>
             {{ comentario.descripcionComentario }}
           </p>
           <p>
-            <mat-icon class="card-icon">forum</mat-icon> Post:
+            <mat-icon class="card-icon">forum</mat-icon> <strong>Post:</strong>
             {{ comentario.post.descripcionPost }}
           </p>
           <p>
-            <mat-icon class="card-icon">person</mat-icon> Usuario:
+            <mat-icon class="card-icon">person</mat-icon> <strong>Usuario:</strong>
             {{ comentario.usuario.nombreUsuario }}
           </p>
-          </mat-card-content>
+        </mat-card-content>
         <mat-card-actions>
           <button mat-button color="primary" [routerLink]="['ediciones', comentario.idComentario]">
             <mat-icon>edit</mat-icon> Editar
@@ -37,11 +45,12 @@
     </div>
 
     <mat-paginator
-      [length]="comentarios ? comentarios.length : 0"
+      [length]="dataSource.data.length"
       [pageSize]="3"
       [pageSizeOptions]="[3, 6, 9, 12]"
       aria-label="Seleccionar página de comentarios"
       class="user-paginator"
+      [hidden]="dataSource.data.length === 0"
     >
     </mat-paginator>
   </div>

@@ -15,75 +15,75 @@
 
   <div class="content-cards-section">
     <!-- Mensaje de "No hay resultados" si dataSource no tiene datos -->
-    <div *ngIf="dataSource.data.length === 0; else dataFound" class="no-data-container">
+    <div *ngIf="dataSource.data.length === 0" class="no-data-container">
       <p>No hay respuestas disponibles para mostrar en este momento.</p>
       <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
     </div>
 
-    <!-- Plantilla que se muestra si se encuentran datos -->
-    <ng-template #dataFound>
-      <!-- Contenedor de la cuadrícula de tarjetas -->
-      <div class="cards-grid">
-        <!-- Ahora itera sobre dataSource.connect() | async -->
-        <mat-card class="respuesta-card" *ngFor="let res of dataSource.connect() | async">
-          <mat-card-header>
-            <mat-card-title><mat-icon class="card-title-icon">message</mat-icon> ID Respuesta: {{ res.idRespuesta }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p class="respuesta-texto">
-              <mat-icon class="card-icon">text_fields</mat-icon> "{{ res.textoRespuesta }}"
-            </p>
-            <p>
-              <mat-icon class="card-icon">event</mat-icon> Fecha:
-              {{ res.fechaRespuesta | date:'dd/MM/yyyy HH:mm' }}
-            </p>
+    <!-- Contenedor de la cuadrícula de tarjetas -->
+    <!-- Este div solo se muestra si SÍ hay datos -->
+    <div class="cards-grid" *ngIf="dataSource.data.length > 0">
+      <!-- Ahora itera sobre dataSource.connect() | async -->
+      <mat-card class="respuesta-card" *ngFor="let res of dataSource.connect() | async">
+        <mat-card-header>
+          <mat-card-title><mat-icon class="card-title-icon">message</mat-icon> ID Respuesta: {{ res.idRespuesta }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="respuesta-texto">
+            <mat-icon class="card-icon">text_fields</mat-icon> "{{ res.textoRespuesta }}"
+          </p>
+          <p>
+            <mat-icon class="card-icon">event</mat-icon> Fecha:
+            {{ res.fechaRespuesta | date:'dd/MM/yyyy HH:mm' }}
+          </p>
 
-            <hr class="card-divider">
+          <hr class="card-divider">
 
-            <h3 class="card-subtitle-heading"><mat-icon class="card-icon">poll</mat-icon> Detalles de la Encuesta y Pregunta:</h3>
-            <p>
-              <mat-icon class="card-icon">assignment</mat-icon> Encuesta:
-              {{ res.encuestaPregunta.encuesta.nombreEncuesta || 'N/A' }}
-            </p>
-            <p>
-              <mat-icon class="card-icon">question_answer</mat-icon> Pregunta:
-              {{ res.encuestaPregunta.pregunta.textoPregunta }}
-            </p>
+          <h3 class="card-subtitle-heading"><mat-icon class="card-icon">poll</mat-icon> Detalles de la Encuesta y Pregunta:</h3>
+          <p>
+            <mat-icon class="card-icon">assignment</mat-icon> Encuesta:
+            {{ res.encuestaPregunta.encuesta.nombreEncuesta || 'N/A' }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">question_answer</mat-icon> Pregunta:
+            {{ res.encuestaPregunta.pregunta.textoPregunta }}
+          </p>
 
-            <h3 class="card-subtitle-heading"><mat-icon class="card-icon">person</mat-icon> Usuario que Respondió:</h3>
-            <p>
-              <mat-icon class="card-icon">account_circle</mat-icon> Nombre:
-              {{ res.usuario.nombreUsuario || 'N/A' }}
-            </p>
-            <p>
-              <mat-icon class="card-icon">email</mat-icon> Email:
-              {{ res.usuario.emailUsuario || 'N/A' }}
-            </p>
-          </mat-card-content>
+          <h3 class="card-subtitle-heading"><mat-icon class="card-icon">person</mat-icon> Usuario que Respondió:</h3>
+          <p>
+            <mat-icon class="card-icon">account_circle</mat-icon> Nombre:
+            {{ res.usuario.nombreUsuario || 'N/A' }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">email</mat-icon> Email:
+            {{ res.usuario.emailUsuario || 'N/A' }}
+          </p>
+        </mat-card-content>
 
-          <mat-card-actions>
-            <button mat-button color="warn" (click)="eliminar(res.idRespuesta)">
-              <mat-icon>delete_forever</mat-icon> Eliminar
-            </button>
-            <!-- No hay botón de edición en tu HTML original, pero lo dejo comentado por si lo necesitas -->
-            <!-- <button mat-button color="primary" [routerLink]="['ediciones', res.idRespuesta]">
-              <mat-icon>edit</mat-icon> Editar
-            </button> -->
-          </mat-card-actions>
-        </mat-card>
-      </div>
+        <mat-card-actions>
+          <button mat-button color="warn" (click)="eliminar(res.idRespuesta)">
+            <mat-icon>delete_forever</mat-icon> Eliminar
+          </button>
+          <!-- No hay botón de edición en tu HTML original, pero lo dejo comentado por si lo necesitas -->
+          <!-- <button mat-button color="primary" [routerLink]="['ediciones', res.idRespuesta]">
+            <mat-icon>edit</mat-icon> Editar
+          </button> -->
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
-      <!-- Paginador de Material Design -->
-      <mat-paginator
-        [length]="dataSource.data.length"
-        [pageSize]="3"
-        [pageSizeOptions]="[3, 6, 9, 12]"
-        aria-label="Seleccionar página de respuestas"
-        class="user-paginator"
-        [hidden]="dataSource.data.length === 0"
-      >
-      </mat-paginator>
-    </ng-template>
+    <!-- Paginador de Material Design -->
+    <!-- ¡CORRECCIÓN CLAVE AQUÍ: FUERA DE CUALQUIER *ngIf/ng-template! -->
+    <!-- Usamos [hidden] para ocultarlo si no hay datos, pero siempre estará en el DOM. -->
+    <mat-paginator
+      [length]="dataSource.data.length"
+      [pageSize]="3"
+      [pageSizeOptions]="[3, 6, 9, 12]"
+      aria-label="Seleccionar página de respuestas"
+      class="user-paginator"
+      [hidden]="dataSource.data.length === 0"
+    >
+    </mat-paginator>
   </div>
 </div>
 

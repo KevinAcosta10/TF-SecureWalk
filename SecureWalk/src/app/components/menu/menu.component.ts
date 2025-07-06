@@ -8,16 +8,15 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
 @Component({
-  selector: 'app-menu',
-  standalone: true,
-  imports: [MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterLink,
-  CommonModule],
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+    selector: 'app-menu',
+    imports: [MatToolbarModule,
+        MatIconModule,
+        MatMenuModule,
+        MatButtonModule,
+        RouterLink,
+        CommonModule],
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.css'
 })
 export class MenuComponent {
   role: string = '';

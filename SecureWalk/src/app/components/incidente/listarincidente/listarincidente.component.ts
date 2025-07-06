@@ -12,19 +12,18 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'; 
 import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar para notificaciones
 
 @Component({
-  selector: 'app-listarincidente',
-  standalone: true,
-  imports: [
-    MatTableModule, // Asegúrate de que MatTableModule esté importado para MatTableDataSource
-    MatIconModule,
-    CommonModule,
-    MatCardModule,
-    RouterLink,
-    MatButtonModule,
-    MatPaginatorModule, // Asegúrate de que MatPaginatorModule esté importado
-  ],
-  templateUrl: './listarincidente.component.html',
-  styleUrl: './listarincidente.component.css',
+    selector: 'app-listarincidente',
+    imports: [
+        MatTableModule, // Asegúrate de que MatTableModule esté importado para MatTableDataSource
+        MatIconModule,
+        CommonModule,
+        MatCardModule,
+        RouterLink,
+        MatButtonModule,
+        MatPaginatorModule, // Asegúrate de que MatPaginatorModule esté importado
+    ],
+    templateUrl: './listarincidente.component.html',
+    styleUrl: './listarincidente.component.css'
 })
 export class ListarincidenteComponent implements OnInit, AfterViewInit { // Implementar AfterViewInit
 

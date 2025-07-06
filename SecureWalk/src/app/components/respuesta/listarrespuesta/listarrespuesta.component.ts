@@ -11,19 +11,17 @@ import { RouterLink } from '@angular/router'; // Necesario para routerLink
 import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar para notificaciones
 
 @Component({
-  selector: 'app-listarrespuesta',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatPaginatorModule, // Asegurar que esté
-    MatTableModule, // Asegurar que esté para MatTableDataSource
-    MatCardModule, // Asegurar que esté
-    MatButtonModule, // Asegurar que esté
-    MatIconModule, // Asegurar que esté
-    RouterLink, // Asegurar que esté
-  ],
-  templateUrl: './listarrespuesta.component.html',
-  styleUrl: './listarrespuesta.component.css'
+    selector: 'app-listarrespuesta',
+    imports: [
+        CommonModule,
+        MatPaginatorModule, // Asegurar que esté
+        MatTableModule, // Asegurar que esté para MatTableDataSource
+        MatCardModule, // Asegurar que esté
+        MatButtonModule, // Asegurar que esté
+        MatIconModule, // Asegurar que esté // Asegurar que esté
+    ],
+    templateUrl: './listarrespuesta.component.html',
+    styleUrl: './listarrespuesta.component.css'
 })
 export class ListarrespuestaComponent implements OnInit, AfterViewInit { // Implementar AfterViewInit
 

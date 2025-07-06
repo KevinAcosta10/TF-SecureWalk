@@ -3,11 +3,10 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { ListarincidenteComponent } from './listarincidente/listarincidente.component';
 
 @Component({
-  selector: 'app-incidente',
-  standalone: true,
-  imports: [RouterOutlet, ListarincidenteComponent],
-  templateUrl: './incidente.component.html',
-  styleUrl: './incidente.component.css'
+    selector: 'app-incidente',
+    imports: [RouterOutlet, ListarincidenteComponent],
+    templateUrl: './incidente.component.html',
+    styleUrl: './incidente.component.css'
 })
 export class IncidenteComponent {
   constructor(public route: ActivatedRoute) { }

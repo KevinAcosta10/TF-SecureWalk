@@ -15,24 +15,23 @@ import { MatIconModule } from '@angular/material/icon'; // Importar MatIconModul
 import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
 
 @Component({
-  selector: 'app-insertareditarzona',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    CommonModule,
-    NgIf,
-    MatSelectModule,
-    GoogleMapsModule,
-    MapAdvancedMarker,
-    MatButtonModule, // Añadir a imports
-    MatIconModule, // Añadir a imports
-  ],
-  templateUrl: './insertareditarzona.component.html',
-  styleUrl: './insertareditarzona.component.css'
+    selector: 'app-insertareditarzona',
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        CommonModule,
+        NgIf,
+        MatSelectModule,
+        GoogleMapsModule,
+        MapAdvancedMarker,
+        MatButtonModule, // Añadir a imports
+        MatIconModule, // Añadir a imports
+    ],
+    templateUrl: './insertareditarzona.component.html',
+    styleUrl: './insertareditarzona.component.css'
 })
 export class InsertareditarzonaComponent implements OnInit {
   form: FormGroup = new FormGroup({});

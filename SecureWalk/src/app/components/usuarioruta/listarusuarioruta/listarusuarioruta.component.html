@@ -15,62 +15,61 @@
 
   <div class="content-cards-section">
     <!-- Mensaje de "No hay resultados" si dataSource no tiene datos -->
-    <div *ngIf="dataSource.data.length === 0; else dataFound" class="no-data-container">
+    <!-- Este div solo se muestra si NO hay datos -->
+    <div *ngIf="dataSource.data.length === 0" class="no-data-container">
       <p>No se encontraron rutas por usuario para mostrar.</p>
       <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
     </div>
 
-    <!-- Plantilla que se muestra si se encuentran datos -->
-    <ng-template #dataFound>
-      <!-- Contenedor de la cuadrícula de tarjetas -->
-      <div class="cards-grid">
-        <!-- Ahora itera sobre dataSource.connect() | async -->
-        <mat-card class="usuarioruta-card" *ngFor="let usuarioruta of dataSource.connect() | async">
-          <mat-card-header>
-            <mat-card-title><mat-icon class="card-title-icon">person</mat-icon> Usuario: {{ usuarioruta.usuario.nombreUsuario }}, {{ usuarioruta.usuario.idUsuario }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              <mat-icon class="card-icon">location_on</mat-icon> Zonas:
-              {{ usuarioruta.ruta.zona.nombreZona }}
-            </p>
-            <p>
-              <mat-icon class="card-icon">security</mat-icon> Nivel de seguridad:
-              {{ usuarioruta.ruta.nivelSeguridad }}
-            </p>
-            <p>
-              <mat-icon class="card-icon">access_time</mat-icon> Hora de inicio:
-              {{ usuarioruta.ruta.horaInicio }}
-            </p>
-            <p>
-              <mat-icon class="card-icon">access_time</mat-icon> Hora fin:
-              {{ usuarioruta.ruta.horaFin }}
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button color="primary" [routerLink]="['ediciones', usuarioruta.idUsuarioRuta]">
-              <mat-icon>edit</mat-icon> Editar
-            </button>
-            <button mat-button color="warn" (click)="eliminar(usuarioruta.idUsuarioRuta)">
-              <mat-icon>delete_forever</mat-icon> Eliminar
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+    <!-- Contenedor de la cuadrícula de tarjetas -->
+    <!-- Este div solo se muestra si SÍ hay datos -->
+    <div class="cards-grid" *ngIf="dataSource.data.length > 0">
+      <!-- Ahora itera sobre dataSource.connect() | async -->
+      <mat-card class="usuarioruta-card" *ngFor="let usuarioruta of dataSource.connect() | async">
+        <mat-card-header>
+          <mat-card-title><mat-icon class="card-title-icon">person</mat-icon> Usuario: {{ usuarioruta.usuario.nombreUsuario }}, {{ usuarioruta.usuario.idUsuario }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <mat-icon class="card-icon">location_on</mat-icon> Zonas:
+            {{ usuarioruta.ruta.zona.nombreZona }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">security</mat-icon> Nivel de seguridad:
+            {{ usuarioruta.ruta.nivelSeguridad }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">access_time</mat-icon> Hora de inicio:
+            {{ usuarioruta.ruta.horaInicio }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">access_time</mat-icon> Hora fin:
+            {{ usuarioruta.ruta.horaFin }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" [routerLink]="['ediciones', usuarioruta.idUsuarioRuta]">
+            <mat-icon>edit</mat-icon> Editar
+          </button>
+          <button mat-button color="warn" (click)="eliminar(usuarioruta.idUsuarioRuta)">
+            <mat-icon>delete_forever</mat-icon> Eliminar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
-      <!-- Paginador de Material Design -->
-      <!-- [length] ahora usa dataSource.data.length -->
-      <!-- [hidden] asegura que el paginador esté en el DOM para ViewChild -->
-      <mat-paginator
-        [length]="dataSource.data.length"
-        [pageSize]="3"
-        [pageSizeOptions]="[3, 6, 9, 12]"
-        aria-label="Seleccionar página de rutas por usuario"
-        class="user-paginator"
-        [hidden]="dataSource.data.length === 0"
-      >
-      </mat-paginator>
-    </ng-template>
+    <!-- Paginador de Material Design -->
+    <!-- ¡CORRECCIÓN CLAVE AQUÍ: FUERA DE CUALQUIER *ngIf/ng-template! -->
+    <!-- Solo usamos [hidden] para ocultarlo si no hay datos, pero siempre estará en el DOM. -->
+    <mat-paginator
+      [length]="dataSource.data.length"
+      [pageSize]="3"
+      [pageSizeOptions]="[3, 6, 9, 12]"
+      aria-label="Seleccionar página de rutas por usuario"
+      class="user-paginator"
+      [hidden]="dataSource.data.length === 0"
+    >
+    </mat-paginator>
   </div>
 </div>
 

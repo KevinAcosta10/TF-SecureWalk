@@ -18,22 +18,21 @@ interface MarkerData {
   index: number // Índice en la lista original para navegación
 }
 @Component({
-  selector: 'app-listarzona',
-  standalone: true,
-  imports: [MatTableModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    GoogleMap,
-    MapAdvancedMarker,
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
-  templateUrl: './listarzona.component.html',
-  styleUrl: './listarzona.component.css'
+    selector: 'app-listarzona',
+    imports: [MatTableModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        GoogleMap,
+        MapAdvancedMarker,
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
+    templateUrl: './listarzona.component.html',
+    styleUrl: './listarzona.component.css'
 })
 export class ListarzonaComponent implements OnInit {
   // Datos principales

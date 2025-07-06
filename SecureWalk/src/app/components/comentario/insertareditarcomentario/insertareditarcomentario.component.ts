@@ -13,19 +13,23 @@ import { ComentarioService } from '../../../services/comentario.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { PostService } from '../../../services/post.service';
+import { MatSnackBar } from '@angular/material/snack-bar'; // <--- NEW: Import MatSnackBar
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // <--- NEW: Import MatSnackBarModule
+import { MatButtonModule } from '@angular/material/button'; // <--- NEW: Ensure MatButtonModule is imported for buttons
 
 @Component({
   selector: 'app-insertareditarcomentario',
-  standalone: true,
+  standalone: true, // <--- NEW: Add standalone if it's a standalone component
   imports: [
     MatFormFieldModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatFormFieldModule,
     MatNativeDateModule,
     CommonModule,
     MatInputModule,
-    NgIf
+    NgIf,
+    MatSnackBarModule, // <--- NEW: Add MatSnackBarModule
+    MatButtonModule // <--- NEW: Add MatButtonModule
   ],
   templateUrl: './insertareditarcomentario.component.html',
   styleUrl: './insertareditarcomentario.component.css'
@@ -37,30 +41,36 @@ export class InsertareditarcomentarioComponent {
   edicion: boolean = false;
   listaPost: Post[] = [];
   listaUsuarios: Usuario[] = [];
-constructor(
+
+  constructor(
     private cS: ComentarioService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS: UsuariosService,
-    private pS: PostService
+    private pS: PostService,
+    private snackBar: MatSnackBar // <--- NEW: Inject MatSnackBar
   ) {}
-ngOnInit(): void {
+
+  ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
-      //actualizar
       this.init();
     });
+
     this.form = this.formBuilder.group({
-      codigo: [''], 
+      codigo: [''],
       descripcionComentario: ['', Validators.required],
-      descripcionPost: ['', Validators.required],
-      usuario: ['', Validators.required],
+      // These form controls will hold the IDs selected from the mat-select
+      idPost: ['', Validators.required], // Renamed from descripcionPost to idPost for clarity
+      idUsuario: ['', Validators.required], // Renamed from usuario to idUsuario for clarity
     });
+
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
     });
+
     this.pS.list().subscribe((data) => {
       this.listaPost = data;
     });
@@ -70,25 +80,48 @@ ngOnInit(): void {
     if (this.form.valid) {
       this.comentario.idComentario = this.form.value.codigo;
       this.comentario.descripcionComentario = this.form.value.descripcionComentario;
-      this.comentario.post.descripcionPost = this.form.value.descripcionPost;
-      this.comentario.usuario.idUsuario = this.form.value.usuario;
+
+      // Correctly assign the Post object with its ID
+      // Assuming your backend expects a Post object with at least idPost populated
+      this.comentario.post = { idPost: this.form.value.idPost } as Post;
+
+      // Correctly assign the Usuario object with its ID
+      // Assuming your backend expects a Usuario object with at least idUsuario populated
+      this.comentario.usuario = { idUsuario: this.form.value.idUsuario } as Usuario;
 
       if (this.edicion) {
-        //actualizar
-        this.cS.update(this.comentario).subscribe((data) => {
-          this.cS.list().subscribe((data) => {
-            this.cS.setList(data);
-          });
+        // Actualizar
+        this.cS.update(this.comentario).subscribe({
+          next: () => {
+            this.cS.list().subscribe((data) => {
+              this.cS.setList(data);
+            });
+            this.showSuccessMessage('Comentario actualizado exitosamente');
+            this.router.navigate(['comentarios']);
+          },
+          error: (error) => {
+            console.error('Error al actualizar comentario:', error);
+            this.showErrorMessage('Error al actualizar el comentario.');
+          }
         });
       } else {
-        //INSERTAR
-        this.cS.insert(this.comentario).subscribe((data) => {
-          this.cS.list().subscribe((data) => {
-            this.cS.setList(data);
-          });
+        // INSERTAR
+        this.cS.insert(this.comentario).subscribe({
+          next: () => {
+            this.cS.list().subscribe((data) => {
+              this.cS.setList(data);
+            });
+            this.showSuccessMessage('Comentario registrado exitosamente');
+            this.router.navigate(['comentarios']);
+          },
+          error: (error) => {
+            console.error('Error al registrar comentario:', error);
+            this.showErrorMessage('Error al registrar el comentario.');
+          }
         });
       }
-      this.router.navigate(['comentarios']);
+    } else {
+      this.showErrorMessage('Por favor, complete todos los campos requeridos.');
     }
   }
 
@@ -102,10 +135,29 @@ ngOnInit(): void {
         this.form.patchValue({
           codigo: data.idComentario,
           descripcionComentario: data.descripcionComentario,
-          descripcionPost: data.post.descripcionPost,
-          usuario: data.usuario.idUsuario,
+          // Patch with the ID of the Post and Usuario
+          idPost: data.post.idPost,
+          idUsuario: data.usuario.idUsuario,
         });
       });
     }
+  }
+
+  private showSuccessMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['success-snackbar']
+    });
+  }
+
+  private showErrorMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['error-snackbar']
+    });
   }
 }

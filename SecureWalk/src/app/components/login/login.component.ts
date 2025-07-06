@@ -9,11 +9,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [MatFormFieldModule,FormsModule,MatInputModule,MatButtonModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css'
 })
 export class LoginComponent{
 constructor(

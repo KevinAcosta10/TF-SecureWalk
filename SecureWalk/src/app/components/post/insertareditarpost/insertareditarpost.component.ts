@@ -13,19 +13,18 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuariosService } from '../../../services/usuarios.service';
 
 @Component({
-  selector: 'app-insertareditarpost',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatNativeDateModule,
-    CommonModule,
-    MatInputModule,
-  ],
-  templateUrl: './insertareditarpost.component.html',
-  styleUrl: './insertareditarpost.component.css'
+    selector: 'app-insertareditarpost',
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatNativeDateModule,
+        CommonModule,
+        MatInputModule,
+    ],
+    templateUrl: './insertareditarpost.component.html',
+    styleUrl: './insertareditarpost.component.css'
 })
 export class InsertareditarpostComponent {
   form: FormGroup = new FormGroup({});

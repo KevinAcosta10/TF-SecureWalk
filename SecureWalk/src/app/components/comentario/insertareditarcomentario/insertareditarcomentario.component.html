@@ -1,51 +1,53 @@
 <div class="container">
-    <div style="text-align: center; margin: 5%">
-        <h1>Registro de comentarios</h1>
-    </div>
-    <div style="text-align: center">
-        <form [formGroup]="form" (submit)="aceptar()">
-            <mat-form-field>
-                <mat-label>Descripción Comentario</mat-label>
-                <input matInput formControlName="descripcionComentario" />
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de comentarios</h1>
+  </div>
+  <div style="text-align: center">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field>
+        <mat-label>Descripción Comentario</mat-label>
+        <input matInput formControlName="descripcionComentario" />
 
-                <mat-error *ngIf="form.get('descripcionComentario')?.hasError('required')">
-                    La descripcion del comentario es obligatorio!!
-                </mat-error>
-            </mat-form-field>
-            <br />
+        <mat-error *ngIf="form.get('descripcionComentario')?.hasError('required')">
+          La descripcion del comentario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
 
-            <mat-form-field>
-                <mat-label>Post</mat-label>
-                <mat-select formControlName="descripcionPost">
-                    @for (food of listaPost; track food) {
-                    <mat-option [value]="food.idPost">{{ food.descripcionPost }}</mat-option>
-                    }
-                </mat-select>
-                <mat-error *ngIf="form.get('descripcionPost')?.hasError('required')">
-                    El post es obligatoria!!
-                </mat-error>
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Usuario</mat-label>
-                <mat-select formControlName="usuario">
-                    @for (food of listaUsuarios; track food) {
-                    <mat-option [value]="food.idUsuario">{{
-                        food.nombreUsuario
-                        }}</mat-option>
-                    }
-                </mat-select>
-                <mat-error *ngIf="form.get('usuario')?.hasError('required')">
-                    El usuario es obligatorio!
-                </mat-error>
-            </mat-form-field>
-            <br />
+      <mat-form-field>
+        <mat-label>Post</mat-label>
+        <!-- Changed formControlName to idPost -->
+        <mat-select formControlName="idPost">
+          @for (post of listaPost; track post) {
+          <mat-option [value]="post.idPost">{{ post.descripcionPost }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('idPost')?.hasError('required')">
+          El post es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
 
-            <button mat-raised-button color="primary">Aceptar</button>
-            <button mat-raised-button color="warn" (click)="cancelar()">
-                Cancelar
-                </button>
-        </form>
-    </div>
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <!-- Changed formControlName to idUsuario -->
+        <mat-select formControlName="idUsuario">
+          @for (usuario of listaUsuarios; track usuario) {
+          <mat-option [value]="usuario.idUsuario">{{
+            usuario.nombreUsuario
+          }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('idUsuario')?.hasError('required')">
+          El usuario es obligatorio!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <button mat-raised-button color="primary" [style.background-color]="'#3f51b5'">Aceptar</button>
+      <button mat-raised-button color="warn" [style.background-color]="'#FFC107'" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
 </div>
-  

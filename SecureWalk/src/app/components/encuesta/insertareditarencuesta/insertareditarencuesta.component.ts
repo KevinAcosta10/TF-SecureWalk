@@ -21,21 +21,20 @@ import { MatIconModule } from '@angular/material/icon'; // Importar MatIconModul
 import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
 
 @Component({
-  selector: 'app-insertareditarencuesta',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    CommonModule,
-    NgIf,
-    MatButtonModule, // Añadir MatButtonModule
-    MatIconModule, // Añadir MatIconModule
-  ],
-  templateUrl: './insertareditarencuesta.component.html',
-  styleUrl: './insertareditarencuesta.component.css'
+    selector: 'app-insertareditarencuesta',
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        CommonModule,
+        NgIf,
+        MatButtonModule, // Añadir MatButtonModule
+        MatIconModule, // Añadir MatIconModule
+    ],
+    templateUrl: './insertareditarencuesta.component.html',
+    styleUrl: './insertareditarencuesta.component.css'
 })
 export class InsertareditarencuestaComponent implements OnInit {
   form: FormGroup = new FormGroup({});

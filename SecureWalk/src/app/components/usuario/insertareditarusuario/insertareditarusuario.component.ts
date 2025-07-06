@@ -23,23 +23,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Asegúrate de que MatSnackBar esté importado
 
 @Component({
-  selector: 'app-insertareditarusuario',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    CommonModule,
-    NgIf,
-    MatOption,
-    MatSelectModule,
-    MatIcon,
-    MatButtonModule,
-  ],
-  templateUrl: './insertareditarusuario.component.html',
-  styleUrl: './insertareditarusuario.component.css',
+    selector: 'app-insertareditarusuario',
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        CommonModule,
+        NgIf,
+        MatOption,
+        MatSelectModule,
+        MatIcon,
+        MatButtonModule,
+    ],
+    templateUrl: './insertareditarusuario.component.html',
+    styleUrl: './insertareditarusuario.component.css'
 })
 export class InsertareditarusuarioComponent implements OnInit {
   form: FormGroup = new FormGroup({});

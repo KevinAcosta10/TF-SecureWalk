@@ -7,11 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-listarruta',
-  standalone: true,
-  imports: [MatPaginatorModule, MatTableModule, MatIconModule, RouterLink],
-  templateUrl: './listarruta.component.html',
-  styleUrl: './listarruta.component.css',
+    selector: 'app-listarruta',
+    imports: [MatPaginatorModule, MatTableModule, MatIconModule, RouterLink],
+    templateUrl: './listarruta.component.html',
+    styleUrl: './listarruta.component.css'
 })
 export class ListarrutaComponent {
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];

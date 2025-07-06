@@ -21,21 +21,20 @@ import { IncidenteService } from '../../../services/incidente.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-insertarevaluacionincidente',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    CommonModule,
-    MatInputModule,
-    NgIf,
-  ],
-  templateUrl: './insertarevaluacionincidente.component.html',
-  styleUrl: './insertarevaluacionincidente.component.css',
+    selector: 'app-insertarevaluacionincidente',
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        CommonModule,
+        MatInputModule,
+        NgIf,
+    ],
+    templateUrl: './insertarevaluacionincidente.component.html',
+    styleUrl: './insertarevaluacionincidente.component.css'
 })
 export class InsertarevaluacionincidenteComponent {
   form: FormGroup = new FormGroup({});

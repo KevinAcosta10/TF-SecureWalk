@@ -12,20 +12,19 @@ import { MatButtonModule } from '@angular/material/button'; // Asegurar MatButto
 import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar para notificaciones
 
 @Component({
-  selector: 'app-listarusuarioruta',
-  standalone: true,
-  imports: [
-    // CarouselModule, // Ya no necesario
-    MatCardModule,
-    MatIconModule,
-    RouterLink,
-    CommonModule,
-    MatPaginatorModule, // Asegurar que esté
-    MatTableModule, // Asegurar que esté para MatTableDataSource
-    MatButtonModule, // Asegurar que esté
-  ],
-  templateUrl: './listarusuarioruta.component.html',
-  styleUrl: './listarusuarioruta.component.css',
+    selector: 'app-listarusuarioruta',
+    imports: [
+        // CarouselModule, // Ya no necesario
+        MatCardModule,
+        MatIconModule,
+        RouterLink,
+        CommonModule,
+        MatPaginatorModule, // Asegurar que esté
+        MatTableModule, // Asegurar que esté para MatTableDataSource
+        MatButtonModule, // Asegurar que esté
+    ],
+    templateUrl: './listarusuarioruta.component.html',
+    styleUrl: './listarusuarioruta.component.css'
 })
 export class ListarusuariorutaComponent implements OnInit, AfterViewInit { // Implementar AfterViewInit
 

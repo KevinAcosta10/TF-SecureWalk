@@ -12,19 +12,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { UsuariosService } from '../../../services/usuarios.service';
 @Component({
-  selector: 'app-insertareditarrol',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    CommonModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatButtonModule
-  ],
-  templateUrl: './insertareditarrol.component.html',
-  styleUrl: './insertareditarrol.component.css'
+    selector: 'app-insertareditarrol',
+    imports: [
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        CommonModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatButtonModule
+    ],
+    templateUrl: './insertareditarrol.component.html',
+    styleUrl: './insertareditarrol.component.css'
 })
 export class InsertareditarrolComponent implements OnInit{
   form: FormGroup = new FormGroup({});
