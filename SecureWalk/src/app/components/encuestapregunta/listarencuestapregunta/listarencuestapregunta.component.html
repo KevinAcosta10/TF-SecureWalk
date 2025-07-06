@@ -6,68 +6,65 @@
   </div>
 
   <div class="content-cards-section">
-    <div *ngIf="encuestaPregunta && encuestaPregunta.length > 0; else noDataFound">
-      <div class="cards-grid">
-        <mat-card class="encuesta-pregunta-card" *ngFor="let ep of encuestaPregunta">
-          <mat-card-header>
-            <mat-card-title>
-              <mat-icon class="card-title-icon">link</mat-icon> Relación ID:
-              {{ ep.idEncuestaPregunta }}
-            </mat-card-title>
-            <mat-card-subtitle>
-              <mat-icon class="card-subtitle-icon">poll</mat-icon> Encuesta:
-              {{ ep.encuesta.nombreEncuesta }} (ID: {{ ep.encuesta.idEncuesta }})
-            </mat-card-subtitle>
-          </mat-card-header>
-
-          <mat-card-content>
-            <div>
-              <p>
-                <mat-icon class="card-icon">Youtube</mat-icon
-                ><strong> Texto de Pregunta:</strong> {{ ep.pregunta.textoPregunta }}
-              </p>
-              <p>
-                <mat-icon class="card-icon">category</mat-icon
-                ><strong> Tipo de Pregunta:</strong> {{ ep.pregunta.tipoPregunta }}
-              </p>
-              <p>
-                <mat-icon class="card-icon">vpn_key</mat-icon><small>ID Pregunta:</small>
-                {{ ep.pregunta.idPregunta }}
-              </p>
-            </div>
-          </mat-card-content>
-
-          <mat-card-actions>
-            <button mat-raised-button color="warn" (click)="eliminar(ep.idEncuestaPregunta)">
-              <mat-icon>delete_forever</mat-icon> Eliminar
-            </button>
-            <button
-              mat-raised-button
-              color="primary"
-              [routerLink]="['ediciones', ep.idEncuestaPregunta]"
-            >
-              <mat-icon>edit</mat-icon> Editar
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-      <mat-paginator
-        [length]="encuestaPregunta ? encuestaPregunta.length : 0"
-        [pageSize]="3"
-        [pageSizeOptions]="[3, 6, 9, 12]"
-        aria-label="Seleccionar página de relaciones Encuesta-Pregunta"
-        class="user-paginator"
-      >
-      </mat-paginator>
+    <div *ngIf="dataSource.data.length === 0" class="no-data-container">
+      <p>No se encontraron relaciones Encuesta-Pregunta para mostrar.</p>
+      <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
     </div>
 
-    <ng-template #noDataFound>
-      <div class="no-data-container">
-        <p>No se encontraron relaciones Encuesta-Pregunta para mostrar.</p>
-        <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
-      </div>
-    </ng-template>
+    <div class="cards-grid" *ngIf="dataSource.data.length > 0">
+      <mat-card class="encuesta-pregunta-card" *ngFor="let ep of dataSource.connect() | async">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="card-title-icon">link</mat-icon> Relación ID:
+            {{ ep.idEncuestaPregunta }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            <mat-icon class="card-subtitle-icon">poll</mat-icon> Encuesta:
+            {{ ep.encuesta.nombreEncuesta }} (ID: {{ ep.encuesta.idEncuesta }})
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div>
+            <p>
+              <mat-icon class="card-icon">Youtube</mat-icon
+              ><strong> Texto de Pregunta:</strong> {{ ep.pregunta.textoPregunta }}
+            </p>
+            <p>
+              <mat-icon class="card-icon">category</mat-icon
+              ><strong> Tipo de Pregunta:</strong> {{ ep.pregunta.tipoPregunta }}
+            </p>
+            <p>
+              <mat-icon class="card-icon">vpn_key</mat-icon><small>ID Pregunta:</small>
+              {{ ep.pregunta.idPregunta }}
+            </p>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-raised-button color="warn" (click)="eliminar(ep.idEncuestaPregunta)">
+            <mat-icon>delete_forever</mat-icon> Eliminar
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['ediciones', ep.idEncuestaPregunta]"
+          >
+            <mat-icon>edit</mat-icon> Editar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <mat-paginator
+      [length]="dataSource.data.length"
+      [pageSize]="3"
+      [pageSizeOptions]="[3, 6, 9, 12]"
+      aria-label="Seleccionar página de relaciones Encuesta-Pregunta"
+      class="user-paginator"
+      [hidden]="dataSource.data.length === 0"
+    >
+    </mat-paginator>
   </div>
 </div>
 

@@ -1,63 +1,91 @@
-<!-- Componente HTML para listar y visualizar respuestas -->
-<div class="container mx-auto p-4 font-inter">
-  <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center rounded-lg p-2 shadow-md bg-gradient-to-r from-blue-100 to-indigo-100">
-    Listado de Respuestas
-  </h2>
+<!-- ====================================================== -->
+<!-- === src/app/listarrespuesta/listarrespuesta.component.html       === -->
+<!-- ====================================================== -->
 
-  <!-- Sección del carrusel de respuestas -->
-  <div *ngIf="respuesta && respuesta.length > 0; else noRespuestas" class="bg-white p-6 rounded-xl shadow-lg">
-    <owl-carousel-o [options]="customOptions">
-      <ng-template carouselSlide *ngFor="let res of respuesta">
-        <div class="p-6 border border-gray-200 rounded-lg shadow-sm bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col h-full">
-          <div class="flex-grow">
-            <p class="text-sm text-gray-500 mb-2">
-              <span class="font-semibold text-gray-700">ID Respuesta:</span> {{ res.idRespuesta }}
-            </p>
-            <p class="text-xl font-semibold text-indigo-700 mb-3">
-              "{{ res.textoRespuesta }}"
-            </p>
-            <p class="text-sm text-gray-600 mb-1">
-              <span class="font-medium text-gray-700">Fecha:</span> {{ res.fechaRespuesta | date:'dd/MM/yyyy HH:mm' }}
-            </p>
-
-            <hr class="my-4 border-gray-200">
-
-            <h3 class="text-lg font-bold text-gray-800 mb-2">Detalles de la Encuesta y Pregunta:</h3>
-            <p class="text-md text-gray-700 mb-1">
-              <span class="font-semibold">Encuesta:</span> {{ res.encuestaPregunta.encuesta.nombreEncuesta || 'N/A' }}
-            </p>
-            <p class="text-md text-gray-700 mb-3">
-              <span class="font-semibold">Pregunta:</span> {{ res.encuestaPregunta.pregunta.textoPregunta }}
-            </p>
-
-            <h3 class="text-lg font-bold text-gray-800 mb-2">Usuario que Respondió:</h3>
-            <p class="text-md text-gray-700 mb-1">
-              <span class="font-semibold">Nombre:</span> {{ res.usuario.nombreUsuario || 'N/A' }}
-            </p>
-            <p class="text-md text-gray-700 mb-3">
-              <span class="font-semibold">Email:</span> {{ res.usuario.emailUsuario || 'N/A' }}
-            </p>
-          </div>
-
-          <div class="mt-4 text-right">
-            <button
-              (click)="eliminar(res.idRespuesta)"
-              class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transition-colors duration-200"
-            >
-              Eliminar
-            </button>
-          </div>
-        </div>
-      </ng-template>
-    </owl-carousel-o>
+<div class="main-container">
+  <div class="top-header-section">
+    <div class="title-search-block">
+      <h1 class="page-title">Lista de Respuestas</h1>
+      <!-- Aquí podrías añadir un botón para crear una nueva respuesta si lo necesitas -->
+      <!-- <button mat-raised-button class="add-button" routerLink="/crear-respuesta">
+        <mat-icon>add</mat-icon> Nueva Respuesta
+      </button> -->
+    </div>
   </div>
 
-  <!-- Plantilla si no hay respuestas -->
-  <ng-template #noRespuestas>
-    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md shadow-md text-center">
-      <p class="font-bold">¡Atención!</p>
+  <div class="content-cards-section">
+    <!-- Mensaje de "No hay resultados" si dataSource no tiene datos -->
+    <div *ngIf="dataSource.data.length === 0; else dataFound" class="no-data-container">
       <p>No hay respuestas disponibles para mostrar en este momento.</p>
+      <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
     </div>
-  </ng-template>
+
+    <!-- Plantilla que se muestra si se encuentran datos -->
+    <ng-template #dataFound>
+      <!-- Contenedor de la cuadrícula de tarjetas -->
+      <div class="cards-grid">
+        <!-- Ahora itera sobre dataSource.connect() | async -->
+        <mat-card class="respuesta-card" *ngFor="let res of dataSource.connect() | async">
+          <mat-card-header>
+            <mat-card-title><mat-icon class="card-title-icon">message</mat-icon> ID Respuesta: {{ res.idRespuesta }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="respuesta-texto">
+              <mat-icon class="card-icon">text_fields</mat-icon> "{{ res.textoRespuesta }}"
+            </p>
+            <p>
+              <mat-icon class="card-icon">event</mat-icon> Fecha:
+              {{ res.fechaRespuesta | date:'dd/MM/yyyy HH:mm' }}
+            </p>
+
+            <hr class="card-divider">
+
+            <h3 class="card-subtitle-heading"><mat-icon class="card-icon">poll</mat-icon> Detalles de la Encuesta y Pregunta:</h3>
+            <p>
+              <mat-icon class="card-icon">assignment</mat-icon> Encuesta:
+              {{ res.encuestaPregunta.encuesta.nombreEncuesta || 'N/A' }}
+            </p>
+            <p>
+              <mat-icon class="card-icon">question_answer</mat-icon> Pregunta:
+              {{ res.encuestaPregunta.pregunta.textoPregunta }}
+            </p>
+
+            <h3 class="card-subtitle-heading"><mat-icon class="card-icon">person</mat-icon> Usuario que Respondió:</h3>
+            <p>
+              <mat-icon class="card-icon">account_circle</mat-icon> Nombre:
+              {{ res.usuario.nombreUsuario || 'N/A' }}
+            </p>
+            <p>
+              <mat-icon class="card-icon">email</mat-icon> Email:
+              {{ res.usuario.emailUsuario || 'N/A' }}
+            </p>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button color="warn" (click)="eliminar(res.idRespuesta)">
+              <mat-icon>delete_forever</mat-icon> Eliminar
+            </button>
+            <!-- No hay botón de edición en tu HTML original, pero lo dejo comentado por si lo necesitas -->
+            <!-- <button mat-button color="primary" [routerLink]="['ediciones', res.idRespuesta]">
+              <mat-icon>edit</mat-icon> Editar
+            </button> -->
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <!-- Paginador de Material Design -->
+      <mat-paginator
+        [length]="dataSource.data.length"
+        [pageSize]="3"
+        [pageSizeOptions]="[3, 6, 9, 12]"
+        aria-label="Seleccionar página de respuestas"
+        class="user-paginator"
+        [hidden]="dataSource.data.length === 0"
+      >
+      </mat-paginator>
+    </ng-template>
+  </div>
 </div>
 
+<!-- FOOTER ESPECÍFICO PARA ESTE COMPONENTE -->
+<footer class="app-footer"></footer>

@@ -1,0 +1,329 @@
+/* ====================================================== */
+/* === src/app/listarrespuesta/listarrespuesta.component.css === */
+/* ====================================================== */
+
+/* El propio componente <app-listarrespuesta> debe ser un contenedor flex que crezca */
+:host { /* :host se refiere al elemento <app-listarrespuesta> */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Contenedor principal del contenido (header, cards, paginator) */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Esto hace que el contenido se estire y empuje el footer */
+}
+
+/* TOP HEADER SECTION: Contains title */
+.top-header-section {
+  background: #3f51b5; /* Primary Blue */
+  color: white;
+  padding: 40px 60px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.title-search-block { /* Nombre para consistencia con otros componentes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* Título de la página */
+.page-title {
+  font-size: 4em;
+  font-weight: 800;
+  color: #ffffff; /* White */
+  margin-bottom: 30px;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+}
+
+/* Sección de contenido de tarjetas */
+.content-cards-section {
+  padding: 40px;
+  background-color: #f0f2f5; /* Light Gray: Fondo de la sección de tarjetas */
+  display: flex;
+  flex-direction: column; /* Apila los elementos (cuadrícula de tarjetas, paginador, no-data) verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  flex-grow: 1; /* Permite que esta sección se estire si es necesario */
+}
+
+/* Contenedor de la cuadrícula de tarjetas */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(368px, 1fr));
+  gap: 30px; /* Espacio entre las tarjetas */
+  width: 100%; /* Ocupa el ancho completo de su padre */
+  max-width: 1400px; /* Limita su ancho máximo para centrar */
+  justify-content: center; /* Centra los items dentro de la cuadrícula si no llenan la fila */
+}
+
+/* Estilos para las tarjetas de respuesta (mat-card) */
+.respuesta-card { /* Nuevo nombre de clase para las tarjetas */
+  margin: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  background-color: #e0e0e0; /* Light Gray para suavizar el fondo de la tarjeta */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+  border: 1px solid #e0e0e0; /* Border from original Tailwind */
+}
+
+.respuesta-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Encabezado de la tarjeta */
+.respuesta-card mat-card-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0; /* Light Gray */
+  background-color: #fcfcfc; /* Un blanco suave para el header de la tarjeta */
+}
+
+/* Título de la tarjeta (con ícono) */
+.respuesta-card mat-card-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #333333; /* Dark Gray/Near Black */
+  display: flex;
+  align-items: center;
+}
+
+/* Iconos en el título de la tarjeta */
+.card-title-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+  color: #3f51b5; /* Primary Blue */
+}
+
+/* Contenido de la tarjeta */
+.respuesta-card mat-card-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.respuesta-card mat-card-content p {
+  margin-bottom: 12px;
+  color: #424242; /* Dark Gray/Near Black */
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+}
+
+/* Estilo específico para el texto de la respuesta */
+.respuesta-card mat-card-content .respuesta-texto {
+  font-size: 1.25em; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  color: #4CAF50; /* Green (Success/Safe) - Usando un color de tu paleta */
+  margin-bottom: 1rem; /* mb-3 */
+}
+
+/* Línea divisoria en la tarjeta */
+.card-divider {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0; /* border-gray-200 */
+  margin: 1rem 0; /* my-4 */
+}
+
+/* Encabezados de subtítulos dentro del contenido de la tarjeta */
+.card-subtitle-heading {
+  font-size: 1.125em; /* text-lg */
+  font-weight: 700; /* font-bold */
+  color: #333333; /* text-gray-800 */
+  margin-bottom: 0.5rem; /* mb-2 */
+  display: flex;
+  align-items: center;
+}
+
+/* Íconos dentro del contenido de la tarjeta (general) */
+.card-icon {
+  margin-right: 10px;
+  color: #3f51b5; /* Primary Blue */
+  font-size: 1.2em;
+}
+
+/* Acciones de la tarjeta (botones) */
+.respuesta-card mat-card-actions {
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  padding: 10px 20px 20px;
+  border-top: 1px solid #f0f0f0; /* Light Gray */
+  margin-top: 1rem; /* mt-4 */
+}
+
+/* Estilos para los botones dentro de mat-card-actions (adaptados de Tailwind) */
+.respuesta-card mat-card-actions button {
+  border-radius: 8px; /* rounded-md */
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  font-weight: 600; /* font-semibold */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; /* transition-colors duration-200 */
+  /* Los colores de fondo y texto serán manejados por color="warn" de Material */
+}
+
+.respuesta-card mat-card-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* hover:shadow-xl */
+}
+
+/* Estilos para el paginador */
+.user-paginator { /* Mismo nombre de clase para consistencia */
+  text-align: center;
+  margin-top: 30px;
+  background-color: #e0e0e0; /* Light Gray */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  color: #424242; /* Dark Gray/Near Black */
+  font-size: 0.9em;
+  width: 100%; /* Asegura que ocupe el 100% del espacio disponible de su padre */
+  max-width: 1400px; /* Limita su ancho máximo para que coincida con las tarjetas */
+}
+
+/* Estilos para el mensaje de "No se encontraron datos" */
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+  color: #424242; /* Dark Gray/Near Black */
+  font-size: 1.2em;
+  background-color: #ffffff; /* White */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 600px; /* Ajusta el ancho máximo */
+  margin: 50px auto; /* Centra el contenedor */
+  /* Estilos adicionales del original Tailwind */
+  border-left: 4px solid #FFC107; /* border-l-4 border-yellow-500 */
+  background-color: #FFFDE7; /* bg-yellow-100 (más claro para el fondo) */
+  color: #FF9800; /* text-yellow-700 (más oscuro para el texto) */
+}
+
+.no-data-container p.font-bold { /* Estilo específico para el texto en negrita */
+  font-weight: 700;
+}
+
+
+.no-data-icon {
+  font-size: 4em; /* Ícono grande */
+  color: #5c6bc0; /* Secondary Blue */
+  margin-top: 20px;
+}
+
+/* Estilos del footer */
+.app-footer {
+  background-color: #3f51b5; /* Primary Blue */
+  min-height: 100px; /* Ajustado para ser más grande */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9em;
+  padding: 10px 20px;
+  box-sizing: border-box; /* Asegura que padding no aumente el ancho */
+  margin-top: auto; /* ¡Esta es la línea clave para empujar el footer hacia abajo! */
+}
+
+
+/* ====================================================== */
+/* === Responsive Design (Media Queries)              === */
+/* ====================================================== */
+
+@media (max-width: 1000px) {
+  .top-header-section {
+    padding: 30px 30px;
+  }
+
+  .page-title {
+    font-size: 3.2em;
+    margin-bottom: 25px;
+  }
+
+  .content-cards-section {
+    padding: 30px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-header-section {
+    padding: 25px 20px;
+  }
+
+  .page-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+
+  .content-cards-section {
+    padding: 20px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+  }
+
+  .respuesta-card { /* Nuevo nombre de clase */
+    max-width: none;
+    margin: 0;
+  }
+
+  .app-footer {
+    min-height: 80px; /* Ajuste para pantallas pequeñas */
+  }
+
+  .no-data-container {
+    padding: 30px;
+    font-size: 1em;
+  }
+
+  .no-data-icon {
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-header-section {
+    padding: 20px 15px;
+  }
+
+  .page-title {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  .content-cards-section {
+    padding: 15px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,9 +1,9 @@
 /* ====================================================== */
-/* === src/app/post/post.component.css                === */
+/* === src/app/listarpost/listarpost.component.css                === */
 /* ====================================================== */
 
-/* El propio componente <app-post> debe ser un contenedor flex que crezca */
-:host { /* :host se refiere al elemento <app-post> */
+/* El propio componente <app-listarpost> debe ser un contenedor flex que crezca */
+:host { /* :host se refiere al elemento <app-listarpost> */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -100,6 +100,8 @@
   font-size: 1.5em;
   font-weight: 700;
   color: #333333; /* Dark Gray/Near Black */
+  display: flex; /* Para alinear el ícono con el texto */
+  align-items: center;
 }
 
 /* Contenido de la tarjeta */
@@ -117,7 +119,7 @@
 }
 
 /* Íconos dentro del contenido de la tarjeta */
-.card-icon {
+.card-icon, .card-title-icon { /* Añadido .card-title-icon para el ícono en el título */
   margin-right: 10px;
   color: #3f51b5; /* Primary Blue */
   font-size: 1.2em;
@@ -141,7 +143,7 @@
   transform: translateY(-2px);
 }
 
-/* Estilos para el paginador */
+/* Estilos para el paginador (mat-paginator) */
 .user-paginator { /* Mismo nombre de clase para consistencia */
   text-align: center;
   margin-top: 30px;
@@ -153,6 +155,30 @@
   font-size: 0.9em;
   width: 100%; /* Asegura que ocupe el 100% del espacio disponible de su padre */
   max-width: 1400px; /* Limita su ancho máximo para que coincida con las tarjetas */
+}
+
+/* Estilos para el mensaje de "No se encontraron datos" */
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+  color: #424242; /* Dark Gray/Near Black */
+  font-size: 1.2em;
+  background-color: #ffffff; /* White */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 600px; /* Ajusta el ancho máximo */
+  margin: 50px auto; /* Centra el contenedor */
+}
+
+.no-data-icon {
+  font-size: 4em; /* Ícono grande */
+  color: #5c6bc0; /* Secondary Blue */
+  margin-top: 20px;
 }
 
 /* Estilos del footer */
