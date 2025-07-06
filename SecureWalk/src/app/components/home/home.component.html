@@ -1,34 +1,41 @@
-<main>
-  <div class="main-content">
-    <h1>Mantente seguro en todo momento</h1>
-    <p>Bienvenido a nuestra comunidad</p>
-    <button mat-raised-button color="accent" (click)="openAboutDialog()">Sobre nosotros</button>
-  </div>
-  <div class="main-image">
-    <img src="assets/img-mapa.jpg" alt="Mapa de seguridad de SecureWalk" style="max-width:100%;">
-  </div>
-</main>
-
-<mat-card class="info-banner mat-elevation-z1" style="margin: 32px 0;">
-  <mat-card-content>
-    <div class="container-banner" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
-      <div>
-        <h2>¿Necesitas más información?</h2>
-        <p>Escríbenos tu consulta y un especialista te responderá.</p>
-      </div>
-      <div>
-        <button mat-raised-button color="primary">Hacer clic</button>
-      </div>
+<div class="main-container">
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Mantente seguro en todo momento</h1>
+      <p class="hero-subtitle">Bienvenido a nuestra comunidad</p>
+      <button mat-raised-button color="accent" (click)="openAboutDialog()" class="hero-button">
+        Sobre nosotros
+        <mat-icon>info</mat-icon>
+      </button>
     </div>
-  </mat-card-content>
-</mat-card>
+    <div class="hero-image">
+      <img src="assets/img-mapa.jpg" alt="Mapa de seguridad de SecureWalk">
+    </div>
+  </div>
 
-<!-- Diálogo "Sobre Nosotros" -->
+  <mat-card class="info-banner mat-elevation-z1">
+    <mat-card-content>
+      <div class="container-banner">
+        <div>
+          <h2>¿Necesitas más información?</h2>
+          <p>Escríbenos tu consulta y un especialista te responderá.</p>
+        </div>
+        <div>
+          <button mat-raised-button color="primary">
+            Hacer clic
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <ng-template #aboutDialog>
   <h1 mat-dialog-title>Nosotros:</h1>
   <div mat-dialog-content>
-    <p>El objetivo de nuestra aplicación SecureWalk es resolver la problemática 
-      de la inseguridad ciudadana en las calles de Lima, Perú, proporcionando a los 
+    <p>El objetivo de nuestra aplicación SecureWalk es resolver la problemática
+      de la inseguridad ciudadana en las calles de Lima, Perú, proporcionando a los
       usuarios información en tiempo real sobre los lugares con mayor riesgo de incidentes delictivos.</p>
     <h2>Dirigido para cualquier persona:</h2>
     <p>Personas de todas las edades y géneros que buscan rutas seguras y reportes de incidentes en tiempo real.</p>
@@ -40,7 +47,6 @@
   </div>
 </ng-template>
 
-<!-- Diálogo "Términos y Condiciones" -->
 <ng-template #termsDialog>
   <h1 mat-dialog-title>Términos y Condiciones</h1>
   <div mat-dialog-content>
@@ -60,7 +66,6 @@
   </div>
 </ng-template>
 
-<!-- Diálogo "Política de Privacidad" -->
 <ng-template #privacyDialog>
   <h1 mat-dialog-title>Política de Privacidad</h1>
   <div mat-dialog-content>
@@ -79,51 +84,57 @@
   </div>
 </ng-template>
 
-<footer>
-  <mat-card class="footer-logo" style="text-align:center; margin-bottom: 24px;">
-    <a routerLink="/"><img src="assets/logo1.png" alt="Logo de SecureWalk" style="height:48px;"></a>
-    <p>SecureWalk</p>
-    <p>&copy; 2024 Todos los derechos reservados | SecureWalk</p>
-  </mat-card>
-  <div class="footer-columns" style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
-    <mat-card class="footer-column" style="min-width:180px;">
-      <h3>Política</h3>
-      <ul>
-        <li><a href="#" (click)="openPrivacyDialog($event)">Política de privacidad</a></li>
-        <li><a href="#" (click)="openTermsDialog($event)">Términos y condiciones</a></li>
-      </ul>
+<footer class="app-footer">
+  <div class="footer-content">
+    <mat-card class="footer-logo mat-elevation-z0">
+      <a routerLink="/"><img src="assets/logo1.png" alt="Logo de SecureWalk"></a>
+      <p class="app-name">SecureWalk</p>
+      <p class="copyright">&copy; {{'2024'}} Todos los derechos reservados | SecureWalk</p>
     </mat-card>
-    <mat-card class="footer-column" style="min-width:180px;">
-      <h3>Compañía</h3>
-      <ul>
-        <li><a href="#" (click)="openAboutDialog($event)">Sobre nosotros</a></li>
-        <li><a href="#">Seguridad</a></li>
-        <li><a href="#">Centro de confianza</a></li>
-      </ul>
-    </mat-card>
-    <mat-card class="footer-column" style="min-width:180px;">
-      <h3>Recursos</h3>
-      <ul>
-        <li><a href="https://www.blogger.com/about/?hl=es" target="_blank">Blog</a></li>
-        <li><a href="https://www.google.com/intl/es-419/gmail/about/" target="_blank">Soporte</a></li>
-      </ul>
-    </mat-card>
-    <mat-card class="footer-column" style="min-width:180px;">
-      <h3>Conéctate con nosotros</h3>
-      <div class="social-icons" style="display: flex; gap: 16px; margin-top: 8px;">
-        <a href="https://www.facebook.com" target="_blank">
-            <img src="assets/facebook.png" alt="Facebook" style="width:40px; height:30px;">
-        </a>
-        <a href="https://www.instagram.com" target="_blank">
-            <img src="assets/instagram.png" alt="Instagram" style="width:30px; height:30px;">
-        </a>
-        <a href="https://www.twitter.com" target="_blank">
-            <img src="assets/twitter.png" alt="Twitter" style="width:30px; height:30px;">
-        </a>
-        <a href="https://www.linkedin.com" target="_blank">
-            <img src="assets/linkedin.png" alt="LinkedIn" style="width:30px; height:30px;">
-        </a>
-      </div>
-    </mat-card>
+
+    <div class="footer-columns-container">
+      <mat-card class="footer-column mat-elevation-z0">
+        <h3>Política</h3>
+        <ul>
+          <li><a href="#" (click)="openPrivacyDialog($event)">Política de privacidad</a></li>
+          <li><a href="#" (click)="openTermsDialog($event)">Términos y condiciones</a></li>
+        </ul>
+      </mat-card>
+
+      <mat-card class="footer-column mat-elevation-z0">
+        <h3>Compañía</h3>
+        <ul>
+          <li><a href="#" (click)="openAboutDialog($event)">Sobre nosotros</a></li>
+          <li><a href="#">Seguridad</a></li>
+          <li><a href="#">Centro de confianza</a></li>
+        </ul>
+      </mat-card>
+
+      <mat-card class="footer-column mat-elevation-z0">
+        <h3>Recursos</h3>
+        <ul>
+          <li><a href="https://www.blogger.com/about/?hl=es" target="_blank">Blog</a></li>
+          <li><a href="https://www.google.com/intl/es-419/gmail/about/" target="_blank">Soporte</a></li>
+        </ul>
+      </mat-card>
+
+      <mat-card class="footer-column mat-elevation-z0">
+        <h3>Conéctate con nosotros</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com" target="_blank">
+            <img src="assets/facebook.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com" target="_blank">
+            <img src="assets/instagram.png" alt="Instagram">
+          </a>
+          <a href="https://www.twitter.com" target="_blank">
+            <img src="assets/twitter.png" alt="Twitter">
+          </a>
+          <a href="https://www.linkedin.com" target="_blank">
+            <img src="assets/linkedin.png" alt="LinkedIn">
+          </a>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </footer>

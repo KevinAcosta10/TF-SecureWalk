@@ -1,327 +1,542 @@
-:root {
-    --color-primary: #87ceeb;
-    --color-secondary: #0000ff;
-    --color-white: #ffffff;
-    --color-black: #000000;
-    --color-light-gray: #f5f5f5;
-    --color-dark-gray: #333;
+/* ====================================================== */
+/* === src/app/landing/landing.component.css            === */
+/* ====================================================== */
+
+/* Contenedor principal de la vista, permite que el footer se fije abajo */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el host ocupe al menos la altura de la ventana */
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+/* Estilos para el Mat Toolbar */
+.app-toolbar {
+  background-color: #3f51b5; /* Primary Blue */
+  color: #FFFFFF; /* White */
+  padding: 0 40px; /* Ajusta el padding para que no sea muy pegado */
+  height: 64px; /* Altura estándar de toolbar */
 }
 
-body {
-    background-color: var(--color-primary);
-    color: var(--color-black);
-    padding-top: 80px;
+.toolbar-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Quita el subrayado del enlace */
+  color: #FFFFFF; /* Color de texto blanco */
+  font-weight: 600; /* Hace el texto más legible */
+  font-size: 1.2em;
+  transition: opacity 0.2s ease;
 }
 
-/* NAV fijo */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 8%;
-    background-color: var(--color-white);
-    border-bottom: 1px solid #ccc;
-    flex-wrap: wrap;
-    gap: 1rem;
+.toolbar-logo-link:hover {
+  opacity: 0.9;
 }
 
-.logo-header img {
-    width: 80px;
+.toolbar-logo {
+  height: 40px; /* Altura del logo */
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-.header-right {
-    display: flex;
-    gap: 1rem;
+.toolbar-title {
+  font-size: 1.3em;
+  font-weight: 700;
 }
 
-.header-right a {
-    text-decoration: none;
-    color: var(--color-white);
-    background-color: var(--color-black);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+.spacer {
+  flex: 1 1 auto; /* Empuja los elementos a los extremos */
 }
 
-.header-right a:hover {
-    background-color: var(--color-secondary);
+.toolbar-login-button {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: #5c6bc0; /* Secondary Blue */
+  color: #FFFFFF; /* White */
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-/* CONTENIDO PRINCIPAL */
-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4rem 8%;
-    flex-wrap: wrap;
-    gap: 2rem;
+.toolbar-login-button:hover {
+  background-color: #3f51b5; /* Primary Blue on hover */
+  transform: translateY(-2px);
 }
 
-.main-content {
-    max-width: 500px;
-    flex: 1 1 300px;
+.toolbar-login-button mat-icon {
+  margin-left: 8px;
+  font-size: 1.1em;
 }
 
-.main-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-white);
+/* Contenedor principal del contenido, debajo del toolbar */
+.main-content-area {
+  flex-grow: 1; /* Permite que el contenido principal ocupe todo el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f2f5; /* Light Gray */
+  padding-bottom: 40px; /* Espacio antes del footer */
 }
 
-.main-content p {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+/* Hero Section (Main content with image) */
+.hero-section {
+  background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%); /* Primary Blue to Secondary Blue */
+  color: #FFFFFF; /* White */
+  padding: 80px 40px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+  justify-content: center;
+  align-items: center;
+  gap: 60px; /* Espacio entre el contenido y la imagen */
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center; /* Centrar texto por defecto */
 }
 
-.main-content button {
-    background-color: var(--color-black);
-    color: var(--color-white);
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+.hero-content {
+  max-width: 600px;
+  flex: 1 1 auto; /* Permite crecer y encoger */
+  min-width: 300px; /* Asegura un ancho mínimo para el contenido */
 }
 
-.main-content button:hover {
-    background-color: var(--color-secondary);
+.hero-title {
+  font-size: 4.5em; /* Ajustado para más impacto */
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* MAPA */
-.main-image {
-    flex: 1 1 300px;
-    height: 300px;
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 7px solid var(--color-white);
-}  
-
-.main-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.hero-subtitle {
+  font-size: 1.8em;
+  margin-bottom: 40px;
+  opacity: 0.9;
 }
 
-/* BANNER */
+.hero-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: 600;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #FFFFFF; /* Texto blanco en botón accent */
+  background-color: #FFC107; /* Orange/Amber (Accent) */
+}
+
+.hero-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  background-color: #FF9800; /* Darker Orange/Amber on hover */
+}
+
+.hero-button mat-icon {
+  margin-left: 8px;
+  font-size: 1.2em;
+}
+
+.hero-image {
+  flex: 1 1 auto; /* Permite crecer y encoger */
+  max-width: 600px;
+  min-width: 300px; /* Asegura un ancho mínimo para la imagen */
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Info Banner Card */
 .info-banner {
-    color: var(--color-white);
-    padding: 2rem 8%;
-    margin-top: 2rem;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: -60px; /* Superponer ligeramente la sección hero */
+  position: relative;
+  z-index: 10;
+  background-color: #FFFFFF; /* White */
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 30px;
 }
 
-.container-banner {
-    background-color: var(--color-black);
-    padding: 20px 80px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+.info-banner h2 {
+  color: #3f51b5; /* Primary Blue */
+  font-size: 2em;
+  margin-bottom: 10px;
 }
 
-.subcontainer-information,
-.subcontainer-button {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.info-banner p {
+  color: #424242; /* Dark Gray/Near Black */
+  font-size: 1.1em;
 }
 
-.subcontainer-information h2,
-.subcontainer-information p {
-    margin-bottom: 0.5rem;
+.info-banner .container-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre los elementos del banner */
 }
 
-.container-banner button {
-    background-color: var(--color-black);
-    color: var(--color-white);
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--color-white);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+.info-banner button {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 500;
+  border-radius: 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #4CAF50; /* Green (Success) */
+  color: #FFFFFF; /* White text */
 }
 
-.container-banner button:hover {
-    background-color: var(--color-secondary);
+.info-banner button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: #388E3C; /* Darker Green on hover */
 }
 
-/* FOOTER */
-footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 3rem 8%;
-    background-color: var(--color-light-gray);
+.info-banner button mat-icon {
+  margin-left: 8px;
+}
+
+/* Footer Styles */
+.app-footer {
+  background-color: #333333; /* Dark Gray/Near Black */
+  color: #FFFFFF; /* White */
+  padding: 60px 40px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* Empuja el footer al final de la página */
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1400px;
+  width: 100%;
+  gap: 40px; /* Espacio entre las columnas del footer */
 }
 
 .footer-logo {
-    flex: 1 1 200px;
+  flex: 1 1 200px; /* Crece y encoge, con un ancho base */
+  text-align: center;
+  background: none; /* Sin fondo de tarjeta */
+  box-shadow: none; /* Sin sombra de tarjeta */
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px;
 }
 
 .footer-logo img {
-    width: 50px;
-    margin-bottom: 1rem;
+  height: 60px; /* Logo más grande */
+  margin-bottom: 10px;
+}
+
+.footer-logo .app-name {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #4CAF50; /* Green */
+  margin-bottom: 5px;
+}
+
+.footer-logo .copyright {
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.footer-columns-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px; /* Espacio entre las columnas */
+  justify-content: flex-end; /* Alinea las columnas a la derecha en pantallas grandes */
+  flex: 2 1 auto; /* Permite crecer más que el logo */
 }
 
 .footer-column {
-    flex: 1 1 150px;
+  background: none; /* Sin fondo de tarjeta */
+  box-shadow: none; /* Sin sombra de tarjeta */
+  flex: 1 1 180px; /* Ancho base para las columnas, permite que se envuelvan */
+  min-width: 150px;
+  padding: 0; /* Eliminar padding de mat-card */
 }
 
 .footer-column h3 {
-    margin-bottom: 0.5rem;
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #5c6bc0; /* Secondary Blue */
+  margin-bottom: 20px;
+  border-bottom: 2px solid #5c6bc0; /* Subrayado para los títulos de columna */
+  padding-bottom: 8px;
+  display: inline-block; /* Para que el borde no ocupe todo el ancho */
 }
 
 .footer-column ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-column ul li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 10px;
 }
 
 .footer-column ul li a {
-    text-decoration: none;
-    color: var(--color-black);
-    transition: color 0.3s ease;
+  color: #E0E0E0; /* Light Gray */
+  text-decoration: none;
+  font-size: 1em;
+  transition: color 0.2s ease;
 }
 
 .footer-column ul li a:hover {
-    color: var(--color-secondary);
+  color: #4CAF50; /* Green (Success) on hover */
+  text-decoration: underline;
 }
 
-/* ICONOS DE REDES SOCIALES */
 .social-icons {
-    display: flex;
-    gap: 1.2rem;
+  display: flex;
+  gap: 15px; /* Espacio entre los iconos sociales */
+  margin-top: 15px;
 }
 
-.social-icons a {
-    display: inline-block;
-    text-decoration: none;
-    background-color: var(--color-white);
-    padding: 16px;
-    border-radius: 50%;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    width: 50px;
-    height: 50px;
-    display: flex;
+.social-icons img {
+  width: 35px; /* Tamaño unificado para iconos */
+  height: 35px;
+  transition: transform 0.2s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Estilos para los diálogos de Material (estilos generales para los diálogos de la aplicación) */
+.mat-mdc-dialog-container .mat-mdc-dialog-title {
+  color: #3f51b5; /* Primary Blue */
+  font-weight: 700;
+  font-size: 1.8em;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-content {
+  color: #424242; /* Dark Gray/Near Black */
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-content h2 {
+  color: #5c6bc0; /* Secondary Blue */
+  font-size: 1.4em;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-content ul {
+  list-style: disc;
+  margin-left: 20px;
+  padding-left: 0;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-content ul li {
+  margin-bottom: 8px;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-actions button {
+  background-color: #E0E0E0; /* Light Gray */
+  color: #424242; /* Dark Gray/Near Black */
+  padding: 8px 20px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-actions button:hover {
+  background-color: #CCCCCC; /* Ligeramente más oscuro en hover */
+}
+
+
+/* ====================================================== */
+/* === Responsive Design (Media Queries)              === */
+/* ====================================================== */
+
+@media (max-width: 1000px) {
+  .app-toolbar {
+    padding: 0 20px; /* Ajusta padding del toolbar en pantallas medianas */
+  }
+
+  .hero-section {
+    padding: 60px 30px;
+    flex-direction: column; /* Apila contenido e imagen */
+    gap: 40px;
+  }
+
+  .hero-title {
+    font-size: 3.5em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5em;
+  }
+
+  .info-banner {
+    margin-top: -40px;
+    padding: 25px;
+  }
+
+  .info-banner h2 {
+    font-size: 1.7em;
+  }
+
+  .info-banner p {
+    font-size: 1em;
+  }
+
+  .footer-content {
+    padding: 50px 30px;
+    flex-direction: column; /* Apila logo y columnas */
     align-items: center;
-    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-columns-container {
+    justify-content: center; /* Centra las columnas */
+    gap: 30px;
+  }
+
+  .footer-column {
+    flex: 1 1 100%; /* Las columnas ocupan todo el ancho */
+    text-align: center;
+  }
+
+  .footer-column h3 {
+    margin: 20px auto;
+  }
+
+  .social-icons {
+    justify-content: center; /* Centra los iconos sociales */
+  }
 }
 
-.social-icons a:hover {
-    background-color: var(--color-secondary);
-    transform: scale(1.1);
+@media (max-width: 768px) {
+  .app-toolbar {
+    height: 56px; /* Altura más pequeña para toolbar en móviles */
+    padding: 0 15px;
+  }
+
+  .toolbar-logo {
+    height: 35px;
+  }
+
+  .toolbar-title {
+    font-size: 1.1em;
+  }
+
+  .hero-section {
+    padding: 50px 20px;
+  }
+
+  .hero-title {
+    font-size: 2.8em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3em;
+  }
+
+  .hero-button {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+
+  .info-banner {
+    margin-top: -30px;
+    padding: 20px;
+  }
+
+  .info-banner h2 {
+    font-size: 1.5em;
+  }
+
+  .info-banner button {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+
+  .footer-content {
+    padding: 40px 20px;
+    gap: 25px;
+  }
+
+  .footer-logo img {
+    height: 50px;
+  }
+
+  .footer-logo .app-name {
+    font-size: 1.5em;
+  }
+
+  .footer-column h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
 }
 
-.social-icons a i {
-    font-size: 24px; /* Aumenté el tamaño del icono */
-    color: var(--color-black);
-    transition: color 0.3s ease;
-}
+@media (max-width: 480px) {
+  .app-toolbar {
+    padding: 0 10px;
+  }
 
-.social-icons a:hover i {
-    color: var(--color-white);
-}
+  .toolbar-login-button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
 
+  .toolbar-login-button mat-icon {
+    font-size: 1em;
+  }
 
-/* MODAL */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-}
+  .hero-section {
+    padding: 40px 15px;
+  }
 
-.modal-content {
-    background-color: var(--color-white);
-    margin: 10% auto;
-    padding: 30px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 700px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
+  .hero-title {
+    font-size: 2.2em;
+  }
 
-.modal-content h1,
-.modal-content h2 {
-    color: var(--color-dark-gray);
-}
+  .hero-subtitle {
+    font-size: 1.1em;
+  }
 
-.close {
-    font-size: 30px;
-    font-weight: bold;
-    color: var(--color-dark-gray);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
+  .info-banner {
+    margin-top: -20px;
+    padding: 15px;
+  }
 
-.close:hover {
-    color: var(--color-secondary);
-}
+  .info-banner h2 {
+    font-size: 1.2em;
+  }
 
-/* RESPONSIVE */
-@media screen and (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+  .info-banner p {
+    font-size: 0.9em;
+  }
 
-    .header-right {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
+  .info-banner .container-banner {
+    flex-direction: column;
+    text-align: center;
+  }
 
-    main {
-        flex-direction: column;
-        text-align: center;
-        padding: 2rem 6%;
-    }
+  .footer-content {
+    padding: 30px 15px;
+    gap: 20px;
+  }
 
-    .main-content,
-    .main-image {
-        width: 100%;
-    }
-
-    .info-banner {
-        padding: 2rem 6%;
-    }
-
-    footer {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-        padding: 3rem 6%;
-    }
-
-    .footer-column,
-    .footer-logo {
-        width: 100%;
-    }
+  .footer-column ul li a {
+    font-size: 0.9em;
+  }
 }

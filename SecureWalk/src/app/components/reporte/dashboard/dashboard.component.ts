@@ -15,15 +15,6 @@ import { Reporte9Component } from '../reporte9/reporte9.component';
   standalone: true,
   imports: [
     CommonModule,
-    Reporte1Component,
-    Reporte2Component,
-    Reporte3Component,
-    Reporte4Component,
-    Reporte5Component,
-    Reporte6Component,
-    Reporte7Component,
-    Reporte8Component,
-    Reporte9Component
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
