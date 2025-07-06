@@ -1,8 +1,8 @@
-import { Ruta } from "./ruta"
-import { Usuario } from "./usuario"
+import { Ruta } from '../models/ruta';
+import { Usuario } from '../models/usuario';
 
-export class UsuarioRuta{
-    idUsuarioRuta:number=0
-    usuario:Usuario=new Usuario()
-    ruta:Ruta = new Ruta()
+export class UsuarioRuta {
+  idUsuarioRuta: number = 0;
+  ruta: Ruta = new Ruta();
+  usuario: Usuario = new Usuario();
 }

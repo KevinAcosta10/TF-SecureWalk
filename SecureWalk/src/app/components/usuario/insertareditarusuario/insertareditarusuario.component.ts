@@ -20,6 +20,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Asegúrate de que MatSnackBar esté importado
 
 @Component({
   selector: 'app-insertareditarusuario',
@@ -40,7 +41,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './insertareditarusuario.component.html',
   styleUrl: './insertareditarusuario.component.css',
 })
-export class InsertareditarusuarioComponent {
+export class InsertareditarusuarioComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
 
@@ -52,29 +53,17 @@ export class InsertareditarusuarioComponent {
   id: number = 0;
   edicion: boolean = false;
   usernamesRegistrados: string[] = [];
-  hidePassword: boolean = true;
+  hidePassword = true; // Inicializa hidePassword
 
   constructor(
     private uS: UsuariosService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar // Inyecta MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.uS.list().subscribe((usuarios) => {
-      this.usernamesRegistrados = usuarios.map((u: Usuario) =>
-        u.username.toLowerCase()
-      );
-    })
-
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      //actualizar
-      this.init();
-    });
-
     this.form = this.formBuilder.group({
       codigo: [''],
       nombre: [
@@ -95,71 +84,136 @@ export class InsertareditarusuarioComponent {
       password: ['', Validators.required],
       enable: ['', Validators.required],
     });
+
+    this.uS.list().subscribe((usuarios) => {
+      this.usernamesRegistrados = usuarios.map((u: Usuario) =>
+        u.username.toLowerCase()
+      );
+      if (this.edicion) {
+        this.form
+          .get('username')
+          ?.setValidators([
+            Validators.required,
+            this.usernameDuplicadoValidator(this.form.get('username')?.value),
+          ]);
+      } else {
+        this.form
+          .get('username')
+          ?.setValidators([
+            Validators.required,
+            this.usernameDuplicadoValidator(),
+          ]);
+      }
+      this.form.get('username')?.updateValueAndValidity();
+    });
+
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
   }
-  usernameDuplicadoValidator = (): ValidatorFn => {
+
+  usernameDuplicadoValidator = (currentUsername?: string): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) return null;
       const valor = control.value.toLowerCase();
-      const existe = this.usernamesRegistrados.includes(valor);
+      const existe =
+        this.usernamesRegistrados.includes(valor) &&
+        (currentUsername ? valor !== currentUsername.toLowerCase() : true);
       return existe ? { usernameDuplicado: true } : null;
     };
   };
+
   fechaNoPasadaValidator(control: AbstractControl): ValidationErrors | null {
     const valor = new Date(control.value);
     const hoy = new Date();
-    hoy.setHours(0, 0, 0, 0); // Quita horas para comparar solo fecha
+    hoy.setHours(0, 0, 0, 0);
 
     return valor < hoy ? { fechaPasada: true } : null;
   }
 
   aceptar() {
-    if (this.form.valid) {
-      this.usuario.idUsuario = this.form.value.codigo;
-      this.usuario.nombreUsuario = this.form.value.nombre;
-      this.usuario.emailUsuario = this.form.value.email;
-      this.usuario.telefonoUsuario = this.form.value.telefono;
-      this.usuario.direccionUsuario = this.form.value.direccion;
-      this.usuario.fechaRegistroUsuario = this.form.value.fechaRegistro;
-      this.usuario.username = this.form.value.username;
-      this.usuario.password = this.form.value.password;
-      this.usuario.enable = this.form.value.enable;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.snackBar.open('Por favor, completa todos los campos requeridos y corrige los errores.', 'Cerrar', {
+        duration: 4000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-error'] // Clase para estilos de error
+      });
+      return;
+    }
 
-      if (this.edicion) {
+    this.usuario.idUsuario = this.form.value.codigo;
+    this.usuario.nombreUsuario = this.form.value.nombre;
+    this.usuario.emailUsuario = this.form.value.email;
+    this.usuario.telefonoUsuario = this.form.value.telefono;
+    this.usuario.direccionUsuario = this.form.value.direccion;
+    this.usuario.fechaRegistroUsuario = this.form.value.fechaRegistro;
+    this.usuario.username = this.form.value.username;
+    this.usuario.password = this.form.value.password;
+    this.usuario.enable = this.form.value.enable;
+
+    if (this.edicion) {
       this.uS.update(this.usuario).subscribe((data) => {
-        this.uS.list().subscribe((data) => {
-          this.uS.setList(data);
+        this.uS.list().subscribe((dataList) => {
+          this.uS.setList(dataList);
+        });
+        this.router.navigate(['usuarios']);
+        this.snackBar.open('Usuario actualizado exitosamente', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success'] // Clase para estilos de éxito
         });
       });
     } else {
-      //INSERTAR
       this.uS.insert(this.usuario).subscribe((data) => {
-        this.uS.list().subscribe((data) => {
-          this.uS.setList(data);
+        this.uS.list().subscribe((dataList) => {
+          this.uS.setList(dataList);
+        });
+        this.router.navigate(['usuarios']);
+        this.snackBar.open('Usuario registrado exitosamente', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success'] // Clase para estilos de éxito
         });
       });
     }
-    this.router.navigate(['usuarios']);
   }
-}
 
   cancelar() {
     this.router.navigate(['usuarios']);
   }
-  
+
   init() {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-            codigo: new FormControl(data.idUsuario),
-            nombre: new FormControl(data.nombreUsuario),
-            email: new FormControl(data.emailUsuario),
-            direccion: new FormControl(data.direccionUsuario),
-            telefono: new FormControl(data.telefonoUsuario),
-            fechaRegistro: new FormControl(data.fechaRegistroUsuario),
-            username: new FormControl(data.username),
-            password: new FormControl(data.password),
-            enable: new FormControl(data.enable),
+        this.form.patchValue({
+          codigo: data.idUsuario,
+          nombre: data.nombreUsuario,
+          email: data.emailUsuario,
+          direccion: data.direccionUsuario,
+          telefono: data.telefonoUsuario,
+          fechaRegistro: data.fechaRegistroUsuario,
+          username: data.username,
+          password: data.password,
+          enable: data.enable,
         });
+
+        if (this.edicion) {
+          this.form.get('password')?.clearValidators();
+          this.form.get('password')?.updateValueAndValidity();
+        }
+        this.form
+          .get('username')
+          ?.setValidators([
+            Validators.required,
+            this.usernameDuplicadoValidator(data.username),
+          ]);
+        this.form.get('username')?.updateValueAndValidity();
       });
     }
   }

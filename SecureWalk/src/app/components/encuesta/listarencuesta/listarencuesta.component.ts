@@ -1,38 +1,68 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Encuesta } from '../../../models/encuesta';
-import { EncuestaService } from '../../../services/encuesta.service';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common'; // Importar DatePipe para el pipe de fecha
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { EncuestaConPreguntasDTO } from '../../../models/encuestaconpreguntasDTO';
+import { EncuestaService } from '../../../services/encuesta.service';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
+import { Router } from '@angular/router'; // Importar Router para navegación
 
 @Component({
   selector: 'app-listarencuesta',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, RouterLink],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatExpansionModule,
+    DatePipe // Añadir DatePipe para usar el pipe en el template
+  ],
   templateUrl: './listarencuesta.component.html',
-  styleUrl: './listarencuesta.component.css',
+  styleUrls: ['./listarencuesta.component.css']
 })
-export class ListarencuestaComponent {
-  displayedColumns: string[] = ['c1',  'c2', 'c3', 'c4', 'c5', 'c6' ];
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+export class ListarencuestaComponent implements OnInit {
+  encuestasConPreguntas: EncuestaConPreguntasDTO[] = [];
 
-  dataSource: MatTableDataSource<Encuesta> = new MatTableDataSource();
-  constructor(private eS: EncuestaService) {}
+  constructor(
+    private eS: EncuestaService,
+    private snackBar: MatSnackBar, // Inyectar MatSnackBar
+    private router: Router // Inyectar Router
+  ) { }
+
   ngOnInit(): void {
-    this.eS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-    });
-    this.eS.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+    this.cargarEncuestasAgrupadas();
+  }
+
+  cargarEncuestasAgrupadas(): void {
+    this.eS.listarEncuestasConPreguntasAgrupadas().subscribe({
+      next: (data) => {
+        this.encuestasConPreguntas = data;
+        if (data.length === 0) {
+          this.snackBar.open('No se encontraron encuestas para mostrar.', 'Cerrar', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-info'] // Clase para estilos de información
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar encuestas:', err);
+        this.snackBar.open('Error al cargar las encuestas. Inténtalo de nuevo más tarde.', 'Cerrar', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error'] // Clase para estilos de error
+        });
+      }
     });
   }
-  eliminar(id: number) {
-    this.eS.deleteS(id).subscribe((data) => {
-      this.eS.list().subscribe((data) => {
-        this.eS.setList(data);
-      });
-    });
+
+  // Método para navegar a la página de inserción de encuestas (si existe)
+  goToInsertSurvey(): void {
+    this.router.navigate(['encuestas/nuevo']); // Ajusta la ruta según tu configuración
   }
 }

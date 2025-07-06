@@ -17,6 +17,13 @@
       <mat-icon>location_on</mat-icon>
     </button>
   </div>
+     <div>
+    <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
+      <mat-icon>file_copy</mat-icon>
+      Reportes
+    </button>
+  </div>
+   <span class="toolbar-spacer"></span>
   <div>
     <button mat-button [matMenuTriggerFor]="menuPregunta">
       Pregunta
@@ -35,30 +42,51 @@
       <mat-icon>poll</mat-icon>
     </button>
   </div>
-    <div>
-    <button mat-button [matMenuTriggerFor]="menuUsuarioRuta">
-      UsuarioRuta
-      <mat-icon>poll</mat-icon>
-    </button>
-  </div>
-      <div>
-    <button mat-button [matMenuTriggerFor]="menuRespuesta">
-      Respuesta
-      <mat-icon>poll</mat-icon>
-    </button>
-  </div>
-        <div>
-    <button mat-button [matMenuTriggerFor]="menuEncuestaPregunta">
-      EncuestaPregunta
-      <mat-icon>poll</mat-icon>
-    </button>
-  </div>
   <div>
     <button mat-button [matMenuTriggerFor]="menuRuta">
       Ruta
       <mat-icon>poll</mat-icon>
     </button>
   </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuIncidente">
+      Incidente
+      <mat-icon>poll</mat-icon>
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuEvaluacionIncidente">
+      Evaluacion Incidente
+      <mat-icon>poll</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="menuPost">
+      Post
+      <mat-icon>poll</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="menuComentario">
+      Comentario
+      <mat-icon>poll</mat-icon>
+    </button>
+  </div>
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuUsuarioRuta">
+      Usuario Ruta
+      <mat-icon>poll</mat-icon>
+    </button>
+  </div>
+ <div>
+    <button mat-button [matMenuTriggerFor]="menuEncuestaPregunta">
+      Encuesta Pregunta
+      <mat-icon>poll</mat-icon>
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuRespuesta">
+      Respuesta
+      <mat-icon>poll</mat-icon>
+    </button>
+  </div>
+
   <span class="toolbar-spacer"></span>
   <div class="right-menu">
     <button mat-button [matMenuTriggerFor]="menuSalir">
@@ -70,17 +98,8 @@
   <button mat-menu-item routerLink="/usuarios">Listar</button>
   <button mat-menu-item routerLink="/usuarios/formulario">Insertar</button>
 </mat-menu>
-<mat-menu #menuUsuarioRuta="matMenu">
-  <button mat-menu-item routerLink="/usuarioRuta">Listar</button>
-  <button mat-menu-item routerLink="/usuarioRuta/formulario">Insertar</button>
-</mat-menu>
-<mat-menu #menuRespuesta="matMenu">
-  <button mat-menu-item routerLink="/respuesta">Listar</button>
-  <button mat-menu-item routerLink="/respuesta/formulario">Insertar</button>
-</mat-menu>
-<mat-menu #menuEncuestaPregunta="matMenu">
-  <button mat-menu-item routerLink="/encuestaPregunta">Listar</button>
-  <button mat-menu-item routerLink="/encuestaPregunta/formulario">Insertar</button>
+<mat-menu #menuReportes="matMenu">
+  <button mat-menu-item routerLink="/reportes/Dashboard">DashBoard</button>
 </mat-menu>
 <mat-menu #menuZona="matMenu">
   <button mat-menu-item routerLink="/zonas">Listar</button>
@@ -107,6 +126,39 @@
   <button mat-menu-item routerLink="/rutas/formulario">Insertar</button>
 </mat-menu>
 
+<mat-menu #menuIncidente="matMenu">
+  <button mat-menu-item routerLink="/incidentes">Listar</button>
+  <button mat-menu-item routerLink="/incidentes/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuEvaluacionIncidente="matMenu">
+  <button mat-menu-item routerLink="/evaluacionincidentes">Listar</button>
+  <button mat-menu-item routerLink="/evaluacionincidentes/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuUsuarioRuta="matMenu">
+  <button mat-menu-item routerLink="/usuarioRutas">Listar</button>
+  <button mat-menu-item routerLink="/usuarioRutas/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuEncuestaPregunta="matMenu">
+  <button mat-menu-item routerLink="/encuestasPreguntas">Listar</button>
+  <button mat-menu-item routerLink="/encuestasPreguntas/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuPost="matMenu">
+  <button mat-menu-item routerLink="/posts">Listar</button>
+  <button mat-menu-item routerLink="/posts/formulario">Insertar</button>
+</mat-menu>
+<mat-menu #menuComentario="matMenu">
+  <button mat-menu-item routerLink="/comentarios">Listar</button>
+  <button mat-menu-item routerLink="/comentarios/formulario">Insertar</button>
+</mat-menu>
+
+<mat-menu #menuRespuesta="matMenu">
+  <button mat-menu-item routerLink="/respuestas">Listar</button>
+  <button mat-menu-item routerLink="/respuestas/formulario">Insertar</button>
+</mat-menu>
 <mat-menu #menuSalir="matMenu">
   <button mat-menu-item routerLink="/login" (click)="cerrar()">
     <mat-icon>logout</mat-icon>

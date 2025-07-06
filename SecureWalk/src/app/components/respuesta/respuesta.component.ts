@@ -5,10 +5,10 @@ import { ListarrespuestaComponent } from './listarrespuesta/listarrespuesta.comp
 @Component({
   selector: 'app-respuesta',
   standalone: true,
-  imports: [RouterOutlet,ListarrespuestaComponent],
+  imports: [RouterOutlet, ListarrespuestaComponent],
   templateUrl: './respuesta.component.html',
-  styleUrl: './respuesta.component.css'
+  styleUrl: './respuesta.component.css',
 })
 export class RespuestaComponent {
-constructor(public route: ActivatedRoute) {}
+  constructor(public route: ActivatedRoute) {}
 }

@@ -1,0 +1,57 @@
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">Registro de Encuestas</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()" class="survey-form">
+      <!-- Campo Nombre de Encuesta -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Nombre de Encuesta</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+          El nombre de la encuesta es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Campo Descripción -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion" rows="3"></textarea> <!-- Usar textarea para descripciones largas -->
+        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+          La descripción de la encuesta es obligatoria.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Campo Fecha de Creación -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Fecha de Creación</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fechaCreacion"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaCreacion')?.hasError('required')">
+          La fecha es obligatoria.
+        </mat-error>
+        <mat-error *ngIf="form.get('fechaCreacion')?.hasError('fechaPasada')">
+          No se permiten fechas pasadas.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botones de Acción -->
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

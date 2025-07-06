@@ -1,212 +1,374 @@
-/* listarzona.component.css */
+/* Variables CSS para consistencia */
+:root {
+    --primary-color: #3f51b5; /* Primary Blue */
+    --secondary-blue: #5c6bc0; /* Secondary Blue */
+    --green-success: #4CAF50; /* Green (Success/Safe) */
+    --orange-warning: #FFC107; /* Orange/Amber (Warning/Caution) */
+    --red-error: #F44336; /* Red (Danger/Error/Critical Alert) */
+    --light-gray: #f0f2f5; /* Light Gray */
+    --white-color: #FFFFFF; /* White */
+    --dark-gray: #333333; /* Dark Gray/Near Black */
 
+    /* Reasignando variables existentes a la nueva paleta */
+    --accent-color: var(--secondary-blue); /* Ajustado para ser Secondary Blue */
+    --success-color: var(--green-success); /* Coincide */
+    --warning-color: var(--orange-warning); /* Coincide */
+    --error-color: var(--red-error); /* Coincide */
+    --background-light: var(--light-gray); /* Coincide */
+
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Layout principal */
 .main-container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  height: calc(100vh - 64px);
-  box-sizing: border-box;
+    display: flex;
+    gap: 1px;
+    padding: 1px;
+    height: calc(100vh - 64px); /* Asumiendo que 64px es la altura de una barra de navegación superior */
+    box-sizing: border-box;
 }
 
 .list-container {
-  flex: 1;
-  max-width: 400px;
-  min-width: 300px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Permite desplazamiento si hay muchas filas */
-  display: flex;
-  flex-direction: column;
+    flex: 1;
+    max-width: 450px;
+    min-width: 350px;
+    background-color: var(--white-color); /* Fondo blanco para el contenedor de la lista */
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Contenedor del mapa */
 .map-container {
-  flex: 2;
-  min-height: 400px;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+    flex: 2;
+    min-height: 400px;
+    background-color: var(--background-light); /* Fondo gris claro para el mapa */
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    position: relative;
 }
 
-/* Estilo para la tabla */
-table {
-  width: 100%;
-  margin-bottom: 10px;
-  table-layout: fixed; /* Ayuda a que las columnas respeten el ancho asignado */
+/* Header mejorado */
+.header-section {
+    padding: 5px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-blue)); /* Gradiente de azules */
+    color: var(--white-color); /* Texto blanco */
+    text-align: center;
 }
 
-/* Estilos para el nuevo contenedor del buscador */
+.titulo {
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.stats-info,
+.search-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.clear-search-btn {
+    color: var(--white-color); /* Botón de limpiar búsqueda en blanco */
+}
+
+/* Sección de búsqueda mejorada */
 .search-container {
-  display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-  gap: 10px; /* Espacio entre los campos y botones */
-  padding: 15px;
-  border-bottom: 1px solid #ddd; /* Separador visual */
-  margin-bottom: 15px; /* Espacio debajo del buscador */
-  align-items: center; /* Alinea verticalmente los items */
+    padding: 5px;
+    border-bottom: 1px solid #e0e0e0; /* Un gris claro para el borde inferior */
+    background-color: #fafafa; /* Un gris muy muy claro, casi blanco */
+}
+
+.search-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    color: var(--primary-color); /* Título de búsqueda en Primary Blue */
+}
+
+.search-inputs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 .search-field {
-  flex: 1; /* Permite que los campos crezcan y ocupen espacio */
-  min-width: 120px; /* Ancho mínimo para cada campo */
-  max-width: 180px; /* Ancho máximo para cada campo */
+    flex: 1;
 }
 
-/* Ajustes para el botón de búsqueda */
-.search-container button {
-  height: 56px; /* Ajusta la altura del botón */
+.search-actions {
+    display: flex;
+    gap: 8px;
 }
 
-/* Responsive adjustments for search container */
-@media (max-width: 768px) {
-  .search-container {
-    flex-direction: column; /* Apila los campos y botones en pantallas pequeñas */
-    align-items: stretch; /* Estira los elementos para que ocupen todo el ancho */
-  }
-
-  .search-field {
-    max-width: 100%; /* Ocupa todo el ancho disponible */
-  }
-
-  .search-container button {
-    width: 100%; /* Botones también ocupan todo el ancho */
-  }
+.search-actions button {
+    flex: 1;
 }
 
-/* Estilo para Material table header */
+/* Tabla mejorada */
+.table-container {
+    flex: 1;
+    overflow: auto;
+}
+
+.mat-elevation-z8 {
+    box-shadow: none; /* Mantener sin sombra para la tabla en sí si está dentro de un contenedor con sombra */
+    border-radius: 0;
+}
+
 .mat-header-cell {
-  background-color: #3f51b5;
-  color: white;
-  font-weight: bold;
-  padding: 8px 12px;
-  text-align: left;
-}
-
-/* Estilo para Material table rows */
-.mat-row:nth-child(even) {
-  background-color: #f0f0f0;
-}
-
-.mat-row:hover {
-  background-color: #e0e0e0;
+    background-color: var(--primary-color); /* Cabeceras de tabla en Primary Blue */
+    color: var(--white-color); /* Texto de cabeceras en blanco */
+    font-weight: 800;
+    padding: 12px 16px;
+    border-bottom: none;
 }
 
 .mat-cell {
-  padding: 6px 12px;
-  font-size: 0.9em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--light-gray); /* Borde entre celdas en Light Gray */
+    transition: var(--transition);
 }
 
-/* Estilos específicos para las celdas de las acciones (eliminar/actualizar) */
+.mat-row {
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.mat-row:hover {
+    background-color: #f8f9fa; /* Un gris muy suave al pasar el ratón */
+}
+
+/* Fila seleccionada con animación */
+.selected-row {
+    background-color: #e8f5e8 !important; /* Un verde muy claro para la fila seleccionada */
+    border-left: 4px solid var(--success-color); /* Borde izquierdo en Success Green */
+    animation: highlight-pulse 1s ease-in-out;
+}
+
+@keyframes highlight-pulse {
+    0% {
+        background-color: #c8e6c9; /* Un verde ligeramente más oscuro al inicio de la animación */
+    }
+    50% {
+        background-color: #e8f5e8; /* El mismo verde claro */
+    }
+    100% {
+        background-color: #e8f5e8;
+    }
+}
+
+.zone-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.selected-icon {
+    color: var(--success-color); /* Ícono de selección en Success Green */
+    font-size: 18px;
+    animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    60%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-4px);
+    }
+    80% {
+        transform: translateY(-2px);
+    }
+}
+
+/* Acciones */
 .acciones-header,
 .acciones-cell {
-  width: 50px; /* Ancho fijo y pequeño para las columnas de iconos */
-  text-align: center;
-  padding: 0px; /* Elimina el padding de estas celdas */
+    width: 80px;
+    text-align: center;
+    padding: 8px !important;
 }
 
-.acciones-header {
-  border-left: 1px solid rgba(255, 255, 255, 0.2); /* Separador sutil para los encabezados de acción */
+/* Marcadores personalizados */
+.custom-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
 }
 
-.acciones-cell {
-  border-left: 1px solid rgba(0, 0, 0, 0.05); /* Separador sutil para las celdas de acción */
+.custom-marker mat-icon {
+    transform: rotate(45deg);
+    font-size: 20px;
+    color: var(--white-color); /* Íconos de marcador en blanco */
 }
 
-/* Asegura que los iconos dentro de los botones sean pequeños */
-.mat-icon-button .mat-icon {
-  font-size: 18px;
-  height: 18px;
-  width: 18px;
-  line-height: 18px;
+.zone-marker {
+    background-color: var(--error-color); /* Marcador de zona por defecto en Error Red */
 }
 
-/* Paginador styling */
+.zone-marker:hover {
+    transform: rotate(-45deg) scale(1.1);
+    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4); /* Sombra al pasar el ratón basada en Error Red */
+}
+
+.selected-marker {
+    background-color: var(--success-color) !important; /* Marcador seleccionado en Success Green */
+    transform: rotate(-45deg) scale(1.2);
+    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.5); /* Sombra al seleccionar basada en Success Green */
+    z-index: 1000;
+}
+
+.search-marker {
+    background-color: var(--primary-color); /* Marcador de búsqueda en Primary Blue */
+}
+
+.marker-label {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    background: rgba(var(--dark-gray-rgb), 0.8); /* Fondo de etiqueta en Dark Gray semi-transparente */
+    color: var(--white-color); /* Texto de etiqueta en blanco */
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+/* RGB value for --dark-gray, to be used in rgba() for transparency */
+:root {
+  --dark-gray-rgb: 51, 51, 51; /* For #333333 */
+  /* If you use #424242, it would be --dark-gray-rgb: 66, 66, 66; */
+}
+
+
+.custom-marker:hover .marker-label {
+    opacity: 1;
+}
+
+/* Información de zona seleccionada */
+.selected-zone-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--white-color); /* Fondo de la información de zona en blanco */
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: var(--success-color); /* Cabecera de información en Success Green */
+    color: var(--white-color); /* Texto de cabecera en blanco */
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-weight: 500;
+}
+
+.info-header button {
+    margin-left: auto;
+    color: var(--white-color); /* Botón en cabecera de información en blanco */
+}
+
+.info-content {
+    padding: 16px;
+}
+
+.info-content p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+}
+
+/* Botón flotante */
+.add-zone-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    background-color: var(--primary-color); /* CAMBIO: Botón flotante en Primary Blue */
+}
+
+/* Paginador */
 mat-paginator {
-  background-color: transparent;
-  padding: 10px 0;
-  border-top: 1px solid #ddd;
+    border-top: 1px solid #e0e0e0; /* Borde superior en un gris claro */
+    background-color: #fafafa; /* Fondo del paginador en un gris muy muy claro */
 }
 
-/* Title styling */
-.titulo {
-  color: #3f51b5;
-  margin-bottom: 20px;
-  font-size: 1.8em;
-  padding-top: 10px;
-}
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-    height: auto;
-  }
+    .main-container {
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+        padding: 10px;
+    }
 
-  .list-container {
-    max-width: 100%;
-    min-width: unset;
-  }
+    .list-container {
+        max-width: 100%;
+        min-width: unset;
+    }
 
-  .map-container {
-    min-height: 300px;
-  }
+    .map-container {
+        min-height: 300px;
+    }
+
+    .search-inputs {
+        flex-direction: column;
+    }
+
+    .search-actions {
+        flex-direction: column;
+    }
+
+    .selected-zone-info {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px;
+    }
 }
 
-/* Scroll smooth para la fila seleccionada */
-.selected {
-  background-color: #d3f8e2; /* Resalta la fila seleccionada */
-  font-weight: bold;
+/* Snackbar personalizado */
+::ng-deep .success-snackbar {
+    background-color: var(--success-color);
+    color: var(--white-color);
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+::ng-deep .error-snackbar {
+    background-color: var(--error-color);
+    color: var(--white-color);
 }
 
-.container {
-  display: flex;
-  height: 100vh;
-}
-
-.sidebar {
-  width: 400px;
-  background-color: #f5f5f5;
-  padding: 20px;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.store {
-  h3,
-  p {
-    margin: 0;
-  }
-  h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  cursor: pointer;
-
-  &.active {
-    background-color: #e0e0e0;
-    border: 2px solid #3f51b5;
-  }
-
-  &.hover {
-    background-color: #e0e0e0;
-  }
-}
-
-.sidebar:last-child {
-  margin-bottom: 0;
+::ng-deep .warning-snackbar {
+    background-color: var(--warning-color);
+    color: var(--dark-gray); /* Texto oscuro para el warning si el fondo es claro */
 }

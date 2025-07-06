@@ -1,39 +1,79 @@
-<div class="container">
-  <div>
-    <h1 class="titulo">Lista de usuarios</h1>
-  </div>
+<div class="main-container">
+  <div class="top-header-section">
+    <div class="title-search-block">
+      <h1 class="titulo">Lista de Usuarios</h1>
 
- <form [formGroup]="form" class="search-form"> <!-- Vinculamos el formulario al FormGroup 'form' -->
-    <mat-form-field appearance="outline" class="search-field"> <!-- Añadido 'appearance' para estilo -->
-      <mat-label>Buscar usuario</mat-label>
-      <!-- El input se vincula al FormControl 'usuario' dentro del FormGroup 'form' -->
-      <input matInput formControlName="usuario">
-      <mat-icon matSuffix>search</mat-icon> <!-- Ícono de búsqueda al final -->
-    </mat-form-field>
+      <form [formGroup]="form" class="search-form">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Buscar usuario</mat-label>
+          <input matInput formControlName="usuario" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
 
-    <!-- Botón para limpiar la búsqueda. Se muestra si el campo no está vacío. -->
-    <button mat-button color="accent" (click)="form.get('usuario')?.setValue('')" *ngIf="form.get('usuario')?.value" class="clear-button">
-      Limpiar búsqueda
-    </button>
-  </form>
+        <button
+          mat-button
+          color="accent"
+          (click)="form.get('usuario')?.setValue('')"
+          *ngIf="form.get('usuario')?.value"
+          class="clear-button"
+        >
+          Limpiar búsqueda
+        </button>
+      </form>
+    </div>
 
- <div class="slider-container">
-  <owl-carousel-o [options]="customOptions">
-    <ng-template carouselSlide *ngFor="let usuario of usuarios">
-      <mat-card class="usuario-card">
+    </div>
+
+  <div class="content-cards-section">
+    <div *ngIf="notResults" class="no-results-message">
+      <p>No se encontraron resultados para "{{ usuarioBusqueda }}"</p>
+    </div>
+
+    <div class="cards-grid-container" *ngIf="!notResults">
+      <mat-card class="usuario-card" *ngFor="let usuario of usuarios">
         <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+            <img
+              mat-card-image
+              [src]="
+                'https://randomuser.me/api/portraits/lego/' +
+                (usuario.idUsuario % 10) +
+                '.jpg'
+              "
+              alt="Avatar de usuario"
+            />
+          </div>
           <mat-card-title>{{ usuario.nombreUsuario }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Fecha de registro: {{ usuario.fechaRegistroUsuario }}</p>
-          <p>Estado: {{ usuario.enable }}</p>
+          <p>
+            <mat-icon class="card-icon">event</mat-icon> Fecha de registro:
+            {{ usuario.fechaRegistroUsuario | date : 'shortDate' }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">{{
+              usuario.enable ? 'check_circle' : 'cancel'
+            }}</mat-icon>
+            Estado: {{ usuario.enable ? 'Habilitado' : 'Deshabilitado' }}
+          </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button color="primary" [routerLink]="['ediciones', usuario.idUsuario]"><mat-icon>edit</mat-icon></button>
-          <button mat-button color="warn" (click)="eliminar(usuario.idUsuario)"><mat-icon>delete_forever</mat-icon></button>
+          <button
+            mat-button
+            color="primary"
+            [routerLink]="['ediciones', usuario.idUsuario]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-button
+            color="warn"
+            (click)="eliminar(usuario.idUsuario)"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
         </mat-card-actions>
       </mat-card>
-    </ng-template>
-  </owl-carousel-o>
-</div>
+    </div>
+  </div>
 </div>

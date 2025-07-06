@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Pregunta } from '../models/pregunta';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tipoPreguntaxPreguntaDTO } from '../models/tipoPreguntaxPreguntaDTO';
 
 const base_url = environment.base;
 
@@ -37,5 +38,9 @@ export class PreguntaService {
 
   deleteS(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getTipoPreguntaxPregunta():Observable<tipoPreguntaxPreguntaDTO[]>{
+    return this.http.get<tipoPreguntaxPreguntaDTO[]>(`${this.url}/tipoPreguntaxPregunta`);
   }
 }

@@ -1,0 +1,79 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de incidentes</h1>
+  </div>
+  <div style="text-align: center">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="tipo">
+          @for (tipo of tipos; track tipo) {
+          <mat-option [value]="tipo.value">{{ tipo.viewValue }}</mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+          El tipo de incidente es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fecha')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcion" />
+
+        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+          La descripcion del incidente es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Zona</mat-label>
+        <mat-select formControlName="zona">
+          @for (food of listaZonas; track food) {
+          <mat-option [value]="food.idZona">{{ food.nombreZona }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('zona')?.hasError('required')">
+          La zona del incidente es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (food of listaUsuarios; track food) {
+          <mat-option [value]="food.idUsuario">{{
+            food.nombreUsuario
+          }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

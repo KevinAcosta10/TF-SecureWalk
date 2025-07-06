@@ -1,3 +1,361 @@
-.titulo {
-    text-align: center;
+/* Variables CSS */
+:root {
+  --primary-blue: #3f51b5; /* Primary Blue */
+  --secondary-blue: #5c6bc0; /* Secondary Blue */
+  --green-success: #4CAF50; /* Green (Success/Safe) */
+  --orange-warning: #FFC107; /* Orange/Amber (Warning/Caution) */
+  --red-danger: #F44336; /* Red (Danger/Error/Critical Alert) */
+  --light-gray: #f0f2f5; /* Light Gray */
+  --light-gray-alt: #E0E0E0; /* Alternative Light Gray */
+  --white-color: #FFFFFF; /* White */
+  --dark-gray: #333333; /* Dark Gray/Near Black - Ahora más usado para texto */
+  --medium-gray: #424242; /* Medium Gray - También usado para texto */
+
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-deep: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --border-radius-sm: 8px;
+  --border-radius-md: 15px;
+  --transition-fast: all 0.2s ease-in-out;
+  --transition-normal: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+}
+
+/* Main container for the overall layout */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* TOP HEADER SECTION: Contains title and add button - BLUE BACKGROUND */
+.top-header-section {
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue) 0%,
+    var(--secondary-blue) 100%
+  );
+  color: var(--white-color);
+  padding: 40px 60px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 0;
+}
+
+.title-add-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* Estilos para el título principal */
+.page-title {
+  font-size: 4em;
+  font-weight: 800;
+  color: var(--white-color);
+  margin-bottom: 30px;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+}
+
+/* Estilos para el botón de añadir */
+.add-button {
+  background-color: var(--white-color);
+  color: var(--primary-blue);
+  padding: 10px 20px;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  box-shadow: var(--shadow-light);
+  transition: var(--transition-normal);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-button:hover {
+  background-color: var(--light-gray-alt);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-button mat-icon {
+  color: var(--primary-blue);
+}
+
+/* CONTENT CARDS SECTION: Where the grid of cards live - LIGHT GRAY BACKGROUND */
+.content-cards-section {
+  padding: 40px;
+  background-color: var(--light-gray);
+  flex-grow: 1;
+}
+
+/* Grid de tarjetas */
+.cards-grid {
+  display: grid;
+  /* AUMENTAMOS EL MINMAX PARA HACERLAS MÁS ANCHAS */
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); /* Aumentado a 480px */
+  gap: 30px;
+  width: 100%;
+  /* Mantenemos un max-width generoso para permitir el crecimiento */
+  max-width: 1600px; /* Incrementado para permitir quizás 3 columnas de 480px + gaps */
+  margin: 0 auto;
+  justify-content: center;
+}
+
+/* Estilos para cada tarjeta de encuesta */
+.survey-card {
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-deep);
+  transition: var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.survey-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Cabecera de la tarjeta */
+mat-card-header {
+  background-color: var(--primary-blue);
+  color: var(--white-color);
+  padding: 20px;
+  border-bottom: 3px solid var(--secondary-blue);
+}
+
+.card-title {
+  font-size: 1.6em;
+  font-weight: 600;
+  color: var(--white-color);
+  margin-bottom: 5px;
+}
+
+.card-subtitle {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Contenido de la tarjeta */
+mat-card-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-description {
+  font-size: 1em;
+  line-height: 1.6;
+  color: var(--dark-gray);
+  margin-bottom: 20px;
+}
+
+/* Panel de expansión de preguntas */
+.questions-expansion-panel {
+  margin-top: auto;
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-light);
+  overflow: hidden;
+  border: 1px solid var(--light-gray-alt);
+}
+
+/* Encabezado del panel de expansión */
+.mat-expansion-panel-header {
+  background-color: var(--secondary-blue);
+  color: var(--white-color);
+  padding: 15px 20px;
+  height: auto !important;
+  min-height: 50px;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mat-expansion-panel-header:hover {
+  background-color: color-mix(in srgb, var(--secondary-blue) 90%, black 10%);
+}
+
+.panel-title {
+  font-weight: 600;
+  color: var(--white-color);
+  font-size: 1.1em;
+}
+
+.panel-description {
+  color: var(--dark-gray); /* Color de la descripción del panel: negro/gris oscuro */
+  font-size: 0.85em;
+  margin-left: 10px;
+}
+
+.expansion-toggle-icon {
+  color: var(--white-color);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mat-expansion-panel-header[aria-expanded="true"] .expansion-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Lista de preguntas dentro del panel */
+.questions-list {
+  padding: 15px 20px;
+  background-color: var(--white-color);
+  border-top: 1px solid var(--light-gray-alt);
+}
+
+.question-item {
+  margin-bottom: 15px;
+  color: var(--medium-gray);
+}
+
+.question-item p {
+  margin: 0 0 5px 0;
+  line-height: 1.5;
+}
+
+.question-item p strong {
+  color: var(--dark-gray);
+}
+
+.question-item small {
+  color: #616161;
+}
+
+.item-separator {
+  border-bottom: 1px dashed var(--light-gray-alt);
+  margin: 10px 0;
+}
+
+.question-item:last-child .item-separator {
+  display: none;
+}
+
+.no-questions-message {
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-gray);
+  padding: 10px;
+}
+
+/* Contenedor cuando no se encuentran datos */
+.no-data-container {
+  text-align: center;
+  padding: 50px;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-medium);
+  color: var(--medium-gray);
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.no-data-icon {
+  font-size: 4em;
+  width: 4em;
+  height: 4em;
+  color: var(--light-gray-alt);
+}
+
+/* Snackbar personalizado */
+::ng-deep .snackbar-success {
+  background-color: var(--green-success) !important;
+  color: var(--white-color) !important;
+  border-radius: var(--border-radius-sm);
+}
+
+::ng-deep .snackbar-error {
+  background-color: var(--red-danger) !important;
+  color: var(--white-color) !important;
+  border-radius: var(--border-radius-sm);
+}
+
+::ng-deep .snackbar-info {
+  background-color: var(--secondary-blue) !important;
+  color: var(--white-color) !important;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .top-header-section {
+    padding: 30px 30px;
   }
+  .page-title {
+    font-size: 3.2em;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Ajuste para pantallas medianas */
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 0;
+  }
+  .top-header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px 20px;
+    gap: 15px;
+    text-align: left;
+  }
+  .page-title {
+    font-size: 2.5em;
+    width: 100%;
+    text-align: left;
+  }
+  .add-button {
+    width: 100%;
+    justify-content: center;
+  }
+  .content-cards-section {
+    padding: 20px;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr; /* Siempre una columna en móviles */
+  }
+  .survey-card {
+    border-radius: var(--border-radius-sm);
+  }
+  .no-data-container, .no-questions-message {
+    padding: 30px 20px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-header-section {
+    padding: 20px 15px;
+  }
+  .page-title {
+    font-size: 2em;
+  }
+  .content-cards-section {
+    padding: 15px;
+  }
+}

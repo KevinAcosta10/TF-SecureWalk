@@ -1,0 +1,39 @@
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">Registro de Preguntas</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()" class="question-form">
+      <!-- Campo Texto Pregunta -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Texto de la Pregunta</mat-label>
+        <input matInput formControlName="texto" />
+        <mat-error *ngIf="form.get('texto')?.hasError('required')">
+          El texto de la pregunta es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Campo Tipo de Pregunta (MatSelect) -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Tipo de Pregunta</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option *ngFor="let tp of tipoPregunta" [value]="tp.value">
+            {{ tp.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+          El tipo de la pregunta es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botones de Acción -->
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

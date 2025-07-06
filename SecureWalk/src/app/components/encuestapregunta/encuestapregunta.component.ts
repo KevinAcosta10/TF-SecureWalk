@@ -5,10 +5,10 @@ import { ListarencuestapreguntaComponent } from './listarencuestapregunta/listar
 @Component({
   selector: 'app-encuestapregunta',
   standalone: true,
-  imports: [RouterOutlet,ListarencuestapreguntaComponent],
+  imports: [RouterOutlet, ListarencuestapreguntaComponent],
   templateUrl: './encuestapregunta.component.html',
-  styleUrl: './encuestapregunta.component.css'
+  styleUrl: './encuestapregunta.component.css',
 })
 export class EncuestapreguntaComponent {
-constructor(public route: ActivatedRoute) {}
+  constructor(public route: ActivatedRoute) {}
 }

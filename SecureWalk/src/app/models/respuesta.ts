@@ -1,10 +1,10 @@
-import { EncuestaPregunta } from "./encuestapregunta"
-import { Usuario } from "./usuario"
+import { EncuestaPregunta } from "../models/encuestapregunta"
+import { Usuario } from "../models/usuario"
 
-export class Respuesta {
+export class Respuesta{
     idRespuesta: number = 0
-    textoRespuesta : string = ""
+    textoRespuesta: String = ""
     fechaRespuesta: Date = new Date()
-    encuestaPregunta: EncuestaPregunta = new EncuestaPregunta()
-    usuario:Usuario= new Usuario()
+    encuestaPregunta:EncuestaPregunta = new EncuestaPregunta()
+    usuario:Usuario = new Usuario()
 }

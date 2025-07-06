@@ -1,50 +1,59 @@
-<div>
-  <div>Registro de usuarios</div>
-  <div>
-    <form [formGroup]="form" (submit)="aceptar()">
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">Registro de Usuarios</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()" class="user-form">
+      <!-- Campo Nombre de Usuario -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Nombre de Usuario</mat-label>
         <input matInput formControlName="nombre" />
         <mat-error *ngIf="form.get('nombre')?.hasError('required')">
-          El nombre de usuario es obligatorio!!
+          El nombre de usuario es obligatorio.
         </mat-error>
         <mat-error *ngIf="form.get('nombre')?.hasError('pattern')">
-          No se permiten carácteres especiales
+          No se permiten caracteres especiales.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
+
+      <!-- Campo Email -->
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
         <mat-error *ngIf="form.get('email')?.hasError('required')">
-          El campo email es obligatorio!!
+          El campo email es obligatorio.
         </mat-error>
         <mat-error *ngIf="form.get('email')?.hasError('email')">
-          Debe ser un correo válido
+          Debe ser un correo válido.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Telefono Usuario</mat-label>
+
+      <!-- Campo Teléfono -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Teléfono</mat-label>
         <input matInput formControlName="telefono" />
         <mat-error *ngIf="form.get('telefono')?.hasError('required')">
-          El campo teléfono es obligatorio!!
+          El campo teléfono es obligatorio.
         </mat-error>
         <mat-error *ngIf="form.get('telefono')?.hasError('pattern')">
           El teléfono debe tener exactamente 9 dígitos numéricos.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Dirección Usuario</mat-label>
+
+      <!-- Campo Dirección -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Dirección</mat-label>
         <input matInput formControlName="direccion" />
         <mat-error *ngIf="form.get('direccion')?.hasError('required')">
-          La dirección es obligatoria!!
+          La dirección es obligatoria.
+        </mat-error>
+        <mat-error *ngIf="form.get('direccion')?.hasError('pattern')">
+          La dirección no debe tener caracteres especiales.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Choose a date</mat-label>
+
+      <!-- Campo Fecha de Registro -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Fecha de Registro</mat-label>
         <input
           matInput
           [matDatepicker]="picker"
@@ -57,25 +66,27 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="form.get('fechaRegistro')?.hasError('required')">
-          La fecha es obligatoria!!
+          La fecha es obligatoria.
         </mat-error>
         <mat-error *ngIf="form.get('fechaRegistro')?.hasError('fechaPasada')">
           No se permiten fechas pasadas.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>username</mat-label>
+
+      <!-- Campo Username -->
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Username</mat-label>
         <input matInput formControlName="username" />
         <mat-error *ngIf="form.get('username')?.hasError('required')">
-          Este campo es obligatorio!!
+          Este campo es obligatorio.
         </mat-error>
         <mat-error *ngIf="form.get('username')?.hasError('usernameDuplicado')">
           El nombre de usuario ya está en uso.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field appearance="fill" *ngIf="!edicion"> <!-- Si está en modo edición no muestra el campo contraseña -->
+
+      <!-- Campo Contraseña (solo visible en modo inserción) -->
+      <mat-form-field appearance="outline" class="full-width-field" *ngIf="!edicion">
         <mat-label>Contraseña</mat-label>
         <input
           matInput
@@ -95,31 +106,37 @@
           }}</mat-icon>
         </button>
         <mat-error *ngIf="form.get('password')?.hasError('required')">
-          Este campo es obligatorio!!
+          Este campo es obligatorio.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
+
+      <!-- Campo Habilitado (MatSelect) -->
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Habilitado</mat-label>
         <mat-select formControlName="enable">
           <mat-option *ngFor="let p of enable" [value]="p.value">
             {{ p.viewValue }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="form.get('enable')?.hasError('required')">
+          Este campo es obligatorio.
+        </mat-error>
       </mat-form-field>
-      <br />
 
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
-      <button
-        mat-raised-button
-        color="warn"
-        (click)="cancelar()"
-        routerLink="/usuarios"
-      >
-        Cancelar
-      </button>
+      <!-- Botones de Acción -->
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="cancelar()"
+          type="button"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>
-
-
