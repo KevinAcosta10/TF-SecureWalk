@@ -1,0 +1,21 @@
+<div class="title-container">
+  <div class="title" style="text-align: center;">
+    <h1>Zona X Usuario</h1>
+  </div>
+
+  <div class="chart-container" *ngIf="hasData" style="text-align: center;">
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type]="chartType"
+      [legend]="true">
+    </canvas>
+  </div>
+
+  <div class="no-data" *ngIf="!hasData">
+    <mat-icon class="no-data-icon">info_outline</mat-icon>
+    <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+  </div>
+</div>

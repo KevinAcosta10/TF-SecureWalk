@@ -11,5 +11,7 @@ public interface IComentarioService {
     public void delete(int id);
     public List<String[]> TotalComentariosPorUsuario();
     public Comentario listId(int id);
+    List<String[]> nombreZonaxComentario();
+    List<String[]> comentarioxTipoPregunta();
 
 }

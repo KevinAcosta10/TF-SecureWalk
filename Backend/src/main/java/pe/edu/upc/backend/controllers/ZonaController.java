@@ -95,4 +95,17 @@ public class ZonaController {
         ZonaDTO dto =m.map(zS.listId(id), ZonaDTO.class);
         return dto;
     }
+
+    @GetMapping("/nombreZonaxAprobacion")
+    public List<NombreZonaxAprobacionDTO> consulta01() {
+        List<String[]> filaLista = zS.nombreZonaxAprobacion();
+        List<NombreZonaxAprobacionDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            NombreZonaxAprobacionDTO dto = new NombreZonaxAprobacionDTO();
+            dto.setNombre_zona(columna[0]);
+            dto.setCantAprobacion(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
 }

@@ -10,4 +10,5 @@ public interface IRespuestaService {
     public void update(Respuesta r);
     public void eliminar(int id);
     public Respuesta listId(int id);
+    List<String[]> respuestaxNombreEncuesta();
 }

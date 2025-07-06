@@ -32,5 +32,10 @@ public class EvaluacionIndicenteImplement implements IEvaluacionIncidenteService
     public void delete(int id) {
         eIR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> aprobacionIncidentexUsuario() {
+        return eIR.aprobacionIncidentexUsuario();
+    }
 }
 

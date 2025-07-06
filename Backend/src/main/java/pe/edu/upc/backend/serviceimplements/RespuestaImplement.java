@@ -36,4 +36,9 @@ public class RespuestaImplement implements IRespuestaService {
     public Respuesta listId(int id) {
         return rR.findById(id).orElse(new Respuesta());
     }
+
+    @Override
+    public List<String[]> respuestaxNombreEncuesta() {
+        return rR.respuestaxNombreEncuesta();
+    }
 }

@@ -2,10 +2,11 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.ComentarioDTO;
 import pe.edu.upc.backend.dtos.ComentarioPorUsuarioDTO;
+import pe.edu.upc.backend.dtos.ComentarioxTipoPreguntaDTO;
+import pe.edu.upc.backend.dtos.NombreZonaxComentarioDTO;
 import pe.edu.upc.backend.entities.Comentario;
 import pe.edu.upc.backend.serviceinterfaces.IComentarioService;
 
@@ -60,5 +61,31 @@ public class ComentarioController {
         ModelMapper m = new ModelMapper();
         ComentarioDTO dto =m.map(cS.listId(id), ComentarioDTO.class);
         return dto;
+    }
+
+    @GetMapping("/nombreZonaxComentario")
+    public List<NombreZonaxComentarioDTO> consulta01() {
+        List<String[]> filaLista = cS.nombreZonaxComentario();
+        List<NombreZonaxComentarioDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            NombreZonaxComentarioDTO dto = new NombreZonaxComentarioDTO();
+            dto.setNombre_zona(columna[0]);
+            dto.setCantComentario(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
+    @GetMapping("/comentarioxTipoPregunta")
+    public List<ComentarioxTipoPreguntaDTO> consulta02() {
+        List<String[]> filaLista = cS.comentarioxTipoPregunta();
+        List<ComentarioxTipoPreguntaDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            ComentarioxTipoPreguntaDTO dto = new ComentarioxTipoPreguntaDTO();
+            dto.setTipo_pregunta(columna[0]);
+            dto.setCantComentario(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }

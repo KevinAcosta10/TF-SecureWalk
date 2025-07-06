@@ -66,7 +66,13 @@ public class WebSecurityConfig {
                                 "/login",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/api/**",
+                                "/usuarios/insertar",
+                                "/usuarios/listar",
+                                "/usuarios/{id}",
+                                "/encuestasPreguntas/agrupadas",
+                                "/preguntas/listar"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

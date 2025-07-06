@@ -36,8 +36,9 @@ public class PreguntaImplement implements IPreguntaService {
         return pS.findById(id).orElse(new Pregunta());
     }
 
-
-    public List<String[]> obtenerPreguntasConEncuesta() {
-        return pS.obtenerPreguntasConEncuesta();
+    @Override
+    public List<String[]> tipoPreguntaxPregunta() {
+        return pS.tipoPreguntaxPregunta();
     }
+
 }

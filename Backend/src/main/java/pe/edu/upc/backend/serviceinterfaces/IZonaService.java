@@ -14,4 +14,5 @@ public interface IZonaService {
     public List<String[]> countRutasByZona();
     public List<String[]> SeguridadPorZona(String zona);
     public Zona listId(int id);
+    List<String[]> nombreZonaxAprobacion();
 }

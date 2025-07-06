@@ -1,0 +1,27 @@
+<!-- reporte5.component.html -->
+<div class="title-container">
+  <div class="title" style="text-align: center;">
+    <h1>Comentarios por Zona</h1>
+  </div>
+
+  <div *ngIf="hasData; else noData">
+    <div *ngFor="let type of chartTypes" class="chart-wrapper" style="margin-bottom: 40px; text-align: center;">
+      <h3>{{ type | titlecase }}</h3>
+      <canvas
+        baseChart
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [type]="type"
+        [legend]="true">
+      </canvas>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="no-data" style="text-align: center;">
+      <mat-icon class="no-data-icon">info_outline</mat-icon>
+      <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+    </div>
+  </ng-template>
+</div>

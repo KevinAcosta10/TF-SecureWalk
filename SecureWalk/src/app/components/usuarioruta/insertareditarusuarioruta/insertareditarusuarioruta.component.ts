@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { UsuarioRuta } from '../../../models/usuarioruta';
+import { UsuarioRuta } from '../../../models/usuarioRuta';
 import { Usuario } from '../../../models/usuario';
 import { Ruta } from '../../../models/ruta';
 import { UsuariorutaService } from '../../../services/usuarioruta.service';

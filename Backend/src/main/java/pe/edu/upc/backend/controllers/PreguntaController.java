@@ -3,8 +3,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.PreguntaDTO;
+import pe.edu.upc.backend.dtos.TipoPreguntaxPreguntaDTO;
 import pe.edu.upc.backend.entities.Pregunta;
 import pe.edu.upc.backend.serviceinterfaces.IPreguntaService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,5 +48,18 @@ public class PreguntaController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){
         pS.delete(id);
+    }
+
+    @GetMapping("/tipoPreguntaxPregunta")
+    public List<TipoPreguntaxPreguntaDTO> consulta01() {
+        List<String[]> filaLista = pS.tipoPreguntaxPregunta();
+        List<TipoPreguntaxPreguntaDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            TipoPreguntaxPreguntaDTO dto = new TipoPreguntaxPreguntaDTO();
+            dto.setTipoPregunta(columna[0]);
+            dto.setCantPregunta(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }

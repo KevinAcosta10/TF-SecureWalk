@@ -42,7 +42,7 @@ public class    UsuarioImplement implements IUsuarioService {
             existingUsuario.setEnable(u.isEnable());
 
             // 3. Lógica condicional para la contraseña:
-            // Si la entidad 'u' que llega a este metodo tiene una contraseña (no nula y no vacía),
+            // Si la entidad 'u' que llega a este método tiene una contraseña (no nula y no vacía),
             // significa que el controlador ha enviado una NUEVA contraseña (ya hasheada).
             // En ese caso, la actualizamos.
             // Si u.getPassword() es nulo o vacío, la contraseña existente NO se modifica.

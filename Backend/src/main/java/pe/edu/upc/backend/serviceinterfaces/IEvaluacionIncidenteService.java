@@ -10,4 +10,5 @@ public interface IEvaluacionIncidenteService {
     public EvaluacionIncidente listId(int id);
     public void update(EvaluacionIncidente eI);
     public void delete(int id);
+    List<String[]> aprobacionIncidentexUsuario();
 }

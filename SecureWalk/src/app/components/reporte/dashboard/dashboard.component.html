@@ -1,0 +1,17 @@
+<div class="dashboard-grid">
+  <div 
+    *ngFor="let rpt of reports; let i = index" 
+    class="dashboard-card" 
+    (click)="openChart(i)">
+    <h2 class="card-title">{{ rpt.title }}</h2>
+    <ng-container *ngComponentOutlet="rpt.component"></ng-container>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="selectedIndex !== null" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <h2>{{ reports[selectedIndex!].title }}</h2>
+    <ng-container *ngComponentOutlet="reports[selectedIndex!].component"></ng-container>
+  </div>
+</div>

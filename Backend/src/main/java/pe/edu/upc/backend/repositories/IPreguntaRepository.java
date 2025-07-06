@@ -15,4 +15,8 @@ public interface IPreguntaRepository extends JpaRepository<Pregunta, Integer>{
             "JOIN encuesta_pregunta ep ON p.id_pregunta = ep.id_pregunta " +
             "JOIN encuesta e ON ep.id_encuesta = e.id_encuesta", nativeQuery = true)
     List<String[]> obtenerPreguntasConEncuesta();
+
+    @Query(value = "SELECT tipo_pregunta,COUNT(id_pregunta) FROM pregunta\n" +
+            "GROUP BY 1", nativeQuery = true)
+    List<String[]> tipoPreguntaxPregunta();
 }

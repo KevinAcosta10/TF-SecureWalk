@@ -10,6 +10,7 @@ public interface IIncidenteService {
     public List<Incidente> list();
     public void update(Incidente i);
     public void delete(int id);
-    public List<String[]> IncidentesPorUsuario();
+    public List<String[]> tipoIncidentexUsuario();
     public Incidente listId(int id);
+
 }

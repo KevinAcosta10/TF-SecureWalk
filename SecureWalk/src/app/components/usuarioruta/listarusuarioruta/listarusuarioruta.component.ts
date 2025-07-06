@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core'; // Añadir ViewChild y AfterViewInit
-import { UsuarioRuta } from '../../../models/usuarioruta';
+import { UsuarioRuta } from '../../../models/usuarioRuta';
 // import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o'; // Ya no necesario
 import { UsuariorutaService } from '../../../services/usuarioruta.service';
 import { MatCardModule } from '@angular/material/card';

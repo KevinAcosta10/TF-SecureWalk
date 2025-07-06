@@ -2,7 +2,6 @@ package pe.edu.upc.backend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.backend.dtos.*;
 import pe.edu.upc.backend.entities.Respuesta;
@@ -53,5 +52,18 @@ public class RespuestaController {
         ModelMapper m = new ModelMapper();
         RespuestaDTO dto =m.map(rS.listId(id), RespuestaDTO.class);
         return dto;
+    }
+
+    @GetMapping("/respuestaxNombreEncuesta")
+    public List<RespuestaxNombreEncuestaDTO> consulta01() {
+        List<String[]> filaLista = rS.respuestaxNombreEncuesta();
+        List<RespuestaxNombreEncuestaDTO> dtoLista = new ArrayList<>();
+        for (String[] columna : filaLista) {
+            RespuestaxNombreEncuestaDTO dto = new RespuestaxNombreEncuestaDTO();
+            dto.setNombre_encuesta(columna[0]);
+            dto.setCantRespuesta(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }
