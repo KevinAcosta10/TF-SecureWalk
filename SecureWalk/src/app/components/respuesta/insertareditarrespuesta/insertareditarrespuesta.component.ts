@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Respuesta } from '../../../models/respuesta';
 import { EncuestaPregunta } from '../../../models/encuestapregunta';
 import { Usuario } from '../../../models/usuario';
@@ -17,20 +22,22 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-insertareditarrespuesta',
   standalone: true,
-  imports: [MatFormFieldModule,
-      ReactiveFormsModule,
-      MatDatepickerModule,
-      MatSelectModule,
-      MatFormFieldModule,
-      MatNativeDateModule,
-      CommonModule,
-      MatInputModule,
-      NgIf],
+  imports: [
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    CommonModule,
+    MatInputModule,
+    NgIf,
+  ],
   templateUrl: './insertareditarrespuesta.component.html',
-  styleUrl: './insertareditarrespuesta.component.css'
+  styleUrl: './insertareditarrespuesta.component.css',
 })
 export class InsertareditarrespuestaComponent {
-form: FormGroup = new FormGroup({});
+  form: FormGroup = new FormGroup({});
   respuesta: Respuesta = new Respuesta();
   id: number = 0;
   edicion: boolean = false;
@@ -43,7 +50,7 @@ form: FormGroup = new FormGroup({});
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS: UsuariosService,
-    private epS: EncuestapreguntaService,
+    private epS: EncuestapreguntaService
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -56,6 +63,8 @@ form: FormGroup = new FormGroup({});
       codigo: [''],
       fechaRespuesta: ['', Validators.required],
       textoRespuesta: ['', Validators.required],
+      usuario: ['', Validators.required],
+      encuestaPregunta: ['', Validators.required],
     });
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
@@ -67,19 +76,28 @@ form: FormGroup = new FormGroup({});
 
   aceptar() {
     if (this.form.valid) {
-      this.respuesta.idRespuesta = this.form.value.codigo;
+      this.respuesta.idRespuesta = this.form.value.codigo; // 'codigo' is likely for existing IDs, handle for new inserts if ID is auto-generated in backend
       this.respuesta.fechaRespuesta = this.form.value.fechaRespuesta;
       this.respuesta.textoRespuesta = this.form.value.textoRespuesta;
 
+      // *** CORRECT ASSIGNMENT ***
+      // Assuming your form.value.usuario and form.value.encuestaPregunta
+      // already contain the full selected objects from your MatSelect.
+      // This is the ideal scenario for the DTOs you provided.
+      this.respuesta.usuario = this.form.value.usuario;
+      this.respuesta.encuestaPregunta = this.form.value.encuestaPregunta;
+
+      // *** REMOVE these lines, they are incorrect for your DTO structure: ***
+      // this.respuesta.encuestaPregunta.encuesta.nombreEncuesta = this.form.value.encuesta;
+      // this.respuesta.encuestaPregunta.pregunta.textoPregunta = this.form.value.pregunta;
+
       if (this.edicion) {
-        //actualizar
         this.rS.update(this.respuesta).subscribe((data) => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
           });
         });
       } else {
-        //INSERTAR
         this.rS.insert(this.respuesta).subscribe((data) => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
@@ -101,7 +119,9 @@ form: FormGroup = new FormGroup({});
           codigo: data.idRespuesta,
           fechaRespuesta: data.fechaRespuesta,
           textoRespuesta: data.textoRespuesta,
-          
+          usuario: data.usuario.nombreUsuario,
+          encuesta: data.encuestaPregunta.encuesta.nombreEncuesta,
+          pregunta: data.encuestaPregunta.pregunta.textoPregunta,
         });
       });
     }

@@ -11,13 +11,15 @@ import { RutaService } from '../../../services/ruta.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { MatTimepickerModule } from '@angular/material/timepicker';
 
 @Component({
   selector: 'app-insertareditarusuarioruta',
   standalone: true,
+  providers: [provideNativeDateAdapter()],
   imports: [MatFormFieldModule,
       ReactiveFormsModule,
       MatDatepickerModule,
@@ -26,7 +28,8 @@ import { MatInputModule } from '@angular/material/input';
       MatNativeDateModule,
       CommonModule,
       MatInputModule,
-      NgIf],
+      NgIf,
+      MatTimepickerModule],
   templateUrl: './insertareditarusuarioruta.component.html',
   styleUrl: './insertareditarusuarioruta.component.css',
 })

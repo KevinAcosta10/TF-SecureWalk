@@ -33,33 +33,26 @@
       </mat-form-field>
       <br>
       <mat-form-field>
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="pickerInicio" formControlName="horaInicio" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="pickerInicio"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #pickerInicio></mat-datepicker>
-        <mat-error *ngIf="form.get('horaInicio')?.hasError('required')">
-          La fecha es obligatoria!!
-        </mat-error>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="horaFin" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="form.get('horaFin')?.hasError('required')">
-          La fecha es obligatoria!!
-        </mat-error>
-      </mat-form-field>
-      <br />
+        <mat-label>Hora de Inicio</mat-label>
+        <input matInput [matTimepicker]="pickerInicio" formControlName="horaInicio" />
+        <mat-timepicker-toggle matIconSuffix [for]="pickerInicio"></mat-timepicker-toggle>
+        <mat-timepicker #pickerInicio></mat-timepicker>
+        <mat-error *ngIf="form.get('horaInicio')?.hasError('required')">
+          La hora de inicio es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Hora Fin</mat-label>
+        <input matInput [matTimepicker]="pickerFin" formControlName="horaFin" />
+        <mat-timepicker-toggle matIconSuffix [for]="pickerFin"></mat-timepicker-toggle>
+        <mat-timepicker #pickerFin></mat-timepicker>
+        <mat-error *ngIf="form.get('horaFin')?.hasError('required')">
+          La hora fin es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
       <button mat-raised-button color="primary">Aceptar</button>
       <button mat-raised-button color="warn" (click)="cancelar()">
         Cancelar

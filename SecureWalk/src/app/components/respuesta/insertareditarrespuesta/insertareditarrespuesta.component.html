@@ -73,7 +73,7 @@
       >
         <option [ngValue]="null" disabled>Seleccione una encuesta y pregunta</option>
         <option *ngFor="let ep of listaEncuestaPregunta" [ngValue]="ep">
-          Encuesta: {{ ep.encuesta.nombreEncuesta || 'N/A' }} - Pregunta: {{ ep.pregunta.textoPregunta }}
+          Encuesta: {{ ep.encuesta.nombreEncuesta }} - Pregunta: {{ ep.pregunta.textoPregunta }}
         </option>
       </select>
     </div>

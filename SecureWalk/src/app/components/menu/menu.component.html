@@ -1,92 +1,76 @@
 <mat-toolbar class="custom-toolbar" *ngIf="verificar()">
-  <div>
+  <mat-toolbar-row>
     <button mat-button [routerLink]="['/homes']" style="color: white">
       <mat-icon>home</mat-icon>Home
     </button>
-  </div>
-  <div>
-    <mat-icon>menu</mat-icon>
-    <button mat-button [matMenuTriggerFor]="menuUsuario">
-      Usuarios
-      <mat-icon>group</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuZona">
-      Zona
-      <mat-icon>map</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuPregunta">
-      Pregunta
-      <mat-icon>help_outline</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuEncuesta">
-      Encuesta
-      <mat-icon>assignment</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuRol">
-      Rol
-      <mat-icon>verified_user</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuRuta">
-      Ruta
-      <mat-icon>alt_route</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuIncidente">
-      Incidente
-      <mat-icon>report_problem</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuEvaluacionIncidente">
-      Evaluacion Incidente
-      <mat-icon>rate_review</mat-icon>
-    </button>
-    <button mat-button [matMenuTriggerFor]="menuPost">
-      Post
-      <mat-icon>article</mat-icon>
-    </button>
-    <button mat-button [matMenuTriggerFor]="menuComentario">
-      Comentario
-      <mat-icon>comment</mat-icon>
-    </button>
-  </div>
-    <div>
-    <button mat-button [matMenuTriggerFor]="menuUsuarioRuta">
-      Usuario Ruta
-      <mat-icon>person_pin_circle</mat-icon>
-    </button>
-  </div>
- <div>
-    <button mat-button [matMenuTriggerFor]="menuEncuestaPregunta">
-      Encuesta Pregunta
-      <mat-icon>quiz</mat-icon>
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuRespuesta">
-      Respuesta
-      <mat-icon>question_answer</mat-icon>
-    </button>
-  </div>
 
-  <span class="toolbar-spacer"></span>
-  <div class="right-menu">
-    <button mat-button [matMenuTriggerFor]="menuSalir">
-      <mat-icon>person</mat-icon>Usuario
+    <button mat-button [matMenuTriggerFor]="menuAdministracion">
+      <mat-icon>build</mat-icon> Administración
     </button>
-  </div>
+    <mat-menu #menuAdministracion="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="menuUsuario">
+        <mat-icon>group</mat-icon> Usuarios
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuZona">
+        <mat-icon>map</mat-icon> Zona
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuRol">
+        <mat-icon>verified_user</mat-icon> Rol
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuUsuarioRuta">
+        <mat-icon>person_pin_circle</mat-icon> Usuario Ruta
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="menuContenido">
+      <mat-icon>article</mat-icon> Contenido
+    </button>
+    <mat-menu #menuContenido="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="menuPost">
+        <mat-icon>article</mat-icon> Post
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuComentario">
+        <mat-icon>comment</mat-icon> Comentario
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="menuEventosEncuestas">
+      <mat-icon>event</mat-icon> Eventos y Encuestas
+    </button>
+    <mat-menu #menuEventosEncuestas="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="menuRuta">
+        <mat-icon>alt_route</mat-icon> Ruta
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuIncidente">
+        <mat-icon>report_problem</mat-icon> Incidente
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuEvaluacionIncidente">
+        <mat-icon>rate_review</mat-icon> Evaluación Incidente
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuPregunta">
+        <mat-icon>help_outline</mat-icon> Pregunta
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuEncuesta">
+        <mat-icon>assignment</mat-icon> Encuesta
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuEncuestaPregunta">
+        <mat-icon>quiz</mat-icon> Encuesta Pregunta
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuRespuesta">
+        <mat-icon>Youtube</mat-icon> Respuesta
+      </button>
+    </mat-menu>
+
+    <span class="toolbar-spacer"></span>
+
+    <div class="right-menu">
+      <button mat-button [matMenuTriggerFor]="menuSalir">
+        <mat-icon>person</mat-icon>Usuario
+      </button>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
+
 <mat-menu #menuUsuario="matMenu">
   <button mat-menu-item routerLink="/usuarios">Listar</button>
   <button mat-menu-item routerLink="/usuarios/formulario">Insertar</button>
@@ -141,6 +125,7 @@
   <button mat-menu-item routerLink="/posts">Listar</button>
   <button mat-menu-item routerLink="/posts/formulario">Insertar</button>
 </mat-menu>
+
 <mat-menu #menuComentario="matMenu">
   <button mat-menu-item routerLink="/comentarios">Listar</button>
   <button mat-menu-item routerLink="/comentarios/formulario">Insertar</button>
@@ -150,6 +135,7 @@
   <button mat-menu-item routerLink="/respuestas">Listar</button>
   <button mat-menu-item routerLink="/respuestas/formulario">Insertar</button>
 </mat-menu>
+
 <mat-menu #menuSalir="matMenu">
   <button mat-menu-item routerLink="/landing" (click)="cerrar()">
     <mat-icon>logout</mat-icon>
