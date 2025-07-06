@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Comentario } from '../models/comentario';
 import { HttpClient } from '@angular/common/http';
+import { nombreZonaxComentarioDTO } from '../models/NombreZonaxComentarioDTO';
+import { ComentarioxTipoPreguntaDTO } from '../models/ComentarioxTipoPreguntaDTO';
 
 
 const base_url = environment.base;
@@ -39,4 +41,12 @@ private listaCambio = new Subject<Comentario[]>();
     deleteS(id: number) {
       return this.http.delete(`${this.url}/${id}`);
     }
+
+    getNombreZonaxComentario():Observable<nombreZonaxComentarioDTO[]>{
+    return this.http.get<nombreZonaxComentarioDTO[]>(`${this.url}/nombreZonaxComentario`);
+  }
+
+  getComentarioxTipoPregunta():Observable<ComentarioxTipoPreguntaDTO[]>{
+      return this.http.get<ComentarioxTipoPreguntaDTO[]>(`${this.url}/comentarioxTipoPregunta`);
+  }
 }

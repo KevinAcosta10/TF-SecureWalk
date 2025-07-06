@@ -40,7 +40,7 @@ export class IncidenteService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  getQuantity(): Observable<IncidentePorUsuarioDTO[]> {
-    return this.http.get<IncidentePorUsuarioDTO[]>(`${this.url}/incidentesPorUsuario`)
+  getIncidentePorUsuario(): Observable<IncidentePorUsuarioDTO[]> {
+    return this.http.get<IncidentePorUsuarioDTO[]>(`${this.url}/incidentexUsuario`)
   }
 }

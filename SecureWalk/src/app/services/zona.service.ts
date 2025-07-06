@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Zona } from '../models/zona';
 import { Observable, Subject } from 'rxjs';
+import { nombreZonaxAprobacionDTO } from '../models/NombreZonaxAprobacionDTO';
 
 const base_url = environment.base
 @Injectable({
@@ -39,5 +40,9 @@ export class ZonaService {
 
   obtenerCoordenadas(): Observable<Zona[]> {
     return this.http.get<Zona[]>(`${this.url}/listar`);
+  }
+
+  getNombreZonaxAprobacion():Observable<nombreZonaxAprobacionDTO[]>{
+    return this.http.get<nombreZonaxAprobacionDTO[]>(`${this.url}/nombreZonaxAprobacion`);
   }
 }

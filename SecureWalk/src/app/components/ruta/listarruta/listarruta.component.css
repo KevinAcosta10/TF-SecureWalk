@@ -1,24 +1,402 @@
-/* Contenedor principal de la página */
-.container {
+/* Variables CSS para consistencia */
+:root {
+  --primary-color: #3f51b5; /* Primary Blue */
+  --secondary-blue: #5c6bc0; /* Secondary Blue */
+  --green-success: #4caf50; /* Green (Success/Safe) */
+  --orange-warning: #ffc107; /* Orange/Amber (Warning/Caution) */
+  --red-error: #f44336; /* Red (Danger/Error/Critical Alert) */
+  --light-gray: #f0f2f5; /* Light Gray */
+  --white-color: #ffffff; /* White */
+  --dark-gray: #333333; /* Dark Gray/Near Black */
+
+  /* Reasignando variables existentes a la nueva paleta */
+  --accent-color: var(--secondary-blue); /* Ajustado para ser Secondary Blue */
+  --success-color: var(--green-success); /* Coincide */
+  --warning-color: var(--orange-warning); /* Coincide */
+  --error-color: var(--red-error); /* Coincide */
+  --background-light: var(--light-gray); /* Coincide */
+
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+/* Layout principal */
+.main-container {
+  display: flex;
+  gap: 1px;
+  padding: 1px;
+  height: calc(
+    100vh - 64px
+  ); /* Asumiendo que 64px es la altura de una barra de navegación superior */
+  box-sizing: border-box;
+}
+
+.list-container {
+  flex: 1;
+  max-width: 450px;
+  min-width: 350px;
+  background-color: var(
+    --white-color
+  ); /* Fondo blanco para el contenedor de la lista */
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  gap: 20px; /* Espacio entre los elementos principales (título, formulario, carrusel) */
-  max-width: 1200px; /* Ancho máximo para el contenido */
-  margin: 0 auto; /* Centra el contenedor en la página */
 }
-    
-/* Estilos para el título principal */
-.titulo {
-  color: #3f51b5; /* Un azul primario de Material Design */
-  margin-bottom: 10px;
-  font-size: 2.5em; /* Tamaño de fuente grande para el título */
-  font-weight: 600; /* Peso de fuente semi-negrita */
+
+.map-container {
+  flex: 2;
+  min-height: 400px;
+  background-color: var(--background-light); /* Fondo gris claro para el mapa */
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header mejorado */
+.header-section {
+  padding: 5px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-blue)
+  ); /* Gradiente de azules */
+  color: var(--white-color); /* Texto blanco */
   text-align: center;
 }
 
-.mat-elevation-z8 {
-  width: 100%;
-  max-width: 960px; /* Ajusta este ancho para controlar el tamaño general del carrusel */
-  margin-top: 20px;
+.titulo {
+  margin: 0 0 10px 0;
+  font-size: 1.8rem;
+  font-weight: 500;
 }
+
+.stats-info,
+.search-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.clear-search-btn {
+  color: var(--white-color); /* Botón de limpiar búsqueda en blanco */
+}
+
+/* Sección de búsqueda mejorada */
+.search-container {
+  padding: 5px;
+  border-bottom: 1px solid #e0e0e0; /* Un gris claro para el borde inferior */
+  background-color: #fafafa; /* Un gris muy muy claro, casi blanco */
+}
+
+.search-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  color: var(--primary-color); /* Título de búsqueda en Primary Blue */
+}
+
+.search-inputs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.search-field {
+  flex: 1;
+}
+
+.search-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.search-actions button {
+  flex: 1;
+}
+
+/* Tabla mejorada */
+.table-container {
+  flex: 1;
+  overflow: auto;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none; /* Mantener sin sombra para la tabla en sí si está dentro de un contenedor con sombra */
+  border-radius: 0;
+}
+
+.mat-header-cell {
+  background-color: var(
+    --primary-color
+  ); /* Cabeceras de tabla en Primary Blue */
+  color: var(--white-color); /* Texto de cabeceras en blanco */
+  font-weight: 800;
+  padding: 12px 16px;
+  border-bottom: none;
+}
+
+.mat-cell {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--light-gray); /* Borde entre celdas en Light Gray */
+  transition: var(--transition);
+}
+
+.mat-row {
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.mat-row:hover {
+  background-color: #f8f9fa; /* Un gris muy suave al pasar el ratón */
+}
+
+/* Fila seleccionada con animación */
+.selected-row {
+  background-color: #e8f5e8 !important; /* Un verde muy claro para la fila seleccionada */
+  border-left: 4px solid var(--success-color); /* Borde izquierdo en Success Green */
+  animation: highlight-pulse 1s ease-in-out;
+}
+
+@keyframes highlight-pulse {
+  0% {
+    background-color: #c8e6c9; /* Un verde ligeramente más oscuro al inicio de la animación */
+  }
+  50% {
+    background-color: #e8f5e8; /* El mismo verde claro */
+  }
+  100% {
+    background-color: #e8f5e8;
+  }
+}
+
+.zone-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selected-icon {
+  color: var(--success-color); /* Ícono de selección en Success Green */
+  font-size: 18px;
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  80% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Acciones */
+.acciones-header,
+.acciones-cell {
+  width: 80px;
+  text-align: center;
+  padding: 8px !important;
+}
+
+/* Marcadores personalizados */
+.custom-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+}
+
+.custom-marker mat-icon {
+  transform: rotate(45deg);
+  font-size: 20px;
+  color: var(--white-color); /* Íconos de marcador en blanco */
+}
+
+.zone-marker {
+  background-color: var(
+    --error-color
+  ); /* Marcador de zona por defecto en Error Red */
+}
+
+.zone-marker:hover {
+  transform: rotate(-45deg) scale(1.1);
+  box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4); /* Sombra al pasar el ratón basada en Error Red */
+}
+
+.selected-marker {
+  background-color: var(
+    --success-color
+  ) !important; /* Marcador seleccionado en Success Green */
+  transform: rotate(-45deg) scale(1.2);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.5); /* Sombra al seleccionar basada en Success Green */
+  z-index: 1000;
+}
+
+.search-marker {
+  background-color: var(
+    --primary-color
+  ); /* Marcador de búsqueda en Primary Blue */
+}
+
+.marker-label {
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  background: rgba(
+    var(--dark-gray-rgb),
+    0.8
+  ); /* Fondo de etiqueta en Dark Gray semi-transparente */
+  color: var(--white-color); /* Texto de etiqueta en blanco */
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+/* RGB value for --dark-gray, to be used in rgba() for transparency */
+:root {
+  --dark-gray-rgb: 51, 51, 51; /* For #333333 */
+  /* If you use #424242, it would be --dark-gray-rgb: 66, 66, 66; */
+}
+
+.custom-marker:hover .marker-label {
+  opacity: 1;
+}
+
+.selected-zone-info {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semiopaco */
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  max-width: 280px;
+  z-index: 1000;
+  font-family: "Roboto", sans-serif;
+  border-left: 6px solid #3f51b5; /* Línea decorativa azul Material */
+  transition: all 0.3s ease;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: var(
+    --success-color
+  ); /* Cabecera de información en Success Green */
+  color: var(--white-color); /* Texto de cabecera en blanco */
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-weight: 500;
+}
+
+.info-header button {
+  margin-left: auto;
+  color: var(--white-color); /* Botón en cabecera de información en blanco */
+}
+
+.info-content {
+  padding: 16px;
+}
+
+.info-content p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+/* Botón flotante */
+.add-zone-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  background-color: var(
+    --primary-color
+  ); /* CAMBIO: Botón flotante en Primary Blue */
+}
+
+/* Paginador */
+mat-paginator {
+  border-top: 1px solid #e0e0e0; /* Borde superior en un gris claro */
+  background-color: #fafafa; /* Fondo del paginador en un gris muy muy claro */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .list-container {
+    max-width: 100%;
+    min-width: unset;
+  }
+
+  .map-container {
+    min-height: 300px;
+  }
+
+  .search-inputs {
+    flex-direction: column;
+  }
+
+  .search-actions {
+    flex-direction: column;
+  }
+
+  .selected-zone-info {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 10px;
+  }
+}
+
+/* Snackbar personalizado */
+::ng-deep .success-snackbar {
+  background-color: var(--success-color);
+  color: var(--white-color);
+}
+
+::ng-deep .error-snackbar {
+  background-color: var(--error-color);
+  color: var(--white-color);
+}
+
+::ng-deep .warning-snackbar {
+  background-color: var(--warning-color);
+  color: var(
+    --dark-gray
+  ); /* Texto oscuro para el warning si el fondo es claro */
+}
+

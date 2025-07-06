@@ -1,68 +1,173 @@
-<div class="container">
-  <div>
-    <h1 class="titulo">Lista de rutas</h1>
+<div class="main-container">
+  <div class="list-container">
+    <div class="header-section">
+      <h1 class="titulo">Lista de rutas</h1>
+      <div class="stats-info" *ngIf="!isSearchActive">
+        <span class="zone-count">{{ coordenadas.length }} rutas registradas</span>
+      </div>
+      <div class="search-info" *ngIf="isSearchActive">
+        <mat-icon>search</mat-icon>
+        <span>{{ searchResults.length }} ruta(s) encontrada(s)</span>
+        <button mat-icon-button (click)="clearSearch()" class="clear-search-btn">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="search-container">
+      <div class="search-title">
+        <mat-icon>my_location</mat-icon>
+        <span>Búsqueda por coordenadas</span>
+      </div>
+
+      <div class="search-inputs">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Latitud</mat-label>
+          <input matInput type="number" step="any" [(ngModel)]="searchLat" placeholder="-12.0873795"
+            (keyup.enter)="searchLocation()">
+          <mat-icon matSuffix>place</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Longitud</mat-label>
+          <input matInput type="number" step="any" [(ngModel)]="searchLng" placeholder="-77.0500079"
+            (keyup.enter)="searchLocation()">
+          <mat-icon matSuffix>place</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="search-actions">
+        <button mat-raised-button color="primary" (click)="searchLocation()"
+          [disabled]="searchLat === null || searchLng === null">
+          <mat-icon>search</mat-icon>
+          Buscar en Mapa
+        </button>
+
+        <button *ngIf="temporaryMarkerPosition" mat-stroked-button color="warn" (click)="clearSearch()">
+          <mat-icon>clear</mat-icon>
+          Limpiar
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="c2">
+          <th mat-header-cell *matHeaderCellDef>Hora Inicio</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="zone-name-cell">
+              {{ element.horaInicio }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c3">
+          <th mat-header-cell *matHeaderCellDef>Hora Fin</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="zone-name-cell">
+              {{ element.horaFin }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c4">
+          <th mat-header-cell *matHeaderCellDef>Nivel de Seguridad</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="zone-name-cell">
+              {{ element.nivelSeguridad }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c5">
+          <th mat-header-cell *matHeaderCellDef>Zona</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="zone-name-cell">
+              <mat-icon *ngIf="isZoneSelected(element)" class="selected-icon">place</mat-icon>
+              {{ element.zona.nombreZona }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c6">
+          <th mat-header-cell *matHeaderCellDef class="acciones-header">Editar</th>
+          <td mat-cell *matCellDef="let element" class="acciones-cell">
+            <button mat-icon-button [routerLink]="['ediciones', element.idRuta]" color="primary"
+              matTooltip="Editar ruta">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c7">
+          <th mat-header-cell *matHeaderCellDef class="acciones-header">Eliminar</th>
+          <td mat-cell *matCellDef="let element" class="acciones-cell">
+            <button mat-icon-button (click)="eliminar(element.idRuta)" color="warn" matTooltip="Eliminar ruta">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; trackBy: trackByZonaId"
+          [class.selected-row]="isZoneSelected(row)" (click)="selectedZonaId = row.idRuta"></tr>
+      </table>
+
+      <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]"
+        [showFirstLastButtons]="true" aria-label="Seleccionar paginación">
+      </mat-paginator>
+    </div>
   </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Position Column -->
-    <ng-container matColumnDef="c1">
-      <th mat-header-cell *matHeaderCellDef>ID.</th>
-      <td mat-cell *matCellDef="let element">{{ element.idRuta }}</td>
-    </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="c2">
-      <th mat-header-cell *matHeaderCellDef>Hora de inicio</th>
-      <td mat-cell *matCellDef="let element">{{ element.horaInicio }}</td>
-    </ng-container>
+  <div class="map-container">
+    <google-map mapId="f404a59fc2fcb5b5" [center]="center" [zoom]="zoom" height="100%" width="100%" [options]="{
+                    mapTypeControl: true,
+                    streetViewControl: true,
+                    fullscreenControl: true,
+                    zoomControl: true,
+                    gestureHandling: 'greedy'
+                  }">
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="c3">
-      <th mat-header-cell *matHeaderCellDef>Hora fin</th>
-      <td mat-cell *matCellDef="let element">{{ element.horaFin }}</td>
-    </ng-container>
+      <ng-container *ngFor="let marker of markerData; trackBy: trackByMarkerData">
+        <map-advanced-marker [position]="marker.position" [title]="marker.ruta.zona.nombreZona"
+          (mapClick)="onMarkerClick(marker.position)" [gmpDraggable]="false">
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="c4">
-      <th mat-header-cell *matHeaderCellDef>Nivel de seguridad</th>
-      <td mat-cell *matCellDef="let element">{{ element.nivelSeguridad }}</td>
-    </ng-container>
+          <div class="custom-marker zone-marker" [class.selected-marker]="isZoneSelected(marker.ruta)">
+            <mat-icon>place</mat-icon>
+            <div class="marker-label">{{ marker.ruta.zona.nombreZona }}</div>
+          </div>
+        </map-advanced-marker>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="c5">
-      <th mat-header-cell *matHeaderCellDef>Zona</th>
-      <td mat-cell *matCellDef="let element">{{ element.zona.nombreZona }}</td>
-    </ng-container>
+      <map-advanced-marker *ngIf="temporaryMarkerPosition" [position]="temporaryMarkerPosition"
+        title="Ubicación Buscada">
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="c6">
-      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-      <td mat-cell *matCellDef="let element">
-        <button matButton [routerLink]="['ediciones', element.idRuta]">
-          <mat-icon>edit</mat-icon>
+        <div class="custom-marker search-marker">
+          <mat-icon>search</mat-icon>
+          <div class="marker-label">Búsqueda</div>
+        </div>
+      </map-advanced-marker>
+    </google-map>
+
+    <div *ngIf="selectedZonaId" class="selected-zone-info">
+      <div class="info-header">
+        <mat-icon>place</mat-icon>
+        <span>Ruta Seleccionada</span>
+        <button mat-icon-button (click)="selectedZonaId = null">
+          <mat-icon>close</mat-icon>
         </button>
-      </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="c7">
-      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-      <td mat-cell *matCellDef="let element">
-        <button matButton (click)="eliminar(element.idRuta)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <!-- Paginador fuera de la tabla -->
-  <mat-paginator
-    [length]="dataSource.data.length"
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 15]"
-    aria-label="Seleccionar paginación"
-  >
-  </mat-paginator>
+      </div>
+      <div class="info-content">
+        <ng-container *ngFor="let ruta of coordenadas">
+          <div *ngIf="ruta.idRuta === selectedZonaId">
+            <p><strong>{{ ruta.zona.nombreZona }}</strong></p>
+            <p>Hora Inicio: {{ ruta.horaInicio }}</p>
+            <p>Hora Fin: {{ ruta.horaFin }}</p>
+            <p>Nivel Seguridad: {{ ruta.nivelSeguridad }}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
 </div>
+

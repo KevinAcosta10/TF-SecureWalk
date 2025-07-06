@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UsuarioRuta } from '../models/usuarioruta';
-import { Subject } from 'rxjs';
+import { UsuarioRuta } from '../models/usuarioRuta';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { zonaxUsuarioDTO } from '../models/zonaxUsuarioDTO';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class UsuariorutaService {
   
     deleteS(id: number) {
       return this.http.delete(`${this.url}/${id}`);
+    }
+
+    getZonaxUsuario():Observable<zonaxUsuarioDTO[]>{
+      return this.http.get<zonaxUsuarioDTO[]>(`${this.url}/zonaxUsuario`);
     }
 }

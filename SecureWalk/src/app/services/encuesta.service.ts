@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Encuesta } from '../models/encuesta';
 import { Observable, Subject } from 'rxjs';
 import { EncuestaConPreguntasDTO } from '../models/encuestaconpreguntasDTO';
+import { nombreEncuestaxUsuarioDTO } from '../models/nombreEncuestaxUsuarioDTO';
 
 const base_url = environment.base
 const ENCUESTAS_PREGUNTAS_BASE_URL = `${base_url}/encuestasPreguntas`; // URL para operaciones de EncuestaPregunta
@@ -43,5 +44,9 @@ private url = `${base_url}/encuestas`
     }
      listarEncuestasConPreguntasAgrupadas(): Observable<EncuestaConPreguntasDTO[]> {
     return this.http.get<EncuestaConPreguntasDTO[]>(`${ENCUESTAS_PREGUNTAS_BASE_URL}/agrupadas`);
+  }
+
+  getNombreEncuestaxUsuario():Observable<nombreEncuestaxUsuarioDTO[]>{
+    return this.http.get<nombreEncuestaxUsuarioDTO[]>(`${this.url}/nombreEncuestaxUsuario`);
   }
 }

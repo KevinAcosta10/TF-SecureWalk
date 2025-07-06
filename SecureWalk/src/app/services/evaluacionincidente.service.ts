@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { EvaluacionIncidente } from '../models/evaluacionincidente';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AprobacionIncidentexUsuarioDTO } from '../models/AprobacionIncidentexUsuarioDTO';
 
 const base_url = environment.base;
 
@@ -38,5 +39,9 @@ export class EvaluacionincidenteService {
 
   deleteS(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getAprobacionIncidente():Observable<AprobacionIncidentexUsuarioDTO[]>{
+    return this.http.get<AprobacionIncidentexUsuarioDTO[]>(`${this.url}/aprobacionIncidentexUsuario`);
   }
 }
