@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-landing',
   standalone: true,
   imports: [
     MatDialogModule,
@@ -19,10 +19,10 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     MatIconModule,
     RouterLink,
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  templateUrl: './landing.component.html',
+  styleUrl: './landing.component.css',
 })
-export class HomeComponent {
+export class LandingComponent {
   @ViewChild('aboutDialog') aboutDialog!: TemplateRef<any>;
   @ViewChild('termsDialog') termsDialog!: TemplateRef<any>;
   @ViewChild('privacyDialog') privacyDialog!: TemplateRef<any>;

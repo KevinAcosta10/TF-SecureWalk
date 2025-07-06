@@ -28,148 +28,172 @@ import { ComentarioComponent } from './components/comentario/comentario.componen
 import { InsertareditarcomentarioComponent } from './components/comentario/insertareditarcomentario/insertareditarcomentario.component';
 import { RespuestaComponent } from './components/respuesta/respuesta.component';
 import { InsertareditarrespuestaComponent } from './components/respuesta/insertareditarrespuesta/insertareditarrespuesta.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { EmptyComponent } from './layouts/empty/empty.component';
+import { FullComponent } from './layouts/full/full.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'usuarios',
-    component: UsuarioComponent,
+    component: EmptyComponent,
     children: [
-      { path: 'ediciones/:id', component: InsertareditarusuarioComponent },
-      { path: 'formulario', component: InsertareditarusuarioComponent },
+      { path: '', redirectTo: 'landing', pathMatch: 'full' },
+      { path: 'landing', component: LandingComponent },
+      { path: 'login', component: LoginComponent },
     ],
-    canActivate: [seguridadGuard],
   },
   {
-    path: 'zonas',
-    component: ZonaComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarzonaComponent },
-      { path: 'formulario', component: InsertareditarzonaComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'preguntas',
-    component: PreguntaComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarpreguntaComponent },
-      { path: 'formulario', component: InsertareditarpreguntaComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'encuestas',
-    component: EncuestaComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarencuestaComponent },
-      { path: 'formulario', component: InsertareditarencuestaComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'roles',
-    component: RolComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarrolComponent },
-      { path: 'formulario', component: InsertareditarrolComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'rutas',
-    component: RutaComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarrutaComponent },
-      { path: 'formulario', component: InsertareditarrutaComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'incidentes',
-    component: IncidenteComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarincidenteComponent },
-      { path: 'formulario', component: InsertareditarincidenteComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'evaluacionincidentes',
-    component: EvaluacionincidenteComponent,
+    path: '',
+    component: FullComponent,
     children: [
       {
-        path: 'ediciones/:id',
-        component: InsertarevaluacionincidenteComponent,
+        path: 'usuarios',
+        component: UsuarioComponent,
+        children: [
+          { path: 'ediciones/:id', component: InsertareditarusuarioComponent },
+          { path: 'formulario', component: InsertareditarusuarioComponent },
+        ],
+        canActivate: [seguridadGuard],
       },
-      { path: 'formulario', component: InsertarevaluacionincidenteComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'usuarioRutas',
-    component: UsuariorutaComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarusuariorutaComponent },
-      { path: 'formulario', component: InsertareditarusuariorutaComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'posts',
-    component: PostComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarpostComponent },
-      { path: 'formulario', component: InsertareditarpostComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
+      {
+        path: 'zonas',
+        component: ZonaComponent,
+        children: [
+          { path: 'ediciones/:id', component: InsertareditarzonaComponent },
+          { path: 'formulario', component: InsertareditarzonaComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'preguntas',
+        component: PreguntaComponent,
+        children: [
+          { path: 'ediciones/:id', component: InsertareditarpreguntaComponent },
+          { path: 'formulario', component: InsertareditarpreguntaComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'encuestas',
+        component: EncuestaComponent,
+        children: [
+          { path: 'ediciones/:id', component: InsertareditarencuestaComponent },
+          { path: 'formulario', component: InsertareditarencuestaComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'roles',
+        component: RolComponent,
+        children: [
+          { path: 'ediciones/:id', component: InsertareditarrolComponent },
+          { path: 'formulario', component: InsertareditarrolComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'rutas',
+        component: RutaComponent,
+        children: [
+          { path: 'ediciones/:id', component: InsertareditarrutaComponent },
+          { path: 'formulario', component: InsertareditarrutaComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'incidentes',
+        component: IncidenteComponent,
+        children: [
+          {
+            path: 'ediciones/:id',
+            component: InsertareditarincidenteComponent,
+          },
+          { path: 'formulario', component: InsertareditarincidenteComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'evaluacionincidentes',
+        component: EvaluacionincidenteComponent,
+        children: [
+          {
+            path: 'ediciones/:id',
+            component: InsertarevaluacionincidenteComponent,
+          },
+          {
+            path: 'formulario',
+            component: InsertarevaluacionincidenteComponent,
+          },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'usuarioRutas',
+        component: UsuariorutaComponent,
+        children: [
+          {
+            path: 'ediciones/:id',
+            component: InsertareditarusuariorutaComponent,
+          },
+          { path: 'formulario', component: InsertareditarusuariorutaComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
+      {
+        path: 'posts',
+        component: PostComponent,
+        children: [
+          { path: 'ediciones/:id', component: InsertareditarpostComponent },
+          { path: 'formulario', component: InsertareditarpostComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
 
-  {
-    path: 'encuestasPreguntas',
-    component: EncuestapreguntaComponent,
-    children: [
       {
-        path: 'ediciones/:id',
-        component: InsertareditarencuestapreguntaComponent,
+        path: 'encuestasPreguntas',
+        component: EncuestapreguntaComponent,
+        children: [
+          {
+            path: 'ediciones/:id',
+            component: InsertareditarencuestapreguntaComponent,
+          },
+          {
+            path: 'formulario',
+            component: InsertareditarencuestapreguntaComponent,
+          },
+        ],
+        canActivate: [seguridadGuard],
       },
       {
-        path: 'formulario',
-        component: InsertareditarencuestapreguntaComponent,
+        path: 'comentarios',
+        component: ComentarioComponent,
+        children: [
+          {
+            path: 'ediciones/:id',
+            component: InsertareditarcomentarioComponent,
+          },
+          { path: 'formulario', component: InsertareditarcomentarioComponent },
+        ],
+        canActivate: [seguridadGuard],
       },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'comentarios',
-    component: ComentarioComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarcomentarioComponent },
-      { path: 'formulario', component: InsertareditarcomentarioComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
-  {
-    path: 'respuestas',
-    component: RespuestaComponent,
-    children: [
-      { path: 'ediciones/:id', component: InsertareditarrespuestaComponent },
-      { path: 'formulario', component: InsertareditarrespuestaComponent },
-    ],
-    canActivate: [seguridadGuard],
-  },
+      {
+        path: 'respuestas',
+        component: RespuestaComponent,
+        children: [
+          {
+            path: 'ediciones/:id',
+            component: InsertareditarrespuestaComponent,
+          },
+          { path: 'formulario', component: InsertareditarrespuestaComponent },
+        ],
+        canActivate: [seguridadGuard],
+      },
 
-  {
-    path: 'homes',
-    component: HomeComponent,
-    canActivate: [seguridadGuard],
+      {
+        path: 'homes',
+        component: HomeComponent,
+        canActivate: [seguridadGuard],
+      },
+    ],
   },
 ];
