@@ -20,33 +20,37 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatOption } from '@angular/material/core'; // MatOption para mat-select
 import { MatDatepickerModule } from '@angular/material/datepicker'; // Aunque no se usa directamente en este HTML, se mantiene si es un import general
 import { MatSelectModule } from '@angular/material/select'; // MatSelectModule para mat-select
-import { MatIcon } from '@angular/material/icon'; // MatIcon para iconos
+import { MatIconModule } from '@angular/material/icon'; // MatIconModule para iconos
 import { MatButtonModule } from '@angular/material/button'; // MatButtonModule para botones
+import { MatCardModule } from '@angular/material/card'; // MatCardModule para la tarjeta
 
 // Importa tus modelos de Encuesta y Pregunta
 import { Encuesta } from '../../../models/encuesta';
 import { Pregunta } from '../../../models/pregunta';
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // Asegurarse de que MatSnackBarModule esté importado
 
 @Component({
-    selector: 'app-insertareditarencuestapregunta',
-    imports: [
-        CommonModule, // Necesario para *ngFor, *ngIf
-        ReactiveFormsModule, // Necesario para formularios reactivos
-        MatFormFieldModule,
-        MatInputModule,
-        MatNativeDateModule,
-        MatDatepickerModule, // Se mantiene por si se usa en otros contextos o por consistencia de imports
-        MatSelectModule, // Para los dropdowns de Encuesta y Pregunta
-        MatOption, // Para las opciones dentro de mat-select
-        MatIcon, // Para los iconos
-        MatButtonModule, // Para los botones
-        NgIf, // Para *ngIf
-    ],
-    templateUrl: './insertareditarencuestapregunta.component.html',
-    styleUrl: './insertareditarencuestapregunta.component.css'
+  selector: 'app-insertareditarencuestapregunta',
+  standalone: true, // Asegurar que sea standalone
+  imports: [
+    CommonModule, // Necesario para *ngFor, *ngIf
+    ReactiveFormsModule, // Necesario para formularios reactivos
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule, // Se mantiene por si se usa en otros contextos o por consistencia de imports
+    MatSelectModule, // Para los dropdowns de Encuesta y Pregunta
+    MatOption, // Para las opciones dentro de mat-select
+    MatIconModule, // Para los iconos
+    MatButtonModule, // Para los botones
+    NgIf, // Para *ngIf
+    MatSnackBarModule, // Añadido
+    MatCardModule // Añadido
+  ],
+  templateUrl: './insertareditarencuestapregunta.component.html',
+  styleUrl: './insertareditarencuestapregunta.component.css'
 })
 export class InsertareditarencuestapreguntaComponent implements OnInit {
-  // ¡Añade implements OnInit!
   form: FormGroup = new FormGroup({});
   encuestapregunta: EncuestaPregunta = new EncuestaPregunta();
   id: number = 0; // ID de la relación EncuestaPregunta para edición
@@ -67,12 +71,12 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      codigo: [''], 
-      encuesta: ['', Validators.required], 
-      pregunta: ['', Validators.required], 
+      codigo: [{ value: '', disabled: true }], // Deshabilitar el campo código por defecto
+      encuesta: ['', Validators.required],
+      pregunta: ['', Validators.required],
     });
 
-    // 2. Carga las listas para los dropdowns
+    // Carga las listas para los dropdowns
     this.eS.list().subscribe((data) => {
       this.listaEncuestas = data;
     });
@@ -87,36 +91,36 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
     });
   }
 
-
   aceptar(): void {
     // Si el formulario no es válido, marca todos los controles como 'touched'
     // para mostrar los mensajes de error y detiene la ejecución.
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.snackBar.open(
-        'Por favor, corrige los errores del formulario.',
-        'Cerrar',
-        {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        }
-      );
+      this.showErrorMessage('Por favor, completa todos los campos requeridos y corrige los errores.');
       return;
     }
 
     // Mapea los valores del formulario a la instancia de EncuestaPregunta
-    // ¡IMPORTANTE! Necesitas crear instancias de Encuesta y Pregunta y asignar solo sus IDs
-    // Tu backend esperará objetos completos o solo IDs, dependiendo de cómo manejes las relaciones.
-    this.encuestapregunta.idEncuestaPregunta = this.form.value.codigo;
+    this.encuestapregunta.idEncuestaPregunta = this.edicion ? this.id : 0; // Asignar 0 para nuevas inserciones
 
-    // Crea instancias de Encuesta y Pregunta y asigna el ID seleccionado del dropdown
-    this.encuestapregunta.encuesta = new Encuesta();
-    this.encuestapregunta.encuesta.idEncuesta = this.form.value.encuesta; // Asigna el ID de la encuesta seleccionada
+    // Buscar y asignar el objeto Encuesta completo
+    const selectedEncuesta = this.listaEncuestas.find(enc => enc.idEncuesta === this.form.value.encuesta);
+    if (selectedEncuesta) {
+      this.encuestapregunta.encuesta = selectedEncuesta;
+    } else {
+      this.showErrorMessage('Encuesta seleccionada no encontrada.');
+      return;
+    }
 
-    this.encuestapregunta.pregunta = new Pregunta();
-    this.encuestapregunta.pregunta.idPregunta = this.form.value.pregunta; // Asigna el ID de la pregunta seleccionada
+    // Buscar y asignar el objeto Pregunta completo
+    const selectedPregunta = this.listaPreguntas.find(preg => preg.idPregunta === this.form.value.pregunta);
+    if (selectedPregunta) {
+      this.encuestapregunta.pregunta = selectedPregunta;
+    } else {
+      this.showErrorMessage('Pregunta seleccionada no encontrada.');
+      return;
+    }
+
 
     if (this.edicion) {
       // Actualizar la relación EncuestaPregunta
@@ -124,15 +128,14 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
         next: () => {
           this.epS.list().subscribe((dataList) => {
             this.epS.setList(dataList); // Actualiza la lista en el servicio
-            this.snackBar.open('Relación actualizada exitosamente', 'Cerrar', {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-              panelClass: ['success-snackbar'],
-            });
-            this.router.navigate(['encuestasPreguntas']); // Navega a la lista de relaciones
           });
+          this.showSuccessMessage('Relación actualizada exitosamente');
+          this.router.navigate(['encuestasPreguntas']); // Navega a la lista de relaciones
         },
+        error: (error) => {
+          console.error('Error al actualizar relación:', error);
+          this.showErrorMessage('Error al actualizar la relación. Inténtalo de nuevo.');
+        }
       });
     } else {
       // Insertar nueva relación EncuestaPregunta
@@ -140,15 +143,14 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
         next: () => {
           this.epS.list().subscribe((dataList) => {
             this.epS.setList(dataList); // Actualiza la lista en el servicio
-            this.snackBar.open('Relación registrada exitosamente', 'Cerrar', {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-              panelClass: ['success-snackbar'],
-            });
-            this.router.navigate(['encuestasPreguntas']); // Navega a la lista de relaciones
           });
+          this.showSuccessMessage('Relación registrada exitosamente');
+          this.router.navigate(['encuestasPreguntas']); // Navega a la lista de relaciones
         },
+        error: (error) => {
+          console.error('Error al registrar relación:', error);
+          this.showErrorMessage('Error al registrar la relación. Inténtalo de nuevo.');
+        }
       });
     }
   }
@@ -169,10 +171,28 @@ export class InsertareditarencuestapreguntaComponent implements OnInit {
         // Rellena el formulario con los IDs de las entidades relacionadas y el orden
         this.form.patchValue({
           codigo: data.idEncuestaPregunta,
-          encuesta: data.encuesta?.idEncuesta, // Asigna el ID de la encuesta
-          pregunta: data.pregunta?.idPregunta, // Asigna el ID de la pregunta
+          encuesta: data.encuesta?.idEncuesta || '', // Asigna el ID de la encuesta
+          pregunta: data.pregunta?.idPregunta || '', // Asigna el ID de la pregunta
         });
       });
     }
+  }
+
+  private showSuccessMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snackbar-success']
+    });
+  }
+
+  private showErrorMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snackbar-error']
+    });
   }
 }

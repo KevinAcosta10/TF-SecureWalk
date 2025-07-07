@@ -1,35 +1,44 @@
-<div class="container">
-    <div style="text-align: center;margin: 5%;">
-        <h1>Registro de roles</h1>
-    </div>
-    <div style="text-align: center">
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">{{ edicion ? 'Editar Rol' : 'Registrar Nuevo Rol' }}</h1>
 
-        <form [formGroup]="form" (submit)=" aceptar()">
-            <mat-form-field>
-                <mat-label>Rol</mat-label>
-                <mat-select formControlName="nombre">
-                    @for (nombre of nombres; track nombre) {
-                    <mat-option [value]="nombre.value">{{nombre.viewValue}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
+    <form [formGroup]="form" (submit)="aceptar()" class="rol-form">
 
-            <br>
-            <mat-form-field>
-                <mat-label>Usuario</mat-label>
-                <mat-select formControlName="usuario">
-                    @for (food of listaUsuarios; track food) {
-                    <mat-option [value]="food.idUsuario">{{food.nombreUsuario}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <br>
-            <button mat-raised-button color="primary">Aceptar</button>
-            <button mat-raised-button color="warn" (click)="cancelar()">
-                Cancelar
-            </button>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="nombre">
+          @for (nombre of nombres; track nombre.value) {
+          <mat-option [value]="nombre.value">{{ nombre.viewValue }}</mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix>security</mat-icon>
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+          El rol es obligatorio.
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (user of listaUsuarios; track user.idUsuario) {
+          <mat-option [value]="user.idUsuario">{{ user.nombreUsuario }}</mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix>person_search</mat-icon>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio.
+        </mat-error>
+      </mat-form-field>
 
-        </form>
-    </div>
+      <!-- Botones de Acción -->
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
-  

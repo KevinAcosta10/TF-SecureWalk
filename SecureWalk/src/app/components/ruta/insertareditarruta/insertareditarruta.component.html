@@ -1,63 +1,62 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h1>Registro de rutas</h1>
-  </div>
-  <div style="text-align: center">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <mat-form-field>
-        <mat-label>Zona</mat-label>
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">{{ edicion ? 'Edit Route' : 'Registra nueva ruta' }}</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()" class="ruta-form">
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Zone</mat-label>
         <mat-select formControlName="zona">
-          @for (zona of listaZonas; track zona) {
+          @for (zona of listaZonas; track zona.idZona) {
           <mat-option [value]="zona.idZona">{{ zona.nombreZona }}</mat-option>
           }
         </mat-select>
+        <mat-icon matSuffix>location_on</mat-icon>
         <mat-error *ngIf="form.get('zona')?.hasError('required')">
-          La zona es obligatoria!!
+          The zone is required.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
-        <mat-label>Hora de Inicio</mat-label>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Start Time</mat-label>
         <input matInput [matTimepicker]="pickerInicio" formControlName="horaInicio" />
         <mat-timepicker-toggle matIconSuffix [for]="pickerInicio"></mat-timepicker-toggle>
         <mat-timepicker #pickerInicio></mat-timepicker>
         <mat-error *ngIf="form.get('horaInicio')?.hasError('required')">
-          La hora de inicio es obligatoria!!
+          Start time is required.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
-        <mat-label>Hora Fin</mat-label>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>End Time</mat-label>
         <input matInput [matTimepicker]="pickerFin" formControlName="horaFin" />
         <mat-timepicker-toggle matIconSuffix [for]="pickerFin"></mat-timepicker-toggle>
         <mat-timepicker #pickerFin></mat-timepicker>
         <mat-error *ngIf="form.get('horaFin')?.hasError('required')">
-          La hora fin es obligatoria!!
+          End time is required.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
-        <mat-label>Nivel de seguridad</mat-label>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Security Level</mat-label>
         <mat-select formControlName="seguridad">
-          @for (seguridad of seguridadd; track seguridad) {
-          <mat-option [value]="seguridad.value">{{
-            seguridad.viewValue
-          }}</mat-option>
+          @for (seguridad of seguridadd; track seguridad.value) {
+          <mat-option [value]="seguridad.value">{{ seguridad.viewValue }}</mat-option>
           }
         </mat-select>
+        <mat-icon matSuffix>security</mat-icon>
         <mat-error *ngIf="form.get('seguridad')?.hasError('required')">
-          El indice de seguridad es obligatorio!!
+          The security level is required.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <button mat-raised-button color="primary" [style.background-color]="'#3f51b5'">Aceptar</button>
-      <button mat-raised-button color="warn" [style.background-color]="'#FFC107'" (click)="cancelar()">
-        Cancelar
-      </button>
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Accept
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancel
+        </button>
+      </div>
     </form>
   </div>
 </div>

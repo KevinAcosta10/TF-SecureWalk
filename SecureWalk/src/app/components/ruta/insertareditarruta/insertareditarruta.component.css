@@ -1,19 +1,197 @@
-mat-form-field {
-    width: 50%;
+/* ====================================================== */
+/* === src/app/insertareditarruta/insertareditarruta.component.css === */
+/* === ADAPTED COPY FROM PREVIOUS FORMS === */
+/* ====================================================== */
+
+/* General page styling */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5; /* Light Gray */
+}
+
+.main-container {
+  display: flex;
+  justify-content: center; /* Center the form horizontally */
+  align-items: center; /* Center the form vertically */
+  min-height: 100vh; /* Occupy at least the full viewport height */
+  padding: 40px 20px; /* General padding to prevent content from touching edges */
+  box-sizing: border-box; /* Include padding in total size */
+}
+
+.form-card-container {
+  background-color: #E0E0E0; /* Light Gray to soften the form background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  padding: 40px; /* Generous inner spacing */
+  width: 100%;
+  max-width: 600px; /* Max width for the form */
+  box-sizing: border-box;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 30px; /* Space below the title */
+  color: #3f51b5; /* Primary Blue: Form title color */
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.ruta-form { /* Specific class for this form */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between form fields */
+}
+
+.full-width-field {
+  width: 100%; /* Form fields take full available width */
+}
+
+/* Styles for MatFormField (outline appearance) */
+mat-form-field.mat-mdc-form-field-appearance-outline {
+  /* Normal border color */
+  ::ng-deep .mat-mdc-form-field-outline-start,
+  ::ng-deep .mat-mdc-form-field-outline-gap,
+  ::ng-deep .mat-mdc-form-field-outline-end {
+    border-color: #E0E0E0; /* Light Gray: Border in normal state */
+  }
+
+  /* Border color when focused */
+  &.mat-focused {
+    ::ng-deep .mat-mdc-form-field-outline-start,
+    ::ng-deep .mat-mdc-form-field-outline-gap,
+    ::ng-deep .mat-mdc-form-field-outline-end {
+      border-color: #3f51b5; /* Primary Blue: Border when focused */
     }
-   
-    button[mat-raised-button] {
-    background-color:rgb(215, 55, 11); /* color primario bootstrap azul */
-    color: white;
-    border: none;
-    padding: 0.5rem 1.25rem;
-    font-size: 1.1rem;
-    border-radius: 0.375rem; /* border-radius similar a bootstrap */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 25%; /* para que tome todo el ancho si quieres */
-   }
-   
-   button[mat-raised-button]:hover {
-    background-color: #d78e35; /* un azul más oscuro al pasar el mouse */
-   }
+  }
+
+  /* Label (placeholder) color */
+  ::ng-deep .mat-mdc-form-field-label {
+    color: #424242; /* Dark Gray/Near Black: Label color */
+  }
+
+  /* Input text color */
+  ::ng-deep input.mat-mdc-input-element,
+  ::ng-deep textarea.mat-mdc-input-element {
+    color: #333333; /* Dark Gray/Near Black: Input text color */
+  }
+
+  /* Icon color inside the field (e.g., timepicker toggle, password visibility) */
+  ::ng-deep .mat-icon {
+    color: #5c6bc0; /* Secondary Blue: Icon color */
+  }
+
+  /* Error message color */
+  ::ng-deep .mat-error {
+    color: #F44336; /* Red: Error message color */
+    font-size: 0.85em;
+    margin-top: 5px;
+  }
+}
+
+
+/* Action buttons container */
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 15px; /* Space between buttons */
+  margin-top: 30px; /* Top space to separate from fields */
+}
+
+/* Styles for Accept button (Primary) */
+button[mat-raised-button][color="primary"] {
+  background-color: #3f51b5; /* Primary Blue: Accept button background */
+  color: white; /* White text */
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[mat-raised-button][color="primary"]:hover {
+  background-color: #5c6bc0; /* Secondary Blue: Background on hover */
+  transform: translateY(-2px);
+}
+
+button[mat-raised-button][color="primary"][disabled] {
+  background-color: #E0E0E0 !important; /* Light Gray: Background when disabled */
+  color: #A0A0A0 !important; /* Light gray text when disabled */
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Styles for Cancel button (Warn, but we'll make it neutral) */
+button[mat-raised-button][color="warn"] {
+  background-color: #E0E0E0; /* Light Gray: Cancel button background */
+  color: #424242; /* Dark Gray/Near Black: Dark text */
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[mat-raised-button][color="warn"]:hover {
+  background-color: #D3D3D3; /* Slightly darker gray on hover */
+  transform: translateY(-2px);
+}
+
+/* Styles for MatSnackBar (notifications) */
+.snackbar-success {
+  background-color: #4CAF50 !important; /* Green (Success/Safe) */
+  color: white !important;
+  border-radius: 8px;
+}
+
+.snackbar-error {
+  background-color: #F44336 !important; /* Red (Danger/Error/Critical Alert) */
+  color: white !important;
+  border-radius: 8px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 20px 10px;
+  }
+
+  .form-card-container {
+    padding: 30px 20px;
+  }
+
+  .form-title {
+    font-size: 2em;
+    margin-bottom: 25px;
+  }
+
+  .ruta-form { /* Specific class for this form */
+    gap: 15px;
+  }
+
+  .form-actions {
+    flex-direction: column; /* Stack buttons on small screens */
+    align-items: stretch; /* Stretch buttons to full width */
+    gap: 10px;
+  }
+
+  button[mat-raised-button] {
+    width: 100%; /* Occupy full available width */
+    padding: 15px 20px; /* More padding for easier touch */
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card-container {
+    padding: 25px 15px;
+  }
+
+  .form-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+}

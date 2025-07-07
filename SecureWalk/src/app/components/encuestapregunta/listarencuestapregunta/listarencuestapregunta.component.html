@@ -1,59 +1,50 @@
-<div class="main-container">
-  <div class="top-header-section">
-    <div class="title-search-block">
-      <h1 class="page-title">Relaciones Encuesta-Pregunta</h1>
-      </div>
+<div class="main-container"> <div class="top-header-section">
+    <div class="title-add-block"> <h1 class="page-title">Relaciones Encuesta-Pregunta</h1> </div>
   </div>
 
   <div class="content-cards-section">
-    <div *ngIf="dataSource.data.length === 0" class="no-data-container">
-      <p>No se encontraron relaciones Encuesta-Pregunta para mostrar.</p>
+    <div *ngIf="dataSource.data.length === 0" class="no-results-message"> <p>No se encontraron relaciones Encuesta-Pregunta para mostrar.</p>
       <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
     </div>
 
-    <div class="cards-grid" *ngIf="dataSource.data.length > 0">
-      <mat-card class="encuesta-pregunta-card" *ngFor="let ep of dataSource.connect() | async">
-        <mat-card-header>
-          <mat-card-title>
-            <mat-icon class="card-title-icon">link</mat-icon> Relación ID:
-            {{ ep.idEncuestaPregunta }}
-          </mat-card-title>
-          <mat-card-subtitle>
-            <mat-icon class="card-subtitle-icon">poll</mat-icon> Encuesta:
-            {{ ep.encuesta.nombreEncuesta }} (ID: {{ ep.encuesta.idEncuesta }})
-          </mat-card-subtitle>
-        </mat-card-header>
+    <div class="cards-grid" *ngIf="dataSource.data.length > 0"> <div class="survey-card" *ngFor="let ep of dataSource.connect() | async"> <div class="card-header"> <h2 class="card-title"> <mat-icon class="card-title-icon">link</mat-icon> Relación ID: {{ ep.idEncuestaPregunta }}
+          </h2>
+          <p class="card-subtitle-text">
+             Encuesta: {{ ep.encuesta.nombreEncuesta || 'N/A' }} (ID: {{ ep.encuesta.idEncuesta || 'N/A' }})
+          </p>
+        </div>
 
-        <mat-card-content>
-          <div>
-            <p>
-              <mat-icon class="card-icon">Youtube</mat-icon
-              ><strong> Texto de Pregunta:</strong> {{ ep.pregunta.textoPregunta }}
-            </p>
-            <p>
-              <mat-icon class="card-icon">category</mat-icon
-              ><strong> Tipo de Pregunta:</strong> {{ ep.pregunta.tipoPregunta }}
-            </p>
-            <p>
-              <mat-icon class="card-icon">vpn_key</mat-icon><small>ID Pregunta:</small>
-              {{ ep.pregunta.idPregunta }}
-            </p>
-          </div>
-        </mat-card-content>
+        <div class="card-content"> <p>
+            <mat-icon class="card-icon">Youtube</mat-icon> <strong> Texto de Pregunta:</strong> {{ ep.pregunta.textoPregunta || 'N/A' }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">category</mat-icon>
+            <strong> Tipo de Pregunta:</strong> {{ ep.pregunta.tipoPregunta || 'N/A' }}
+          </p>
+          <p>
+            <mat-icon class="card-icon">vpn_key</mat-icon><small>ID Pregunta:</small>
+            {{ ep.pregunta.idPregunta || 'N/A' }}
+          </p>
+        </div>
 
-        <mat-card-actions>
-          <button mat-raised-button color="warn" (click)="eliminar(ep.idEncuestaPregunta)">
-            <mat-icon>delete_forever</mat-icon> Eliminar
-          </button>
-          <button
-            mat-raised-button
+        <div class="card-actions"> <button
+            mat-button
             color="primary"
             [routerLink]="['ediciones', ep.idEncuestaPregunta]"
+            aria-label="Editar relación"
           >
             <mat-icon>edit</mat-icon> Editar
           </button>
-        </mat-card-actions>
-      </mat-card>
+          <button
+            mat-button
+            color="warn"
+            (click)="eliminar(ep.idEncuestaPregunta)"
+            aria-label="Eliminar relación"
+          >
+            <mat-icon>delete_forever</mat-icon> Eliminar
+          </button>
+        </div>
+      </div>
     </div>
 
     <mat-paginator

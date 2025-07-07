@@ -1,22 +1,20 @@
-/* ====================================================== */
-/* === src/app/encuesta-pregunta/encuesta-pregunta.component.css === */
-/* ====================================================== */
+/* src/app/components/listarencuestapregunta/listarencuestapregunta.component.css */
 
-/* El propio componente <app-encuesta-pregunta> debe ser un contenedor flex que crezca */
-:host { /* :host se refiere al elemento <app-encuesta-pregunta> */
+/* :host para que el componente crezca y empuje el footer */
+:host {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-/* Contenedor principal del contenido (header, cards, paginator) */
-.main-container {
+/* Contenedor principal del contenido */
+.main-container { /* Cambiado a main-container */
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Esto hace que el contenido se estire y empuje el footer */
+  flex-grow: 1;
 }
 
-/* TOP HEADER SECTION: Contains title */
+/* TOP HEADER SECTION: Contiene título */
 .top-header-section {
   background: #3f51b5; /* Primary Blue */
   color: white;
@@ -26,9 +24,11 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.title-search-block { /* Nombre para consistencia con otros componentes */
+.title-add-block { /* Cambiado a title-add-block */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,7 @@
 }
 
 /* Título de la página */
-.page-title {
+.page-title { /* Cambiado a page-title */
   font-size: 4em;
   font-weight: 800;
   color: #ffffff; /* White */
@@ -48,28 +48,55 @@
   word-wrap: break-word;
 }
 
-/* Sección de contenido de tarjetas */
+/* Sección de tarjetas de contenido */
 .content-cards-section {
   padding: 40px;
-  background-color: #f0f2f5; /* Light Gray: Fondo de la sección de tarjetas */
+  background-color: #f0f2f5; /* Light Gray */
   display: flex;
-  flex-direction: column; /* Apila los elementos (cuadrícula de tarjetas, paginador, no-data) verticalmente */
-  align-items: center; /* Centra los elementos horizontalmente */
-  flex-grow: 1; /* Permite que esta sección se estire si es necesario */
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mensaje de "No hay resultados" */
+.no-results-message {
+  text-align: center;
+  font-size: 1.3em;
+  color: #424242; /* Dark Gray/Near Black */
+  padding: 60px;
+  background-color: #e0e0e0; /* Light Gray */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.no-results-message p {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.no-data-icon {
+  font-size: 4em;
+  color: #FF9800; /* Orange/Amber */
 }
 
 /* Contenedor de la cuadrícula de tarjetas */
-.cards-grid {
+.cards-grid { /* Cambiado a cards-grid */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(368px, 1fr));
-  gap: 30px; /* Espacio entre las tarjetas */
-  width: 100%; /* Ocupa el ancho completo de su padre */
-  max-width: 1400px; /* Limita el ancho máximo para centrar */
-  justify-content: center; /* Centra los items dentro de la cuadrícula si no llenan la fila */
+  gap: 30px;
+  width: 100%;
+  max-width: 1400px;
+  justify-content: center;
 }
 
-/* Estilos para las tarjetas de encuesta-pregunta (mat-card) */
-.encuesta-pregunta-card { /* Nuevo nombre de clase para las tarjetas */
+/* Estilos para las tarjetas individuales (div.survey-card) */
+.survey-card { /* Cambiado a survey-card */
   margin: 0;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
@@ -80,56 +107,54 @@
   background-color: #e0e0e0; /* Light Gray para suavizar el fondo de la tarjeta */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   overflow: hidden;
+  border: 1px solid #E0E0E0; /* Borde sutil para definirla */
 }
 
-.encuesta-pregunta-card:hover {
+.survey-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Encabezado de la tarjeta */
-.encuesta-pregunta-card mat-card-header {
+/* Header de la tarjeta */
+.card-header { /* Cambiado a card-header */
   padding: 20px;
   display: flex;
-  flex-direction: column; /* Apilar título y subtítulo */
-  align-items: flex-start; /* Alinear a la izquierda */
+  flex-direction: column; /* Apila título y subtítulo si aplica */
+  align-items: flex-start; /* Alinea el texto a la izquierda dentro del header */
   border-bottom: 1px solid #f0f0f0; /* Light Gray */
   background-color: #fcfcfc; /* Un blanco suave para el header de la tarjeta */
 }
 
 /* Título de la tarjeta */
-.encuesta-pregunta-card mat-card-title {
+.card-title { /* Cambiado a card-title */
   font-size: 1.5em;
   font-weight: 700;
   color: #333333; /* Dark Gray/Near Black */
-  margin-bottom: 5px; /* Espacio entre título y subtítulo */
+  margin: 0; /* Elimina márgenes por defecto del h2 */
   display: flex;
   align-items: center;
+  gap: 10px; /* Espacio entre icono y texto */
 }
 
-/* Subtítulo de la tarjeta */
-.encuesta-pregunta-card mat-card-subtitle {
+.card-title-icon { /* Estilo para el icono dentro del título */
+    color: #3f51b5; /* Primary Blue */
+    font-size: 1.2em;
+}
+
+/* Subtítulo de la tarjeta (si se usa) */
+.card-subtitle-text {
   font-size: 0.9em;
-  color: #424242; /* Dark Gray/Near Black */
-  margin-top: 5px;
-  display: flex;
-  align-items: center;
-}
-
-/* Iconos en el título y subtítulo de la tarjeta */
-.card-title-icon, .card-subtitle-icon {
-  margin-right: 8px;
-  font-size: 1.2em;
-  color: #3f51b5; /* Primary Blue */
+  color: #5c6bc0; /* Secondary Blue */
+  margin-top: 5px; /* Pequeño espacio debajo del título */
 }
 
 /* Contenido de la tarjeta */
-.encuesta-pregunta-card mat-card-content {
+.card-content { /* Cambiado a card-content */
   padding: 20px;
   flex-grow: 1;
 }
 
-.encuesta-pregunta-card mat-card-content p {
+.card-content p {
   margin-bottom: 12px;
   color: #424242; /* Dark Gray/Near Black */
   display: flex;
@@ -145,26 +170,53 @@
 }
 
 /* Acciones de la tarjeta (botones) */
-.encuesta-pregunta-card mat-card-actions {
+.card-actions { /* Cambiado a card-actions */
   display: flex;
-  justify-content: flex-end; /* Alinea los botones a la derecha */
+  justify-content: flex-end;
   padding: 10px 20px 20px;
   border-top: 1px solid #f0f0f0; /* Light Gray */
 }
 
-.encuesta-pregunta-card mat-card-actions button {
+/* Estilos para los botones dentro de card-actions */
+.card-actions button { /* Apuntando a los mat-button */
   border-radius: 8px;
   margin-left: 10px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
+  font-size: 0.9em; /* Ajustar el tamaño de la fuente para consistencia */
+  padding: 8px 18px; /* Ajustar el padding para consistencia */
 }
 
-.encuesta-pregunta-card mat-card-actions button:hover {
+.card-actions button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para el paginador */
-.user-paginator { /* Mismo nombre de clase para consistencia */
+/* Estilos específicos de color para los botones */
+button[mat-button][color="primary"] {
+  background-color: #3f51b5; /* Primary Blue */
+  color: #ffffff; /* White */
+}
+
+button[mat-button][color="primary"]:hover {
+  background-color: #5c6bc0; /* Secondary Blue */
+}
+
+button[mat-button][color="warn"] {
+  background-color: #F44336; /* Red */
+  color: #ffffff; /* White */
+}
+
+button[mat-button][color="warn"]:hover {
+  background-color: #D32F2F; /* Darker Red */
+}
+
+button[mat-button] mat-icon { /* Estilo para el icono dentro del botón */
+  margin-right: 5px;
+  font-size: 1.1em;
+}
+
+
+/* Estilos para el paginador (mat-paginator) */
+.user-paginator {
   text-align: center;
   margin-top: 30px;
   background-color: #e0e0e0; /* Light Gray */
@@ -173,38 +225,14 @@
   padding: 10px 20px;
   color: #424242; /* Dark Gray/Near Black */
   font-size: 0.9em;
-  width: 100%; /* Asegura que ocupe el 100% del espacio disponible de su padre */
-  max-width: 1400px; /* Limita su ancho máximo para que coincida con las tarjetas */
-}
-
-/* Estilos para el mensaje de "No se encontraron datos" */
-.no-data-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 50px;
-  text-align: center;
-  color: #424242; /* Dark Gray/Near Black */
-  font-size: 1.2em;
-  background-color: #ffffff; /* White */
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 600px; /* Ajusta el ancho máximo */
-  margin: 50px auto; /* Centra el contenedor */
-}
-
-.no-data-icon {
-  font-size: 4em; /* Ícono grande */
-  color: #5c6bc0; /* Secondary Blue */
-  margin-top: 20px;
+  max-width: 1400px;
 }
 
 /* Estilos del footer */
 .app-footer {
   background-color: #3f51b5; /* Primary Blue */
-  min-height: 100px; /* Ajustado para ser más grande */
+  min-height: 100px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -212,13 +240,13 @@
   color: white;
   font-size: 0.9em;
   padding: 10px 20px;
-  box-sizing: border-box; /* Asegura que padding no aumente el ancho */
-  margin-top: auto; /* ¡Esta es la línea clave para empujar el footer hacia abajo! */
+  box-sizing: border-box;
+  margin-top: auto;
 }
 
 
 /* ====================================================== */
-/* === Responsive Design (Media Queries)              === */
+/* === Responsive Design (Media Queries)              === */
 /* ====================================================== */
 
 @media (max-width: 1000px) {
@@ -226,7 +254,7 @@
     padding: 30px 30px;
   }
 
-  .page-title {
+  .page-title { /* Cambiado a page-title */
     font-size: 3.2em;
     margin-bottom: 25px;
   }
@@ -235,65 +263,59 @@
     padding: 30px;
   }
 
-  .cards-grid {
+  .cards-grid { /* Cambiado a cards-grid */
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .top-header-section {
-    padding: 25px 20px;
+  .main-container { /* Cambiado a main-container */
+    padding: 15px;
   }
 
-  .page-title {
+  .top-header-section, .content-cards-section, .user-paginator {
+    max-width: 100%;
+  }
+
+  .title-add-block { /* Cambiado a title-add-block */
+    padding: 12px 20px;
+  }
+
+  .page-title { /* Cambiado a page-title */
     font-size: 2.5em;
     margin-bottom: 20px;
   }
 
-  .content-cards-section {
-    padding: 20px;
-  }
-
-  .cards-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  .cards-grid { /* Cambiado a cards-grid */
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
-  .encuesta-pregunta-card { /* Nuevo nombre de clase */
-    max-width: none;
-    margin: 0;
+  .card-title { /* Cambiado a card-title */
+    font-size: 1.2em;
   }
 
-  .app-footer {
-    min-height: 80px; /* Ajuste para pantallas pequeñas */
+  .card-subtitle-text {
+    font-size: 0.9em;
   }
 
-  .no-data-container {
-    padding: 30px;
-    font-size: 1em;
+  .card-actions { /* Cambiado a card-actions */
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .no-data-icon {
-    font-size: 3em;
+  .card-actions button { /* Apuntando a los mat-button */
+    width: 100%;
+    padding: 10px 15px;
   }
 }
 
 @media (max-width: 480px) {
-  .top-header-section {
-    padding: 20px 15px;
+  .page-title { /* Cambiado a page-title */
+    font-size: 1.5em;
   }
-
-  .page-title {
-    font-size: 2em;
-    margin-bottom: 15px;
-  }
-
   .content-cards-section {
     padding: 15px;
-  }
-
-  .cards-grid {
-    grid-template-columns: 1fr;
   }
 }

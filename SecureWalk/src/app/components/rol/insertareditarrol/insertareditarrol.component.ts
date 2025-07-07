@@ -7,25 +7,32 @@ import { Usuario } from '../../../models/usuario';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker'; // Aunque no se use, se mantiene si es un patrón
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { UsuariosService } from '../../../services/usuarios.service';
+import { MatCardModule } from '@angular/material/card'; // Para usar <mat-card>
+import { MatIconModule } from '@angular/material/icon'; // Para usar <mat-icon>
+import { MatSnackBar } from '@angular/material/snack-bar'; // Para notificaciones
+
 @Component({
-    selector: 'app-insertareditarrol',
-    imports: [
-        ReactiveFormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        CommonModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        MatButtonModule
-    ],
-    templateUrl: './insertareditarrol.component.html',
-    styleUrl: './insertareditarrol.component.css'
+  selector: 'app-insertareditarrol',
+  standalone: true, 
+  imports: [
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    CommonModule,
+    MatDatepickerModule, 
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+  ],
+  templateUrl: './insertareditarrol.component.html',
+  styleUrl: './insertareditarrol.component.css'
 })
-export class InsertareditarrolComponent implements OnInit{
+export class InsertareditarrolComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   rol: Rol = new Rol();
 
@@ -37,7 +44,7 @@ export class InsertareditarrolComponent implements OnInit{
   nombres: { value: string; viewValue: string }[] = [
     { value: 'ADMINISTRADOR', viewValue: 'ADMINISTRADOR' },
     { value: 'POLICIA', viewValue: 'POLICIA' },
-    { value: 'USUARIO', viewValue: 'USUARIO' }
+    { value: 'CLIENTE', viewValue: 'CLIENTE' }
   ]
 
   constructor(
@@ -45,18 +52,18 @@ export class InsertareditarrolComponent implements OnInit{
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private uS: UsuariosService
+    private uS: UsuariosService,
+    private snackBar: MatSnackBar 
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
-      //actualizar
       this.init();
     });
     this.form = this.formBuilder.group({
-      codigo: [''],
+      codigo: [{ value: '', disabled: true }], 
       nombre: ['', Validators.required],
       usuario: ['', Validators.required],
     });
@@ -64,41 +71,86 @@ export class InsertareditarrolComponent implements OnInit{
       this.listaUsuarios = data
     })
   }
-  aceptar() {
-    if (this.form.valid) {
-      this.rol.idRol = this.form.value.codigo;
-      this.rol.nombreRol = this.form.value.nombre;
-      this.rol.usuario.idUsuario = this.form.value.usuario;
 
-      if (this.edicion) {
-        //actualizar
-        this.rS.update(this.rol).subscribe(data => {
+  aceptar() {
+    if (this.form.invalid) { 
+      this.form.markAllAsTouched(); 
+      this.snackBar.open('Por favor, completa todos los campos requeridos y corrige los errores.', 'Cerrar', {
+        duration: 4000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-error']
+      });
+      return; 
+    }
+
+    this.rol.idRol = this.edicion ? this.id : 0; 
+    this.rol.nombreRol = this.form.value.nombre;
+    this.rol.usuario = new Usuario(); // Asegurar que el objeto usuario exista
+    this.rol.usuario.idUsuario = this.form.value.usuario;
+
+    if (this.edicion) {
+      this.rS.update(this.rol).subscribe(
+        () => {
           this.rS.list().subscribe(data => {
-            this.rS.setList(data)
-          })
-        })
-      } else {
-        //INSERTAR
-        this.rS.insert(this.rol).subscribe(data => {
+            this.rS.setList(data);
+          });
+          this.router.navigate(['roles']);
+          this.snackBar.open('Rol actualizado exitosamente', 'Cerrar', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-success']
+          });
+        },
+        (error) => {
+          console.error('Error al actualizar el rol:', error);
+          this.snackBar.open('Error al actualizar el rol. Inténtalo de nuevo.', 'Cerrar', {
+            duration: 4000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-error']
+          });
+        }
+      );
+    } else {
+      this.rS.insert(this.rol).subscribe(
+        () => {
           this.rS.list().subscribe(data => {
-            this.rS.setList(data)
-          })
-        })
-      }
-      this.router.navigate(['roles'])
+            this.rS.setList(data);
+          });
+          this.router.navigate(['roles']);
+          this.snackBar.open('Rol registrado exitosamente', 'Cerrar', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-success']
+          });
+        },
+        (error) => {
+          console.error('Error al registrar el rol:', error);
+          this.snackBar.open('Error al registrar el rol. Inténtalo de nuevo.', 'Cerrar', {
+            duration: 4000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-error']
+          });
+        }
+      );
     }
   }
 
   cancelar() {
     this.router.navigate(['roles']);
   }
+
   init() {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idRol),
-          nombre: new FormControl(data.nombreRol),
-          usuario: new FormControl(data.usuario.idUsuario), //deshabilita la edición del campo en específico a la hora de editar
+        this.form.patchValue({ 
+          codigo: data.idRol,
+          nombre: data.nombreRol,
+          usuario: data.usuario.idUsuario,
         });
       });
     }

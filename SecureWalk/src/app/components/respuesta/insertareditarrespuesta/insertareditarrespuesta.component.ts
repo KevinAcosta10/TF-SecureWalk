@@ -1,12 +1,12 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule, provideNativeDateAdapter } from '@angular/material/core'; 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,26 +18,35 @@ import { RespuestaService } from '../../../services/respuesta.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { EncuestapreguntaService } from '../../../services/encuestapregunta.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card'; 
+import { MatIconModule } from '@angular/material/icon'; 
 
 @Component({
-    selector: 'app-insertareditarrespuesta',
-    standalone:true,
-    imports: [
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatNativeDateModule,
-        CommonModule,
-        MatInputModule,
-        NgIf,
-    ],
-    templateUrl: './insertareditarrespuesta.component.html',
-    styleUrl: './insertareditarrespuesta.component.css'
+  selector: 'app-insertareditarrespuesta',
+  standalone: true,
+  providers: [provideNativeDateAdapter()], 
+  imports: [
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    CommonModule,
+    MatInputModule,
+    NgIf,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatOptionModule
+  ],
+  templateUrl: './insertareditarrespuesta.component.html',
+  styleUrl: './insertareditarrespuesta.component.css'
 })
-export class InsertareditarrespuestaComponent {
+export class InsertareditarrespuestaComponent implements OnInit { 
   form: FormGroup = new FormGroup({});
   respuesta: Respuesta = new Respuesta();
   id: number = 0;
@@ -51,22 +60,25 @@ export class InsertareditarrespuestaComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS: UsuariosService,
-    private epS: EncuestapreguntaService
+    private epS: EncuestapreguntaService,
+    private snackBar: MatSnackBar
   ) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
-      //actualizar
       this.init();
     });
+
     this.form = this.formBuilder.group({
-      codigo: [''],
+      codigo: [{ value: '', disabled: true }], 
       fechaRespuesta: ['', Validators.required],
       textoRespuesta: ['', Validators.required],
-      usuario: ['', Validators.required],
-      encuestaPregunta: ['', Validators.required],
+      usuario: ['', Validators.required], 
+      encuestaPregunta: ['', Validators.required], 
     });
+
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
     });
@@ -76,36 +88,48 @@ export class InsertareditarrespuestaComponent {
   }
 
   aceptar() {
-    if (this.form.valid) {
-      this.respuesta.idRespuesta = this.form.value.codigo; // 'codigo' is likely for existing IDs, handle for new inserts if ID is auto-generated in backend
-      this.respuesta.fechaRespuesta = this.form.value.fechaRespuesta;
-      this.respuesta.textoRespuesta = this.form.value.textoRespuesta;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); 
+      this.showErrorMessage('Por favor, completa todos los campos requeridos y corrige los errores.');
+      return;
+    }
 
-      // *** CORRECT ASSIGNMENT ***
-      // Assuming your form.value.usuario and form.value.encuestaPregunta
-      // already contain the full selected objects from your MatSelect.
-      // This is the ideal scenario for the DTOs you provided.
-      this.respuesta.usuario = this.form.value.usuario;
-      this.respuesta.encuestaPregunta = this.form.value.encuestaPregunta;
+    this.respuesta.idRespuesta = this.edicion ? this.id : 0; 
 
-      // *** REMOVE these lines, they are incorrect for your DTO structure: ***
-      // this.respuesta.encuestaPregunta.encuesta.nombreEncuesta = this.form.value.encuesta;
-      // this.respuesta.encuestaPregunta.pregunta.textoPregunta = this.form.value.pregunta;
+    this.respuesta.usuario = this.form.value.usuario;
+    this.respuesta.encuestaPregunta = this.form.value.encuestaPregunta;
+    this.respuesta.fechaRespuesta = this.form.value.fechaRespuesta;
+    this.respuesta.textoRespuesta = this.form.value.textoRespuesta;
 
-      if (this.edicion) {
-        this.rS.update(this.respuesta).subscribe((data) => {
+
+    if (this.edicion) {
+      this.rS.update(this.respuesta).subscribe({
+        next: () => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
           });
-        });
-      } else {
-        this.rS.insert(this.respuesta).subscribe((data) => {
+          this.showSuccessMessage('Respuesta actualizada exitosamente');
+          this.router.navigate(['respuestas']);
+        },
+        error: (error) => {
+          console.error('Error al actualizar respuesta:', error);
+          this.showErrorMessage('Error al actualizar la respuesta. Inténtalo de nuevo.');
+        }
+      });
+    } else {
+      this.rS.insert(this.respuesta).subscribe({
+        next: () => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
           });
-        });
-      }
-      this.router.navigate(['respuestas']);
+          this.showSuccessMessage('Respuesta registrada exitosamente');
+          this.router.navigate(['respuestas']);
+        },
+        error: (error) => {
+          console.error('Error al registrar respuesta:', error);
+          this.showErrorMessage('Error al registrar la respuesta. Inténtalo de nuevo.');
+        }
+      });
     }
   }
 
@@ -120,11 +144,28 @@ export class InsertareditarrespuestaComponent {
           codigo: data.idRespuesta,
           fechaRespuesta: data.fechaRespuesta,
           textoRespuesta: data.textoRespuesta,
-          usuario: data.usuario.nombreUsuario,
-          encuesta: data.encuestaPregunta.encuesta.nombreEncuesta,
-          pregunta: data.encuestaPregunta.pregunta.textoPregunta,
+          usuario: data.usuario || null, 
+          encuestaPregunta: data.encuestaPregunta || null, 
         });
       });
     }
+  }
+
+  private showSuccessMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snackbar-success']
+    });
+  }
+
+  private showErrorMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snackbar-error']
+    });
   }
 }

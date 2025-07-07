@@ -1,25 +1,25 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h1>Registro de incidentes</h1>
-  </div>
-  <div style="text-align: center">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <mat-form-field>
-        <mat-label>Tipo</mat-label>
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">
+      {{ edicion ? "Editar Incidente" : "Registrar Nuevo Incidente" }}
+    </h1>
+
+    <form [formGroup]="form" (submit)="aceptar()" class="incidente-form">
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Tipo de Incidente</mat-label>
         <mat-select formControlName="tipo">
-          @for (tipo of tipos; track tipo) {
+          @for (tipo of tipos; track tipo.value) {
           <mat-option [value]="tipo.value">{{ tipo.viewValue }}</mat-option>
           }
         </mat-select>
-
+        <mat-icon matSuffix>warning</mat-icon>
         <mat-error *ngIf="form.get('tipo')?.hasError('required')">
-          El tipo de incidente es obligatorio!!
+          El tipo de incidente es obligatorio.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
-        <mat-label>Choose a date</mat-label>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Fecha del Incidente</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="fecha" />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
@@ -28,52 +28,65 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="form.get('fecha')?.hasError('required')">
-          La fecha es obligatoria!!
+          La fecha es obligatoria.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Descripción</mat-label>
-        <input matInput formControlName="descripcion" />
-
+        <textarea matInput formControlName="descripcion" rows="4"></textarea>
+        <mat-icon matSuffix>description</mat-icon>
         <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
-          La descripcion del incidente es obligatorio!!
+          La descripción del incidente es obligatoria.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Zona</mat-label>
         <mat-select formControlName="zona">
-          @for (food of listaZonas; track food) {
-          <mat-option [value]="food.idZona">{{ food.nombreZona }}</mat-option>
+          @for (zona of listaZonas; track zona.idZona) {
+          <mat-option [value]="zona.idZona">{{ zona.nombreZona }}</mat-option>
           }
         </mat-select>
+        <mat-icon matSuffix>location_on</mat-icon>
         <mat-error *ngIf="form.get('zona')?.hasError('required')">
-          La zona del incidente es obligatoria!!
+          La zona del incidente es obligatoria.
         </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
-          @for (food of listaUsuarios; track food) {
-          <mat-option [value]="food.idUsuario">{{
-            food.nombreUsuario
+          @for (usuario of listaUsuarios; track usuario.idUsuario) {
+          <mat-option [value]="usuario.idUsuario">{{
+            usuario.nombreUsuario
           }}</mat-option>
           }
         </mat-select>
+        <mat-icon matSuffix>person</mat-icon>
         <mat-error *ngIf="form.get('usuario')?.hasError('required')">
-          El usuario es obligatorio!
+          El usuario es obligatorio.
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <button mat-raised-button color="primary">Aceptar</button>
-      <button mat-raised-button color="warn" (click)="cancelar()">
-        Cancelar
-      </button>
+      <div class="form-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          Aceptar
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="cancelar()"
+          type="button"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>

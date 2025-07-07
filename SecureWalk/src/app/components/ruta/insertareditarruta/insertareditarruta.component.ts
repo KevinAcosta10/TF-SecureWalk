@@ -11,9 +11,14 @@ import { Zona } from '../../../models/zona';
 import { RutaService } from '../../../services/ruta.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ZonaService } from '../../../services/zona.service';
-import { MatTimepickerModule } from '@angular/material/timepicker'; // <--- NEW: Import MatTimepickerModule
-import { MatSnackBar } from '@angular/material/snack-bar'; // <--- NEW: Import MatSnackBar
-import { MatSnackBarModule } from '@angular/material/snack-bar'; // <--- NEW: Import MatSnackBarModule
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+// ======================================================
+// === NEW: Add imports for MatCardModule and MatIconModule ===
+// ======================================================
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-insertareditarruta',
@@ -23,11 +28,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'; // <--- NEW: Im
     ReactiveFormsModule,
     MatInputModule,
     CommonModule,
-    MatDatepickerModule,
+    MatDatepickerModule, // Keep for potential date needs, though timepicker is dominant here
     MatSelectModule,
     MatButtonModule,
-    MatTimepickerModule, // <--- NEW: Add MatTimepickerModule
-    MatSnackBarModule // <--- NEW: Add MatSnackBarModule
+    MatTimepickerModule,
+    MatSnackBarModule,
+    // ======================================================
+    // === NEW: Add MatCardModule and MatIconModule to imports ===
+    // ======================================================
+    MatCardModule,
+    MatIconModule
   ],
   templateUrl: './insertareditarruta.component.html',
   styleUrl: './insertareditarruta.component.css'
@@ -51,8 +61,8 @@ export class InsertareditarrutaComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private zS: ZonaService, // Renamed 'uS' to 'zS' for ZonaService for clarity
-    private snackBar: MatSnackBar // <--- NEW: Inject MatSnackBar
+    private zS: ZonaService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -63,69 +73,74 @@ export class InsertareditarrutaComponent implements OnInit {
     });
 
     this.form = this.formBuilder.group({
-      codigo: [''],
+      codigo: [{ value: '', disabled: true }], // Disable the code field by default
       horaInicio: ['', Validators.required],
       horaFin: ['', Validators.required],
       seguridad: ['', Validators.required],
       zona: ['', Validators.required],
     });
 
-    this.zS.list().subscribe((data) => { // Using zS
+    this.zS.list().subscribe((data) => {
       this.listaZonas = data;
     });
   }
 
   aceptar() {
-    if (this.form.valid) {
-      this.ruta.idRuta = this.form.value.codigo;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // Mark all fields as touched to show validation errors
+      this.showErrorMessage('Please complete all required fields and correct any errors.');
+      return; // Stop execution if the form is invalid
+    }
 
-      // Ensure the 'zona' is assigned as an object with 'idZona'
-      // The MatSelect will provide the 'idZona' in form.value.zona
-      this.ruta.zona = { idZona: this.form.value.zona } as Zona; // Cast to Zona to match type
+    this.ruta.idRuta = this.edicion ? this.id : 0; // Assign 0 for new insertions
 
-      this.ruta.nivelSeguridad = this.form.value.seguridad;
-
-      // Get the Date objects from the form controls
-      const horaInicioDate: Date = this.form.value.horaInicio;
-      const horaFinDate: Date = this.form.value.horaFin;
-
-      // Format the Date objects to "HH:mm" strings for LocalTime backend
-      this.ruta.horaInicio = horaInicioDate ? this.formatTime(horaInicioDate) : null;
-      this.ruta.horaFin = horaFinDate ? this.formatTime(horaFinDate) : null;
-
-      if (this.edicion) {
-        // Actualizar
-        this.rS.update(this.ruta).subscribe({
-          next: () => {
-            this.rS.list().subscribe((data) => {
-              this.rS.setList(data);
-            });
-            this.showSuccessMessage('Ruta actualizada exitosamente');
-            this.router.navigate(['rutas']);
-          },
-          error: (error) => {
-            console.error('Error al actualizar ruta:', error);
-            this.showErrorMessage('Error al actualizar la ruta.');
-          }
-        });
-      } else {
-        // INSERTAR
-        this.rS.insert(this.ruta).subscribe({
-          next: () => {
-            this.rS.list().subscribe((data) => {
-              this.rS.setList(data);
-            });
-            this.showSuccessMessage('Ruta registrada exitosamente');
-            this.router.navigate(['rutas']);
-          },
-          error: (error) => {
-            console.error('Error al registrar ruta:', error);
-            this.showErrorMessage('Error al registrar la ruta.');
-          }
-        });
-      }
+    // Find and assign the complete Zona object
+    const selectedZona = this.listaZonas.find(zona => zona.idZona === this.form.value.zona);
+    if (selectedZona) {
+      this.ruta.zona = selectedZona;
     } else {
-      this.showErrorMessage('Por favor, complete todos los campos requeridos.');
+      this.showErrorMessage('Selected Zone not found.');
+      return;
+    }
+
+    this.ruta.nivelSeguridad = this.form.value.seguridad;
+
+    // Get the Date objects from the form controls
+    const horaInicioDate: Date = this.form.value.horaInicio;
+    const horaFinDate: Date = this.form.value.horaFin;
+
+    // Format the Date objects to "HH:mm" strings for LocalTime backend
+    this.ruta.horaInicio = horaInicioDate ? this.formatTime(horaInicioDate) : null;
+    this.ruta.horaFin = horaFinDate ? this.formatTime(horaFinDate) : null;
+
+    if (this.edicion) {
+      this.rS.update(this.ruta).subscribe({
+        next: () => {
+          this.rS.list().subscribe((data) => {
+            this.rS.setList(data);
+          });
+          this.showSuccessMessage('Route updated successfully');
+          this.router.navigate(['rutas']);
+        },
+        error: (error) => {
+          console.error('Error updating route:', error);
+          this.showErrorMessage('Error updating the route. Please try again.');
+        }
+      });
+    } else {
+      this.rS.insert(this.ruta).subscribe({
+        next: () => {
+          this.rS.list().subscribe((data) => {
+            this.rS.setList(data);
+          });
+          this.showSuccessMessage('Route registered successfully');
+          this.router.navigate(['rutas']);
+        },
+        error: (error) => {
+          console.error('Error registering route:', error);
+          this.showErrorMessage('Error registering the route. Please try again.');
+        }
+      });
     }
   }
 
@@ -136,13 +151,13 @@ export class InsertareditarrutaComponent implements OnInit {
   init() {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
-        this.form.patchValue({ // Use patchValue instead of new FormGroup for simpler updates
+        this.form.patchValue({
           codigo: data.idRuta,
           // Convert LocalTime string from backend to Date object for the time picker
           horaInicio: data.horaInicio ? this.parseTime(data.horaInicio) : null,
           horaFin: data.horaFin ? this.parseTime(data.horaFin) : null,
-          seguridad: data.nivelSeguridad, // Corrected from data.idRuta
-          zona: data.zona.idZona, // Patch with ID, not the name
+          seguridad: data.nivelSeguridad,
+          zona: data.zona?.idZona || '', // Use optional chaining and fallback
         });
       });
     }
@@ -166,7 +181,7 @@ export class InsertareditarrutaComponent implements OnInit {
   private parseTime(timeString: string): Date | null {
     if (!timeString) return null;
     const [hours, minutes, seconds = '00'] = timeString.split(':');
-    const date = new Date(); // Use a generic date (today's date, but time part will be set)
+    const date = new Date(); // Use a generic date, only time part matters for the picker
     date.setHours(parseInt(hours, 10));
     date.setMinutes(parseInt(minutes, 10));
     date.setSeconds(parseInt(seconds, 10));
@@ -179,7 +194,7 @@ export class InsertareditarrutaComponent implements OnInit {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: ['success-snackbar'] // Using remembered color: Green
+      panelClass: ['snackbar-success'] // Using remembered color: Green
     });
   }
 
@@ -188,7 +203,7 @@ export class InsertareditarrutaComponent implements OnInit {
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: ['error-snackbar'] // Using remembered color: Red
+      panelClass: ['snackbar-error'] // Using remembered color: Red
     });
   }
 }

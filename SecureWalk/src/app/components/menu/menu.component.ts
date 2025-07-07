@@ -30,7 +30,11 @@ export class MenuComponent {
     this.role = this.loginService.showRole();
     return this.loginService.verificar();
   }
-  isUSUARIO() {
+  isCLIENTE() {
+    return this.role === 'USUARIO';
+  }
+
+  isPOLICIA() {
     return this.role === 'USUARIO';
   }
 
