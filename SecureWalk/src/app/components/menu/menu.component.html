@@ -50,7 +50,7 @@
       <button mat-menu-item [matMenuTriggerFor]="menuRuta">
         <mat-icon>alt_route</mat-icon> Ruta
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="menuEvaluacionIncidente" *ngIf="isPOLICIA() OR isADMIN()">
+      <button mat-menu-item [matMenuTriggerFor]="menuEvaluacionIncidente" *ngIf="isPOLICIA() || isADMIN()">
         <mat-icon>rate_review</mat-icon> Evaluación Incidente
       </button>
       <button mat-menu-item [matMenuTriggerFor]="menuEncuestaPregunta">
