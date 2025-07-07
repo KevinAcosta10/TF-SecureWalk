@@ -40,13 +40,9 @@ public class UsuarioController {
 
     @PutMapping("/modificar")
     public void modificar(@RequestBody ActualizarUsuarioDTO dto) {
-        // 1. Obtener el usuario existente de la base de datos
-        // Esto es CRUCIAL para preservar la contraseña actual si no se cambia.
-        Usuario existingUsuario = uS.listId(dto.getIdUsuario()); // Obtiene la entidad completa (con contraseña hasheada)
 
-        // 2. Mapear los campos del DTO a la entidad existente, EXCLUYENDO la contraseña.
-        // Copiamos manualmente los campos no sensibles para evitar sobrescribir la contraseña
-        // con un valor nulo si el DTO no la contiene.
+        Usuario existingUsuario = uS.listId(dto.getIdUsuario());
+
         existingUsuario.setNombreUsuario(dto.getNombreUsuario());
         existingUsuario.setEmailUsuario(dto.getEmailUsuario());
         existingUsuario.setTelefonoUsuario(dto.getTelefonoUsuario());
@@ -55,15 +51,7 @@ public class UsuarioController {
         existingUsuario.setUsername(dto.getUsername());
         existingUsuario.setEnable(dto.isEnable());
 
-        // 3. Lógica condicional para la contraseña:
-        // Si el DTO de actualización *no tiene* un campo de contraseña (como ActualizarUsuarioDTO),
-        // entonces no hay nueva contraseña que hashear.
-        // Si tu frontend enviara una nueva contraseña en un DTO diferente,
-        // la lógica para hashearla e insertarla iría aquí.
-        // Dado que ActualizarUsuarioDTO no tiene 'password', no hacemos nada con la contraseña aquí.
-        // La contraseña existente en 'existingUsuario' (cargada de la DB) se mantendrá.
-
-        uS.update(existingUsuario); // Llama al servicio para actualizar (el servicio ya no hashea)
+        uS.update(existingUsuario);
     }
 
     @DeleteMapping("/{id}")
@@ -73,7 +61,6 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ActualizarUsuarioDTO buscarId(@PathVariable("id") int id){
-        // El servicio devuelve la entidad Usuario, el controlador mapea a ActualizarUsuarioDTO
         ModelMapper m = new ModelMapper();
         Usuario usuario = uS.listId(id);
         return m.map(usuario, ActualizarUsuarioDTO.class);
