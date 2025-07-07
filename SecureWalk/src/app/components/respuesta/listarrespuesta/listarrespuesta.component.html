@@ -1,29 +1,18 @@
-<!-- ====================================================== -->
-<!-- === src/app/listarrespuesta/listarrespuesta.component.html       === -->
-<!-- ====================================================== -->
-
 <div class="main-container">
   <div class="top-header-section">
     <div class="title-search-block">
       <h1 class="page-title">Lista de Respuestas</h1>
-      <!-- Aquí podrías añadir un botón para crear una nueva respuesta si lo necesitas -->
-      <!-- <button mat-raised-button class="add-button" routerLink="/crear-respuesta">
-        <mat-icon>add</mat-icon> Nueva Respuesta
-      </button> -->
     </div>
   </div>
 
   <div class="content-cards-section">
-    <!-- Mensaje de "No hay resultados" si dataSource no tiene datos -->
     <div *ngIf="dataSource.data.length === 0" class="no-data-container">
       <p>No hay respuestas disponibles para mostrar en este momento.</p>
       <mat-icon class="no-data-icon">sentiment_dissatisfied</mat-icon>
     </div>
 
-    <!-- Contenedor de la cuadrícula de tarjetas -->
-    <!-- Este div solo se muestra si SÍ hay datos -->
+
     <div class="cards-grid" *ngIf="dataSource.data.length > 0">
-      <!-- Ahora itera sobre dataSource.connect() | async -->
       <mat-card class="respuesta-card" *ngFor="let res of dataSource.connect() | async">
         <mat-card-header>
           <mat-card-title><mat-icon class="card-title-icon">message</mat-icon> ID Respuesta: {{ res.idRespuesta }}</mat-card-title>
@@ -64,17 +53,10 @@
           <button mat-button color="warn" (click)="eliminar(res.idRespuesta)">
             <mat-icon>delete_forever</mat-icon> Eliminar
           </button>
-          <!-- No hay botón de edición en tu HTML original, pero lo dejo comentado por si lo necesitas -->
-          <!-- <button mat-button color="primary" [routerLink]="['ediciones', res.idRespuesta]">
-            <mat-icon>edit</mat-icon> Editar
-          </button> -->
         </mat-card-actions>
       </mat-card>
     </div>
 
-    <!-- Paginador de Material Design -->
-    <!-- ¡CORRECCIÓN CLAVE AQUÍ: FUERA DE CUALQUIER *ngIf/ng-template! -->
-    <!-- Usamos [hidden] para ocultarlo si no hay datos, pero siempre estará en el DOM. -->
     <mat-paginator
       [length]="dataSource.data.length"
       [pageSize]="3"
