@@ -31,11 +31,11 @@ export class MenuComponent {
     return this.loginService.verificar();
   }
   isCLIENTE() {
-    return this.role === 'USUARIO';
+    return this.role === 'CLIENTE';
   }
 
   isPOLICIA() {
-    return this.role === 'USUARIO';
+    return this.role === 'POLICIA';
   }
 
   isADMIN() {
