@@ -1,0 +1,195 @@
+/* insertareditarrespuesta.component.css */
+/* COPIA ADAPTADA DE formularios anteriores */
+
+/* General page styling */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5; /* Light Gray */
+}
+
+.main-container {
+  display: flex;
+  justify-content: center; /* Centra el formulario horizontalmente */
+  align-items: center; /* Centra el formulario verticalmente */
+  min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
+  padding: 40px 20px; /* Padding general para evitar que el contenido toque los bordes */
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+.form-card-container {
+  background-color: #E0E0E0; /* Light Gray para suavizar el fondo del formulario */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+  padding: 40px; /* Espaciado interno generoso */
+  width: 100%;
+  max-width: 600px; /* Ancho máximo para el formulario */
+  box-sizing: border-box;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 30px; /* Espacio debajo del título */
+  color: #3f51b5; /* Primary Blue: Color del título del formulario */
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.respuesta-form { /* Clase específica para este formulario */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre los campos del formulario */
+}
+
+.full-width-field {
+  width: 100%; /* Los campos de formulario ocupan todo el ancho disponible */
+}
+
+/* Estilos para los campos de MatFormField (outline appearance) */
+mat-form-field.mat-mdc-form-field-appearance-outline {
+  /* Color del borde normal */
+  ::ng-deep .mat-mdc-form-field-outline-start,
+  ::ng-deep .mat-mdc-form-field-outline-gap,
+  ::ng-deep .mat-mdc-form-field-outline-end {
+    border-color: #E0E0E0; /* Light Gray: Borde en estado normal */
+  }
+
+  /* Color del borde cuando está enfocado */
+  &.mat-focused {
+    ::ng-deep .mat-mdc-form-field-outline-start,
+    ::ng-deep .mat-mdc-form-field-outline-gap,
+    ::ng-deep .mat-mdc-form-field-outline-end {
+      border-color: #3f51b5; /* Primary Blue: Borde cuando está enfocado */
+    }
+  }
+
+  /* Color de la etiqueta (placeholder) */
+  ::ng-deep .mat-mdc-form-field-label {
+    color: #424242; /* Dark Gray/Near Black: Color de la etiqueta */
+  }
+
+  /* Color del texto de entrada */
+  ::ng-deep input.mat-mdc-input-element,
+  ::ng-deep textarea.mat-mdc-input-element {
+    color: #333333; /* Dark Gray/Near Black: Color del texto de entrada */
+  }
+
+  /* Color de los íconos dentro del campo (ej. datepicker toggle, password visibility) */
+  ::ng-deep .mat-icon {
+    color: #5c6bc0; /* Secondary Blue: Color de los íconos */
+  }
+
+  /* Color de los mensajes de error */
+  ::ng-deep .mat-error {
+    color: #F44336; /* Red: Color de los mensajes de error */
+    font-size: 0.85em;
+    margin-top: 5px;
+  }
+}
+
+
+/* Contenedor de botones de acción */
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  gap: 15px; /* Espacio entre los botones */
+  margin-top: 30px; /* Espacio superior para separar de los campos */
+}
+
+/* Estilos para el botón Aceptar (Primary) */
+button[mat-raised-button][color="primary"] {
+  background-color: #3f51b5; /* Primary Blue: Fondo del botón Aceptar */
+  color: white; /* Texto blanco */
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[mat-raised-button][color="primary"]:hover {
+  background-color: #5c6bc0; /* Secondary Blue: Fondo al pasar el ratón */
+  transform: translateY(-2px);
+}
+
+button[mat-raised-button][color="primary"][disabled] {
+  background-color: #E0E0E0 !important; /* Light Gray: Fondo cuando está deshabilitado */
+  color: #A0A0A0 !important; /* Texto gris claro cuando está deshabilitado */
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Estilos para el botón Cancelar (Warn, pero lo haremos neutral) */
+button[mat-raised-button][color="warn"] {
+  background-color: #E0E0E0; /* Light Gray: Fondo del botón Cancelar */
+  color: #424242; /* Dark Gray/Near Black: Texto oscuro */
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[mat-raised-button][color="warn"]:hover {
+  background-color: #D3D3D3; /* Un gris ligeramente más oscuro al pasar el ratón */
+  transform: translateY(-2px);
+}
+
+/* Estilos para el MatSnackBar (notificaciones) */
+.snackbar-success {
+  background-color: #4CAF50 !important; /* Green (Success/Safe) */
+  color: white !important;
+  border-radius: 8px;
+}
+
+.snackbar-error {
+  background-color: #F44336 !important; /* Red (Danger/Error/Critical Alert) */
+  color: white !important;
+  border-radius: 8px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 20px 10px;
+  }
+
+  .form-card-container {
+    padding: 30px 20px;
+  }
+
+  .form-title {
+    font-size: 2em;
+    margin-bottom: 25px;
+  }
+
+  .respuesta-form { /* Clase específica para este formulario */
+    gap: 15px;
+  }
+
+  .form-actions {
+    flex-direction: column; /* Apila los botones en pantallas pequeñas */
+    align-items: stretch; /* Estira los botones para ocupar el ancho completo */
+    gap: 10px;
+  }
+
+  button[mat-raised-button] {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 15px 20px; /* Más padding para facilitar el toque */
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card-container {
+    padding: 25px 15px;
+  }
+
+  .form-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+}

@@ -1,11 +1,9 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h1>Registro de evaluaciones de incidentes</h1>
-  </div>
-  <div style="text-align: center">
-    <form [formGroup]="form" (submit)="aceptar()">
+<div class="page-main-content">
+  <div class="form-card-container">
+    <h1 class="form-title">Registro de evaluaciones de incidentes</h1>
 
-      <mat-form-field>
+    <form [formGroup]="form" (submit)="aceptar()" class="incident-evaluation-form">
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Aprobacion de Incidente</mat-label>
         <mat-select formControlName="aprobacion">
           @for (food of tipos; track food) {
@@ -16,10 +14,9 @@
           Este campo es obligatorio!!
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
-        <mat-label>Choose a date</mat-label>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Fecha de Evaluación</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="fecha" />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
@@ -31,9 +28,8 @@
           La fecha es obligatoria!!
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Incidente</mat-label>
         <mat-select formControlName="incidente">
           @for (food of listaIncidentes; track food) {
@@ -44,9 +40,8 @@
           El incidente es obligatorio
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width-field">
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
           @for (food of listaUsuarios; track food) {
@@ -57,12 +52,17 @@
           El nombre de usuario es obligatorio!!
         </mat-error>
       </mat-form-field>
-      <br />
 
-      <button mat-raised-button color="primary">Aceptar</button>
-      <button mat-raised-button color="warn" (click)="cancelar()">
-        Cancelar
-      </button>
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>
+
+<footer class="app-footer"></footer>

@@ -4,7 +4,7 @@
       <mat-icon>home</mat-icon>Home
     </button>
 
-    <button mat-button [matMenuTriggerFor]="menuAdministracion">
+    <button mat-button [matMenuTriggerFor]="menuAdministracion" *ngIf="isADMIN()">
       <mat-icon>build</mat-icon> Administración
     </button>
     <mat-menu #menuAdministracion="matMenu">
@@ -35,10 +35,10 @@
       <button mat-menu-item [matMenuTriggerFor]="menuIncidente">
         <mat-icon>report_problem</mat-icon> Incidente
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="menuPregunta">
+      <button mat-menu-item [matMenuTriggerFor]="menuPregunta" *ngIf="isADMIN()">
         <mat-icon>help_outline</mat-icon> Pregunta
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="menuEncuesta">
+      <button mat-menu-item [matMenuTriggerFor]="menuEncuesta" *ngIf="isADMIN()">
         <mat-icon>assignment</mat-icon> Encuesta
       </button>
     </mat-menu>
@@ -50,7 +50,7 @@
       <button mat-menu-item [matMenuTriggerFor]="menuRuta">
         <mat-icon>alt_route</mat-icon> Ruta
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="menuEvaluacionIncidente">
+      <button mat-menu-item [matMenuTriggerFor]="menuEvaluacionIncidente" *ngIf="isPOLICIA() || isADMIN()">
         <mat-icon>rate_review</mat-icon> Evaluación Incidente
       </button>
       <button mat-menu-item [matMenuTriggerFor]="menuEncuestaPregunta">

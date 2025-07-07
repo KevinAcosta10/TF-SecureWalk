@@ -1,11 +1,13 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Asegurarse de importar OnInit
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker'; // Se mantiene aunque no se use directamente, por si el patrón lo requiere
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon'; // Nueva importación para iconos
+import { MatCardModule } from '@angular/material/card'; // Nueva importación para la tarjeta
 import { Comentario } from '../../../models/comentario';
 import { Usuario } from '../../../models/usuario';
 import { Post } from '../../../models/post';
@@ -13,13 +15,13 @@ import { ComentarioService } from '../../../services/comentario.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { PostService } from '../../../services/post.service';
-import { MatSnackBar } from '@angular/material/snack-bar'; // <--- NEW: Import MatSnackBar
-import { MatSnackBarModule } from '@angular/material/snack-bar'; // <--- NEW: Import MatSnackBarModule
-import { MatButtonModule } from '@angular/material/button'; // <--- NEW: Ensure MatButtonModule is imported for buttons
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-insertareditarcomentario',
-  standalone: true, // <--- NEW: Add standalone if it's a standalone component
+  standalone: true,
   imports: [
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -28,13 +30,15 @@ import { MatButtonModule } from '@angular/material/button'; // <--- NEW: Ensure 
     CommonModule,
     MatInputModule,
     NgIf,
-    MatSnackBarModule, // <--- NEW: Add MatSnackBarModule
-    MatButtonModule // <--- NEW: Add MatButtonModule
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule, 
+    MatCardModule 
   ],
   templateUrl: './insertareditarcomentario.component.html',
   styleUrl: './insertareditarcomentario.component.css'
 })
-export class InsertareditarcomentarioComponent {
+export class InsertareditarcomentarioComponent implements OnInit { // Implementar OnInit
   form: FormGroup = new FormGroup({});
   comentario: Comentario = new Comentario();
   id: number = 0;
@@ -49,7 +53,7 @@ export class InsertareditarcomentarioComponent {
     private route: ActivatedRoute,
     private uS: UsuariosService,
     private pS: PostService,
-    private snackBar: MatSnackBar // <--- NEW: Inject MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -60,11 +64,10 @@ export class InsertareditarcomentarioComponent {
     });
 
     this.form = this.formBuilder.group({
-      codigo: [''],
+      codigo: [{ value: '', disabled: true }], // Deshabilitar el campo código por defecto
       descripcionComentario: ['', Validators.required],
-      // These form controls will hold the IDs selected from the mat-select
-      idPost: ['', Validators.required], // Renamed from descripcionPost to idPost for clarity
-      idUsuario: ['', Validators.required], // Renamed from usuario to idUsuario for clarity
+      idPost: ['', Validators.required],
+      idUsuario: ['', Validators.required],
     });
 
     this.uS.list().subscribe((data) => {
@@ -77,51 +80,61 @@ export class InsertareditarcomentarioComponent {
   }
 
   aceptar() {
-    if (this.form.valid) {
-      this.comentario.idComentario = this.form.value.codigo;
-      this.comentario.descripcionComentario = this.form.value.descripcionComentario;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // Marcar todos los campos como tocados para mostrar errores
+      this.showErrorMessage('Por favor, completa todos los campos requeridos y corrige los errores.');
+      return;
+    }
 
-      // Correctly assign the Post object with its ID
-      // Assuming your backend expects a Post object with at least idPost populated
-      this.comentario.post = { idPost: this.form.value.idPost } as Post;
+    this.comentario.idComentario = this.edicion ? this.id : 0; // Asignar 0 para nuevas inserciones
+    this.comentario.descripcionComentario = this.form.value.descripcionComentario;
 
-      // Correctly assign the Usuario object with its ID
-      // Assuming your backend expects a Usuario object with at least idUsuario populated
-      this.comentario.usuario = { idUsuario: this.form.value.idUsuario } as Usuario;
-
-      if (this.edicion) {
-        // Actualizar
-        this.cS.update(this.comentario).subscribe({
-          next: () => {
-            this.cS.list().subscribe((data) => {
-              this.cS.setList(data);
-            });
-            this.showSuccessMessage('Comentario actualizado exitosamente');
-            this.router.navigate(['comentarios']);
-          },
-          error: (error) => {
-            console.error('Error al actualizar comentario:', error);
-            this.showErrorMessage('Error al actualizar el comentario.');
-          }
-        });
-      } else {
-        // INSERTAR
-        this.cS.insert(this.comentario).subscribe({
-          next: () => {
-            this.cS.list().subscribe((data) => {
-              this.cS.setList(data);
-            });
-            this.showSuccessMessage('Comentario registrado exitosamente');
-            this.router.navigate(['comentarios']);
-          },
-          error: (error) => {
-            console.error('Error al registrar comentario:', error);
-            this.showErrorMessage('Error al registrar el comentario.');
-          }
-        });
-      }
+    // Buscar y asignar el objeto Post completo
+    const selectedPost = this.listaPost.find(post => post.idPost === this.form.value.idPost);
+    if (selectedPost) {
+      this.comentario.post = selectedPost;
     } else {
-      this.showErrorMessage('Por favor, complete todos los campos requeridos.');
+      this.showErrorMessage('Post seleccionado no encontrado.');
+      return;
+    }
+
+    // Buscar y asignar el objeto Usuario completo
+    const selectedUsuario = this.listaUsuarios.find(usuario => usuario.idUsuario === this.form.value.idUsuario);
+    if (selectedUsuario) {
+      this.comentario.usuario = selectedUsuario;
+    } else {
+      this.showErrorMessage('Usuario seleccionado no encontrado.');
+      return;
+    }
+
+    if (this.edicion) {
+      this.cS.update(this.comentario).subscribe({
+        next: () => {
+          this.cS.list().subscribe((data) => {
+            this.cS.setList(data);
+          });
+          this.showSuccessMessage('Comentario actualizado exitosamente');
+          this.router.navigate(['comentarios']);
+        },
+        error: (error) => {
+          console.error('Error al actualizar comentario:', error);
+          this.showErrorMessage('Error al actualizar el comentario. Inténtalo de nuevo.');
+        }
+      });
+    } else {
+      this.cS.insert(this.comentario).subscribe({
+        next: () => {
+          this.cS.list().subscribe((data) => {
+            this.cS.setList(data);
+          });
+          this.showSuccessMessage('Comentario registrado exitosamente');
+          this.router.navigate(['comentarios']);
+        },
+        error: (error) => {
+          console.error('Error al registrar comentario:', error);
+          this.showErrorMessage('Error al registrar el comentario. Inténtalo de nuevo.');
+        }
+      });
     }
   }
 
@@ -135,9 +148,8 @@ export class InsertareditarcomentarioComponent {
         this.form.patchValue({
           codigo: data.idComentario,
           descripcionComentario: data.descripcionComentario,
-          // Patch with the ID of the Post and Usuario
-          idPost: data.post.idPost,
-          idUsuario: data.usuario.idUsuario,
+          idPost: data.post?.idPost || '', // Usar optional chaining y fallback
+          idUsuario: data.usuario?.idUsuario || '', // Usar optional chaining y fallback
         });
       });
     }
@@ -148,7 +160,7 @@ export class InsertareditarcomentarioComponent {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: ['success-snackbar']
+      panelClass: ['snackbar-success'] // Asegúrate de que esta clase esté definida en tu CSS
     });
   }
 
@@ -157,7 +169,7 @@ export class InsertareditarcomentarioComponent {
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: ['error-snackbar']
+      panelClass: ['snackbar-error'] // Asegúrate de que esta clase esté definida en tu CSS
     });
   }
 }

@@ -1,100 +1,68 @@
-<!-- insertareditarrespuesta.component.html -->
-<div class="container mx-auto p-6 font-inter">
-  <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center rounded-lg p-3 shadow-md bg-gradient-to-r from-green-100 to-blue-100">
-    {{ edicion ? 'Editar Respuesta' : 'Registrar Nueva Respuesta' }}
-  </h2>
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">{{ edicion ? 'Editar Respuesta' : 'Registrar Nueva Respuesta' }}</h1>
 
-  <form [formGroup]="form" (submit)="aceptar()" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+    <form [formGroup]="form" (submit)="aceptar()" class="respuesta-form">
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Fecha de Respuesta</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaRespuesta" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaRespuesta')?.hasError('required')">
+          La fecha de respuesta es obligatoria.
+        </mat-error>
+      </mat-form-field>
 
-    <!-- Campo de Código (solo visible en edición) -->
-    <div *ngIf="edicion" class="mb-6">
-      <label for="codigo" class="block text-gray-700 text-sm font-semibold mb-2">Código de Respuesta:</label>
-      <input
-        type="text"
-        id="codigo"
-        formControlName="codigo"
-        class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-100 cursor-not-allowed"
-        readonly
-      >
-    </div>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Texto de Respuesta</mat-label>
+        <textarea matInput formControlName="textoRespuesta" rows="4"></textarea>
+        <mat-icon matSuffix>text_fields</mat-icon>
+        <mat-error *ngIf="form.get('textoRespuesta')?.hasError('required')">
+          El texto de respuesta es obligatorio.
+        </mat-error>
+      </mat-form-field>
 
-    <!-- Campo Fecha de Respuesta -->
-    <div class="mb-6">
-      <label for="fechaRespuesta" class="block text-gray-700 text-sm font-semibold mb-2">Fecha de Respuesta:</label>
-      <input
-        type="date"
-        id="fechaRespuesta"
-        formControlName="fechaRespuesta"
-        class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        [ngClass]="{'border-red-500': form.get('fechaRespuesta')?.invalid && form.get('fechaRespuesta')?.touched}"
-      >
-      <div *ngIf="form.get('fechaRespuesta')?.invalid && form.get('fechaRespuesta')?.touched" class="text-red-500 text-xs mt-1">
-        La fecha de respuesta es obligatoria.
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          <mat-option [value]="null" disabled>Seleccione un usuario</mat-option>
+          @for (u of listaUsuarios; track u.idUsuario) {
+          <mat-option [value]="u">
+            {{ u.nombreUsuario }} ({{ u.emailUsuario }})
+          </mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Encuesta y Pregunta</mat-label>
+        <mat-select formControlName="encuestaPregunta">
+          <mat-option [value]="null" disabled>Seleccione una encuesta y pregunta</mat-option>
+          @for (ep of listaEncuestaPregunta; track ep.idEncuestaPregunta) {
+          <mat-option [value]="ep">
+            Encuesta: {{ ep.encuesta.nombreEncuesta || 'N/A' }} - Pregunta: {{ ep.pregunta.textoPregunta || 'N/A' }}
+          </mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix>assignment</mat-icon>
+        <mat-error *ngIf="form.get('encuestaPregunta')?.hasError('required')">
+          La encuesta y pregunta son obligatorias.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancelar
+        </button>
       </div>
-    </div>
-
-    <!-- Campo Texto de Respuesta -->
-    <div class="mb-6">
-      <label for="textoRespuesta" class="block text-gray-700 text-sm font-semibold mb-2">Texto de Respuesta:</label>
-      <textarea
-        id="textoRespuesta"
-        formControlName="textoRespuesta"
-        rows="4"
-        class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y"
-        [ngClass]="{'border-red-500': form.get('textoRespuesta')?.invalid && form.get('textoRespuesta')?.touched}"
-      ></textarea>
-      <div *ngIf="form.get('textoRespuesta')?.invalid && form.get('textoRespuesta')?.touched" class="text-red-500 text-xs mt-1">
-        El texto de respuesta es obligatorio.
-      </div>
-    </div>
-
-    <!-- Dropdown para Usuario -->
-    <div class="mb-6">
-      <label for="usuario" class="block text-gray-700 text-sm font-semibold mb-2">Usuario:</label>
-      <select
-        id="usuario"
-        formControlName="usuario"
-        class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      >
-        <option [ngValue]="null" disabled>Seleccione un usuario</option>
-        <option *ngFor="let u of listaUsuarios" [ngValue]="u">
-          {{ u.nombreUsuario }} ({{ u.emailUsuario }})
-        </option>
-      </select>
-    </div>
-
-    <!-- Dropdown para Encuesta Pregunta -->
-    <div class="mb-6">
-      <label for="encuestaPregunta" class="block text-gray-700 text-sm font-semibold mb-2">Encuesta y Pregunta:</label>
-      <select
-        id="encuestaPregunta"
-        formControlName="encuestaPregunta"
-        class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      >
-        <option [ngValue]="null" disabled>Seleccione una encuesta y pregunta</option>
-        <option *ngFor="let ep of listaEncuestaPregunta" [ngValue]="ep">
-          Encuesta: {{ ep.encuesta.nombreEncuesta }} - Pregunta: {{ ep.pregunta.textoPregunta }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Botones de Acción -->
-    <div class="flex justify-end space-x-4 mt-8">
-      <button
-        type="submit"
-        [disabled]="!form.valid"
-        class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        Aceptar
-      </button>
-      <button
-        type="button"
-        (click)="cancelar()"
-        class="px-6 py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75 transition-colors duration-200"
-      >
-        Cancelar
-      </button>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
-
