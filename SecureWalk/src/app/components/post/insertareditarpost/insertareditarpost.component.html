@@ -1,38 +1,39 @@
-<div class="container">
-    <div style="text-align: center; margin: 5%">
-        <h1>Registro de post</h1>
-    </div>
-    <div style="text-align: center">
-        <form [formGroup]="form" (submit)="aceptar()">
-            <mat-form-field>
-                <mat-label>Descripción</mat-label>
-                <input matInput formControlName="descripcionPost" />
+<div class="main-container">
+  <div class="form-card-container">
+    <h1 class="form-title">{{ edicion ? 'Editar Post' : 'Registrar Nuevo Post' }}</h1>
 
-                <mat-error *ngIf="form.get('descripcionPost')?.hasError('required')">
-                    La descripcion del post es obligatorio!!
-                </mat-error>
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Usuario</mat-label>
-                <mat-select formControlName="usuario">
-                    @for (food of listaUsuarios; track food) {
-                    <mat-option [value]="food.idUsuario">{{
-                        food.nombreUsuario
-                        }}</mat-option>
-                    }
-                </mat-select>
-                <mat-error *ngIf="form.get('usuario')?.hasError('required')">
-                    El usuario es obligatorio!
-                </mat-error>
-            </mat-form-field>
-            <br />
+    <form [formGroup]="form" (submit)="aceptar()" class="post-form">
 
-            <button mat-raised-button color="primary">Aceptar</button>
-            <button mat-raised-button color="warn" (click)="cancelar()">
-                Cancelar
-            </button>
-        </form>
-    </div>
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcionPost" rows="4"></textarea>
+        <mat-icon matSuffix>description</mat-icon>
+        <mat-error *ngIf="form.get('descripcionPost')?.hasError('required')">
+          La descripción del post es obligatoria.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (user of listaUsuarios; track user.idUsuario) {
+          <mat-option [value]="user.idUsuario">{{ user.nombreUsuario }}</mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix>person_search</mat-icon>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Aceptar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancelar()" type="button">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
-  
